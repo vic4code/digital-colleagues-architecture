@@ -21,11 +21,11 @@ This repo is the place to:
 
 | # | Phase | Status | Goal |
 |---|---|---|---|
-| 0 | [Prototype](./phases/0-prototype/) | ✅ Running | Prove the idea on a single machine |
-| 1 | [Legal MVP](./phases/1-legal-mvp/) | 🚧 In design | First production scenario: contract review |
-| 2 | [Generalized Platform](./phases/2-generalized/) | ⏳ Planned | Multi-scenario, multi-department |
-| 3 | [Enterprise & Multi-Channel](./phases/3-enterprise/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
-| 4 | [Terraform / IaC](./phases/4-terraform/) | ⏳ Planned | Production-grade IaC, multi-env, DR |
+| 0 | [Prototype](./phases/0/) | ✅ Running | Prove the idea on a single machine |
+| 1 | [Legal MVP](./phases/1/) | 🚧 In design | First production scenario: contract review |
+| 2 | [Generalized Platform](./phases/2/) | ⏳ Planned | Multi-scenario, multi-department |
+| 3 | [Enterprise & Multi-Channel](./phases/3/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
+| 4 | [Terraform / IaC](./phases/4/) | ⏳ Planned | Production-grade IaC, multi-env, DR |
 
 Phases are cumulative — Phase 2 builds on Phase 1, not replaces it. Each phase has
 its own README explaining the goal, the architecture, and the migration from the
@@ -34,8 +34,8 @@ previous phase.
 ## Reading order
 
 1. **Start here:** [`overview/`](./overview/) — what we're building, glossary, audiences
-2. **See where we are:** [`phases/0-prototype/`](./phases/0-prototype/) — current running system
-3. **See where we're going:** [`phases/1-legal-mvp/`](./phases/1-legal-mvp/) onwards
+2. **See where we are:** [`phases/0/`](./phases/0/) — current running system (prototype)
+3. **See where we're going:** [`phases/1/`](./phases/1/) onwards (legal MVP → enterprise)
 4. **Understand the why:** [`decisions/`](./decisions/) — Architecture Decision Records
 5. **Cross-phase concerns:** [`flows/`](./flows/) (end-to-end workflows), [`research/`](./research/) (scratchpad)
 
