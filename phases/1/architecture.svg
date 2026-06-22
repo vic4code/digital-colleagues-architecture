@@ -1,0 +1,153 @@
+<svg viewBox="0 0 780 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 1 — Legal MVP on AWS</title>
+  <desc>Stateless orchestrator + SQS-driven worker pool + externalized state on AWS, single region</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
+    .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
+    .edgeDash { stroke-dasharray: 4 3; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .boxFuture { fill: #fafafa; stroke: #e5e7eb; stroke-dasharray: 3 3; stroke-width: 1; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .pillAccent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .edgeLabel { font-size: 10px; fill: #6b7280; font-family: ui-monospace, monospace; }
+    .badge { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+  </style>
+
+  <text x="20" y="22" class="tier">PHASE 1 · LEGAL MVP · AWS · SINGLE REGION</text>
+
+  <text x="20" y="50" class="tier">INGRESS · CHANNELS</text>
+  <rect x="40" y="64" width="150" height="50" rx="6" class="box"/>
+  <text x="115" y="86" text-anchor="middle" class="label">Browser → Claw3D</text>
+  <text x="115" y="102" text-anchor="middle" class="sub">3D office UI (web)</text>
+  <rect x="210" y="64" width="150" height="50" rx="6" class="box"/>
+  <text x="285" y="86" text-anchor="middle" class="label">Linear</text>
+  <text x="285" y="102" text-anchor="middle" class="sub">webhook · issue → turn</text>
+  <rect x="380" y="64" width="150" height="50" rx="6" class="box"/>
+  <text x="455" y="86" text-anchor="middle" class="label">Legal admin UI</text>
+  <text x="455" y="102" text-anchor="middle" class="sub">approve / sign off</text>
+  <rect x="550" y="64" width="170" height="50" rx="6" class="boxFuture"/>
+  <text x="635" y="86" text-anchor="middle" class="label">Slack / Teams / Email</text>
+  <text x="635" y="102" text-anchor="middle" class="sub">deferred · Phase 3</text>
+
+  <text x="20" y="146" class="tier">EDGE</text>
+  <rect x="40" y="160" width="680" height="36" rx="6" class="box"/>
+  <text x="60" y="183" class="label">ALB</text>
+  <text x="120" y="183" class="sub">TLS · WAF · Cognito (JWT to API)</text>
+  <text x="710" y="183" text-anchor="end" class="badge">us-east-1</text>
+
+  <line x1="115" y1="114" x2="115" y2="158" class="edge" marker-end="url(#arr)"/>
+  <line x1="285" y1="114" x2="285" y2="158" class="edge" marker-end="url(#arr)"/>
+  <line x1="455" y1="114" x2="455" y2="158" class="edge" marker-end="url(#arr)"/>
+
+  <text x="20" y="226" class="tier">ORCHESTRATOR · STATELESS</text>
+  <rect x="40" y="240" width="460" height="100" rx="8" class="box"/>
+  <text x="60" y="262" class="label">Orchestrator API</text>
+  <text x="60" y="278" class="sub">ECS Fargate · 2–N tasks · autoscale on CPU + queue depth</text>
+  <rect x="60" y="290" width="110" height="26" rx="13" class="pill"/>
+  <text x="115" y="307" text-anchor="middle" class="sub">/v1/chat · /turn</text>
+  <rect x="178" y="290" width="100" height="26" rx="13" class="pill"/>
+  <text x="228" y="307" text-anchor="middle" class="sub">routing · auth</text>
+  <rect x="286" y="290" width="110" height="26" rx="13" class="pill"/>
+  <text x="341" y="307" text-anchor="middle" class="sub">message fan-out</text>
+  <rect x="404" y="290" width="86" height="26" rx="13" class="pill"/>
+  <text x="447" y="307" text-anchor="middle" class="sub">SSE stream</text>
+
+  <line x1="380" y1="196" x2="270" y2="238" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="40" y="360" width="460" height="40" rx="20" class="pillAccent"/>
+  <text x="60" y="385" class="label">SQS · turn dispatch queue</text>
+  <text x="490" y="385" text-anchor="end" class="sub">DLQ · visibility timeout · FIFO per colleague</text>
+
+  <line x1="270" y1="340" x2="270" y2="358" class="edge" marker-end="url(#arr)"/>
+  <text x="276" y="354" class="edgeLabel">enqueue turn</text>
+
+  <text x="20" y="426" class="tier">AGENT WORKER POOL · QUEUE-DRIVEN</text>
+  <rect x="40" y="440" width="460" height="200" rx="8" class="boxAgent"/>
+  <text x="56" y="462" class="label">Worker fleet</text>
+  <text x="56" y="476" class="sub">ECS Fargate · autoscale 0–N on queue depth · stateless</text>
+
+  <rect x="56" y="488" width="138" height="62" rx="6" class="box"/>
+  <text x="125" y="506" text-anchor="middle" class="label">worker N</text>
+  <text x="125" y="521" text-anchor="middle" class="sub">spawn codex</text>
+  <text x="125" y="535" text-anchor="middle" class="sub">inject persona + ctx</text>
+
+  <rect x="202" y="488" width="138" height="62" rx="6" class="box"/>
+  <text x="271" y="506" text-anchor="middle" class="label">worker N+1</text>
+  <text x="271" y="521" text-anchor="middle" class="sub">run turn</text>
+  <text x="271" y="535" text-anchor="middle" class="sub">stream events</text>
+
+  <rect x="348" y="488" width="138" height="62" rx="6" class="box"/>
+  <text x="417" y="506" text-anchor="middle" class="label">worker N+2</text>
+  <text x="417" y="521" text-anchor="middle" class="sub">commit results</text>
+  <text x="417" y="535" text-anchor="middle" class="sub">release</text>
+
+  <text x="56" y="572" class="sub">Per-turn lifecycle: dequeue → load colleague row → spawn codex with persona + memory →</text>
+  <text x="56" y="586" class="sub">execute MCP tool calls (doc/kanban/message/memory) → write Postgres/S3 → ack message → exit</text>
+  <text x="56" y="610" class="sub">Colleagues are data (Postgres rows + S3 prompts), not deployments.</text>
+  <text x="56" y="624" class="sub">Same MCP tool interface as Phase 0 — only the storage backend changes.</text>
+
+  <line x1="270" y1="400" x2="270" y2="438" class="edge" marker-end="url(#arr)"/>
+  <text x="276" y="420" class="edgeLabel">dequeue</text>
+
+  <text x="520" y="226" class="tier">EXTERNALIZED STATE</text>
+  <rect x="520" y="240" width="220" height="400" rx="8" class="boxShared"/>
+
+  <text x="536" y="262" class="label">RDS Postgres (Multi-AZ)</text>
+  <text x="536" y="276" class="sub">Sessions · messages · kanban</text>
+  <text x="536" y="290" class="sub">audit · colleagues · tickets</text>
+  <line x1="536" y1="300" x2="724" y2="300" class="edge"/>
+
+  <text x="536" y="320" class="label">S3 (KMS-encrypted)</text>
+  <text x="536" y="334" class="sub">Contracts · BRDs · ADRs</text>
+  <text x="536" y="348" class="sub">large agent artifacts</text>
+  <line x1="536" y1="358" x2="724" y2="358" class="edge"/>
+
+  <text x="536" y="378" class="label">Secrets Manager + KMS</text>
+  <text x="536" y="392" class="sub">Per-colleague codex / LLM keys</text>
+  <text x="536" y="406" class="sub">rotated, never in env files</text>
+  <line x1="536" y1="416" x2="724" y2="416" class="edge"/>
+
+  <text x="536" y="436" class="label">Audit log (immutable)</text>
+  <text x="536" y="450" class="sub">S3 Object Lock + CloudTrail</text>
+  <text x="536" y="464" class="sub">7-year retention for legal</text>
+  <line x1="536" y1="474" x2="724" y2="474" class="edge"/>
+
+  <text x="536" y="494" class="label">Observability</text>
+  <text x="536" y="508" class="sub">CloudWatch · OpenTelemetry</text>
+  <text x="536" y="522" class="sub">tracing per turn</text>
+  <line x1="536" y1="532" x2="724" y2="532" class="edge"/>
+
+  <text x="536" y="552" class="label">LLM provider</text>
+  <text x="536" y="566" class="sub">OpenAI · Anthropic</text>
+  <text x="536" y="580" class="sub">via VPC endpoints where avail.</text>
+  <line x1="536" y1="590" x2="724" y2="590" class="edge"/>
+
+  <text x="536" y="608" class="label">Human-in-the-loop</text>
+  <text x="536" y="622" class="sub">Legal approves all outputs</text>
+  <text x="536" y="636" class="sub">before send / sign / commit</text>
+
+  <path d="M 500 290 Q 510 290 520 290" class="edge" marker-end="url(#arr)"/>
+  <path d="M 500 520 Q 510 520 520 520" class="edgeAccent edgeDash" marker-end="url(#arrAccent)"/>
+  <text x="510" y="560" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools</text>
+  <text x="510" y="574" text-anchor="middle" class="edgeLabel" fill="#c2410c">→ DB / S3</text>
+
+  <text x="20" y="668" class="tier">WHAT CHANGED FROM PHASE 0</text>
+  <text x="20" y="686" class="sub">① File-based state → Postgres + S3  ·  ② Per-agent subprocess → SQS-driven stateless workers  ·  ③ KNOWN_AGENTS list → colleagues table</text>
+  <text x="20" y="702" class="sub">④ Single host → Fargate Multi-AZ  ·  ⑤ jsonl audit → immutable S3 Object Lock  ·  ⑥ MCP tool interface unchanged (storage swap only)</text>
+</svg>
