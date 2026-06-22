@@ -46,4 +46,4 @@ Frontend is the Claw3D 3D virtual office.
 
 ## Migration path
 
-See [Phase 1](../20-phase1-legal-mvp/) for the next step.
+See [Phase 1](../1-legal-mvp/) for the next step.
