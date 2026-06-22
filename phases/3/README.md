@@ -2,6 +2,8 @@
 
 **Status:** ⏳ Planned. The robust, scale-out version.
 
+![Phase 3 architecture](./architecture.svg)
+
 ## Goal
 
 Run 1000+ digital colleagues across a 1000+ person company, reachable from any

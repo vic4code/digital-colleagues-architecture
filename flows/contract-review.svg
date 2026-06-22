@@ -1,0 +1,129 @@
+<svg viewBox="0 0 820 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Flow — Legal contract review, end to end</title>
+  <desc>Sequence of actions from contract intake through human-approval gate to audited delivery</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .step { font-size: 11px; fill: #111827; }
+    .stepNum { font-size: 11px; font-weight: 600; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .lifeline { stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 3 3; }
+    .edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .edgeA { stroke: #c2410c; stroke-width: 1.4; fill: none; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxHuman { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1; }
+    .gate { fill: #fef3c7; stroke: #f59e0b; stroke-width: 1.2; }
+    .span { fill: rgba(253, 186, 116, 0.25); stroke: #fdba74; stroke-width: 0.5; }
+    .spanHuman { fill: rgba(147, 197, 253, 0.2); stroke: #93c5fd; stroke-width: 0.5; }
+  </style>
+
+  <text x="20" y="22" class="tier">FLOW · LEGAL CONTRACT REVIEW · END-TO-END</text>
+
+  <rect x="40" y="44" width="100" height="48" rx="6" class="boxHuman"/>
+  <text x="90" y="64" text-anchor="middle" class="label">Lawyer</text>
+  <text x="90" y="80" text-anchor="middle" class="sub">human · legal team</text>
+
+  <rect x="160" y="44" width="110" height="48" rx="6" class="box"/>
+  <text x="215" y="64" text-anchor="middle" class="label">Linear / Claw3D</text>
+  <text x="215" y="80" text-anchor="middle" class="sub">intake channel</text>
+
+  <rect x="290" y="44" width="110" height="48" rx="6" class="box"/>
+  <text x="345" y="64" text-anchor="middle" class="label">Orchestrator</text>
+  <text x="345" y="80" text-anchor="middle" class="sub">routes &amp; enqueues</text>
+
+  <rect x="420" y="44" width="110" height="48" rx="6" class="boxAgent"/>
+  <text x="475" y="64" text-anchor="middle" class="label">Claire</text>
+  <text x="475" y="80" text-anchor="middle" class="sub">paralegal colleague</text>
+
+  <rect x="550" y="44" width="120" height="48" rx="6" class="box"/>
+  <text x="610" y="64" text-anchor="middle" class="label">KB · S3 · Postgres</text>
+  <text x="610" y="80" text-anchor="middle" class="sub">contract + precedent</text>
+
+  <rect x="690" y="44" width="110" height="48" rx="6" class="box"/>
+  <text x="745" y="64" text-anchor="middle" class="label">Audit log</text>
+  <text x="745" y="80" text-anchor="middle" class="sub">immutable</text>
+
+  <line x1="90" y1="92" x2="90" y2="690" class="lifeline"/>
+  <line x1="215" y1="92" x2="215" y2="690" class="lifeline"/>
+  <line x1="345" y1="92" x2="345" y2="690" class="lifeline"/>
+  <line x1="475" y1="92" x2="475" y2="690" class="lifeline"/>
+  <line x1="610" y1="92" x2="610" y2="690" class="lifeline"/>
+  <line x1="745" y1="92" x2="745" y2="690" class="lifeline"/>
+
+  <rect x="463" y="195" width="24" height="280" class="span"/>
+  <rect x="78" y="500" width="24" height="80" class="spanHuman"/>
+
+  <text x="20" y="120" class="stepNum">①</text>
+  <line x1="92" y1="120" x2="213" y2="120" class="edge" marker-end="url(#arr)"/>
+  <text x="155" y="115" text-anchor="middle" class="step">create issue + attach contract</text>
+
+  <text x="20" y="150" class="stepNum">②</text>
+  <line x1="217" y1="150" x2="343" y2="150" class="edge" marker-end="url(#arr)"/>
+  <text x="280" y="145" text-anchor="middle" class="step">webhook · turn event</text>
+
+  <text x="20" y="180" class="stepNum">③</text>
+  <line x1="347" y1="180" x2="743" y2="180" class="edge" marker-end="url(#arr)"/>
+  <text x="545" y="175" text-anchor="middle" class="step">persist turn · write audit · enqueue SQS</text>
+
+  <text x="20" y="215" class="stepNum">④</text>
+  <line x1="347" y1="215" x2="473" y2="215" class="edge" marker-end="url(#arr)"/>
+  <text x="410" y="210" text-anchor="middle" class="step">dispatch · load persona</text>
+
+  <text x="20" y="248" class="stepNum">⑤</text>
+  <line x1="477" y1="248" x2="608" y2="248" class="edge" marker-end="url(#arr)"/>
+  <text x="542" y="243" text-anchor="middle" class="step">read contract (S3)</text>
+  <line x1="608" y1="268" x2="477" y2="268" class="edge" marker-end="url(#arr)"/>
+  <text x="542" y="263" text-anchor="middle" class="sub">content + metadata</text>
+
+  <text x="20" y="300" class="stepNum">⑥</text>
+  <line x1="477" y1="300" x2="608" y2="300" class="edge" marker-end="url(#arr)"/>
+  <text x="542" y="295" text-anchor="middle" class="step">query precedent + standard clauses</text>
+  <line x1="608" y1="320" x2="477" y2="320" class="edge" marker-end="url(#arr)"/>
+  <text x="542" y="315" text-anchor="middle" class="sub">deviations · risk patterns</text>
+
+  <text x="20" y="350" class="stepNum">⑦</text>
+  <rect x="430" y="334" width="90" height="40" rx="6" class="boxAgent"/>
+  <text x="475" y="350" text-anchor="middle" class="step">reason · flag clauses</text>
+  <text x="475" y="364" text-anchor="middle" class="sub">risk score · citations</text>
+
+  <text x="20" y="400" class="stepNum">⑧</text>
+  <line x1="477" y1="400" x2="608" y2="400" class="edgeA" marker-end="url(#arrA)"/>
+  <text x="542" y="395" text-anchor="middle" class="step">write review draft + risk report</text>
+
+  <text x="20" y="430" class="stepNum">⑨</text>
+  <line x1="477" y1="430" x2="743" y2="430" class="edge" marker-end="url(#arr)"/>
+  <text x="610" y="425" text-anchor="middle" class="step">audit · tool calls · model + version</text>
+
+  <text x="20" y="465" class="stepNum">⑩</text>
+  <line x1="473" y1="465" x2="218" y2="465" class="edge" marker-end="url(#arr)"/>
+  <text x="345" y="460" text-anchor="middle" class="step">comment + Claw3D notification</text>
+
+  <line x1="213" y1="490" x2="92" y2="490" class="edge" marker-end="url(#arr)"/>
+  <text x="155" y="485" text-anchor="middle" class="sub">"draft ready"</text>
+
+  <rect x="40" y="510" width="760" height="50" rx="6" class="gate"/>
+  <text x="56" y="530" class="label">⑪ Human-in-the-loop gate</text>
+  <text x="56" y="546" class="sub">Lawyer reviews draft + risk report in Claw3D / Linear · approves · requests changes · or rejects</text>
+
+  <text x="20" y="588" class="stepNum">⑫</text>
+  <line x1="92" y1="588" x2="343" y2="588" class="edge" marker-end="url(#arr)"/>
+  <text x="218" y="583" text-anchor="middle" class="step">approve OR request changes</text>
+
+  <text x="20" y="618" class="stepNum">⑬</text>
+  <line x1="347" y1="618" x2="473" y2="618" class="edgeA" marker-end="url(#arrA)"/>
+  <text x="410" y="613" text-anchor="middle" class="step">apply edits / finalize</text>
+
+  <line x1="477" y1="640" x2="608" y2="640" class="edgeA" marker-end="url(#arrA)"/>
+  <text x="542" y="635" text-anchor="middle" class="step">persist final + version</text>
+
+  <line x1="477" y1="664" x2="743" y2="664" class="edge" marker-end="url(#arr)"/>
+  <text x="610" y="659" text-anchor="middle" class="step">audit · approver · timestamp</text>
+
+  <text x="20" y="700" class="tier">NON-NEGOTIABLES</text>
+  <text x="20" y="716" class="sub">① Claire never finalizes without ⑪ · ② Every step ③⑨⑬ writes audit · ③ All KB queries are sourced + cited · ④ Iterations loop back to ⑦ with reviewer feedback</text>
+</svg>

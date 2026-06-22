@@ -2,6 +2,8 @@
 
 **Status:** ⏳ Planned. Cross-cuts all phases; this folder is for the production-grade artifact.
 
+![Phase 4 IaC layout](./architecture.svg)
+
 ## Goal
 
 Every piece of infrastructure described in Phases 1–3 expressed as Terraform,

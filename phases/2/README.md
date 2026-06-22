@@ -2,6 +2,8 @@
 
 **Status:** ⏳ Planned. Begins after Phase 1 is in production.
 
+![Phase 2 architecture](./architecture.svg)
+
 ## Goal
 
 Take the legal-specific MVP and generalize it into a platform that supports any

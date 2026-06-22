@@ -1,0 +1,141 @@
+<svg viewBox="0 0 800 760" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 3 — Enterprise &amp; multi-channel at 1000+ colleague scale</title>
+  <desc>Channel adapters, stateless worker fleet + stateful long-running colleagues, multi-region, observability</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
+    .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
+    .edgeDash { stroke-dasharray: 4 3; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxAgentStrong { fill: #ffedd5; stroke: #f97316; stroke-width: 1.5; }
+    .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .boxRegion { fill: none; stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 8 4; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .pillAccent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .edgeLabel { font-size: 10px; fill: #6b7280; font-family: ui-monospace, monospace; }
+    .badge { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+  </style>
+
+  <text x="20" y="22" class="tier">PHASE 3 · ENTERPRISE · 1000+ COLLEAGUES · MULTI-CHANNEL · MULTI-REGION</text>
+
+  <text x="20" y="50" class="tier">CHANNELS · ANY HUMAN-FACING SURFACE</text>
+  <rect x="40" y="64" width="100" height="46" rx="6" class="box"/><text x="90" y="84" text-anchor="middle" class="label">Claw3D</text><text x="90" y="100" text-anchor="middle" class="sub">3D office</text>
+  <rect x="148" y="64" width="100" height="46" rx="6" class="box"/><text x="198" y="84" text-anchor="middle" class="label">Slack</text><text x="198" y="100" text-anchor="middle" class="sub">DM · mention</text>
+  <rect x="256" y="64" width="100" height="46" rx="6" class="box"/><text x="306" y="84" text-anchor="middle" class="label">Teams</text><text x="306" y="100" text-anchor="middle" class="sub">DM · channel</text>
+  <rect x="364" y="64" width="100" height="46" rx="6" class="box"/><text x="414" y="84" text-anchor="middle" class="label">Linear</text><text x="414" y="100" text-anchor="middle" class="sub">issue · cmt</text>
+  <rect x="472" y="64" width="100" height="46" rx="6" class="box"/><text x="522" y="84" text-anchor="middle" class="label">Email</text><text x="522" y="100" text-anchor="middle" class="sub">SES inbound</text>
+  <rect x="580" y="64" width="100" height="46" rx="6" class="box"/><text x="630" y="84" text-anchor="middle" class="label">Webhook / API</text><text x="630" y="100" text-anchor="middle" class="sub">programmatic</text>
+  <rect x="688" y="64" width="92" height="46" rx="6" class="box"/><text x="734" y="84" text-anchor="middle" class="label">Voice</text><text x="734" y="100" text-anchor="middle" class="sub">Connect</text>
+
+  <text x="20" y="142" class="tier">CHANNEL ADAPTER LAYER · NORMALIZE TO TURN EVENTS</text>
+  <rect x="40" y="156" width="740" height="50" rx="6" class="box"/>
+  <text x="60" y="176" class="label">Channel adapters</text>
+  <text x="60" y="192" class="sub">One service per channel · ECS Fargate · translates vendor payload → canonical Turn event (tenant, colleague, user, content)</text>
+  <line x1="90" y1="110" x2="90" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="198" y1="110" x2="198" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="306" y1="110" x2="306" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="414" y1="110" x2="414" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="522" y1="110" x2="522" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="630" y1="110" x2="630" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="734" y1="110" x2="734" y2="154" class="edge" marker-end="url(#arr)"/>
+
+  <text x="20" y="238" class="tier">REGION · US-EAST-1 (PRIMARY) ⇄ US-WEST-2 (PASSIVE)</text>
+  <rect x="40" y="250" width="500" height="380" rx="10" class="boxRegion"/>
+  <text x="780" y="250" text-anchor="end" class="badge">active / passive</text>
+
+  <rect x="56" y="266" width="468" height="62" rx="6" class="box"/>
+  <text x="74" y="286" class="label">Orchestrator (stateless · Fargate · 10–100 tasks)</text>
+  <text x="74" y="302" class="sub">routing · auth · RBAC · fan-out · cost meter · channel context</text>
+  <rect x="74" y="308" width="140" height="14" rx="7" class="pill"/><text x="144" y="318" text-anchor="middle" class="sub">global rate limit</text>
+  <rect x="222" y="308" width="140" height="14" rx="7" class="pill"/><text x="292" y="318" text-anchor="middle" class="sub">backpressure / fairness</text>
+  <rect x="370" y="308" width="140" height="14" rx="7" class="pill"/><text x="440" y="318" text-anchor="middle" class="sub">circuit breaker</text>
+
+  <line x1="200" y1="206" x2="200" y2="264" class="edge" marker-end="url(#arr)"/>
+  <line x1="400" y1="206" x2="400" y2="264" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="56" y="346" width="220" height="38" rx="19" class="pillAccent"/>
+  <text x="74" y="370" class="sub">SQS · ephemeral turns (per-tenant FIFO)</text>
+  <rect x="290" y="346" width="234" height="38" rx="19" class="pillAccent"/>
+  <text x="308" y="370" class="sub">EventBridge · long-running triggers</text>
+
+  <line x1="170" y1="328" x2="170" y2="344" class="edge" marker-end="url(#arr)"/>
+  <line x1="410" y1="328" x2="410" y2="344" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="56" y="404" width="220" height="216" rx="8" class="boxAgent"/>
+  <text x="72" y="424" class="label">Stateless worker fleet</text>
+  <text x="72" y="438" class="sub">Fargate · autoscale 0–N · 95% of turns</text>
+  <rect x="72" y="450" width="188" height="38" rx="6" class="box"/><text x="166" y="466" text-anchor="middle" class="label">ephemeral worker</text><text x="166" y="480" text-anchor="middle" class="sub">spawn · run · exit</text>
+  <rect x="72" y="494" width="188" height="38" rx="6" class="box"/><text x="166" y="510" text-anchor="middle" class="label">ephemeral worker</text><text x="166" y="524" text-anchor="middle" class="sub">spawn · run · exit</text>
+  <rect x="72" y="538" width="188" height="38" rx="6" class="box"/><text x="166" y="554" text-anchor="middle" class="label">ephemeral worker</text><text x="166" y="568" text-anchor="middle" class="sub">spawn · run · exit</text>
+  <text x="72" y="595" class="sub">≈1000 concurrent at peak</text>
+  <text x="72" y="610" class="sub">p95 dispatch &lt; 200ms</text>
+
+  <rect x="290" y="404" width="234" height="216" rx="8" class="boxAgentStrong"/>
+  <text x="306" y="424" class="label">Stateful colleagues (small subset)</text>
+  <text x="306" y="438" class="sub">EKS StatefulSet · persistent connections only</text>
+  <rect x="306" y="450" width="202" height="38" rx="6" class="box"/><text x="407" y="466" text-anchor="middle" class="label">on-call monitor</text><text x="407" y="480" text-anchor="middle" class="sub">always-on · watches alerts</text>
+  <rect x="306" y="494" width="202" height="38" rx="6" class="box"/><text x="407" y="510" text-anchor="middle" class="label">meeting copilot</text><text x="407" y="524" text-anchor="middle" class="sub">long voice session</text>
+  <rect x="306" y="538" width="202" height="38" rx="6" class="box"/><text x="407" y="554" text-anchor="middle" class="label">support agent</text><text x="407" y="568" text-anchor="middle" class="sub">multi-hour customer thread</text>
+  <text x="306" y="595" class="sub">Bounded by /goal — autonomy limits</text>
+  <text x="306" y="610" class="sub">escalation handoff to stateless or human</text>
+
+  <line x1="166" y1="384" x2="166" y2="402" class="edge" marker-end="url(#arr)"/>
+  <line x1="407" y1="384" x2="407" y2="402" class="edge" marker-end="url(#arr)"/>
+
+  <text x="560" y="238" class="tier">CROSS-CUTTING</text>
+  <rect x="560" y="250" width="220" height="500" rx="8" class="boxShared"/>
+
+  <text x="576" y="272" class="label">Observability</text>
+  <text x="576" y="286" class="sub">OTel · X-Ray · Datadog</text>
+  <text x="576" y="300" class="sub">trace per turn end-to-end</text>
+  <line x1="576" y1="310" x2="764" y2="310" class="edge"/>
+
+  <text x="576" y="328" class="label">SLO &amp; alerting</text>
+  <text x="576" y="342" class="sub">PagerDuty · per-channel SLO</text>
+  <text x="576" y="356" class="sub">queue depth · turn latency · errors</text>
+  <line x1="576" y1="366" x2="764" y2="366" class="edge"/>
+
+  <text x="576" y="384" class="label">Aurora Global Database</text>
+  <text x="576" y="398" class="sub">cross-region replica</text>
+  <text x="576" y="412" class="sub">RPO ≈ 1s · RTO &lt; 1min</text>
+  <line x1="576" y1="422" x2="764" y2="422" class="edge"/>
+
+  <text x="576" y="440" class="label">S3 Cross-Region Replication</text>
+  <text x="576" y="454" class="sub">documents · audit · models</text>
+  <line x1="576" y1="464" x2="764" y2="464" class="edge"/>
+
+  <text x="576" y="482" class="label">Compliance</text>
+  <text x="576" y="496" class="sub">SOC2 · ISO 27001 · HIPAA</text>
+  <text x="576" y="510" class="sub">retention · legal hold · DLP</text>
+  <line x1="576" y1="520" x2="764" y2="520" class="edge"/>
+
+  <text x="576" y="538" class="label">Cost guardrails</text>
+  <text x="576" y="552" class="sub">per-tenant budget caps</text>
+  <text x="576" y="566" class="sub">model fallback (cheap if budget)</text>
+  <line x1="576" y1="576" x2="764" y2="576" class="edge"/>
+
+  <text x="576" y="594" class="label">DR runbook</text>
+  <text x="576" y="608" class="sub">scripted region failover</text>
+  <text x="576" y="622" class="sub">tested quarterly</text>
+  <line x1="576" y1="632" x2="764" y2="632" class="edge"/>
+
+  <text x="576" y="650" class="label">Identity</text>
+  <text x="576" y="664" class="sub">SSO (Okta / Entra)</text>
+  <text x="576" y="678" class="sub">SCIM provisioning</text>
+  <line x1="576" y1="688" x2="764" y2="688" class="edge"/>
+
+  <text x="576" y="706" class="label">Model gateway</text>
+  <text x="576" y="720" class="sub">vendor-agnostic LLM routing</text>
+  <text x="576" y="734" class="sub">prompt cache · fallback chain</text>
+
+  <text x="20" y="694" class="tier">WHAT IS NEW VS PHASE 2</text>
+  <text x="20" y="712" class="sub">① Channel adapter layer for every human surface  ·  ② Stateless / stateful colleague split (95 / 5)  ·  ③ EventBridge for long-running triggers</text>
+  <text x="20" y="728" class="sub">④ Multi-region (Aurora Global · S3 CRR)  ·  ⑤ Full observability + SLOs  ·  ⑥ Model gateway with vendor fallback  ·  ⑦ /goal as autonomy boundary</text>
+</svg>
