@@ -29,7 +29,7 @@ auditable, recoverable, and able to be operated without the original developer p
 - **Linear webhook** as the second ingress (issue → turn)
 - **CloudTrail + immutable audit log** for legal compliance story
 
-See [`architecture.svg`](./architecture.svg) *(to be drawn)*.
+![Phase 1 architecture](./architecture.svg)
 
 ## Key design decisions to capture as ADRs
 
