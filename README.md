@@ -21,11 +21,11 @@ This repo is the place to:
 
 | # | Phase | Status | Goal |
 |---|---|---|---|
-| 0 | [Prototype](./10-phase0-prototype/) | ✅ Running | Prove the idea on a single machine |
-| 1 | [Legal MVP](./20-phase1-legal-mvp/) | 🚧 In design | First production scenario: contract review |
-| 2 | [Generalized Platform](./30-phase2-generalized/) | ⏳ Planned | Multi-scenario, multi-department |
-| 3 | [Enterprise & Multi-Channel](./40-phase3-enterprise/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
-| 4 | [Terraform / IaC](./50-phase4-terraform/) | ⏳ Planned | Production-grade IaC, multi-env, DR |
+| 0 | [Prototype](./phases/0-prototype/) | ✅ Running | Prove the idea on a single machine |
+| 1 | [Legal MVP](./phases/1-legal-mvp/) | 🚧 In design | First production scenario: contract review |
+| 2 | [Generalized Platform](./phases/2-generalized/) | ⏳ Planned | Multi-scenario, multi-department |
+| 3 | [Enterprise & Multi-Channel](./phases/3-enterprise/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
+| 4 | [Terraform / IaC](./phases/4-terraform/) | ⏳ Planned | Production-grade IaC, multi-env, DR |
 
 Phases are cumulative — Phase 2 builds on Phase 1, not replaces it. Each phase has
 its own README explaining the goal, the architecture, and the migration from the
@@ -33,9 +33,9 @@ previous phase.
 
 ## Reading order
 
-1. **Start here:** [`00-overview/`](./00-overview/) — what we're building, glossary, audiences
-2. **See where we are:** [`10-phase0-prototype/`](./10-phase0-prototype/) — current running system
-3. **See where we're going:** [`20-phase1-legal-mvp/`](./20-phase1-legal-mvp/) onwards
+1. **Start here:** [`overview/`](./overview/) — what we're building, glossary, audiences
+2. **See where we are:** [`phases/0-prototype/`](./phases/0-prototype/) — current running system
+3. **See where we're going:** [`phases/1-legal-mvp/`](./phases/1-legal-mvp/) onwards
 4. **Understand the why:** [`decisions/`](./decisions/) — Architecture Decision Records
 5. **Cross-phase concerns:** [`flows/`](./flows/) (end-to-end workflows), [`research/`](./research/) (scratchpad)
 
@@ -43,7 +43,7 @@ previous phase.
 
 - All diagrams are **SVG** (renders inline on GitHub, diffable in PRs, hand-editable in Penpot/Boxy SVG)
 - One file per concern. Phase READMEs link to relevant ADRs and diagrams
-- Number folders with gaps (00, 10, 20…) so we can insert later phases without renaming
+- Phases live under `phases/`, numbered `0/1/2/…` — insertions are rare; if needed, rename together
 - See [`STYLE.md`](./STYLE.md) for diagram conventions and writing guidelines
 
 ## Status (as of repo creation)
