@@ -1,0 +1,146 @@
+<svg viewBox="0 0 800 660" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 4 — Terraform / IaC layout</title>
+  <desc>Module hierarchy, env composition, deployment pipeline, state backend, policy as code</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .mono { font-size: 11px; fill: #374151; font-family: ui-monospace, monospace; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
+    .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
+    .edgeDash { stroke-dasharray: 4 3; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .boxStrong { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.2; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .pillAccent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+  </style>
+
+  <text x="20" y="22" class="tier">PHASE 4 · TERRAFORM / IAC · REPO: PRJT-DIGITAL-OFFICE-INFRA</text>
+
+  <text x="20" y="50" class="tier">MODULES · REUSABLE BUILDING BLOCKS</text>
+  <rect x="40" y="64" width="220" height="380" rx="8" class="box"/>
+  <text x="56" y="84" class="mono">terraform/modules/</text>
+
+  <text x="56" y="110" class="mono">├── networking/</text>
+  <text x="70" y="124" class="sub">VPC · subnets · NAT · endpoints</text>
+  <text x="56" y="146" class="mono">├── edge/</text>
+  <text x="70" y="160" class="sub">ALB · WAF · Cognito · TLS</text>
+  <text x="56" y="182" class="mono">├── orchestrator/</text>
+  <text x="70" y="196" class="sub">Fargate service · autoscale</text>
+  <text x="56" y="218" class="mono">├── worker-pool/</text>
+  <text x="70" y="232" class="sub">Fargate service · scale on SQS</text>
+  <text x="56" y="254" class="mono">├── stateful-runtime/</text>
+  <text x="70" y="268" class="sub">EKS · StatefulSet helm chart</text>
+  <text x="56" y="290" class="mono">├── queues/</text>
+  <text x="70" y="304" class="sub">SQS · DLQ · EventBridge</text>
+  <text x="56" y="326" class="mono">├── postgres/</text>
+  <text x="70" y="340" class="sub">RDS · Aurora Global · backups</text>
+  <text x="56" y="362" class="mono">├── object-store/</text>
+  <text x="70" y="376" class="sub">S3 · KMS · Object Lock · CRR</text>
+  <text x="56" y="398" class="mono">├── secrets/</text>
+  <text x="70" y="412" class="sub">Secrets Manager · rotation</text>
+  <text x="56" y="434" class="mono">└── observability/</text>
+
+  <text x="290" y="50" class="tier">ENVIRONMENTS · MODULE COMPOSITION</text>
+  <rect x="290" y="64" width="220" height="380" rx="8" class="box"/>
+  <text x="306" y="84" class="mono">terraform/envs/</text>
+
+  <text x="306" y="110" class="mono">├── dev/</text>
+  <text x="320" y="124" class="sub">single-AZ · small RDS · 1-task svc</text>
+  <text x="320" y="138" class="sub">all modules with cheap defaults</text>
+
+  <text x="306" y="166" class="mono">├── staging/</text>
+  <text x="320" y="180" class="sub">multi-AZ · prod-like sizing</text>
+  <text x="320" y="194" class="sub">prod data shape, synthetic load</text>
+
+  <text x="306" y="222" class="mono">└── prod/</text>
+  <text x="320" y="236" class="sub">multi-AZ · Aurora Global</text>
+  <text x="320" y="250" class="sub">autoscale ceilings · 2 regions</text>
+
+  <rect x="306" y="276" width="188" height="156" rx="6" class="boxStrong"/>
+  <text x="316" y="294" class="label">prod/main.tf (example)</text>
+  <text x="316" y="312" class="mono">module "net" {</text>
+  <text x="324" y="326" class="mono">  source = "../../modules/networking"</text>
+  <text x="324" y="340" class="mono">  cidr   = "10.10.0.0/16"</text>
+  <text x="316" y="354" class="mono">}</text>
+  <text x="316" y="372" class="mono">module "db" {</text>
+  <text x="324" y="386" class="mono">  source       = "../../modules/postgres"</text>
+  <text x="324" y="400" class="mono">  global       = true</text>
+  <text x="324" y="414" class="mono">  vpc_id       = module.net.id</text>
+  <text x="316" y="428" class="mono">}</text>
+
+  <line x1="260" y1="234" x2="288" y2="234" class="edge" marker-end="url(#arr)"/>
+  <text x="263" y="222" class="sub">consume</text>
+
+  <text x="540" y="50" class="tier">PIPELINE · GITHUB ACTIONS</text>
+  <rect x="540" y="64" width="240" height="380" rx="8" class="box"/>
+
+  <rect x="556" y="84" width="208" height="46" rx="6" class="box"/>
+  <text x="566" y="104" class="label">1 · PR opened</text>
+  <text x="566" y="120" class="sub">terraform fmt · validate · plan</text>
+  <line x1="660" y1="130" x2="660" y2="142" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="556" y="146" width="208" height="46" rx="6" class="box"/>
+  <text x="566" y="166" class="label">2 · plan posted to PR</text>
+  <text x="566" y="182" class="sub">reviewers inspect resource diff</text>
+  <line x1="660" y1="192" x2="660" y2="204" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="556" y="208" width="208" height="46" rx="6" class="box"/>
+  <text x="566" y="228" class="label">3 · policy gate</text>
+  <text x="566" y="244" class="sub">OPA / Sentinel · auto-reject if fails</text>
+  <line x1="660" y1="254" x2="660" y2="266" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="556" y="270" width="208" height="46" rx="6" class="box"/>
+  <text x="566" y="290" class="label">4 · merge → apply (dev)</text>
+  <text x="566" y="306" class="sub">auto-applied via OIDC role</text>
+  <line x1="660" y1="316" x2="660" y2="328" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="556" y="332" width="208" height="46" rx="6" class="box"/>
+  <text x="566" y="352" class="label">5 · promote staging</text>
+  <text x="566" y="368" class="sub">tag → run · soak tests · canary</text>
+  <line x1="660" y1="378" x2="660" y2="390" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="556" y="394" width="208" height="44" rx="6" class="boxStrong"/>
+  <text x="566" y="414" class="label">6 · promote prod (manual gate)</text>
+  <text x="566" y="430" class="sub">change ticket · 2-person approve</text>
+
+  <text x="20" y="478" class="tier">CROSS-CUTTING</text>
+
+  <rect x="40" y="494" width="220" height="120" rx="8" class="boxShared"/>
+  <text x="56" y="514" class="label">State backend</text>
+  <text x="56" y="530" class="sub">S3 (versioned · KMS) +</text>
+  <text x="56" y="544" class="sub">DynamoDB lock table</text>
+  <text x="56" y="566" class="mono">backend "s3" {</text>
+  <text x="64" y="580" class="mono">  bucket = "tf-state-prjt-..."</text>
+  <text x="64" y="594" class="mono">  encrypt = true</text>
+  <text x="56" y="608" class="mono">}</text>
+
+  <rect x="290" y="494" width="220" height="120" rx="8" class="boxShared"/>
+  <text x="306" y="514" class="label">Policy as code</text>
+  <text x="306" y="530" class="sub">OPA Rego · pre-apply check</text>
+  <line x1="306" y1="540" x2="494" y2="540" class="edge"/>
+  <text x="306" y="558" class="sub">• No public S3 buckets</text>
+  <text x="306" y="572" class="sub">• KMS on every data store</text>
+  <text x="306" y="586" class="sub">• Mandatory tagging (cost / owner)</text>
+  <text x="306" y="600" class="sub">• No IAM wildcards</text>
+
+  <rect x="540" y="494" width="240" height="120" rx="8" class="boxShared"/>
+  <text x="556" y="514" class="label">Secrets &amp; identity</text>
+  <text x="556" y="530" class="sub">GitHub OIDC → AWS IAM role</text>
+  <text x="556" y="544" class="sub">No long-lived AWS keys in CI</text>
+  <line x1="556" y1="554" x2="764" y2="554" class="edge"/>
+  <text x="556" y="572" class="sub">• Plan role: read-only</text>
+  <text x="556" y="586" class="sub">• Apply role: scoped per env</text>
+  <text x="556" y="600" class="sub">• Prod apply: requires assume + MFA</text>
+
+  <line x1="510" y1="234" x2="538" y2="234" class="edge" marker-end="url(#arr)"/>
+  <text x="513" y="222" class="sub">trigger</text>
+
+  <text x="20" y="640" class="tier">PRINCIPLES</text>
+  <text x="20" y="656" class="sub">① Modules are version-pinned · ② Envs differ only in inputs, never copy-pasted code · ③ State backend is the source of truth, never local · ④ Policy gate before any apply</text>
+</svg>

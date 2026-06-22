@@ -1,0 +1,152 @@
+<svg viewBox="0 0 820 640" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Flow — Multi-channel routing</title>
+  <desc>How the same colleague is reachable from any channel with shared identity and memory</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .mono { font-size: 11px; fill: #374151; font-family: ui-monospace, monospace; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .edgeA { stroke: #c2410c; stroke-width: 1.4; fill: none; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .stepNum { font-size: 11px; font-weight: 600; fill: #c2410c; font-family: ui-monospace, monospace; }
+  </style>
+
+  <text x="20" y="22" class="tier">FLOW · MULTI-CHANNEL ROUTING · ONE COLLEAGUE, ANY SURFACE</text>
+
+  <text x="20" y="50" class="tier">INBOUND · CHANNEL → ORCHESTRATOR → COLLEAGUE</text>
+
+  <rect x="40" y="64" width="120" height="34" rx="6" class="box"/><text x="100" y="86" text-anchor="middle" class="label">Slack DM</text>
+  <rect x="40" y="106" width="120" height="34" rx="6" class="box"/><text x="100" y="128" text-anchor="middle" class="label">Linear comment</text>
+  <rect x="40" y="148" width="120" height="34" rx="6" class="box"/><text x="100" y="170" text-anchor="middle" class="label">Email reply</text>
+  <rect x="40" y="190" width="120" height="34" rx="6" class="box"/><text x="100" y="212" text-anchor="middle" class="label">Claw3D chat</text>
+
+  <rect x="200" y="64" width="160" height="160" rx="8" class="box"/>
+  <text x="216" y="86" class="label">Channel adapter</text>
+  <text x="216" y="100" class="sub">vendor payload →</text>
+  <text x="216" y="114" class="sub">canonical Turn event</text>
+  <rect x="216" y="124" width="128" height="90" rx="4" class="pill"/>
+  <text x="224" y="140" class="mono">{</text>
+  <text x="230" y="154" class="mono">tenant_id,</text>
+  <text x="230" y="168" class="mono">user_ext_id,</text>
+  <text x="230" y="182" class="mono">colleague_id,</text>
+  <text x="230" y="196" class="mono">content,</text>
+  <text x="230" y="210" class="mono">channel: "slack"</text>
+
+  <line x1="160" y1="81" x2="198" y2="81" class="edge" marker-end="url(#arr)"/>
+  <line x1="160" y1="123" x2="198" y2="123" class="edge" marker-end="url(#arr)"/>
+  <line x1="160" y1="165" x2="198" y2="165" class="edge" marker-end="url(#arr)"/>
+  <line x1="160" y1="207" x2="198" y2="207" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="400" y="64" width="180" height="160" rx="8" class="box"/>
+  <text x="416" y="86" class="label">Orchestrator</text>
+  <text x="416" y="100" class="sub">resolves identity + memory</text>
+  <rect x="416" y="110" width="148" height="22" rx="11" class="pill"/>
+  <text x="490" y="125" text-anchor="middle" class="sub">user_ext_id → user_id</text>
+  <rect x="416" y="138" width="148" height="22" rx="11" class="pill"/>
+  <text x="490" y="153" text-anchor="middle" class="sub">tenant + RBAC check</text>
+  <rect x="416" y="166" width="148" height="22" rx="11" class="pill"/>
+  <text x="490" y="181" text-anchor="middle" class="sub">load colleague + memory</text>
+  <rect x="416" y="194" width="148" height="22" rx="11" class="pill"/>
+  <text x="490" y="209" text-anchor="middle" class="sub">enqueue turn</text>
+
+  <line x1="360" y1="144" x2="398" y2="144" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="620" y="64" width="170" height="160" rx="8" class="boxAgent"/>
+  <text x="636" y="86" class="label">Claire (colleague)</text>
+  <text x="636" y="100" class="sub">worker spawns codex</text>
+  <text x="636" y="114" class="sub">with persona + memory</text>
+  <text x="636" y="138" class="sub">Memory loaded:</text>
+  <text x="636" y="152" class="mono">• prior chats w/ user</text>
+  <text x="636" y="166" class="mono">• team preferences</text>
+  <text x="636" y="180" class="mono">• ongoing tasks</text>
+  <text x="636" y="208" class="sub">Claire does not know</text>
+  <text x="636" y="222" class="sub">which channel — channel</text>
+  <text x="636" y="236" class="sub">is just metadata.</text>
+
+  <line x1="580" y1="144" x2="618" y2="144" class="edge" marker-end="url(#arr)"/>
+
+  <text x="180" y="58" class="stepNum">①</text>
+  <text x="380" y="58" class="stepNum">②</text>
+  <text x="600" y="58" class="stepNum">③</text>
+
+  <line x1="40" y1="270" x2="780" y2="270" class="edge"/>
+
+  <text x="20" y="298" class="tier">OUTBOUND · COLLEAGUE REPLY → ROUTED BACK TO ORIGIN CHANNEL</text>
+
+  <rect x="620" y="312" width="170" height="100" rx="8" class="boxAgent"/>
+  <text x="636" y="334" class="label">Claire produces reply</text>
+  <text x="636" y="348" class="sub">structured content +</text>
+  <text x="636" y="362" class="sub">attachments (links, files)</text>
+  <text x="636" y="382" class="sub">writes memory delta</text>
+  <text x="636" y="396" class="sub">(what was discussed)</text>
+
+  <rect x="400" y="312" width="180" height="100" rx="8" class="box"/>
+  <text x="416" y="334" class="label">Orchestrator</text>
+  <text x="416" y="348" class="sub">persist turn + memory</text>
+  <text x="416" y="362" class="sub">audit · pick outbound</text>
+  <text x="416" y="382" class="sub">channel from request meta</text>
+  <text x="416" y="396" class="sub">format hints per channel</text>
+
+  <rect x="200" y="312" width="160" height="100" rx="8" class="box"/>
+  <text x="216" y="334" class="label">Outbound adapter</text>
+  <text x="216" y="348" class="sub">canonical reply →</text>
+  <text x="216" y="362" class="sub">vendor-native message</text>
+  <text x="216" y="382" class="sub">Slack blocks · Linear MD</text>
+  <text x="216" y="396" class="sub">email MIME · 3D bubble</text>
+
+  <rect x="40" y="312" width="120" height="100" rx="8" class="box"/>
+  <text x="100" y="338" text-anchor="middle" class="label">Origin channel</text>
+  <text x="100" y="356" text-anchor="middle" class="sub">delivered back to</text>
+  <text x="100" y="370" text-anchor="middle" class="sub">the same thread,</text>
+  <text x="100" y="384" text-anchor="middle" class="sub">DM, issue,</text>
+  <text x="100" y="398" text-anchor="middle" class="sub">or 3D session</text>
+
+  <line x1="618" y1="362" x2="582" y2="362" class="edgeA" marker-end="url(#arrA)"/>
+  <line x1="398" y1="362" x2="362" y2="362" class="edgeA" marker-end="url(#arrA)"/>
+  <line x1="198" y1="362" x2="162" y2="362" class="edgeA" marker-end="url(#arrA)"/>
+
+  <text x="600" y="306" class="stepNum">④</text>
+  <text x="380" y="306" class="stepNum">⑤</text>
+  <text x="180" y="306" class="stepNum">⑥</text>
+  <text x="20" y="306" class="stepNum">⑦</text>
+
+  <text x="20" y="448" class="tier">WHY THIS PATTERN WORKS</text>
+
+  <rect x="40" y="464" width="240" height="120" rx="8" class="boxShared"/>
+  <text x="56" y="484" class="label">Identity is global</text>
+  <text x="56" y="500" class="sub">A user has one user_id across</text>
+  <text x="56" y="514" class="sub">channels — slack_uid, email,</text>
+  <text x="56" y="528" class="sub">linear_id all link to it.</text>
+  <text x="56" y="552" class="sub">Claire greets you the same</text>
+  <text x="56" y="566" class="sub">whether you DM her or open</text>
+  <text x="56" y="580" class="sub">Linear — and remembers context.</text>
+
+  <rect x="290" y="464" width="240" height="120" rx="8" class="boxShared"/>
+  <text x="306" y="484" class="label">Channel is just metadata</text>
+  <text x="306" y="500" class="sub">The colleague reasons on</text>
+  <text x="306" y="514" class="sub">content; channel hints affect</text>
+  <text x="306" y="528" class="sub">only formatting + length.</text>
+  <text x="306" y="552" class="sub">Adding a new channel =</text>
+  <text x="306" y="566" class="sub">one adapter + format profile.</text>
+  <text x="306" y="580" class="sub">Zero changes to colleagues.</text>
+
+  <rect x="540" y="464" width="240" height="120" rx="8" class="boxShared"/>
+  <text x="556" y="484" class="label">Replies go back to origin</text>
+  <text x="556" y="500" class="sub">Same thread, same DM,</text>
+  <text x="556" y="514" class="sub">same issue. No surprise</text>
+  <text x="556" y="528" class="sub">cross-channel jumps.</text>
+  <text x="556" y="552" class="sub">If a turn was started by</text>
+  <text x="556" y="566" class="sub">webhook with no human</text>
+  <text x="556" y="580" class="sub">channel, reply is logged only.</text>
+
+  <text x="20" y="612" class="tier">CONTRAST</text>
+  <text x="20" y="628" class="sub">Bad design: one colleague service per channel (Slack-Claire, Linear-Claire, Email-Claire) — memory diverges, identity duplicates, every new surface = N×services.</text>
+</svg>
