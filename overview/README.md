@@ -1,5 +1,9 @@
 # Overview
 
+**Start here if the whole concept still feels abstract:** [worldview.md](./worldview.md) is the
+honest version — the core claim, what's genuinely unresolved, and the risks. This document below
+is the reference version once the worldview lands.
+
 ## What we're building
 
 A platform of **digital colleagues** — AI agents with distinct personas, skills, and
