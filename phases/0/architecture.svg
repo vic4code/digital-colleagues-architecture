@@ -1,14 +1,11 @@
-<svg viewBox="0 0 780 640" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>prjt-digital-staff current prototype architecture</title>
-  <desc>Claw3D frontend, FastAPI orchestrator, per-agent codex app-server daemons, file-based shared state</desc>
+<svg viewBox="0 0 820 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0 — Prototype with Linear integration</title>
+  <desc>FastAPI + per-agent codex daemons + file-based state, with bidirectional Linear sync and task dispatcher</desc>
 
   <defs>
-    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
-    </marker>
-    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
-    </marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
   </defs>
 
   <style>
@@ -18,95 +15,135 @@
     .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
     .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
     .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
+    .edgeBlue { stroke: #2563eb; stroke-width: 1.3; fill: none; }
     .edgeDash { stroke-dasharray: 4 3; }
     .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
     .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
     .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .boxExternal { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1; }
     .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .pillBlue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1; }
     .edgeLabel { font-size: 10px; fill: #6b7280; font-family: ui-monospace, monospace; }
+    .edgeLabelBlue { font-size: 10px; fill: #2563eb; font-family: ui-monospace, monospace; }
   </style>
 
-  <text x="20" y="32" class="tier">USER · FRONTEND</text>
-  <rect x="40" y="48" width="140" height="50" rx="6" class="box"/>
-  <text x="110" y="70" text-anchor="middle" class="label">Browser</text>
-  <text x="110" y="86" text-anchor="middle" class="sub">End user</text>
-  <rect x="220" y="48" width="180" height="50" rx="6" class="box"/>
-  <text x="310" y="68" text-anchor="middle" class="label">Claw3D</text>
-  <text x="310" y="84" text-anchor="middle" class="sub">3D virtual office UI</text>
-  <text x="310" y="96" text-anchor="middle" class="port">:3000</text>
-  <line x1="180" y1="73" x2="218" y2="73" class="edge" marker-end="url(#arr)"/>
-  <text x="199" y="68" text-anchor="middle" class="edgeLabel">HTTP</text>
+  <text x="20" y="32" class="tier">USER · FRONTEND · EXTERNAL CHANNEL</text>
 
-  <text x="20" y="138" class="tier">ORCHESTRATOR</text>
-  <rect x="40" y="154" width="700" height="92" rx="8" class="box"/>
+  <rect x="40" y="48" width="120" height="50" rx="6" class="box"/>
+  <text x="100" y="70" text-anchor="middle" class="label">Browser</text>
+  <text x="100" y="86" text-anchor="middle" class="sub">End user</text>
+
+  <rect x="180" y="48" width="170" height="50" rx="6" class="box"/>
+  <text x="265" y="68" text-anchor="middle" class="label">Claw3D</text>
+  <text x="265" y="84" text-anchor="middle" class="sub">3D virtual office UI</text>
+  <text x="265" y="96" text-anchor="middle" class="port">:3000</text>
+
+  <rect x="600" y="48" width="200" height="50" rx="6" class="boxExternal"/>
+  <text x="700" y="68" text-anchor="middle" class="label">Linear · sprint board</text>
+  <text x="700" y="84" text-anchor="middle" class="sub">issues · states · assignees</text>
+  <text x="700" y="96" text-anchor="middle" class="port">GraphQL API (linear.app)</text>
+
+  <line x1="160" y1="73" x2="178" y2="73" class="edge" marker-end="url(#arr)"/>
+  <text x="169" y="68" text-anchor="middle" class="edgeLabel">HTTP</text>
+
+  <text x="20" y="138" class="tier">ORCHESTRATOR · FASTAPI · SERVER.PY :7770</text>
+
+  <rect x="40" y="154" width="760" height="120" rx="8" class="box"/>
   <text x="60" y="178" class="label">FastAPI · server.py</text>
-  <text x="60" y="194" class="port">:7770</text>
+  <text x="60" y="194" class="port">:7770 · single process</text>
+
   <rect x="220" y="162" width="120" height="28" rx="14" class="pill"/>
   <text x="280" y="180" text-anchor="middle" class="sub">/v1/chat/completions</text>
   <rect x="350" y="162" width="100" height="28" rx="14" class="pill"/>
   <text x="400" y="180" text-anchor="middle" class="sub">DaemonPool</text>
   <rect x="460" y="162" width="120" height="28" rx="14" class="pill"/>
-  <text x="520" y="180" text-anchor="middle" class="sub">message fan-out</text>
+  <text x="520" y="180" text-anchor="middle" class="sub">fan-out (message)</text>
   <rect x="590" y="162" width="130" height="28" rx="14" class="pill"/>
   <text x="655" y="180" text-anchor="middle" class="sub">busy-queue / pending</text>
-  <text x="60" y="222" class="sub">Routing · session mapping · message dispatch · busy queue · SSE streaming</text>
-  <text x="60" y="236" class="sub">/kanban/view · /audit/view · /docs/view · /pending/{ticket}</text>
-  <line x1="310" y1="98" x2="310" y2="152" class="edge" marker-end="url(#arr)"/>
-  <text x="316" y="125" class="edgeLabel">POST /v1/chat/completions</text>
 
-  <text x="20" y="286" class="tier">PER-AGENT RUNTIME · KNOWN_AGENTS = [vanessa, david]</text>
+  <rect x="220" y="200" width="160" height="28" rx="14" class="pillBlue"/>
+  <text x="300" y="218" text-anchor="middle" class="sub">_background_linear_sync</text>
+  <rect x="390" y="200" width="180" height="28" rx="14" class="pillBlue"/>
+  <text x="480" y="218" text-anchor="middle" class="sub">TaskDispatcher (source=linear)</text>
+  <rect x="580" y="200" width="140" height="28" rx="14" class="pillBlue"/>
+  <text x="650" y="218" text-anchor="middle" class="sub">LinearAdapter (GraphQL)</text>
 
-  <rect x="40" y="304" width="220" height="200" rx="8" class="boxAgent"/>
-  <text x="56" y="326" class="label">Vanessa</text>
-  <text x="56" y="340" class="sub">PM · requirements · BRD</text>
-  <rect x="56" y="354" width="188" height="40" rx="6" class="box"/>
-  <text x="150" y="370" text-anchor="middle" class="label">codex app-server</text>
-  <text x="150" y="385" text-anchor="middle" class="sub">subprocess · stdin/stdout JSON</text>
-  <rect x="56" y="402" width="188" height="34" rx="6" class="box"/>
-  <text x="150" y="416" text-anchor="middle" class="label">MCP stdio server</text>
-  <text x="150" y="430" text-anchor="middle" class="sub">mcp_stdio.py</text>
-  <rect x="56" y="444" width="188" height="48" rx="6" class="box"/>
-  <text x="150" y="459" text-anchor="middle" class="label">agents/vanessa/</text>
-  <text x="150" y="473" text-anchor="middle" class="sub">.codex/ (auth · skills · sqlite)</text>
-  <text x="150" y="486" text-anchor="middle" class="sub">cwd/AGENTS.md · memory/</text>
+  <text x="60" y="252" class="sub">Routes · session map · message dispatch · busy queue · SSE streaming</text>
+  <text x="60" y="266" class="sub">Background tasks · Linear sync 5s incremental / 60s full · auto-dispatch on new Linear assignment</text>
 
-  <rect x="280" y="304" width="220" height="200" rx="8" class="boxAgent"/>
-  <text x="296" y="326" class="label">David</text>
-  <text x="296" y="340" class="sub">SA · ADR · AWS diagrams</text>
-  <rect x="296" y="354" width="188" height="40" rx="6" class="box"/>
-  <text x="390" y="370" text-anchor="middle" class="label">codex app-server</text>
-  <text x="390" y="385" text-anchor="middle" class="sub">subprocess · stdin/stdout JSON</text>
-  <rect x="296" y="402" width="188" height="34" rx="6" class="box"/>
-  <text x="390" y="416" text-anchor="middle" class="label">MCP stdio server</text>
-  <text x="390" y="430" text-anchor="middle" class="sub">mcp_stdio.py</text>
-  <rect x="296" y="444" width="188" height="48" rx="6" class="box"/>
-  <text x="390" y="459" text-anchor="middle" class="label">agents/david/</text>
-  <text x="390" y="473" text-anchor="middle" class="sub">.codex/ (auth · skills · sqlite)</text>
-  <text x="390" y="486" text-anchor="middle" class="sub">cwd/AGENTS.md · memory/</text>
+  <line x1="265" y1="98" x2="265" y2="152" class="edge" marker-end="url(#arr)"/>
+  <text x="271" y="125" class="edgeLabel">POST /v1/chat/completions</text>
 
-  <line x1="200" y1="246" x2="150" y2="352" class="edge" marker-end="url(#arr)"/>
-  <line x1="380" y1="246" x2="390" y2="352" class="edge" marker-end="url(#arr)"/>
-  <text x="105" y="298" class="edgeLabel">spawn / JSON-RPC</text>
+  <line x1="700" y1="98" x2="700" y2="152" class="edgeBlue" marker-end="url(#arrBlue)"/>
+  <line x1="690" y1="152" x2="690" y2="98" class="edgeBlue" marker-end="url(#arrBlue)"/>
+  <text x="706" y="125" class="edgeLabelBlue">push (dirty) / pull (issues)</text>
 
-  <text x="520" y="286" class="tier">FILE-BASED STATE</text>
-  <rect x="520" y="304" width="220" height="200" rx="8" class="boxShared"/>
-  <text x="536" y="326" class="label">workspace/</text>
-  <text x="536" y="340" class="sub">Business artifacts · shared</text>
-  <rect x="536" y="350" width="188" height="20" rx="4" class="pill"/>
-  <text x="544" y="364" class="sub">docs/  ·  kanban/  ·  messages/</text>
-  <text x="536" y="392" class="label">runtime/</text>
-  <text x="536" y="406" class="sub">System scratch · disposable</text>
-  <rect x="536" y="416" width="188" height="20" rx="4" class="pill"/>
-  <text x="544" y="430" class="sub">sessions/  ·  audit/  ·  pending/</text>
-  <text x="536" y="458" class="label">Per-agent private</text>
-  <rect x="536" y="468" width="188" height="20" rx="4" class="pill"/>
-  <text x="544" y="482" class="sub">memory/  ·  .codex/*.sqlite</text>
+  <text x="20" y="314" class="tier">PER-AGENT RUNTIME · KNOWN_AGENTS = [vanessa, david]</text>
 
-  <path d="M 244 418 Q 380 540 536 418" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <path d="M 484 418 Q 510 540 536 418" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <text x="390" y="558" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools: doc_* · kanban_* · message_* · memory_*</text>
+  <rect x="40" y="332" width="220" height="200" rx="8" class="boxAgent"/>
+  <text x="56" y="354" class="label">Vanessa</text>
+  <text x="56" y="368" class="sub">PM · BRD · linear_id ↔ assignee email</text>
+  <rect x="56" y="382" width="188" height="40" rx="6" class="box"/>
+  <text x="150" y="398" text-anchor="middle" class="label">codex app-server</text>
+  <text x="150" y="413" text-anchor="middle" class="sub">subprocess · stdin/stdout JSON</text>
+  <rect x="56" y="430" width="188" height="34" rx="6" class="box"/>
+  <text x="150" y="444" text-anchor="middle" class="label">MCP stdio server</text>
+  <text x="150" y="458" text-anchor="middle" class="sub">mcp_stdio.py</text>
+  <rect x="56" y="472" width="188" height="48" rx="6" class="box"/>
+  <text x="150" y="487" text-anchor="middle" class="label">agents/vanessa/</text>
+  <text x="150" y="501" text-anchor="middle" class="sub">.codex/ (auth · skills · sqlite)</text>
+  <text x="150" y="514" text-anchor="middle" class="sub">cwd/AGENTS.md · memory/</text>
 
-  <text x="20" y="600" class="tier">KEY FLOWS</text>
-  <text x="20" y="618" class="sub">① User → Claw3D → FastAPI → Vanessa daemon  ·  ② Vanessa writes files + message_send  ·  ③ Server detects recipient → spawns David turn in background</text>
-  <text x="20" y="632" class="sub">④ David busy → next user msg gets instant "hold on" reply + pending.jsonl row → worker awaits _turn_lock → /pending/{ticket} polled by client</text>
+  <rect x="280" y="332" width="220" height="200" rx="8" class="boxAgent"/>
+  <text x="296" y="354" class="label">David</text>
+  <text x="296" y="368" class="sub">SA · ADR · AWS diagrams</text>
+  <rect x="296" y="382" width="188" height="40" rx="6" class="box"/>
+  <text x="390" y="398" text-anchor="middle" class="label">codex app-server</text>
+  <text x="390" y="413" text-anchor="middle" class="sub">subprocess · stdin/stdout JSON</text>
+  <rect x="296" y="430" width="188" height="34" rx="6" class="box"/>
+  <text x="390" y="444" text-anchor="middle" class="label">MCP stdio server</text>
+  <text x="390" y="458" text-anchor="middle" class="sub">mcp_stdio.py</text>
+  <rect x="296" y="472" width="188" height="48" rx="6" class="box"/>
+  <text x="390" y="487" text-anchor="middle" class="label">agents/david/</text>
+  <text x="390" y="501" text-anchor="middle" class="sub">.codex/ (auth · skills · sqlite)</text>
+  <text x="390" y="514" text-anchor="middle" class="sub">cwd/AGENTS.md · memory/</text>
+
+  <line x1="200" y1="274" x2="150" y2="380" class="edge" marker-end="url(#arr)"/>
+  <line x1="380" y1="274" x2="390" y2="380" class="edge" marker-end="url(#arr)"/>
+  <text x="105" y="320" class="edgeLabel">spawn / JSON-RPC</text>
+
+  <path d="M 480 228 Q 480 290 200 380" class="edgeBlue edgeDash" fill="none" marker-end="url(#arrBlue)"/>
+  <text x="320" y="318" class="edgeLabelBlue">dispatch turn on new Linear assignment (AGENT_TO_EMAIL)</text>
+
+  <text x="540" y="314" class="tier">FILE-BASED STATE</text>
+  <rect x="540" y="332" width="260" height="200" rx="8" class="boxShared"/>
+
+  <text x="556" y="354" class="label">workspace/</text>
+  <text x="556" y="368" class="sub">Business artifacts · shared</text>
+  <rect x="556" y="378" width="228" height="20" rx="4" class="pill"/>
+  <text x="564" y="392" class="sub">docs/  ·  kanban/  ·  messages/</text>
+  <rect x="556" y="402" width="228" height="20" rx="4" class="pillBlue"/>
+  <text x="564" y="416" class="sub">kanban.json ⇄ Linear (sync source of truth)</text>
+
+  <text x="556" y="436" class="label">runtime/</text>
+  <text x="556" y="450" class="sub">System scratch · disposable</text>
+  <rect x="556" y="460" width="228" height="20" rx="4" class="pill"/>
+  <text x="564" y="474" class="sub">sessions/  ·  audit/  ·  pending/</text>
+
+  <text x="556" y="494" class="label">Per-agent private</text>
+  <rect x="556" y="504" width="228" height="20" rx="4" class="pill"/>
+  <text x="564" y="518" class="sub">memory/  ·  .codex/*.sqlite</text>
+
+  <path d="M 244 446 Q 400 580 556 446" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 484 446 Q 520 580 556 446" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <text x="410" y="600" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools: doc_* · kanban_* · message_* · memory_*</text>
+
+  <path d="M 700 332 Q 760 290 720 274" class="edgeBlue edgeDash" fill="none"/>
+  <text x="710" y="298" text-anchor="middle" class="edgeLabelBlue">5s incremental / 60s full</text>
+
+  <text x="20" y="640" class="tier">KEY FLOWS</text>
+  <text x="20" y="658" class="sub">① User → Claw3D → FastAPI → Vanessa daemon  ·  ② Vanessa writes files + message_send  ·  ③ Server detects recipient → spawns David turn in background</text>
+  <text x="20" y="674" class="sub">④ David busy → instant "hold on" + pending.jsonl ticket → worker awaits _turn_lock → /pending/{ticket} polled</text>
+  <text x="20" y="690" class="sub">⑤ Background loop pulls Linear issues every 5s · pushes dirty local cards · Linear-assigned issue (matched via AGENT_TO_EMAIL) → TaskDispatcher → agent turn</text>
+  <text x="20" y="706" class="sub">⑥ kanban_update on local card → marked dirty → next sync pushes to Linear · conflict resolution: Linear wins</text>
 </svg>

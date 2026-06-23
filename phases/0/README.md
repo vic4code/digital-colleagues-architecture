@@ -18,6 +18,16 @@ colleague is a long-running `codex app-server` subprocess managed by a `DaemonPo
 All shared state — documents, kanban, messages — lives as JSON/JSONL files on disk.
 Frontend is the Claw3D 3D virtual office.
 
+**Linear integration (optional, enabled by `LINEAR_API_KEY` + `LINEAR_TEAM_ID`).**
+A background task in `server.py` performs **bidirectional sync** between the local
+`workspace/kanban/kanban.json` and a Linear team's sprint board: 5-second incremental
+sync (pushes dirty local cards + pulls Linear issues), 60-second full sync (catches
+deletions). Linear-assigned issues — matched to a local colleague via the
+`AGENT_TO_EMAIL` map — are auto-dispatched as turns by `TaskDispatcher` (source =
+`linear`). This makes Linear the **secondary task ingress** alongside Claw3D, and
+the team's sprint board doubles as the cross-colleague kanban view that non-3D-savvy
+stakeholders (e.g. legal) can use. Conflict resolution: Linear wins.
+
 ## What works well
 
 - **Zero infrastructure.** One process, one filesystem. Easy to run on a laptop or a single EC2.
@@ -43,6 +53,9 @@ Frontend is the Claw3D 3D virtual office.
 - The **MCP tool layer** — `doc_*`, `kanban_*`, `message_*`, `memory_*` are the right
   abstraction; the implementation behind them just gets swapped out
 - The **persona-as-data approach** (`agents/<id>/cwd/AGENTS.md` + `memory/`)
+- The **Linear-as-control-plane pattern** — issue assignment triggers an agent turn.
+  This is exactly the right model to keep in Phase 1+ (replace polling sync with
+  Linear webhook → orchestrator → SQS, same semantics)
 
 ## Migration path
 
