@@ -16,6 +16,37 @@ and the ability to take meaningful actions in our systems on behalf of the team.
 - Not a one-shot RPA replacement — agents reason and adapt, not script-follow
 - Not autonomous — humans stay in the loop for high-stakes decisions (especially legal)
 
+## Relationship to Codex / Claude Code
+
+Codex (`app-server`) and Claude Code are **single-agent execution runtimes**. They solve
+"run a session, call tools, stream turns back" — for one agent, one process, one machine.
+They have no concept of other agents, no idea what host they're running on, and no built-in
+way to dispatch work across a fleet. They are the engine, not the organization.
+
+A **digital colleague** is a layer above that: a persistent identity (persona + memory +
+scoped permissions, stored as data) that is *backed by* one of these runtimes at any given
+moment, but is not *the same thing as* the runtime instance executing it. The platform's job
+is to take many such runtimes and make them behave like an observable, dispatchable group —
+not a pile of unrelated single-player tools.
+
+Concretely, the platform adds three things no agent runtime provides on its own:
+
+1. **Group interaction.** Colleagues message each other and hand off work (the fan-out
+   pattern). A bare Codex session has no notion that another agent even exists.
+2. **Observability across the group.** The orchestrator tracks who's busy, who's idle, how
+   long a turn has been running, whether something is stuck — state that lives outside any
+   single runtime process, because the runtime itself only knows about itself.
+3. **Cross-machine, cross-network dispatch.** A colleague's identity is decoupled from the
+   specific process and machine executing it right now. If the host running "David" goes
+   away, a new worker on a different host can pick up "David" — same persona, same memory,
+   same permissions — because identity lives in shared state, not in a process.
+
+One sentence: **Codex/Claude Code answers "how do I get one agent to finish one piece of
+work"; the digital colleague platform answers "how do I turn many such agents into a managed
+organization with identity, observability, and dispatch."** The runtime is a replaceable part
+of the platform, not the platform itself — this is also the substance behind Non-negotiable #5
+below (no vendor lock).
+
 ## Audiences for this repo
 
 | Audience | Reads | Cares about |
