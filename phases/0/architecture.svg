@@ -41,7 +41,7 @@
   <rect x="600" y="48" width="200" height="50" rx="6" class="boxExternal"/>
   <text x="700" y="68" text-anchor="middle" class="label">Linear · sprint board</text>
   <text x="700" y="84" text-anchor="middle" class="sub">issues · states · assignees</text>
-  <text x="700" y="96" text-anchor="middle" class="port">GraphQL API (linear.app)</text>
+  <text x="700" y="96" text-anchor="middle" class="port">GraphQL · linear.app</text>
 
   <line x1="160" y1="73" x2="178" y2="73" class="edge" marker-end="url(#arr)"/>
   <text x="169" y="68" text-anchor="middle" class="edgeLabel">HTTP</text>
@@ -72,17 +72,21 @@
   <text x="60" y="266" class="sub">Background tasks · Linear sync 5s incremental / 60s full · auto-dispatch on new Linear assignment</text>
 
   <line x1="265" y1="98" x2="265" y2="152" class="edge" marker-end="url(#arr)"/>
-  <text x="271" y="125" class="edgeLabel">POST /v1/chat/completions</text>
+  <text x="320" y="118" text-anchor="middle" class="edgeLabel">POST /v1/chat/completions</text>
 
   <line x1="700" y1="98" x2="700" y2="152" class="edgeBlue" marker-end="url(#arrBlue)"/>
-  <line x1="690" y1="152" x2="690" y2="98" class="edgeBlue" marker-end="url(#arrBlue)"/>
-  <text x="706" y="125" class="edgeLabelBlue">push (dirty) / pull (issues)</text>
+  <line x1="688" y1="152" x2="688" y2="98" class="edgeBlue" marker-end="url(#arrBlue)"/>
+  <text x="694" y="118" text-anchor="middle" class="edgeLabelBlue">push dirty · pull issues</text>
+  <text x="694" y="132" text-anchor="middle" class="edgeLabelBlue">5s / 60s sync</text>
 
-  <text x="20" y="314" class="tier">PER-AGENT RUNTIME · KNOWN_AGENTS = [vanessa, david]</text>
+  <text x="20" y="306" class="tier">PER-AGENT RUNTIME · KNOWN_AGENTS = [vanessa, david]</text>
+
+  <path d="M 480 274 Q 340 304 150 332" class="edgeBlue edgeDash" fill="none" marker-end="url(#arrBlue)"/>
+  <text x="316" y="298" text-anchor="middle" class="edgeLabelBlue">Linear assignment → dispatch turn</text>
 
   <rect x="40" y="332" width="220" height="200" rx="8" class="boxAgent"/>
   <text x="56" y="354" class="label">Vanessa</text>
-  <text x="56" y="368" class="sub">PM · BRD · linear_id ↔ assignee email</text>
+  <text x="56" y="368" class="sub">PM · requirements · BRD</text>
   <rect x="56" y="382" width="188" height="40" rx="6" class="box"/>
   <text x="150" y="398" text-anchor="middle" class="label">codex app-server</text>
   <text x="150" y="413" text-anchor="middle" class="sub">subprocess · stdin/stdout JSON</text>
@@ -108,14 +112,10 @@
   <text x="390" y="501" text-anchor="middle" class="sub">.codex/ (auth · skills · sqlite)</text>
   <text x="390" y="514" text-anchor="middle" class="sub">cwd/AGENTS.md · memory/</text>
 
-  <line x1="200" y1="274" x2="150" y2="380" class="edge" marker-end="url(#arr)"/>
-  <line x1="380" y1="274" x2="390" y2="380" class="edge" marker-end="url(#arr)"/>
-  <text x="105" y="320" class="edgeLabel">spawn / JSON-RPC</text>
+  <line x1="380" y1="274" x2="390" y2="332" class="edge" marker-end="url(#arr)"/>
+  <text x="397" y="306" class="edgeLabel">spawn / JSON-RPC</text>
 
-  <path d="M 480 228 Q 480 290 200 380" class="edgeBlue edgeDash" fill="none" marker-end="url(#arrBlue)"/>
-  <text x="320" y="318" class="edgeLabelBlue">dispatch turn on new Linear assignment (AGENT_TO_EMAIL)</text>
-
-  <text x="540" y="314" class="tier">FILE-BASED STATE</text>
+  <text x="540" y="306" class="tier">FILE-BASED STATE</text>
   <rect x="540" y="332" width="260" height="200" rx="8" class="boxShared"/>
 
   <text x="556" y="354" class="label">workspace/</text>
@@ -123,7 +123,7 @@
   <rect x="556" y="378" width="228" height="20" rx="4" class="pill"/>
   <text x="564" y="392" class="sub">docs/  ·  kanban/  ·  messages/</text>
   <rect x="556" y="402" width="228" height="20" rx="4" class="pillBlue"/>
-  <text x="564" y="416" class="sub">kanban.json ⇄ Linear (sync source of truth)</text>
+  <text x="564" y="416" class="sub">kanban.json ⇄ Linear (synced both ways)</text>
 
   <text x="556" y="436" class="label">runtime/</text>
   <text x="556" y="450" class="sub">System scratch · disposable</text>
@@ -134,16 +134,13 @@
   <rect x="556" y="504" width="228" height="20" rx="4" class="pill"/>
   <text x="564" y="518" class="sub">memory/  ·  .codex/*.sqlite</text>
 
-  <path d="M 244 446 Q 400 580 556 446" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <path d="M 484 446 Q 520 580 556 446" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <text x="410" y="600" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools: doc_* · kanban_* · message_* · memory_*</text>
+  <path d="M 244 446 Q 400 568 556 446" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 484 446 Q 520 568 556 446" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <text x="410" y="588" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools · doc_* · kanban_* · message_* · memory_*</text>
 
-  <path d="M 700 332 Q 760 290 720 274" class="edgeBlue edgeDash" fill="none"/>
-  <text x="710" y="298" text-anchor="middle" class="edgeLabelBlue">5s incremental / 60s full</text>
-
-  <text x="20" y="640" class="tier">KEY FLOWS</text>
-  <text x="20" y="658" class="sub">① User → Claw3D → FastAPI → Vanessa daemon  ·  ② Vanessa writes files + message_send  ·  ③ Server detects recipient → spawns David turn in background</text>
-  <text x="20" y="674" class="sub">④ David busy → instant "hold on" + pending.jsonl ticket → worker awaits _turn_lock → /pending/{ticket} polled</text>
-  <text x="20" y="690" class="sub">⑤ Background loop pulls Linear issues every 5s · pushes dirty local cards · Linear-assigned issue (matched via AGENT_TO_EMAIL) → TaskDispatcher → agent turn</text>
-  <text x="20" y="706" class="sub">⑥ kanban_update on local card → marked dirty → next sync pushes to Linear · conflict resolution: Linear wins</text>
+  <text x="20" y="624" class="tier">KEY FLOWS</text>
+  <text x="20" y="642" class="sub">① User → Claw3D → FastAPI → Vanessa daemon  ·  ② Vanessa writes files + message_send  ·  ③ Server detects recipient → spawns David turn in background</text>
+  <text x="20" y="658" class="sub">④ David busy → instant "hold on" + pending.jsonl ticket → worker awaits _turn_lock → /pending/{ticket} polled</text>
+  <text x="20" y="674" class="sub">⑤ Linear sync loop pulls issues every 5s · pushes dirty local cards · new assignment (via AGENT_TO_EMAIL) → TaskDispatcher → agent turn</text>
+  <text x="20" y="690" class="sub">⑥ kanban_update marks card dirty → next sync pushes to Linear · conflict resolution: Linear wins</text>
 </svg>
