@@ -17,6 +17,7 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 010 | [Email dispatch addresses the colleague, not a shared inbox](./ADR-010-email-per-colleague-identity.md) | Proposed |
 | 011 | [ALB + orchestrator as the gateway, not AWS API Gateway](./ADR-011-alb-not-api-gateway.md) | Proposed |
 | 012 | [Worker → orchestrator streaming return path](./ADR-012-streaming-return-path.md) | Proposed |
+| 013 | [Capability-oriented logical architecture; clouds are bindings](./ADR-013-capability-oriented-logical-architecture.md) | Proposed |
 
 ## Conventions
 

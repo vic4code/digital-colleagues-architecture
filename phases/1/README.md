@@ -5,6 +5,12 @@
 **Scope:** One scenario only — **legal contract review**. One channel — Claw3D + Linear.
 One team — legal. Multi-colleague but small (3–5 personas).
 
+> This phase is the **AWS binding** of the
+> [logical architecture](../../overview/logical-architecture.md). The AWS services below
+> (RDS, S3, SQS, Fargate, …) are *implementations* of capability components (Persona store,
+> Dispatch queue, Worker pool, …); the same capabilities can bind on-prem — see
+> [ADR-013](../../decisions/ADR-013-capability-oriented-logical-architecture.md).
+
 ## Goal
 
 Ship a production-ready system that the legal team can rely on for daily contract

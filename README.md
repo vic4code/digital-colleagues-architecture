@@ -36,10 +36,12 @@ previous phase.
 1. **Start here:** [`overview/worldview.md`](./overview/worldview.md) — the core concept, what's
    genuinely unresolved, and the risks, before any architecture diagram
 2. **Then:** [`overview/README.md`](./overview/README.md) — what we're building, glossary, audiences
-3. **See where we are:** [`phases/0/`](./phases/0/) — current running system (prototype)
-4. **See where we're going:** [`phases/1/`](./phases/1/) onwards (legal MVP → enterprise)
-5. **Understand the why:** [`decisions/`](./decisions/) — Architecture Decision Records
-6. **Cross-phase concerns:** [`flows/`](./flows/) (end-to-end workflows), [`research/`](./research/) (scratchpad)
+3. **The capability model:** [`overview/logical-architecture.md`](./overview/logical-architecture.md) —
+   the cloud-agnostic logical architecture every phase is a binding of
+4. **See where we are:** [`phases/0/`](./phases/0/) — current running system (prototype)
+5. **See where we're going:** [`phases/1/`](./phases/1/) onwards (legal MVP → enterprise)
+6. **Understand the why:** [`decisions/`](./decisions/) — Architecture Decision Records
+7. **Cross-phase concerns:** [`flows/`](./flows/) (end-to-end workflows), [`research/`](./research/) (scratchpad)
 
 ## Conventions
 
