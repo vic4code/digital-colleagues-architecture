@@ -38,6 +38,8 @@ auditable, recoverable, and able to be operated without the original developer p
 - ADR-004: Worker pool with externalized state vs per-agent containers
 - ADR-005: Human-in-the-loop gates for contract output
 - ADR-006: Audit log storage and retention for legal compliance
+- [ADR-007](../../decisions/ADR-007-symphony-inspired-orchestration.md): Symphony-inspired claim-state
+  machine, workflow-as-data colleague config, and bounded continuation turns — informs ADR-004
 
 ## Migration from Phase 0
 

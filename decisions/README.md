@@ -6,6 +6,7 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 |---|---|---|
 | 000 | [Template](./ADR-000-template.md) | — |
 | 001 | [File-based state in Phase 0](./ADR-001-file-based-state-in-phase0.md) | Accepted |
+| 007 | [Symphony-inspired orchestration model for Phase 1+](./ADR-007-symphony-inspired-orchestration.md) | Proposed |
 
 ## Conventions
 
