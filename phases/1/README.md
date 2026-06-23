@@ -31,13 +31,13 @@ auditable, recoverable, and able to be operated without the original developer p
 
 ![Phase 1 architecture](./architecture.svg)
 
-## Key design decisions to capture as ADRs
+## Key design decisions (ADRs)
 
-- ADR-002: Fargate vs EKS — why we're not doing Kubernetes yet
-- ADR-003: Linear as control plane for task dispatch
-- ADR-004: Worker pool with externalized state vs per-agent containers
-- ADR-005: Human-in-the-loop gates for contract output
-- ADR-006: Audit log storage and retention for legal compliance
+- [ADR-002](../../decisions/ADR-002-fargate-not-eks.md): Fargate vs EKS — why we're not doing Kubernetes yet
+- [ADR-003](../../decisions/ADR-003-linear-as-control-plane.md): Linear as control plane for task dispatch
+- [ADR-004](../../decisions/ADR-004-worker-pool-externalized-state.md): Worker pool with externalized state vs per-agent containers
+- [ADR-005](../../decisions/ADR-005-human-in-the-loop-gates.md): Human-in-the-loop gates for contract output
+- [ADR-006](../../decisions/ADR-006-audit-log-retention.md): Audit log storage and retention for legal compliance
 - [ADR-007](../../decisions/ADR-007-symphony-inspired-orchestration.md): Symphony-inspired claim-state
   machine, workflow-as-data colleague config, and bounded continuation turns — informs ADR-004
 
