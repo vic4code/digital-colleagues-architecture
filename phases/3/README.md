@@ -26,7 +26,7 @@ Each colleague is reachable from any of these — same identity, same memory:
 - Slack (DM, channel mention, slash command, modal)
 - Microsoft Teams (chat triggers)
 - Linear (issue assignment, comment)
-- Email (inbound + outbound)
+- Email (inbound + outbound) — each colleague has its own address; see [ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md)
 - Webhook / API (for programmatic callers)
 - VDI-bound desktops (presentation-only — see [ADR-008](../../decisions/ADR-008-vdi-presentation-only-channel.md))
 - Voice / phone (future)

@@ -14,6 +14,7 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 007 | [Symphony-inspired orchestration model for Phase 1+](./ADR-007-symphony-inspired-orchestration.md) | Proposed |
 | 008 | [VDI is a presentation-only channel](./ADR-008-vdi-presentation-only-channel.md) | Proposed |
 | 009 | [Source connectors distinct from channel adapters](./ADR-009-source-connectors-distinct-from-channels.md) | Proposed |
+| 010 | [Email dispatch addresses the colleague, not a shared inbox](./ADR-010-email-per-colleague-identity.md) | Proposed |
 
 ## Conventions
 

@@ -51,6 +51,26 @@ organization with identity, observability, and dispatch."** The runtime is a rep
 of the platform, not the platform itself — this is also the substance behind Non-negotiable #5
 below (no vendor lock).
 
+## How the phases differ
+
+Each phase adds exactly one essential thing and is named by it. The phases are cumulative —
+later phases keep everything earlier phases built. (Full detail and diagrams live in each
+[`phases/N/`](../phases/) README; this is the one-line version.)
+
+| Phase | The essential new thing | One-sentence difference | Still can't do |
+|---|---|---|---|
+| **[0](../phases/0/)** | It exists at all | Many colleagues collaborate on one machine, all state in local files. | Survive a second machine, a crash, or a stranger. |
+| **[1](../phases/1/)** | Identity decoupled from the process | Same behavior, but state is externalized (Postgres/S3/SQS) so any worker can run any colleague — HA, autoscale, auditable. Legal contract review only. | Serve more than one team, or any channel beyond Claw3D + Linear. |
+| **[2](../phases/2/)** | Many teams, many scenarios | The legal MVP generalizes: multi-tenant, persona library, skill marketplace, RBAC, per-tenant cost — adding a colleague is data, not deploy. | Reach colleagues where employees already are (Slack/Teams/Email); run at enterprise scale. |
+| **[3](../phases/3/)** | Reach + scale + resilience | The same colleague is reachable from any channel (Slack, Teams, Linear, Email, voice, VDI), at 1000+ colleagues, with observability, compliance, multi-region. | — (this is the robust target state). |
+| **[4](../phases/4/)** | It's reproducible | Everything in Phases 1–3 expressed as reviewed, versioned Terraform across dev/staging/prod. | — (this hardens, it doesn't add product capability). |
+
+The thread running through all of them: **Phase 0 proves the idea, Phase 1 makes a colleague's
+identity outlive any single process, Phase 2 makes the platform serve anyone, Phase 3 makes it
+reachable and resilient everywhere, Phase 4 makes it reproducible.** The hard conceptual leap is
+Phase 0 → 1 (identity stops being "a running process"); everything after is scale and reach on
+top of that foundation.
+
 ## Audiences for this repo
 
 | Audience | Reads | Cares about |
