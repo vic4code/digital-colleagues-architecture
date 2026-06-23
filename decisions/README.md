@@ -15,6 +15,8 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 008 | [VDI is a presentation-only channel](./ADR-008-vdi-presentation-only-channel.md) | Proposed |
 | 009 | [Source connectors distinct from channel adapters](./ADR-009-source-connectors-distinct-from-channels.md) | Proposed |
 | 010 | [Email dispatch addresses the colleague, not a shared inbox](./ADR-010-email-per-colleague-identity.md) | Proposed |
+| 011 | [ALB + orchestrator as the gateway, not AWS API Gateway](./ADR-011-alb-not-api-gateway.md) | Proposed |
+| 012 | [Worker → orchestrator streaming return path](./ADR-012-streaming-return-path.md) | Proposed |
 
 ## Conventions
 

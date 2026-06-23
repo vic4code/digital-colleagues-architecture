@@ -40,6 +40,8 @@ auditable, recoverable, and able to be operated without the original developer p
 - [ADR-006](../../decisions/ADR-006-audit-log-retention.md): Audit log storage and retention for legal compliance
 - [ADR-007](../../decisions/ADR-007-symphony-inspired-orchestration.md): Symphony-inspired claim-state
   machine, workflow-as-data colleague config, and bounded continuation turns — informs ADR-004
+- [ADR-011](../../decisions/ADR-011-alb-not-api-gateway.md): ALB + orchestrator as the gateway, not API Gateway
+- [ADR-012](../../decisions/ADR-012-streaming-return-path.md): worker → orchestrator streaming return path (Redis Pub/Sub)
 
 ## Migration from Phase 0
 
