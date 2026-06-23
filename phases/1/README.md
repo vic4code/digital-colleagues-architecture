@@ -45,7 +45,9 @@ auditable, recoverable, and able to be operated without the original developer p
 
 - `workspace/messages/messages.jsonl` → Postgres `messages` table
 - `workspace/kanban/kanban.json` → Postgres `kanban_cards` table
-- `workspace/docs/` → S3 bucket (with KMS encryption)
+- `workspace/docs/` → S3 bucket (with KMS encryption), as the **default** source connector for
+  content we originate — if a team's contracts actually live in SharePoint, `doc_*` tools resolve
+  through a SharePoint connector instead; see [ADR-009](../../decisions/ADR-009-source-connectors-distinct-from-channels.md)
 - `runtime/pending/pending.jsonl` → SQS queue + Postgres `pending_tickets` table
 - `agents/<id>/.codex/` → Secrets Manager + per-colleague config in DB
 - `KNOWN_AGENTS` list → `colleagues` table

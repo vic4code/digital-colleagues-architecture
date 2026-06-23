@@ -7,6 +7,8 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 000 | [Template](./ADR-000-template.md) | — |
 | 001 | [File-based state in Phase 0](./ADR-001-file-based-state-in-phase0.md) | Accepted |
 | 007 | [Symphony-inspired orchestration model for Phase 1+](./ADR-007-symphony-inspired-orchestration.md) | Proposed |
+| 008 | [VDI is a presentation-only channel](./ADR-008-vdi-presentation-only-channel.md) | Proposed |
+| 009 | [Source connectors distinct from channel adapters](./ADR-009-source-connectors-distinct-from-channels.md) | Proposed |
 
 ## Conventions
 

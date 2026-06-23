@@ -24,14 +24,21 @@ Each colleague is reachable from any of these — same identity, same memory:
 
 - Claw3D 3D office (the differentiator, kept)
 - Slack (DM, channel mention, slash command, modal)
-- Microsoft Teams
+- Microsoft Teams (chat triggers)
 - Linear (issue assignment, comment)
 - Email (inbound + outbound)
 - Webhook / API (for programmatic callers)
+- VDI-bound desktops (presentation-only — see [ADR-008](../../decisions/ADR-008-vdi-presentation-only-channel.md))
 - Voice / phone (future)
 
 **Key insight:** channels are thin adapters in front of the same orchestrator.
 The colleague doesn't know which channel they're being reached on, except as metadata.
+
+**Channels are not document sources.** Where a document actually lives (S3, SharePoint, a DMS)
+is a separate concern handled by **source connectors**, not channel adapters — see
+[ADR-009](../../decisions/ADR-009-source-connectors-distinct-from-channels.md). Microsoft Teams,
+for example, is a channel adapter for chat and a source connector for files at the same time —
+they share Graph API auth, not architecture.
 
 ## What gets added vs Phase 2
 
