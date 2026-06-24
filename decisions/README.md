@@ -18,6 +18,7 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 011 | [ALB + orchestrator as the gateway, not AWS API Gateway](./ADR-011-alb-not-api-gateway.md) | Proposed |
 | 012 | [Worker → orchestrator streaming return path](./ADR-012-streaming-return-path.md) | Proposed |
 | 013 | [Capability-oriented logical architecture; clouds are bindings](./ADR-013-capability-oriented-logical-architecture.md) | Proposed |
+| 014 | [Worker pool placement: federated, pull-based pools by location](./ADR-014-worker-pool-placement.md) | Proposed |
 
 ## Conventions
 

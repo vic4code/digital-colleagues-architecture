@@ -51,6 +51,9 @@ they share Graph API auth, not architecture.
 - **Compliance** — SOC2, ISO 27001, legal hold, data retention policies as code
 - **Cost guardrails** — per-tenant LLM spend budgets, autoscale ceilings, alarms
 - **Multi-region** — at least active/passive for DR
+- **Federated worker pools by location** — a cloud pool plus, where data sovereignty requires it,
+  an on-prem Linux pool inside the corporate network; edge pools pull work outbound, are never
+  called into; agents never run on end-user machines. See [ADR-014](../../decisions/ADR-014-worker-pool-placement.md)
 
 ## What we explicitly avoid
 
