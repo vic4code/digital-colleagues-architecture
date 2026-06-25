@@ -97,10 +97,10 @@
   <text x="417" y="521" text-anchor="middle" class="sub">commit results</text>
   <text x="417" y="535" text-anchor="middle" class="sub">release</text>
 
-  <text x="56" y="572" class="sub">Per-turn: dequeue → load colleague row → materialize identity (AGENTS.md · Soul.md · skills · memory) →</text>
-  <text x="56" y="586" class="sub">spawn codex → MCP tool calls (doc/kanban/message/memory) → write Postgres/S3 → ack → exit</text>
-  <text x="56" y="610" class="sub">Colleague identity is data: persona files in S3, skills + scoped memory in S3 + Postgres, keys in Secrets Manager.</text>
-  <text x="56" y="624" class="sub">No persona is pinned to a host — any worker becomes any colleague by loading it. Same MCP interface as Phase 0.</text>
+  <text x="56" y="572" class="sub">Per-turn: dequeue → load colleague row → materialize persona + skills + memory →</text>
+  <text x="56" y="586" class="sub">spawn codex → MCP tools (doc/kanban/message/memory) → write Postgres/S3 → ack → exit</text>
+  <text x="56" y="610" class="sub">Identity is data: persona/skills/memory in S3 + Postgres, keys in Secrets Manager.</text>
+  <text x="56" y="624" class="sub">No persona is pinned to a host — any worker becomes any colleague by loading it.</text>
 
   <line x1="270" y1="400" x2="270" y2="438" class="edge" marker-end="url(#arr)"/>
   <text x="276" y="420" class="edgeLabel">dequeue</text>

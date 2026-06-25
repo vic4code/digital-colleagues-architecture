@@ -110,7 +110,7 @@
   <line x1="232" y1="120" x2="205" y2="148" class="edge" marker-end="url(#arr)"/>
   <line x1="359" y1="120" x2="245" y2="148" class="edge" marker-end="url(#arr)"/>
   <line x1="195" y1="180" x2="178" y2="246" class="edge" marker-end="url(#arr)"/>
-  <text x="60" y="214" class="edgeLabel">internet → IGW → ALB</text>
+  <text x="206" y="216" class="edgeLabel">internet → IGW → ALB</text>
 
   <line x1="763" y1="120" x2="763" y2="150" class="edgeDash" marker-end="url(#arrDash)"/>
   <path d="M 688 165 C 600 200 560 330 560 354" class="edgeDash" marker-end="url(#arrDash)"/>
