@@ -57,6 +57,10 @@
   <text x="763" y="169" text-anchor="middle" class="label">VPN gateway</text>
   <text x="640" y="146" text-anchor="end" class="edgeLabel">egress allowlist: only the VPN may leave</text>
 
+  <!-- internet gateway (left door) -->
+  <rect x="120" y="150" width="160" height="30" rx="6" class="box"/>
+  <text x="200" y="169" text-anchor="middle" class="label">Internet Gateway</text>
+
   <!-- VPC -->
   <rect x="20" y="184" width="860" height="556" rx="10" class="vpc"/>
   <text x="36" y="206" class="label">AWS VPC — private</text>
@@ -102,10 +106,11 @@
   <text x="612" y="522" class="sub">endpoint over the VPN (ADR-014).</text>
 
   <!-- edges -->
-  <line x1="98" y1="120" x2="150" y2="246" class="edge" marker-end="url(#arr)"/>
-  <line x1="232" y1="120" x2="190" y2="246" class="edge" marker-end="url(#arr)"/>
-  <line x1="359" y1="120" x2="230" y2="246" class="edge" marker-end="url(#arr)"/>
-  <text x="120" y="160" class="edgeLabel">public internet → ALB</text>
+  <line x1="98" y1="120" x2="170" y2="148" class="edge" marker-end="url(#arr)"/>
+  <line x1="232" y1="120" x2="205" y2="148" class="edge" marker-end="url(#arr)"/>
+  <line x1="359" y1="120" x2="245" y2="148" class="edge" marker-end="url(#arr)"/>
+  <line x1="195" y1="180" x2="178" y2="246" class="edge" marker-end="url(#arr)"/>
+  <text x="60" y="214" class="edgeLabel">internet → IGW → ALB</text>
 
   <line x1="763" y1="120" x2="763" y2="150" class="edgeDash" marker-end="url(#arrDash)"/>
   <path d="M 688 165 C 600 200 560 330 560 354" class="edgeDash" marker-end="url(#arrDash)"/>
@@ -117,10 +122,11 @@
   <line x1="560" y1="400" x2="596" y2="386" class="edge" marker-end="url(#arr)"/>
   <text x="566" y="372" class="edgeLabel">private path</text>
   <line x1="436" y1="248" x2="436" y2="184" class="edge" marker-end="url(#arr)"/>
+  <text x="442" y="226" class="edgeLabel">NAT egress, out via IGW</text>
 
   <!-- footnotes -->
   <text x="20" y="762" class="note">Standard teams reach the ALB over the public internet (WAF + Cognito at the edge). This is the default.</text>
-  <text x="20" y="780" class="note">Connection-restricted teams: the ALB is internal-only and reached through the site-to-site VPN — no public path (ADR-008).</text>
+  <text x="20" y="780" class="note">Connection-restricted teams: no Internet Gateway at all — ALB is internal-only, reached through the site-to-site VPN (ADR-008).</text>
   <text x="20" y="798" class="note">Data-cannot-leave teams: this whole VPC is instead a full on-prem deployment (ADR-013 on-prem binding) — nothing runs in AWS.</text>
   <text x="20" y="816" class="edgeLabel">— solid: in-cloud / public path    – – dashed: via VPN (private)    orange: agent / worker compute</text>
 </svg>

@@ -49,10 +49,13 @@ the VPC, its subnets, and the corporate network.
 
 Three network situations, same components:
 
-1. **Standard teams** (default) — reach the ALB over the public internet; WAF + Cognito at the
-   edge. The orchestrator/workers live in private subnets with no public IP; data stores have no
-   internet route; AWS services (SQS, S3, Secrets) are reached through PrivateLink VPC endpoints,
-   not the public internet.
+1. **Standard teams** (default) — reach the ALB over the public internet through an **Internet
+   Gateway**; WAF + Cognito at the edge. The orchestrator/workers live in private subnets with no
+   public IP; their outbound traffic (e.g. an LLM API) leaves via a **NAT gateway**, which itself
+   egresses through the Internet Gateway. Data stores have no internet route; AWS services (SQS,
+   S3, Secrets) are reached through **PrivateLink VPC endpoints**, not the public internet.
+   (IGW = the door to the internet; NAT = outbound-only for private subnets; VPC endpoint = reach
+   AWS services with no internet at all.)
 2. **Connection-restricted teams** — the data may transit encrypted, but nothing should cross the
    public internet. The ALB becomes internal-only and is reached through a **site-to-site VPN**;
    desktops (Windows VDI / macOS) are browser-only, so the OS doesn't matter ([ADR-008](../../decisions/ADR-008-vdi-presentation-only-channel.md)).
