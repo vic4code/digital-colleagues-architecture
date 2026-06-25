@@ -37,6 +37,35 @@ auditable, recoverable, and able to be operated without the original developer p
 
 ![Phase 1 architecture](./architecture.svg)
 
+This is the **component / flow view** — what the pieces are and how a turn moves between them.
+
+### Deployment & network view
+
+The component view above deliberately says nothing about network trust boundaries. That's a
+separate concern, so it's a separate diagram — where things sit relative to the public internet,
+the VPC, its subnets, and the corporate network.
+
+![Phase 1 deployment and network view](./deployment-network.svg)
+
+Three network situations, same components:
+
+1. **Standard teams** (default) — reach the ALB over the public internet; WAF + Cognito at the
+   edge. The orchestrator/workers live in private subnets with no public IP; data stores have no
+   internet route; AWS services (SQS, S3, Secrets) are reached through PrivateLink VPC endpoints,
+   not the public internet.
+2. **Connection-restricted teams** — the data may transit encrypted, but nothing should cross the
+   public internet. The ALB becomes internal-only and is reached through a **site-to-site VPN**;
+   desktops (Windows VDI / macOS) are browser-only, so the OS doesn't matter ([ADR-008](../../decisions/ADR-008-vdi-presentation-only-channel.md)).
+   This is the meaning of "private VPC + VPC endpoints + site-to-site VPN + egress allowlist."
+3. **Data-cannot-leave teams** — the strictest case. The whole VPC is instead a **full on-prem
+   deployment** ([ADR-013](../../decisions/ADR-013-capability-oriented-logical-architecture.md)
+   on-prem binding); an on-prem Linux worker pool pulls turns over the VPN
+   ([ADR-014](../../decisions/ADR-014-worker-pool-placement.md)). Nothing runs in AWS.
+
+Which situation applies is a question for IT/legal, not an architecture choice — see
+[ADR-008](../../decisions/ADR-008-vdi-presentation-only-channel.md). "Network-private" (situations
+1–2) and "physically not in the cloud" (situation 3) are different requirements; don't conflate them.
+
 ## Key design decisions (ADRs)
 
 - [ADR-002](../../decisions/ADR-002-fargate-not-eks.md): Fargate vs EKS — why we're not doing Kubernetes yet

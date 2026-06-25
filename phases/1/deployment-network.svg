@@ -1,0 +1,126 @@
+<svg viewBox="0 0 900 820" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 1 — deployment &amp; network view</title>
+  <desc>Where Phase 1's components sit relative to network trust boundaries: public internet and on-prem corporate network as ingress, an AWS private VPC with public / private-app / private-data subnets and PrivateLink VPC endpoints, reached either over the public internet (standard teams) or a site-to-site VPN (connection-restricted teams).</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrDash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+  </defs>
+
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .edgeDash { stroke: #9ca3af; stroke-width: 1.3; fill: none; stroke-dasharray: 5 4; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .zone { fill: none; stroke: #cbd5e1; stroke-width: 1.3; stroke-dasharray: 6 4; }
+    .zoneFill { fill: #fafafa; stroke: #d1d5db; stroke-width: 1.2; stroke-dasharray: 6 4; }
+    .vpc { fill: none; stroke: #94a3b8; stroke-width: 1.6; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .edgeLabel { font-size: 10px; fill: #6b7280; font-family: ui-monospace, monospace; }
+    .note { font-size: 11px; fill: #4b5563; }
+  </style>
+
+  <text x="20" y="22" class="tier">Phase 1 · deployment &amp; network view · where trust boundaries sit</text>
+
+  <!-- Ingress: public internet -->
+  <text x="20" y="44" class="tier">Public internet · standard teams</text>
+  <rect x="20" y="50" width="410" height="86" rx="8" class="zoneFill"/>
+  <rect x="36" y="66" width="124" height="54" rx="6" class="box"/>
+  <text x="98" y="89" text-anchor="middle" class="label">Browser → Claw3D</text>
+  <text x="98" y="106" text-anchor="middle" class="sub">3D office (web)</text>
+  <rect x="170" y="66" width="124" height="54" rx="6" class="box"/>
+  <text x="232" y="89" text-anchor="middle" class="label">Linear webhook</text>
+  <text x="232" y="106" text-anchor="middle" class="sub">issue → turn</text>
+  <rect x="304" y="66" width="110" height="54" rx="6" class="box"/>
+  <text x="359" y="89" text-anchor="middle" class="label">Legal admin</text>
+  <text x="359" y="106" text-anchor="middle" class="sub">approve / sign</text>
+
+  <!-- Ingress: corporate network -->
+  <text x="460" y="44" class="tier">Corporate network (on-prem) · restricted teams</text>
+  <rect x="460" y="50" width="420" height="86" rx="8" class="zoneFill"/>
+  <rect x="474" y="66" width="104" height="54" rx="6" class="box"/>
+  <text x="526" y="89" text-anchor="middle" class="label">Windows VDI</text>
+  <text x="526" y="106" text-anchor="middle" class="sub">browser only</text>
+  <rect x="586" y="66" width="104" height="54" rx="6" class="box"/>
+  <text x="638" y="89" text-anchor="middle" class="label">macOS laptop</text>
+  <text x="638" y="106" text-anchor="middle" class="sub">browser only</text>
+  <rect x="698" y="66" width="168" height="54" rx="6" class="boxAgent"/>
+  <text x="782" y="86" text-anchor="middle" class="label">On-prem worker pool</text>
+  <text x="782" y="101" text-anchor="middle" class="sub">optional · Linux · pulls turns</text>
+  <text x="782" y="114" text-anchor="middle" class="sub">(strict data-residency only)</text>
+
+  <!-- egress / vpn gateway -->
+  <rect x="688" y="150" width="150" height="30" rx="6" class="box"/>
+  <text x="763" y="169" text-anchor="middle" class="label">VPN gateway</text>
+  <text x="640" y="146" text-anchor="end" class="edgeLabel">egress allowlist: only the VPN may leave</text>
+
+  <!-- VPC -->
+  <rect x="20" y="184" width="860" height="556" rx="10" class="vpc"/>
+  <text x="36" y="206" class="label">AWS VPC — private</text>
+
+  <!-- public subnet -->
+  <text x="44" y="228" class="tier">Public subnet</text>
+  <rect x="40" y="234" width="536" height="80" rx="8" class="zone"/>
+  <rect x="56" y="248" width="240" height="52" rx="6" class="box"/>
+  <text x="176" y="270" text-anchor="middle" class="label">ALB · WAF · Cognito</text>
+  <text x="176" y="287" text-anchor="middle" class="sub">the only public face</text>
+  <rect x="312" y="248" width="248" height="52" rx="6" class="box"/>
+  <text x="436" y="270" text-anchor="middle" class="label">NAT gateway</text>
+  <text x="436" y="287" text-anchor="middle" class="sub">outbound only (e.g. LLM API)</text>
+
+  <!-- private app subnet -->
+  <text x="44" y="336" class="tier">Private app subnet · no public IP</text>
+  <rect x="40" y="342" width="536" height="106" rx="8" class="zone"/>
+  <rect x="56" y="356" width="504" height="40" rx="6" class="box"/>
+  <text x="308" y="381" text-anchor="middle" class="label">ECS orchestrator (Fargate) · stateless</text>
+  <rect x="56" y="402" width="504" height="40" rx="6" class="boxAgent"/>
+  <text x="308" y="427" text-anchor="middle" class="label">ECS worker pool (Fargate) · runs agents</text>
+
+  <!-- private data subnet -->
+  <text x="44" y="470" class="tier">Private data subnet · no internet route</text>
+  <rect x="40" y="476" width="536" height="96" rx="8" class="zone"/>
+  <rect x="56" y="490" width="240" height="44" rx="6" class="box"/>
+  <text x="176" y="516" text-anchor="middle" class="label">RDS Postgres</text>
+  <rect x="312" y="490" width="248" height="44" rx="6" class="box"/>
+  <text x="436" y="516" text-anchor="middle" class="label">ElastiCache Redis</text>
+  <text x="56" y="556" class="sub">Sessions · messages · kanban · audit · live-event bus</text>
+
+  <!-- VPC endpoints -->
+  <text x="600" y="228" class="tier">VPC endpoints (PrivateLink)</text>
+  <rect x="596" y="234" width="268" height="338" rx="8" class="zone"/>
+  <text x="612" y="256" class="sub">AWS services reached privately —</text>
+  <text x="612" y="270" class="sub">never over the public internet</text>
+  <rect x="612" y="282" width="236" height="34" rx="6" class="pill"/><text x="730" y="304" text-anchor="middle" class="sub">S3 — documents / artifacts</text>
+  <rect x="612" y="324" width="236" height="34" rx="6" class="pill"/><text x="730" y="346" text-anchor="middle" class="sub">SQS — turn dispatch queue</text>
+  <rect x="612" y="366" width="236" height="34" rx="6" class="pill"/><text x="730" y="388" text-anchor="middle" class="sub">Secrets Manager + KMS</text>
+  <rect x="612" y="408" width="236" height="34" rx="6" class="pill"/><text x="730" y="430" text-anchor="middle" class="sub">CloudWatch — observability</text>
+  <rect x="612" y="450" width="236" height="34" rx="6" class="pill"/><text x="730" y="472" text-anchor="middle" class="sub">S3 Object Lock — immutable audit</text>
+  <text x="612" y="508" class="sub">On-prem pool pulls from the SQS</text>
+  <text x="612" y="522" class="sub">endpoint over the VPN (ADR-014).</text>
+
+  <!-- edges -->
+  <line x1="98" y1="120" x2="150" y2="246" class="edge" marker-end="url(#arr)"/>
+  <line x1="232" y1="120" x2="190" y2="246" class="edge" marker-end="url(#arr)"/>
+  <line x1="359" y1="120" x2="230" y2="246" class="edge" marker-end="url(#arr)"/>
+  <text x="120" y="160" class="edgeLabel">public internet → ALB</text>
+
+  <line x1="763" y1="120" x2="763" y2="150" class="edgeDash" marker-end="url(#arrDash)"/>
+  <path d="M 688 165 C 600 200 560 330 560 354" class="edgeDash" marker-end="url(#arrDash)"/>
+  <text x="610" y="210" class="edgeLabel">site-to-site VPN → app subnet</text>
+
+  <line x1="176" y1="300" x2="176" y2="354" class="edge" marker-end="url(#arr)"/>
+  <line x1="308" y1="396" x2="308" y2="402" class="edge" marker-end="url(#arr)"/>
+  <line x1="308" y1="442" x2="308" y2="476" class="edge" marker-end="url(#arr)"/>
+  <line x1="560" y1="400" x2="596" y2="386" class="edge" marker-end="url(#arr)"/>
+  <text x="566" y="372" class="edgeLabel">private path</text>
+  <line x1="436" y1="248" x2="436" y2="184" class="edge" marker-end="url(#arr)"/>
+
+  <!-- footnotes -->
+  <text x="20" y="762" class="note">Standard teams reach the ALB over the public internet (WAF + Cognito at the edge). This is the default.</text>
+  <text x="20" y="780" class="note">Connection-restricted teams: the ALB is internal-only and reached through the site-to-site VPN — no public path (ADR-008).</text>
+  <text x="20" y="798" class="note">Data-cannot-leave teams: this whole VPC is instead a full on-prem deployment (ADR-013 on-prem binding) — nothing runs in AWS.</text>
+  <text x="20" y="816" class="edgeLabel">— solid: in-cloud / public path    – – dashed: via VPN (private)    orange: agent / worker compute</text>
+</svg>
