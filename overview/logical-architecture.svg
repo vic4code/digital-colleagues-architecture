@@ -47,7 +47,7 @@
   <line x1="200" y1="142" x2="200" y2="158" class="edge" marker-end="url(#arr)"/>
 
   <!-- Control plane: orchestrator -->
-  <text x="20" y="172" class="tier">CONTROL PLANE</text>
+  <text x="20" y="156" class="tier">CONTROL PLANE</text>
   <rect x="40" y="160" width="460" height="84" rx="8" class="box"/>
   <text x="56" y="182" class="label">Orchestrator</text>
   <text x="56" y="196" class="sub">routing · dispatch · fine-grained authz · connection mgmt</text>
@@ -69,7 +69,7 @@
   <text x="426" y="300" class="edgeLabel">live events</text>
 
   <!-- Execution / data plane: worker pool -->
-  <text x="20" y="326" class="tier">EXECUTION · DATA PLANE</text>
+  <text x="20" y="308" class="tier">DATA PLANE</text>
   <rect x="40" y="314" width="460" height="168" rx="8" class="boxAgent"/>
   <text x="56" y="336" class="label">Worker pool</text>
   <text x="56" y="350" class="sub">stateless · scales on demand · runs one turn, then frees</text>
@@ -107,7 +107,7 @@
   <text x="536" y="288" class="sub">injected at turn start, never in code</text>
 
   <!-- Shared business state (right, lower) -->
-  <text x="520" y="324" class="tier">SHARED BUSINESS STATE</text>
+  <text x="520" y="308" class="tier">SHARED BUSINESS STATE</text>
   <rect x="520" y="314" width="340" height="168" rx="8" class="boxShared"/>
   <text x="536" y="338" class="label">Document / artifact store</text>
   <text x="536" y="352" class="sub">via source connectors (S3 / SharePoint / …)</text>
