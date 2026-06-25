@@ -98,7 +98,7 @@
   <text x="417" y="535" text-anchor="middle" class="sub">release</text>
 
   <text x="56" y="572" class="sub">Per-turn: dequeue → load colleague row → materialize persona + skills + memory →</text>
-  <text x="56" y="586" class="sub">spawn codex → MCP tools (doc/kanban/message/memory) → write Postgres/S3 → ack → exit</text>
+  <text x="56" y="586" class="sub">spawn codex → MCP tool calls → write Postgres / S3 → ack → exit</text>
   <text x="56" y="610" class="sub">Identity is data: persona/skills/memory in S3 + Postgres, keys in Secrets Manager.</text>
   <text x="56" y="624" class="sub">No persona is pinned to a host — any worker becomes any colleague by loading it.</text>
 
@@ -143,9 +143,7 @@
   <text x="536" y="636" class="sub">before send / sign / commit</text>
 
   <path d="M 500 290 Q 510 290 520 290" class="edge" marker-end="url(#arr)"/>
-  <path d="M 500 520 Q 510 520 520 520" class="edgeAccent edgeDash" marker-end="url(#arrAccent)"/>
-  <text x="510" y="560" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools</text>
-  <text x="510" y="574" text-anchor="middle" class="edgeLabel" fill="#c2410c">→ DB / S3</text>
+  <path d="M 500 460 Q 510 460 520 460" class="edgeAccent edgeDash" marker-end="url(#arrAccent)"/>
 
   <text x="20" y="668" class="tier">WHAT CHANGED FROM PHASE 0</text>
   <text x="20" y="686" class="sub">① File-based state → Postgres + S3  ·  ② Per-agent subprocess → SQS-driven stateless workers  ·  ③ KNOWN_AGENTS list → colleagues table</text>
