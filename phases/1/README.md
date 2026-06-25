@@ -89,8 +89,27 @@ Which situation applies is a question for IT/legal, not an architecture choice �
   content we originate — if a team's contracts actually live in SharePoint, `doc_*` tools resolve
   through a SharePoint connector instead; see [ADR-009](../../decisions/ADR-009-source-connectors-distinct-from-channels.md)
 - `runtime/pending/pending.jsonl` → SQS queue + Postgres `pending_tickets` table
-- `agents/<id>/.codex/` → Secrets Manager + per-colleague config in DB
 - `KNOWN_AGENTS` list → `colleagues` table
 
-The MCP tool layer (`doc_*`, `kanban_*`, etc.) keeps its interface — only the
+### Colleague identity (the personalization state — where it lives)
+
+This is the part that makes a colleague *that* colleague, and it must survive the move off the
+local filesystem. It maps to the **Colleague Identity Plane** in the
+[logical architecture](../../overview/logical-architecture.md); here is its concrete Phase 1 (AWS)
+binding:
+
+- `agents/<id>/cwd/AGENTS.md`, `Soul.md` (**persona** — role, voice, rules) → **S3** (versioned
+  persona files), referenced from the `colleagues` row
+- `agents/<id>/.codex/skills` (**skills**) → **S3** (skill bundles) + Postgres (per-colleague skill
+  registry: which colleague has which skills)
+- `agents/<id>/memory/` (**memory**) → **Postgres** (structured, scoped: session / colleague /
+  team) + S3 (large memory artifacts)
+- `agents/<id>/.codex/*.sqlite`, auth (**credentials**) → **Secrets Manager + KMS** (keys) +
+  Postgres (config)
+
+A worker is stateless: at turn start it **materializes** the colleague's persona + skills + memory
+into its per-turn workspace, then spawns codex. No persona is pinned to a host — any worker becomes
+any colleague by loading it. This is what makes "identity is data, not a deployment" concrete.
+
+The MCP tool layer (`doc_*`, `kanban_*`, `memory_*`, etc.) keeps its interface — only the
 backing storage changes. This means the codex agent prompts don't need to change.
