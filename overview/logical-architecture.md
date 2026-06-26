@@ -40,6 +40,11 @@ Why this exists as a separate view (see [ADR-013](../decisions/ADR-013-capabilit
   this is the replaceable part, not the platform.
 - **Tool layer (MCP ports)** — `doc` / `kanban` / `message` / `memory` tools as a
   storage-agnostic interface. The interface is stable across phases; only the backing changes.
+  **This is the platform's main extension seam:** adding a tool adds a capability a colleague can
+  use (e.g. `calendar`, `search`, `email`) without touching the orchestrator or worker; swapping a
+  tool's adapter changes where it's backed (e.g. `doc` → S3 *or* SharePoint, per
+  [ADR-009](../decisions/ADR-009-source-connectors-distinct-from-channels.md)). It runs inside each
+  worker per turn, so it scales with the worker pool — there is no separate service to scale.
 
 **Colleague identity plane** *(this is the part that makes a colleague a colleague)*
 - **Persona store** — who the colleague is: role, voice, behavior rules. Data, not code.
@@ -47,6 +52,13 @@ Why this exists as a separate view (see [ADR-013](../decisions/ADR-013-capabilit
 - **Skill registry** — what it can do: bundled, composable capabilities.
 - **Permission / RBAC** — what it may do, and who may reach or approve it.
 - **Secret store** — per-colleague runtime/LLM credentials, injected at turn start, never in code.
+
+> **Where does this state physically live?** Deliberately *not* shown on this diagram — each box
+> above is a *storage capability*, and where it physically lives is the **binding** (the table
+> below), not the logical model. That's why the Phase 1 diagram looks more concrete: it *is* the
+> binding. In Phase 1 (AWS): persona files → **S3**; structured memory + skill registry + RBAC →
+> **Postgres**; large memory/skill artifacts → **S3**; credentials → **Secrets Manager**. Swap the
+> binding column and the same capabilities live on Postgres / MinIO / Vault on-prem.
 
 **Shared business state**
 - **Document / artifact store** — the actual business content, reached through source connectors
@@ -68,10 +80,12 @@ on-prem column shows the same model is implementable without AWS.
 | Orchestrator / Worker pool | ECS Fargate | Kubernetes or VMs |
 | Dispatch queue | SQS | RabbitMQ / NATS |
 | Event / stream bus | ElastiCache Redis Pub/Sub | Redis / NATS |
-| Persona / Memory / Work / RBAC metadata | RDS Postgres | Postgres |
-| Document / artifact / persona prompts | S3 (+ source connectors) | MinIO (+ source connectors) |
-| Skill registry | Postgres + S3 | Postgres + MinIO |
+| Persona store (AGENTS.md / Soul.md) | S3 (versioned files) | MinIO |
+| Memory store | Postgres (structured) + S3 (artifacts) | Postgres + MinIO |
+| Skill registry | Postgres (registry) + S3 (bundles) | Postgres + MinIO |
+| Permission / RBAC | RDS Postgres | Postgres |
 | Secret store | Secrets Manager + KMS | Vault |
+| Document / work state | S3 + RDS Postgres (+ connectors) | MinIO + Postgres |
 | Audit store | S3 Object Lock + CloudTrail | WORM storage + append-only Postgres |
 | Observability | CloudWatch + OpenTelemetry | Prometheus + Grafana + OpenTelemetry |
 | Agent runtime | Codex / Claude Code | Codex / Claude Code (same) |
