@@ -80,22 +80,17 @@
   <text x="20" y="426" class="tier">AGENT WORKER POOL · QUEUE-DRIVEN</text>
   <rect x="40" y="440" width="460" height="200" rx="8" class="boxAgent"/>
   <text x="56" y="462" class="label">Worker fleet</text>
-  <text x="56" y="476" class="sub">ECS Fargate · autoscale 0–N on queue depth · stateless</text>
+  <text x="56" y="476" class="sub">ECS Fargate · autoscale 0–N on queue depth · stateless — each worker runs:</text>
 
-  <rect x="56" y="488" width="138" height="62" rx="6" class="box"/>
-  <text x="125" y="506" text-anchor="middle" class="label">worker N</text>
-  <text x="125" y="521" text-anchor="middle" class="sub">codex app-server</text>
-  <text x="125" y="535" text-anchor="middle" class="sub">+ MCP stdio (tools)</text>
+  <rect x="56" y="488" width="206" height="62" rx="6" class="box"/>
+  <text x="159" y="508" text-anchor="middle" class="label">Agent runtime (pluggable)</text>
+  <text x="159" y="524" text-anchor="middle" class="sub">codex app-server</text>
+  <text x="159" y="538" text-anchor="middle" class="sub">spawned per turn</text>
 
-  <rect x="202" y="488" width="138" height="62" rx="6" class="box"/>
-  <text x="271" y="506" text-anchor="middle" class="label">worker N+1</text>
-  <text x="271" y="521" text-anchor="middle" class="sub">codex app-server</text>
-  <text x="271" y="535" text-anchor="middle" class="sub">+ MCP stdio (tools)</text>
-
-  <rect x="348" y="488" width="138" height="62" rx="6" class="box"/>
-  <text x="417" y="506" text-anchor="middle" class="label">worker N+2</text>
-  <text x="417" y="521" text-anchor="middle" class="sub">codex app-server</text>
-  <text x="417" y="535" text-anchor="middle" class="sub">+ MCP stdio (tools)</text>
+  <rect x="278" y="488" width="206" height="62" rx="6" class="box"/>
+  <text x="381" y="508" text-anchor="middle" class="label">Tool layer — MCP ports</text>
+  <text x="381" y="524" text-anchor="middle" class="sub">MCP stdio server</text>
+  <text x="381" y="538" text-anchor="middle" class="sub">doc · kanban · message · memory</text>
 
   <text x="56" y="572" class="sub">Per-turn: dequeue → load colleague row → materialize persona + skills + memory →</text>
   <text x="56" y="586" class="sub">spawn codex → MCP tool calls → write Postgres / S3 → ack → exit</text>
