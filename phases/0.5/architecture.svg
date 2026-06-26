@@ -1,0 +1,162 @@
+<svg viewBox="0 0 820 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 edge / personal-device architecture</title>
+  <desc>Outbound-only channel adapters (Slack Socket Mode, IMAP IDLE) connecting the same FastAPI + codex daemon runtime as Phase 0, packaged to run on a personal device.</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
+    .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
+    .edgeDash { stroke-dasharray: 4 3; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .boxDevice { fill: none; stroke: #9ca3af; stroke-width: 1.2; stroke-dasharray: 6 4; }
+    .boxCloud { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .edgeLabel { font-size: 10px; fill: #6b7280; font-family: ui-monospace, monospace; }
+  </style>
+
+  <!-- External channel clouds (above device boundary) -->
+  <text x="20" y="28" class="tier">EXTERNAL CHANNELS · SaaS</text>
+
+  <rect x="40" y="44" width="200" height="60" rx="30" class="boxCloud"/>
+  <text x="140" y="68" text-anchor="middle" class="label">Slack workspace</text>
+  <text x="140" y="84" text-anchor="middle" class="sub">api.slack.com</text>
+  <text x="140" y="98" text-anchor="middle" class="port">wss-primary.slack.com</text>
+
+  <rect x="280" y="44" width="200" height="60" rx="30" class="boxCloud"/>
+  <text x="380" y="68" text-anchor="middle" class="label">Mail server</text>
+  <text x="380" y="84" text-anchor="middle" class="sub">Gmail · Outlook · IMAP</text>
+  <text x="380" y="98" text-anchor="middle" class="port">IMAP/993 · SMTP/587</text>
+
+  <rect x="520" y="44" width="260" height="60" rx="8" class="box"/>
+  <text x="650" y="68" text-anchor="middle" class="label">User (local browser)</text>
+  <text x="650" y="84" text-anchor="middle" class="sub">Claw3D or minimal chat UI</text>
+  <text x="650" y="98" text-anchor="middle" class="port">http://localhost:7770</text>
+
+  <!-- Device boundary -->
+  <rect x="24" y="138" width="772" height="430" rx="12" class="boxDevice"/>
+  <text x="40" y="158" class="tier">PERSONAL DEVICE · macOS / Linux / Windows</text>
+  <text x="780" y="158" text-anchor="end" class="sub">background service · launchd / systemd / Task Scheduler</text>
+
+  <!-- Channel adapters tier -->
+  <text x="40" y="184" class="tier">CHANNEL ADAPTERS · OUTBOUND ONLY</text>
+
+  <rect x="40" y="200" width="200" height="58" rx="6" class="box"/>
+  <text x="140" y="220" text-anchor="middle" class="label">Slack adapter</text>
+  <text x="140" y="236" text-anchor="middle" class="sub">slack-bolt · Socket Mode</text>
+  <text x="140" y="250" text-anchor="middle" class="port">@app.event("app_mention")</text>
+
+  <rect x="280" y="200" width="200" height="58" rx="6" class="box"/>
+  <text x="380" y="220" text-anchor="middle" class="label">Email adapter</text>
+  <text x="380" y="236" text-anchor="middle" class="sub">aioimaplib · IDLE + SMTP</text>
+  <text x="380" y="250" text-anchor="middle" class="port">you+vanessa@gmail.com</text>
+
+  <rect x="520" y="200" width="260" height="58" rx="6" class="box"/>
+  <text x="650" y="220" text-anchor="middle" class="label">Local UI handler</text>
+  <text x="650" y="236" text-anchor="middle" class="sub">loopback HTTP route</text>
+  <text x="650" y="250" text-anchor="middle" class="port">127.0.0.1 only</text>
+
+  <!-- Arrows from external to adapters -->
+  <line x1="140" y1="104" x2="140" y2="198" class="edge" marker-end="url(#arr)"/>
+  <text x="146" y="138" class="edgeLabel">WSS (outbound)</text>
+  <line x1="380" y1="104" x2="380" y2="198" class="edge" marker-end="url(#arr)"/>
+  <text x="386" y="138" class="edgeLabel">IMAP IDLE (outbound)</text>
+  <line x1="650" y1="104" x2="650" y2="198" class="edge" marker-end="url(#arr)"/>
+  <text x="656" y="138" class="edgeLabel">HTTP (loopback)</text>
+
+  <!-- Orchestrator tier -->
+  <text x="40" y="284" class="tier">ORCHESTRATOR</text>
+  <rect x="40" y="300" width="740" height="74" rx="8" class="box"/>
+  <text x="60" y="322" class="label">FastAPI · server.py</text>
+  <text x="60" y="336" class="port">:7770 (bound to 127.0.0.1)</text>
+  <rect x="280" y="308" width="110" height="24" rx="12" class="pill"/>
+  <text x="335" y="324" text-anchor="middle" class="sub">turn dispatch</text>
+  <rect x="400" y="308" width="100" height="24" rx="12" class="pill"/>
+  <text x="450" y="324" text-anchor="middle" class="sub">DaemonPool</text>
+  <rect x="510" y="308" width="120" height="24" rx="12" class="pill"/>
+  <text x="570" y="324" text-anchor="middle" class="sub">message fan-out</text>
+  <rect x="640" y="308" width="130" height="24" rx="12" class="pill"/>
+  <text x="705" y="324" text-anchor="middle" class="sub">busy-queue / pending</text>
+  <text x="60" y="358" class="sub">Channel → IncomingTurn → daemon · same code as Phase 0, channel-aware reply routing</text>
+
+  <!-- Arrows from adapters into orchestrator -->
+  <line x1="140" y1="258" x2="200" y2="298" class="edge" marker-end="url(#arr)"/>
+  <line x1="380" y1="258" x2="380" y2="298" class="edge" marker-end="url(#arr)"/>
+  <line x1="650" y1="258" x2="580" y2="298" class="edge" marker-end="url(#arr)"/>
+
+  <!-- Agent runtime + state tier -->
+  <text x="40" y="402" class="tier">PER-AGENT RUNTIME</text>
+  <text x="540" y="402" class="tier">USER DATA DIR</text>
+
+  <rect x="40" y="418" width="220" height="132" rx="8" class="boxAgent"/>
+  <text x="56" y="438" class="label">Vanessa</text>
+  <text x="56" y="452" class="sub">PM · requirements</text>
+  <rect x="56" y="464" width="188" height="36" rx="6" class="box"/>
+  <text x="150" y="479" text-anchor="middle" class="label">codex app-server</text>
+  <text x="150" y="492" text-anchor="middle" class="sub">subprocess · JSON-RPC</text>
+  <rect x="56" y="506" width="188" height="34" rx="6" class="box"/>
+  <text x="150" y="520" text-anchor="middle" class="label">MCP stdio server</text>
+  <text x="150" y="534" text-anchor="middle" class="sub">mcp_stdio.py</text>
+
+  <rect x="280" y="418" width="220" height="132" rx="8" class="boxAgent"/>
+  <text x="296" y="438" class="label">David</text>
+  <text x="296" y="452" class="sub">SA · ADR · diagrams</text>
+  <rect x="296" y="464" width="188" height="36" rx="6" class="box"/>
+  <text x="390" y="479" text-anchor="middle" class="label">codex app-server</text>
+  <text x="390" y="492" text-anchor="middle" class="sub">subprocess · JSON-RPC</text>
+  <rect x="296" y="506" width="188" height="34" rx="6" class="box"/>
+  <text x="390" y="520" text-anchor="middle" class="label">MCP stdio server</text>
+  <text x="390" y="534" text-anchor="middle" class="sub">mcp_stdio.py</text>
+
+  <rect x="540" y="418" width="240" height="132" rx="8" class="boxShared"/>
+  <text x="556" y="438" class="label">~/Library/Application Support/…</text>
+  <text x="556" y="452" class="sub">(or platform equivalent)</text>
+  <rect x="556" y="462" width="208" height="20" rx="4" class="pill"/>
+  <text x="564" y="476" class="sub">workspace/  ·  docs · kanban · messages</text>
+  <rect x="556" y="488" width="208" height="20" rx="4" class="pill"/>
+  <text x="564" y="502" class="sub">runtime/  ·  sessions · audit · pending</text>
+  <rect x="556" y="514" width="208" height="20" rx="4" class="pill"/>
+  <text x="564" y="528" class="sub">agents/&lt;id&gt;/  ·  memory · .codex sqlite</text>
+
+  <!-- Orchestrator to daemons -->
+  <line x1="200" y1="374" x2="150" y2="416" class="edge" marker-end="url(#arr)"/>
+  <line x1="450" y1="374" x2="390" y2="416" class="edge" marker-end="url(#arr)"/>
+  <text x="160" y="394" class="edgeLabel">spawn · JSON-RPC</text>
+
+  <!-- Agent tools to state (orange dashed) -->
+  <path d="M 244 522 Q 400 600 556 500" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 484 522 Q 520 600 556 500" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+
+  <!-- LLM endpoint (below device) -->
+  <text x="20" y="600" class="tier">LLM ENDPOINT · OPENAI_BASE_URL (configurable per colleague)</text>
+  <rect x="40" y="616" width="740" height="64" rx="8" class="box"/>
+  <text x="60" y="638" class="label">User-chosen inference backend</text>
+  <rect x="60" y="648" width="160" height="24" rx="12" class="pill"/>
+  <text x="140" y="664" text-anchor="middle" class="sub">Cloud API · OpenAI / Anthropic</text>
+  <rect x="230" y="648" width="160" height="24" rx="12" class="pill"/>
+  <text x="310" y="664" text-anchor="middle" class="sub">Azure OpenAI</text>
+  <rect x="400" y="648" width="160" height="24" rx="12" class="pill"/>
+  <text x="480" y="664" text-anchor="middle" class="sub">On-prem vLLM</text>
+  <rect x="570" y="648" width="200" height="24" rx="12" class="pill"/>
+  <text x="670" y="664" text-anchor="middle" class="sub">Local · Ollama / llama.cpp</text>
+
+  <!-- Daemons to LLM endpoint -->
+  <line x1="150" y1="550" x2="200" y2="614" class="edge edgeDash" marker-end="url(#arr)"/>
+  <line x1="390" y1="550" x2="400" y2="614" class="edge edgeDash" marker-end="url(#arr)"/>
+  <text x="220" y="588" class="edgeLabel">HTTPS · OpenAI-compatible</text>
+
+  <text x="400" y="704" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools: doc_* · kanban_* · message_* · memory_*  (same as Phase 0)</text>
+</svg>

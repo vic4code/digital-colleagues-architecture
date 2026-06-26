@@ -22,14 +22,16 @@ This repo is the place to:
 | # | Phase | Status | Goal |
 |---|---|---|---|
 | 0 | [Prototype](./phases/0/) | ✅ Running | Prove the idea on a single machine |
+| 0.5 | [Edge / Personal Device](./phases/0.5/) | 🚧 Exploration | Parallel track — on-device, Slack/Email channels, no cloud |
 | 1 | [Legal MVP](./phases/1/) | 🚧 In design | First production scenario: contract review |
 | 2 | [Generalized Platform](./phases/2/) | ⏳ Planned | Multi-scenario, multi-department |
 | 3 | [Enterprise & Multi-Channel](./phases/3/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
 | 4 | [Terraform / IaC](./phases/4/) | ⏳ Planned | Production-grade IaC, multi-env, DR |
 
-Phases are cumulative — Phase 2 builds on Phase 1, not replaces it. Each phase has
-its own README explaining the goal, the architecture, and the migration from the
-previous phase.
+Phases 0 → 1 → 2 → 3 are the **centralized SaaS** progression — cumulative, Phase 2
+builds on Phase 1, not replaces it. Phase 0.5 is a **parallel decentralized track**
+(on-device, per-user) and is not a prerequisite for Phase 1+. Each phase has its
+own README explaining the goal, the architecture, and how it relates to the others.
 
 ## Reading order
 
