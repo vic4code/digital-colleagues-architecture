@@ -1,6 +1,6 @@
-<svg viewBox="0 0 820 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 0.5 edge / personal-device architecture</title>
-  <desc>Outbound-only channel adapters (Slack Socket Mode, IMAP IDLE) connecting the same FastAPI + codex daemon runtime as Phase 0, packaged to run on a personal device.</desc>
+<svg viewBox="0 0 840 760" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 codex-native edge prototype architecture</title>
+  <desc>Outlook (and later Teams) channels feeding a thin channel adapter, which drives an unmodified codex app-server runtime on the user's device. Two-layer interaction traces: adapter audit stream plus codex session rollouts, synced to a shared store.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -20,7 +20,9 @@
     .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
     .edgeDash { stroke-dasharray: 4 3; }
     .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxFuture { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 4 3; }
     .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxOwned { fill: #ffffff; stroke: #6b7280; stroke-width: 1.4; }
     .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
     .boxDevice { fill: none; stroke: #9ca3af; stroke-width: 1.2; stroke-dasharray: 6 4; }
     .boxCloud { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
@@ -28,135 +30,107 @@
     .edgeLabel { font-size: 10px; fill: #6b7280; font-family: ui-monospace, monospace; }
   </style>
 
-  <!-- External channel clouds (above device boundary) -->
-  <text x="20" y="28" class="tier">EXTERNAL CHANNELS · SaaS</text>
+  <!-- Tier 1: channels -->
+  <text x="20" y="28" class="tier">CHANNELS · MICROSOFT 365</text>
 
-  <rect x="40" y="44" width="200" height="60" rx="30" class="boxCloud"/>
-  <text x="140" y="68" text-anchor="middle" class="label">Slack workspace</text>
-  <text x="140" y="84" text-anchor="middle" class="sub">api.slack.com</text>
-  <text x="140" y="98" text-anchor="middle" class="port">wss-primary.slack.com</text>
+  <rect x="40" y="44" width="220" height="60" rx="30" class="boxCloud"/>
+  <text x="150" y="68" text-anchor="middle" class="label">Outlook / Exchange Online</text>
+  <text x="150" y="84" text-anchor="middle" class="sub">per-colleague mailbox (ADR-010)</text>
+  <text x="150" y="98" text-anchor="middle" class="port">graph.microsoft.com</text>
 
-  <rect x="280" y="44" width="200" height="60" rx="30" class="boxCloud"/>
-  <text x="380" y="68" text-anchor="middle" class="label">Mail server</text>
-  <text x="380" y="84" text-anchor="middle" class="sub">Gmail · Outlook · IMAP</text>
-  <text x="380" y="98" text-anchor="middle" class="port">IMAP/993 · SMTP/587</text>
+  <rect x="300" y="44" width="200" height="60" rx="30" class="boxFuture"/>
+  <text x="400" y="68" text-anchor="middle" class="label">Microsoft Teams</text>
+  <text x="400" y="84" text-anchor="middle" class="sub">v0.3 — needs resident box</text>
+  <text x="400" y="98" text-anchor="middle" class="port">Azure Bot webhook</text>
 
-  <rect x="520" y="44" width="260" height="60" rx="8" class="box"/>
-  <text x="650" y="68" text-anchor="middle" class="label">User (local browser)</text>
-  <text x="650" y="84" text-anchor="middle" class="sub">Claw3D or minimal chat UI</text>
-  <text x="650" y="98" text-anchor="middle" class="port">http://localhost:7770</text>
+  <rect x="540" y="44" width="260" height="60" rx="8" class="box"/>
+  <text x="670" y="68" text-anchor="middle" class="label">Users</text>
+  <text x="670" y="84" text-anchor="middle" class="sub">send mail / @mention · install nothing</text>
+  <line x1="540" y1="74" x2="502" y2="74" class="edge edgeDash" marker-end="url(#arr)"/>
+  <line x1="540" y1="66" x2="262" y2="66" class="edge" marker-end="url(#arr)"/>
 
   <!-- Device boundary -->
-  <rect x="24" y="138" width="772" height="430" rx="12" class="boxDevice"/>
-  <text x="40" y="158" class="tier">PERSONAL DEVICE · macOS / Linux / Windows</text>
-  <text x="780" y="158" text-anchor="end" class="sub">background service · launchd / systemd / Task Scheduler</text>
+  <rect x="24" y="140" width="792" height="436" rx="12" class="boxDevice"/>
+  <text x="40" y="162" class="tier">EDGE DEVICE · macOS (launchd) / Windows (Task Scheduler) · no inbound port</text>
 
-  <!-- Channel adapters tier -->
-  <text x="40" y="184" class="tier">CHANNEL ADAPTERS · OUTBOUND ONLY</text>
+  <!-- Channel adapter (owned) -->
+  <rect x="40" y="180" width="760" height="96" rx="8" class="boxOwned"/>
+  <text x="60" y="204" class="label">Channel adapter — the ONLY owned component</text>
+  <rect x="60" y="216" width="160" height="26" rx="13" class="pill"/>
+  <text x="140" y="233" text-anchor="middle" class="sub">Graph delta polling</text>
+  <rect x="230" y="216" width="180" height="26" rx="13" class="pill"/>
+  <text x="320" y="233" text-anchor="middle" class="sub">mailbox → colleague routing</text>
+  <rect x="420" y="216" width="130" height="26" rx="13" class="pill"/>
+  <text x="485" y="233" text-anchor="middle" class="sub">reply relay</text>
+  <rect x="560" y="216" width="220" height="26" rx="13" class="pill"/>
+  <text x="670" y="233" text-anchor="middle" class="sub">event-stream tap → audit trace</text>
+  <text x="60" y="262" class="sub">Outbound-only HTTPS to Graph · JSON-RPC client of the harness · placement-agnostic (edge → resident box → cloud)</text>
 
-  <rect x="40" y="200" width="200" height="58" rx="6" class="box"/>
-  <text x="140" y="220" text-anchor="middle" class="label">Slack adapter</text>
-  <text x="140" y="236" text-anchor="middle" class="sub">slack-bolt · Socket Mode</text>
-  <text x="140" y="250" text-anchor="middle" class="port">@app.event("app_mention")</text>
+  <line x1="150" y1="104" x2="150" y2="178" class="edge" marker-end="url(#arr)"/>
+  <text x="158" y="134" class="edgeLabel">HTTPS poll (outbound only)</text>
 
-  <rect x="280" y="200" width="200" height="58" rx="6" class="box"/>
-  <text x="380" y="220" text-anchor="middle" class="label">Email adapter</text>
-  <text x="380" y="236" text-anchor="middle" class="sub">aioimaplib · IDLE + SMTP</text>
-  <text x="380" y="250" text-anchor="middle" class="port">you+vanessa@gmail.com</text>
+  <!-- codex app-server (official) -->
+  <text x="40" y="304" class="tier">AGENT RUNTIME · OFFICIAL CODEX HARNESS, UNMODIFIED</text>
+  <rect x="40" y="318" width="500" height="220" rx="8" class="box"/>
+  <text x="60" y="342" class="label">codex app-server</text>
+  <text x="60" y="356" class="sub">one process · JSON-RPC · sessions, sandbox, tools, sub-agents all native</text>
 
-  <rect x="520" y="200" width="260" height="58" rx="6" class="box"/>
-  <text x="650" y="220" text-anchor="middle" class="label">Local UI handler</text>
-  <text x="650" y="236" text-anchor="middle" class="sub">loopback HTTP route</text>
-  <text x="650" y="250" text-anchor="middle" class="port">127.0.0.1 only</text>
+  <rect x="60" y="370" width="220" height="76" rx="8" class="boxAgent"/>
+  <text x="76" y="390" class="label">Vanessa · PM</text>
+  <text x="76" y="404" class="sub">session per thread</text>
+  <text x="76" y="420" class="port">personas/vanessa/AGENTS.md</text>
+  <text x="76" y="434" class="port">config.toml profile + MCP allow-list</text>
 
-  <!-- Arrows from external to adapters -->
-  <line x1="140" y1="104" x2="140" y2="198" class="edge" marker-end="url(#arr)"/>
-  <text x="146" y="138" class="edgeLabel">WSS (outbound)</text>
-  <line x1="380" y1="104" x2="380" y2="198" class="edge" marker-end="url(#arr)"/>
-  <text x="386" y="138" class="edgeLabel">IMAP IDLE (outbound)</text>
-  <line x1="650" y1="104" x2="650" y2="198" class="edge" marker-end="url(#arr)"/>
-  <text x="656" y="138" class="edgeLabel">HTTP (loopback)</text>
+  <rect x="300" y="370" width="220" height="76" rx="8" class="boxAgent"/>
+  <text x="316" y="390" class="label">David · SA</text>
+  <text x="316" y="404" class="sub">session per thread</text>
+  <text x="316" y="420" class="port">personas/david/AGENTS.md</text>
+  <text x="316" y="434" class="port">config.toml profile + MCP allow-list</text>
 
-  <!-- Orchestrator tier -->
-  <text x="40" y="284" class="tier">ORCHESTRATOR</text>
-  <rect x="40" y="300" width="740" height="74" rx="8" class="box"/>
-  <text x="60" y="322" class="label">FastAPI · server.py</text>
-  <text x="60" y="336" class="port">:7770 (bound to 127.0.0.1)</text>
-  <rect x="280" y="308" width="110" height="24" rx="12" class="pill"/>
-  <text x="335" y="324" text-anchor="middle" class="sub">turn dispatch</text>
-  <rect x="400" y="308" width="100" height="24" rx="12" class="pill"/>
-  <text x="450" y="324" text-anchor="middle" class="sub">DaemonPool</text>
-  <rect x="510" y="308" width="120" height="24" rx="12" class="pill"/>
-  <text x="570" y="324" text-anchor="middle" class="sub">message fan-out</text>
-  <rect x="640" y="308" width="130" height="24" rx="12" class="pill"/>
-  <text x="705" y="324" text-anchor="middle" class="sub">busy-queue / pending</text>
-  <text x="60" y="358" class="sub">Channel → IncomingTurn → daemon · same code as Phase 0, channel-aware reply routing</text>
+  <path d="M 280 408 L 298 408" class="edgeAccent" marker-end="url(#arrAccent)"/>
+  <text x="290" y="462" text-anchor="middle" class="edgeLabel" fill="#c2410c">native sub-agent spawn (co-work, same device)</text>
 
-  <!-- Arrows from adapters into orchestrator -->
-  <line x1="140" y1="258" x2="200" y2="298" class="edge" marker-end="url(#arr)"/>
-  <line x1="380" y1="258" x2="380" y2="298" class="edge" marker-end="url(#arr)"/>
-  <line x1="650" y1="258" x2="580" y2="298" class="edge" marker-end="url(#arr)"/>
+  <rect x="60" y="476" width="460" height="46" rx="6" class="box"/>
+  <text x="76" y="496" class="label">MCP servers</text>
+  <text x="76" y="510" class="sub">doc_* · kanban_* · memory_* — same tool interface as Phase 0 / Phase 1</text>
 
-  <!-- Agent runtime + state tier -->
-  <text x="40" y="402" class="tier">PER-AGENT RUNTIME</text>
-  <text x="540" y="402" class="tier">USER DATA DIR</text>
+  <line x1="290" y1="276" x2="290" y2="316" class="edge" marker-end="url(#arr)"/>
+  <text x="298" y="300" class="edgeLabel">JSON-RPC: newConversation / sendUserTurn ↓ · event stream ↑</text>
 
-  <rect x="40" y="418" width="220" height="132" rx="8" class="boxAgent"/>
-  <text x="56" y="438" class="label">Vanessa</text>
-  <text x="56" y="452" class="sub">PM · requirements</text>
-  <rect x="56" y="464" width="188" height="36" rx="6" class="box"/>
-  <text x="150" y="479" text-anchor="middle" class="label">codex app-server</text>
-  <text x="150" y="492" text-anchor="middle" class="sub">subprocess · JSON-RPC</text>
-  <rect x="56" y="506" width="188" height="34" rx="6" class="box"/>
-  <text x="150" y="520" text-anchor="middle" class="label">MCP stdio server</text>
-  <text x="150" y="534" text-anchor="middle" class="sub">mcp_stdio.py</text>
+  <!-- Traces side panel -->
+  <text x="570" y="304" class="tier">INTERACTION TRACES</text>
+  <rect x="570" y="318" width="230" height="220" rx="8" class="boxShared"/>
+  <text x="586" y="342" class="label">Two layers, one correlation id</text>
+  <rect x="586" y="354" width="198" height="52" rx="6" class="box"/>
+  <text x="594" y="372" class="label" font-size="12">traces/audit.jsonl</text>
+  <text x="594" y="386" class="sub">business audit — adapter-written</text>
+  <text x="594" y="399" class="port">who · channel · colleague · tools</text>
+  <rect x="586" y="414" width="198" height="52" rx="6" class="box"/>
+  <text x="594" y="432" class="label" font-size="12">~/.codex/sessions/*.jsonl</text>
+  <text x="594" y="446" class="sub">harness rollout — codex-written</text>
+  <text x="594" y="459" class="port">full reasoning + tool I/O</text>
+  <text x="586" y="486" class="sub">channel msg id ↔ session id</text>
+  <text x="586" y="500" class="sub">sub-agent spawns appear in the</text>
+  <text x="586" y="513" class="sub">parent rollout → A→B is one trace</text>
 
-  <rect x="280" y="418" width="220" height="132" rx="8" class="boxAgent"/>
-  <text x="296" y="438" class="label">David</text>
-  <text x="296" y="452" class="sub">SA · ADR · diagrams</text>
-  <rect x="296" y="464" width="188" height="36" rx="6" class="box"/>
-  <text x="390" y="479" text-anchor="middle" class="label">codex app-server</text>
-  <text x="390" y="492" text-anchor="middle" class="sub">subprocess · JSON-RPC</text>
-  <rect x="296" y="506" width="188" height="34" rx="6" class="box"/>
-  <text x="390" y="520" text-anchor="middle" class="label">MCP stdio server</text>
-  <text x="390" y="534" text-anchor="middle" class="sub">mcp_stdio.py</text>
+  <path d="M 780 276 Q 800 300 700 352" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 540 440 L 584 440" class="edge edgeDash" marker-end="url(#arr)"/>
 
-  <rect x="540" y="418" width="240" height="132" rx="8" class="boxShared"/>
-  <text x="556" y="438" class="label">~/Library/Application Support/…</text>
-  <text x="556" y="452" class="sub">(or platform equivalent)</text>
-  <rect x="556" y="462" width="208" height="20" rx="4" class="pill"/>
-  <text x="564" y="476" class="sub">workspace/  ·  docs · kanban · messages</text>
-  <rect x="556" y="488" width="208" height="20" rx="4" class="pill"/>
-  <text x="564" y="502" class="sub">runtime/  ·  sessions · audit · pending</text>
-  <rect x="556" y="514" width="208" height="20" rx="4" class="pill"/>
-  <text x="564" y="528" class="sub">agents/&lt;id&gt;/  ·  memory · .codex sqlite</text>
+  <!-- LLM endpoint -->
+  <rect x="40" y="600" width="500" height="56 " rx="8" class="box"/>
+  <text x="60" y="622" class="label">LLM endpoint — config, not code</text>
+  <text x="60" y="638" class="sub">cloud API · Azure OpenAI · internal vLLM (air-gapped bundle)</text>
+  <line x1="290" y1="538" x2="290" y2="598" class="edge edgeDash" marker-end="url(#arr)"/>
+  <text x="298" y="572" class="edgeLabel">HTTPS (outbound)</text>
 
-  <!-- Orchestrator to daemons -->
-  <line x1="200" y1="374" x2="150" y2="416" class="edge" marker-end="url(#arr)"/>
-  <line x1="450" y1="374" x2="390" y2="416" class="edge" marker-end="url(#arr)"/>
-  <text x="160" y="394" class="edgeLabel">spawn · JSON-RPC</text>
+  <!-- Shared trace sink -->
+  <rect x="570" y="600" width="230" height="56" rx="8" class="boxCloud"/>
+  <text x="685" y="622" text-anchor="middle" class="label">Shared trace store</text>
+  <text x="685" y="638" text-anchor="middle" class="sub">SharePoint / S3 — nightly sync → Phase 1 audit</text>
+  <line x1="685" y1="576" x2="685" y2="598" class="edge edgeDash" marker-end="url(#arr)"/>
 
-  <!-- Agent tools to state (orange dashed) -->
-  <path d="M 244 522 Q 400 600 556 500" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <path d="M 484 522 Q 520 600 556 500" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-
-  <!-- LLM endpoint (below device) -->
-  <text x="20" y="600" class="tier">LLM ENDPOINT · OPENAI_BASE_URL (configurable per colleague)</text>
-  <rect x="40" y="616" width="740" height="64" rx="8" class="box"/>
-  <text x="60" y="638" class="label">User-chosen inference backend</text>
-  <rect x="60" y="648" width="160" height="24" rx="12" class="pill"/>
-  <text x="140" y="664" text-anchor="middle" class="sub">Cloud API · OpenAI / Anthropic</text>
-  <rect x="230" y="648" width="160" height="24" rx="12" class="pill"/>
-  <text x="310" y="664" text-anchor="middle" class="sub">Azure OpenAI</text>
-  <rect x="400" y="648" width="160" height="24" rx="12" class="pill"/>
-  <text x="480" y="664" text-anchor="middle" class="sub">On-prem vLLM</text>
-  <rect x="570" y="648" width="200" height="24" rx="12" class="pill"/>
-  <text x="670" y="664" text-anchor="middle" class="sub">Local · Ollama / llama.cpp</text>
-
-  <!-- Daemons to LLM endpoint -->
-  <line x1="150" y1="550" x2="200" y2="614" class="edge edgeDash" marker-end="url(#arr)"/>
-  <line x1="390" y1="550" x2="400" y2="614" class="edge edgeDash" marker-end="url(#arr)"/>
-  <text x="220" y="588" class="edgeLabel">HTTPS · OpenAI-compatible</text>
-
-  <text x="400" y="704" text-anchor="middle" class="edgeLabel" fill="#c2410c">MCP tools: doc_* · kanban_* · message_* · memory_*  (same as Phase 0)</text>
+  <text x="20" y="692" class="tier">KEY FLOWS</text>
+  <text x="20" y="710" class="sub">① Mail to vanessa@… → adapter poll → route → sendUserTurn → Vanessa session ② Vanessa spawns David natively for the SA sub-task</text>
+  <text x="20" y="726" class="sub">③ Reply relayed back via Graph sendMail ④ Adapter taps every harness event into audit.jsonl; codex keeps the full rollout; nightly sync ships both</text>
+  <text x="20" y="748" class="sub">Cross-device co-work: colleague A emails colleague B's mailbox — same audited path as humans, no laptop-to-laptop mesh.</text>
 </svg>

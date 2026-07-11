@@ -1,121 +1,161 @@
-# Phase 0.5 — Edge / Personal Device
+# Phase 0.5 — Codex-Native Edge Prototype
 
-**Status:** 🚧 Exploration. Parallel track — not on the cloud progression (0 → 1 → 2 → 3).
+**Status:** 🚧 In design. Parallel track — not on the cloud progression (0 → 1 → 2 → 3).
 
-**Scope:** Run the full digital-colleague runtime on a single personal device. Slack
-and Email as the primary channels. No cloud control plane, no public ingress, no
-per-user infrastructure to operate.
+**Scope:** A reference architecture others can implement digital colleagues from.
+Runs on each user's edge device (macOS / Windows, restricted intranets included).
+The agent runtime is **`codex app-server` as-is** — the Phase 0 custom dispatcher
+(`server.py` + DaemonPool) is deliberately dropped. Channels: Outlook first,
+Teams second. Phase 0 stays untouched as the record of the implemented prototype;
+this phase is the redesigned successor on the edge track.
 
 ![Phase 0.5 architecture](./architecture.svg)
 
-## Why this exists (separate from Phase 0 → 1)
+## Why this exists — and when NOT to use it
 
-Phase 0 → 1 → 2 → 3 is the **centralized SaaS** progression — one team operates it,
-many users consume it. Phase 0.5 is the **decentralized personal** progression —
-each user runs their own copy on their own device. It targets:
+The honest question first: **why not just teach everyone codex CLI?** Because they
+are different products. Codex CLI is a *personal* tool — my session, my context,
+gone when I close it. A digital colleague is a *shared, persistent identity*: it has
+its own mailbox, its own memory, its own audit trail, and anyone in the team can
+reach it without installing anything. Three things "just teach codex" cannot give:
 
-- People who can't install Codex / Claude Code (corporate policy, no admin rights)
-- Air-gapped or restricted-network environments where SaaS LLM tooling is blocked
-- Privacy-sensitive use cases — code, contracts, personal notes never leave the device
-- Single-person or very small team scenarios where centralized infra is overkill
+1. **Shared identity** — Vanessa is one colleague, not a prompt each employee re-creates
+2. **Zero-install reach** — legal staff won't install a CLI (and often aren't allowed to),
+   but they already send email and type in Teams
+3. **Governance** — personal CLI output scatters across laptops; a colleague's every
+   turn is captured in one trace (see below)
 
-Phase 0.5 is **not a prerequisite** for Phase 1+. It's a sibling branch.
+**If your audience is all engineers and codex is allowed on their machines, do not
+build this — teach codex + share an AGENTS.md convention.** This track exists for
+everyone else.
 
 ## Goal
 
-A non-engineer installs one package, signs into Slack and their email mailbox once,
-and from that moment can `@mention` a colleague in Slack or send an email tagged
-with a colleague's name — and the agent runs on their own machine, with their own
-files, using whatever LLM endpoint they choose (cloud API, on-prem, or a local
-model via Ollama / llama.cpp).
+A user (or their IT) runs one installer. From then on, emailing a colleague's
+address (or later, @mentioning it in Teams) triggers a turn on the user's own
+device, using the official codex harness, and every interaction is preserved in
+a queryable trace. Nothing custom sits between the channel and the harness except
+one thin adapter.
 
 ## Non-goals
 
-- Multi-user / team sharing (each device is one user's colleagues)
-- High availability or "always on when device sleeps" (see trade-offs)
-- Match cloud-scale latency or model quality when running purely local LLMs
-- A central admin plane — there is no central plane
+- Multi-user shared colleagues on one runtime (that's Phase 1 cloud)
+- Always-on when the device sleeps (accept downtime; see cloud evolution)
+- Teams in v0.1 (see trade-offs — it needs a resident machine)
+- Any custom orchestration: scheduling, sub-agents, tool lifecycle all stay official
 
-## Architecture (changes vs Phase 0)
+## Architecture
 
-Same backbone as Phase 0 — single FastAPI process, DaemonPool of `codex
-app-server` subprocesses, file-based shared state under `~/Library/Application
-Support/...` (or platform equivalent). What changes is **how requests get in**.
+**Own exactly one component: the channel adapter.** Everything else is the
+official harness or configuration.
 
-- **Channel adapters as outbound-only clients.** The device opens connections
-  *to* the channels; no one opens connections *to* the device. This is what makes
-  it work behind NAT / corporate firewalls without a tunnel.
-  - **Slack adapter** — uses Socket Mode. The device holds an outbound WebSocket
-    to `wss://wss-primary.slack.com`. Events (`app_mention`, DM) arrive via that
-    socket; replies go out over the same Bot Token via Web API.
-  - **Email adapter** — IMAP IDLE for inbound (long-poll, near-real-time on
-    Gmail / Exchange / Outlook / generic IMAP), SMTP for outbound. Plus-addressing
-    (`you+legal@gmail.com`) or a dedicated mailbox routes the request to a specific
-    colleague.
-  - **Local web UI** — optional Claw3D or a minimal `localhost:7770` chat page.
-    Same FastAPI as Phase 0, just bound to loopback.
-- **Background service install.** FastAPI is registered with the OS process
-  manager so it survives logout: `launchd` plist on macOS, `systemd --user`
-  unit on Linux, Task Scheduler on Windows.
-- **LLM endpoint is configurable.** `OPENAI_BASE_URL` (or equivalent) points to
-  whatever the user has: OpenAI, Anthropic, Azure OpenAI, on-prem vLLM, Ollama.
-  The orchestrator doesn't care; it just speaks the OpenAI-compatible wire format.
-- **State stays on disk.** Same `workspace/ + runtime/` layout as Phase 0, just
-  living under a platform-appropriate user data directory.
+- **codex app-server is the runtime.** One long-running `codex app-server`
+  process per device, spoken to over JSON-RPC. Sessions, turn lifecycle,
+  sandboxing, tool execution, and **native agent spawning** (colleague A
+  delegating to colleague B as a sub-agent) are all harness features we consume,
+  not code we write. When the harness iterates, we upgrade — we don't port.
+- **Personas are configuration.** Each colleague = an `AGENTS.md` + profile in
+  `config.toml` + an allow-listed MCP tool set. Declared in one `colleagues.yaml`
+  that the installer compiles into `~/.codex` layout. Adding a colleague is a
+  config change, not a deploy.
+- **Channel adapter (the owned surface).** A single small service that:
+  1. polls Microsoft Graph (Outlook) with delta queries — outbound-only, works
+     behind NAT / corporate proxies, no inbound port ever
+  2. routes each message to the right colleague session (per-colleague address,
+     per [ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md))
+  3. relays the reply back out, and
+  4. **taps the JSON-RPC event stream as the audit source** (see traces below)
+- **Installer per OS.** macOS: script installs codex + adapter, registers
+  launchd agent. Windows: PowerShell + Task Scheduler (no Docker — Docker Desktop
+  on corporate Windows means WSL2 + admin rights + licensing; rejected).
+  Air-gapped: offline bundle (binaries + config zip), LLM endpoint pointed at
+  internal vLLM. Docker image exists only for the *resident Linux box* variant.
+- **LLM endpoint is config** — cloud API, Azure OpenAI, or internal vLLM per site.
+
+## Interaction traces — how colleague activity is preserved
+
+Two layers, both already flowing; we capture rather than invent:
+
+| Layer | Producer | Where | Contains |
+|---|---|---|---|
+| **Business audit** | channel adapter (event-stream tap) | `traces/audit.jsonl` per device | who asked, via which channel, which colleague, tool calls made, approvals, what was sent back |
+| **Harness rollout** | codex itself | `~/.codex/sessions/*.jsonl` | the full turn: every message, reasoning step, tool input/output |
+
+Records in both layers share a correlation id (channel message id ↔ codex session
+id), so an auditor can go from "this email reply" to the exact reasoning trace.
+**Co-work is covered by the same two layers**: a native sub-agent spawn appears in
+the parent's rollout (and as an event the adapter records), so A→B delegation is
+one linked trace, not two orphans. The adapter ships `traces/` to a shared store
+(SharePoint / S3 / network drive) on a nightly sync — that same sink becomes the
+Phase 1 audit backbone later. Retention policy per
+[ADR-006](../../decisions/ADR-006-audit-log-retention.md); the two-layer split is
+[ADR-016](../../decisions/ADR-016-two-layer-interaction-traces.md).
+
+## Co-work: colleagues working together
+
+- **Same device (now):** use codex-native agent spawning. Vanessa (PM) delegates a
+  sub-task to David (SA) as a sub-agent within the harness. No custom message bus,
+  no fan-out trigger reimplementation — that was Phase 0's dispatcher, and it's gone.
+- **Across devices / across people (later):** colleagues reach each other through
+  the same channels humans use — colleague A emails colleague B's address. This
+  keeps cross-device co-work on the audited path with zero new infrastructure,
+  at the cost of email-grade latency. Acceptable for the edge tier.
+- **When co-work outgrows this** (needs shared queues, low latency, shared memory),
+  that is the signal to move those colleagues to the cloud version — not to build
+  a mesh between laptops.
 
 ## Trade-offs
 
-- **Outbound-only is the architectural pivot.** Slack Socket Mode and IMAP IDLE
-  exist precisely so clients behind NAT can receive events. Rejected: Slack Events
-  API (HTTP webhook) and inbound email via Mailgun / SES — both require a public
-  URL, which kills the on-device value proposition.
-- **Device sleep = downtime.** When the laptop closes, agents stop. We accept
-  this. Users who need always-on either (a) leave the laptop awake on a charger,
-  (b) move to a small always-on box (Phase 0.5+: same software, runs on a home
-  Linux mini-PC), or (c) graduate to Phase 1 (cloud). We do not try to fake
-  background work via push-notification tricks.
-- **Per-device install means no central updates.** Auto-update is a real cost.
-  L1 packaging (pipx / brew) sidesteps it — users `pipx upgrade` when they want.
-  L2 (Tauri + signed installer) needs Sparkle / Squirrel and code-signing certs
-  (~$100–500/yr). We start at L1 and only graduate to L2 when there's a real
-  non-engineer userbase.
-- **Local LLM quality cliff.** Cloud APIs (Sonnet / GPT-class) handle complex
-  agent loops and long contexts well; 7B–13B local models often can't. We make
-  the LLM endpoint a config knob and let users pick their cost/quality/privacy
-  trade-off per colleague, rather than hard-coding one answer.
-- **Slack in air-gapped networks doesn't work.** Slack is SaaS. For truly
-  air-gapped environments the channels available are: local web UI, local IMAP /
-  Exchange, or self-hosted Mattermost (same Socket-Mode-style outbound pattern).
+- **Official harness over own dispatcher.** We give up control over scheduling
+  internals and accept the harness's release cadence; in exchange every line of
+  orchestration code we'd otherwise maintain (and race against upstream) is
+  deleted. See [ADR-015](../../decisions/ADR-015-codex-harness-own-surface.md).
+  Rejected: keeping Phase 0's FastAPI dispatcher (permanent fork tax); generic
+  agent frameworks (second harness to learn, same fork tax).
+- **Outlook first, Teams second.** Graph delta polling is outbound-only and works
+  from any device. Teams bots require an Azure Bot Service public webhook — an
+  edge laptop can't receive it, and Graph chat-polling needs tenant-admin-heavy
+  permissions. Teams therefore lands with the *resident machine* variant, not v0.1.
+- **Device sleep = colleague offline.** Accepted. The mitigation path is the
+  resident Linux box / cloud version, not keep-awake hacks.
+- **Polling latency (~seconds–minute) over push.** Accepted for email-shaped work;
+  the cloud version restores push.
 
-## Packaging tiers
+## Evolution to the cloud version
 
-| Tier | Distribution | Audience | Cost to ship |
-|---|---|---|---|
-| L1 | `pipx install` / `brew install` + launchd/systemd unit | Engineers, power users | Low — half a day |
-| L2 | Tauri shell + system tray UI, unsigned | Internal non-engineers | Medium — a week |
-| L3 | Signed `.dmg` + `.msi`, auto-update via Sparkle / Squirrel | External users | High — ongoing certs + release pipeline |
+The adapter is written to be placement-agnostic; moving up is redeployment:
 
-Start at L1. Only build L2/L3 when actual non-engineers are blocked on L1.
+1. **Edge (v0.1)** — adapter + app-server on each user's device; traces sync nightly
+2. **Resident box** — same Docker pair on one always-on intranet Linux host;
+   colleagues survive laptop sleep; Teams webhook becomes possible; traces
+   stream instead of sync
+3. **Cloud (Phase 1)** — the adapter becomes the channel-adapter layer in front of
+   the Phase 1 orchestrator ([ADR-014](../../decisions/ADR-014-worker-pool-placement.md)
+   pull-based pools); `traces/` sink becomes Postgres + S3 audit. Personas
+   (`colleagues.yaml`) transfer unchanged.
 
-## Migration / relationship to other phases
+## Deliverables (the reference repo)
 
-- **From Phase 0**: keep the same FastAPI + DaemonPool + file-based-state code.
-  Add the Slack and Email adapter modules. Add the OS service registration step
-  to the installer. Frontend (Claw3D) becomes optional — Slack and email are
-  enough on their own.
-- **To Phase 1**: not a migration; Phase 1 is a different deployment shape, not
-  a successor. A user can run both — Phase 0.5 on their laptop for personal
-  drafts, Phase 1 cloud instance for shared team work. The codex agent prompts
-  and MCP tool interface are identical, so the same persona definitions transfer.
-- **Toward an "always-on personal" variant** (Phase 0.5+ — future): same
-  software, running on a small Linux box (mini-PC, NAS, homelab) instead of the
-  laptop. The laptop becomes a pure frontend. Out of scope for now; document the
-  shape when someone actually wants to build it.
+Separate code repo; this document is its architectural contract:
 
-## Key decisions to capture as ADRs
+```
+digital-colleague-edge/
+├── adapter/            # channel adapter (Graph polling, routing, trace tap)
+├── install/            # install.sh (macOS) · install.ps1 (Windows) · offline bundle
+├── colleagues.yaml     # persona declarations → compiled to ~/.codex layout
+├── personas/           # AGENTS.md per colleague
+└── traces/             # audit.jsonl + sync config
+```
 
-- ADR-0E1: Slack Socket Mode over Events API for on-device deployment
-- ADR-0E2: IMAP IDLE + SMTP over inbound webhook services for email
-- ADR-0E3: Packaging tiers — L1 (pipx) ship-first, L2/L3 only when justified
-- ADR-0E4: LLM endpoint as runtime config, not compile-time choice
-- ADR-0E5: Device-sleep semantics — we accept downtime, no background tricks
+v0.1 vertical slice: **one persona + Outlook polling + OS service + linked traces.**
+Prove email-in → codex turn → email-out → both trace layers correlated. Then
+Windows installer, then resident-box/Teams.
+
+## Key decisions
+
+- [ADR-015](../../decisions/ADR-015-codex-harness-own-surface.md) — build on the
+  official codex harness; own surface = channel adapter only
+- [ADR-016](../../decisions/ADR-016-two-layer-interaction-traces.md) — two-layer
+  interaction trace retention
+- [ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md) — per-colleague
+  email identity (shared with the cloud track)

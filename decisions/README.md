@@ -19,6 +19,8 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 012 | [Worker → orchestrator streaming return path](./ADR-012-streaming-return-path.md) | Proposed |
 | 013 | [Capability-oriented logical architecture; clouds are bindings](./ADR-013-capability-oriented-logical-architecture.md) | Proposed |
 | 014 | [Worker pool placement: federated, pull-based pools by location](./ADR-014-worker-pool-placement.md) | Proposed |
+| 015 | [Build on the official codex harness; own surface = channel adapter only](./ADR-015-codex-harness-own-surface.md) | Proposed |
+| 016 | [Two-layer interaction trace retention](./ADR-016-two-layer-interaction-traces.md) | Proposed |
 
 ## Conventions
 
