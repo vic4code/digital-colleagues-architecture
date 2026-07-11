@@ -124,18 +124,28 @@ Phase 1 audit backbone later. Retention policy per
 - **Polling latency (~seconds–minute) over push.** Accepted for email-shaped work;
   the cloud version restores push.
 
-## Evolution to the cloud version
+## Choosing a deployment mode
 
-The adapter is written to be placement-agnostic; moving up is redeployment:
+The adapter is placement-agnostic; the choice is forced by one question —
+**is the colleague shared or personal?** A colleague's identity is its mailbox
+(ADR-010), and the mailbox is the work queue (adapter-spec §2). If a *shared*
+colleague's runtime ran on every team member's laptop, N adapters would race on
+one mailbox — solving that needs distributed locking, which destroys the
+simplicity this track exists for. So:
 
-1. **Edge (v0.1)** — adapter + app-server on each user's device; traces sync nightly
-2. **Resident box** — same Docker pair on one always-on intranet Linux host;
-   colleagues survive laptop sleep; Teams webhook becomes possible; traces
-   stream instead of sync
-3. **Cloud (Phase 1)** — the adapter becomes the channel-adapter layer in front of
-   the Phase 1 orchestrator ([ADR-014](../../decisions/ADR-014-worker-pool-placement.md)
-   pull-based pools); `traces/` sink becomes Postgres + S3 audit. Personas
-   (`colleagues.yaml`) transfer unchanged.
+- **Shared colleagues (team-facing — the legal scenario) → resident box.**
+  One always-on intranet Linux host (or VM), adapter + app-server as a Docker
+  pair. Also unlocks: survives laptop sleep, Teams webhook becomes possible,
+  Graph application-permission auth, centralized traces, one place to update.
+  **This is the recommended v0.1** — one docker-compose beats three OS installers.
+- **Personal colleagues (my assistant, my files, my mailbox) → edge device.**
+  Naturally one-runtime-per-person, no race. The per-OS installers serve this
+  variant (v0.2+).
+- **Cloud (Phase 1)** — when scale/HA demands it: the adapter becomes the
+  channel-adapter layer in front of the Phase 1 orchestrator
+  ([ADR-014](../../decisions/ADR-014-worker-pool-placement.md) pull-based
+  pools); the `traces/` sink becomes Postgres + S3 audit. Personas
+  (`colleagues.yaml`) transfer unchanged.
 
 ## Deliverables (the reference repo)
 

@@ -61,18 +61,25 @@ discovered → claimed → turn_running → replying → done
 - Per-conversation serialization: one turn at a time per thread; parallel
   threads to the same colleague are fine (sessions are cheap, ADR-015).
 
-## 3. Approval policy
+## 3. Approval policy — native knobs, not a custom engine
 
-The harness asks the client to approve commands/patches; the adapter is that
-client, and nobody is watching a terminal. Policy, per colleague in
-`colleagues.yaml`:
+Codex already has two orthogonal, per-profile controls: `sandbox_mode`
+(`read-only` / `workspace-write` / `danger-full-access`) bounds what the agent
+*can touch*, and `approval_policy` (`untrusted` / `on-failure` / `on-request` /
+`never`) decides *when it asks a human*. We do *not* build an allow-list engine
+on top (that would violate ADR-015); each colleague declares a native pair in
+`colleagues.yaml` and the installer compiles it into their config.toml profile:
 
-- `auto_approve`: glob/command allow-list (e.g. read-only tools, `doc_*`) —
-  approved without ceremony, recorded in the trace.
-- Everything else in v0.1 is **declined** and the colleague is told to answer
-  with what it *can* do. Edge colleagues are advisors, not operators.
-- `escalate` (v0.2): decline-and-ask — the adapter emails the requester
-  "Vanessa wants to run X — reply APPROVE", and re-runs the turn on approval.
+- **Advisor colleagues (v0.1 default):** `workspace-write` + `never` — free to
+  act inside the sandbox, never blocks waiting for an approval nobody will see.
+  The sandbox, not an approval prompt, is the safety boundary.
+- **Read-only colleagues:** `read-only` + `never` — for pure Q&A personas.
+- **Operator colleagues (v0.2):** `workspace-write` + `on-request` — the only
+  case where the adapter handles approval callbacks: it emails the requester
+  "Vanessa wants to run X — reply APPROVE" and resumes the turn on approval.
+  Every approval exchange lands in the trace.
+
+Exact mode names are pinned per codex release along with the binary (ADR-015).
 
 ## 4. Configuration surface — everything a deploy must provide
 
@@ -112,7 +119,8 @@ colleagues:
     mailbox: vanessa@company.com
     persona: personas/vanessa/AGENTS.md
     tools: [docs-v1, kanban-v1]         # MCP allow-list
-    auto_approve: ["doc_*", "kanban_read*"]
+    sandbox_mode: workspace-write       # native codex knobs (§3)
+    approval_policy: never
     model: gpt-5.2                      # per-colleague override allowed
 ```
 
