@@ -18,12 +18,16 @@ Five loops/components sharing one small local state store:
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-- **Poller.** One Graph delta query per colleague mailbox on an interval
-  (default 15 s). Delta tokens are persisted, so a restart resumes where it
-  left off instead of re-reading the mailbox. New messages land in the inbox
-  queue as normalized `IncomingTurn` records.
-- **Router.** Maps mailbox → colleague (from `colleagues.yaml`) and email
-  thread → codex conversation. Threading key: Graph `conversationId` (falls
+- **Poller.** Personal mode (v0.1): **one** Graph delta query on the user's own
+  mailbox (default 15 s), filtering to messages addressed to a colleague
+  plus-tag; everything else is ignored. (Resident-box variant: one delta query
+  per colleague mailbox.) Delta tokens are persisted, so a restart resumes
+  where it left off instead of re-reading the mailbox. New messages land in
+  the inbox queue as normalized `IncomingTurn` records.
+- **Router.** Maps address → colleague and email thread → codex conversation.
+  Personal mode routes on the plus-tag (`me+vanessa@…` → `vanessa`, from
+  `colleagues.yaml`); if the tenant has plus addressing disabled, fallback is
+  a subject tag (`[vanessa] …`). Threading key: Graph `conversationId` (falls
   back to `In-Reply-To`/`References`). First message of a thread ⇒
   `newConversation` with that colleague's profile; later messages ⇒ resume the
   mapped conversation.
@@ -115,8 +119,7 @@ email = "you@company.com"               # dead-letter + health notifications
 
 ```yaml
 colleagues:
-  - id: vanessa
-    mailbox: vanessa@company.com
+  - id: vanessa                         # personal mode: reached at me+vanessa@…
     persona: personas/vanessa/AGENTS.md
     tools: [docs-v1, kanban-v1]         # MCP allow-list
     sandbox_mode: workspace-write       # native codex knobs (§3)
@@ -128,7 +131,7 @@ colleagues:
 
 | Secret | Obtained | Stored |
 |---|---|---|
-| Graph tokens (one per colleague mailbox) | device-code sign-in during install | OS keychain (Keychain / DPAPI / libsecret) |
+| Graph token (personal mode: **one**, for the user's own mailbox) | device-code sign-in during install | OS keychain (Keychain / DPAPI / libsecret) |
 | LLM credential (`OPENAI_API_KEY` / Azure key, or ChatGPT login) | `codex login` or key paste during install | codex's own auth store / keychain; injected as env at service start |
 | MCP tool credentials (e.g. kanban API) | install prompts, per tool | OS keychain |
 
@@ -138,12 +141,11 @@ traces (trace writer redacts `Authorization` fields). Air-gapped deploys point
 
 **Graph auth model — the one real IT decision:**
 
-- **Edge (v0.1): delegated, device-code.** Each colleague mailbox is a real
-  account (or shared mailbox the installing user owns). Install runs one
-  device-code sign-in per colleague; refresh token lives in that device's
-  keychain. Scopes: `Mail.ReadWrite`, `Mail.Send`, `offline_access`. No admin
-  consent beyond normal mailbox ownership — deployable without platform-team
-  involvement.
+- **Edge / personal (v0.1): delegated, device-code, one sign-in.** The adapter
+  only ever touches the user's own mailbox (colleagues are plus-tags on it),
+  so install runs a single device-code sign-in as the user. Scopes:
+  `Mail.ReadWrite`, `Mail.Send`, `offline_access`. No admin consent, no new
+  mailboxes provisioned — deployable without any platform-team involvement.
 - **Resident box (v0.2+): application permissions.** One app registration,
   client credential on one managed machine, scoped by `ApplicationAccessPolicy`
   to exactly the colleague mailboxes. Cleaner, but needs tenant-admin consent —
@@ -155,12 +157,12 @@ traces (trace writer redacts `Authorization` fields). Air-gapped deploys point
 1. Install pinned `codex` binary + adapter binary
 2. Read `colleagues.yaml` → write `~/.codex/config.toml` profiles + personas
 3. Prompt: LLM credential (`codex login` / API key) → keychain
-4. Per colleague: Graph device-code sign-in → keychain
+4. Graph device-code sign-in as the user (one sign-in covers all colleagues) → keychain
 5. Write `adapter.toml`; create workspace + traces dirs
 6. Register services (launchd / systemd / Task Scheduler): `codex app-server`
    and the adapter, restart-on-crash, start-on-boot
-7. Smoke test: send self-mail to each colleague → expect reply + both trace
-   layers correlated; print result
+7. Smoke test: mail `me+<colleague>@…` for each colleague → expect reply + both
+   trace layers correlated; print result
 
 Uninstall reverses it (services, keychain entries, optionally data dirs).
 

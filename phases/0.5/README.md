@@ -3,11 +3,14 @@
 **Status:** 🚧 In design. Parallel track — not on the cloud progression (0 → 1 → 2 → 3).
 
 **Scope:** A reference architecture others can implement digital colleagues from.
-Runs on each user's edge device (macOS / Windows, restricted intranets included).
-The agent runtime is **`codex app-server` as-is** — the Phase 0 custom dispatcher
-(`server.py` + DaemonPool) is deliberately dropped. Channels: Outlook first,
-Teams second. Phase 0 stays untouched as the record of the implemented prototype;
-this phase is the redesigned successor on the edge track.
+**Focus: personal colleagues on the user's own edge device** (macOS / Windows,
+restricted intranets included) — my assistants, my files, my mailbox. Shared
+team colleagues (the resident-box variant) are documented but deferred. The
+agent runtime is **`codex app-server` as-is** — the Phase 0 custom dispatcher
+(`server.py` + DaemonPool) is deliberately dropped. Channel: Outlook first,
+Teams later (and only with the resident box). Phase 0 stays untouched as the
+record of the implemented prototype; this phase is the redesigned successor on
+the edge track.
 
 ![Phase 0.5 architecture](./architecture.svg)
 
@@ -31,17 +34,18 @@ everyone else.
 
 ## Goal
 
-A user (or their IT) runs one installer. From then on, emailing a colleague's
-address (or later, @mentioning it in Teams) triggers a turn on the user's own
-device, using the official codex harness, and every interaction is preserved in
-a queryable trace. Nothing custom sits between the channel and the harness except
-one thin adapter.
+A user runs one installer on their own machine. From then on, mailing
+`me+vanessa@company.com` from any device — phone included — triggers a turn on
+their laptop, using the official codex harness, and every interaction is
+preserved in a queryable trace. Their colleagues, their files, their compute;
+nothing custom between the channel and the harness except one thin adapter.
 
 ## Non-goals
 
-- Multi-user shared colleagues on one runtime (that's Phase 1 cloud)
-- Always-on when the device sleeps (accept downtime; see cloud evolution)
-- Teams in v0.1 (see trade-offs — it needs a resident machine)
+- **Shared / team colleagues** — deferred to the resident-box variant (see
+  deployment modes); v0.x is strictly one user, one device, their own colleagues
+- Always-on when the device sleeps (accept downtime; see deployment modes)
+- Teams (requires a reachable webhook — resident-box territory, not edge)
 - Any custom orchestration: scheduling, sub-agents, tool lifecycle all stay official
 
 ## Architecture
@@ -63,9 +67,12 @@ official harness or configuration.
   [adapter-spec.md](./adapter-spec.md). In one line, it is a single small
   service that:
   1. polls Microsoft Graph (Outlook) with delta queries — outbound-only, works
-     behind NAT / corporate proxies, no inbound port ever
-  2. routes each message to the right colleague session (per-colleague address,
-     per [ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md))
+     behind NAT / corporate proxies, no inbound port ever. **Personal mode
+     watches one mailbox: the user's own**
+  2. routes each message to the right colleague session via plus-addressing
+     (`me+vanessa@company.com`) — each colleague keeps its own address
+     ([ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md))
+     without provisioning any new mailbox
   3. relays the reply back out, and
   4. **taps the JSON-RPC event stream as the audit source** (see traces below)
 - **Installer per OS.** macOS: script installs codex + adapter, registers
@@ -133,14 +140,15 @@ colleague's runtime ran on every team member's laptop, N adapters would race on
 one mailbox — solving that needs distributed locking, which destroys the
 simplicity this track exists for. So:
 
+- **Personal colleagues (my assistant, my files, my mailbox) → edge device.**
+  Naturally one-runtime-per-person, no race — the adapter watches only the
+  user's own mailbox and routes on plus-address tags. **This is the current
+  focus (v0.1)**; the per-OS installers serve it.
 - **Shared colleagues (team-facing — the legal scenario) → resident box.**
   One always-on intranet Linux host (or VM), adapter + app-server as a Docker
-  pair. Also unlocks: survives laptop sleep, Teams webhook becomes possible,
-  Graph application-permission auth, centralized traces, one place to update.
-  **This is the recommended v0.1** — one docker-compose beats three OS installers.
-- **Personal colleagues (my assistant, my files, my mailbox) → edge device.**
-  Naturally one-runtime-per-person, no race. The per-OS installers serve this
-  variant (v0.2+).
+  pair; unlocks laptop-sleep immunity, Teams webhook, application-permission
+  auth, centralized traces. **Deferred** — documented so the personal design
+  doesn't paint it out, not being built now.
 - **Cloud (Phase 1)** — when scale/HA demands it: the adapter becomes the
   channel-adapter layer in front of the Phase 1 orchestrator
   ([ADR-014](../../decisions/ADR-014-worker-pool-placement.md) pull-based
@@ -160,9 +168,11 @@ digital-colleague-edge/
 └── traces/             # audit.jsonl + sync config
 ```
 
-v0.1 vertical slice: **one persona + Outlook polling + OS service + linked traces.**
-Prove email-in → codex turn → email-out → both trace layers correlated. Then
-Windows installer, then resident-box/Teams.
+v0.1 vertical slice (personal mode): **one persona + plus-address polling on the
+user's own mailbox + OS service (macOS first) + linked traces.** Prove
+email-in → codex turn → email-out → both trace layers correlated. Then the
+Windows installer. Resident-box/Teams only when a shared-colleague use case
+actually pulls it.
 
 ## Key decisions
 
