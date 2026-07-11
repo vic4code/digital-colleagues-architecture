@@ -1,0 +1,168 @@
+# Channel adapter — internals & configuration spec
+
+Companion to [README.md](./README.md). This is the "many details" document: what
+the adapter actually does inside, and everything a deployment must configure.
+The adapter is the only component we own (ADR-015), so this file plus
+`colleagues.yaml` **is** the implementation contract.
+
+## 1. Internal structure
+
+Five loops/components sharing one small local state store:
+
+```
+┌──────────────────────────── adapter process ────────────────────────────┐
+│  poller ──▶ inbox queue ──▶ router ──▶ turn runner (×N) ──▶ reply relay │
+│                │                            │                            │
+│                └──────── state store ◀──────┤ (JSON-RPC events)          │
+│                     (SQLite, single file)   └──▶ trace writer            │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+- **Poller.** One Graph delta query per colleague mailbox on an interval
+  (default 15 s). Delta tokens are persisted, so a restart resumes where it
+  left off instead of re-reading the mailbox. New messages land in the inbox
+  queue as normalized `IncomingTurn` records.
+- **Router.** Maps mailbox → colleague (from `colleagues.yaml`) and email
+  thread → codex conversation. Threading key: Graph `conversationId` (falls
+  back to `In-Reply-To`/`References`). First message of a thread ⇒
+  `newConversation` with that colleague's profile; later messages ⇒ resume the
+  mapped conversation.
+- **Turn runner (the core).** A pool of N workers (default 2 on edge). Each
+  runs one turn as a state machine (§2) over the app-server JSON-RPC
+  connection: send the user turn, consume the event stream, answer approval
+  requests per policy (§3), collect the final message.
+- **Reply relay.** Sends the colleague's answer back via Graph `sendMail` on
+  the same thread, then marks the triggering message as processed (moves it to
+  a `Processed` folder — the mailbox itself is the work queue).
+- **Trace writer.** Appends every JSON-RPC event to `traces/audit.jsonl` with
+  the correlation id (ADR-016). Not optional, not configurable-off.
+
+**State store** (one SQLite file — the only adapter-owned persistent state):
+`delta_tokens`, `thread_map` (email thread ↔ conversation id), `processed`
+(message ids, for idempotency), `inflight` (turns being run), `dead_letter`.
+
+## 2. Message lifecycle (at-least-once, idempotent)
+
+```
+discovered → claimed → turn_running → replying → done
+     ↑           │            │
+     └── crash ──┴────────────┘→ retry (max 3) → dead_letter → notify owner
+```
+
+- The mailbox is the queue: a message only leaves `claimed` when the reply has
+  been sent AND the message moved to `Processed`. Crash anywhere before that ⇒
+  next poll re-discovers it; the `processed` table stops double-replies.
+- A turn that dies mid-run (app-server restart) is retried from scratch — turns
+  must therefore be **effectively idempotent**: tools that mutate external
+  systems (e.g. `kanban_*`) take an idempotency key derived from the message id.
+- After 3 failures the message goes to `dead_letter` and the adapter emails the
+  *requester* ("Vanessa couldn't process this; her operator has been notified")
+  and the *operator* (owner address in config). No silent drops, ever.
+- Per-conversation serialization: one turn at a time per thread; parallel
+  threads to the same colleague are fine (sessions are cheap, ADR-015).
+
+## 3. Approval policy
+
+The harness asks the client to approve commands/patches; the adapter is that
+client, and nobody is watching a terminal. Policy, per colleague in
+`colleagues.yaml`:
+
+- `auto_approve`: glob/command allow-list (e.g. read-only tools, `doc_*`) —
+  approved without ceremony, recorded in the trace.
+- Everything else in v0.1 is **declined** and the colleague is told to answer
+  with what it *can* do. Edge colleagues are advisors, not operators.
+- `escalate` (v0.2): decline-and-ask — the adapter emails the requester
+  "Vanessa wants to run X — reply APPROVE", and re-runs the turn on approval.
+
+## 4. Configuration surface — everything a deploy must provide
+
+Two files plus a secrets layer. The installer materializes all of it.
+
+**`adapter.toml`** (non-secret; per device):
+
+```toml
+[graph]
+tenant_id   = "…"
+auth        = "device_code"        # edge default; "client_credentials" on resident box
+poll_seconds = 15
+
+[runtime]
+codex_bin    = "/usr/local/bin/codex"   # pinned version (ADR-015)
+max_turns    = 2                        # concurrent turn workers
+workspace    = "~/DigitalColleagues"    # where colleagues read/write files
+
+[llm]                                   # what codex config.toml gets pointed at
+provider  = "azure_openai"              # or "openai" | "internal_vllm"
+base_url  = "https://…"                 # required for azure/vllm
+
+[traces]
+dir       = "~/DigitalColleagues/traces"
+sync      = "sharepoint"                # or "s3" | "none" (air-gapped: none + manual)
+sync_url  = "https://…"
+
+[operator]
+email = "you@company.com"               # dead-letter + health notifications
+```
+
+**`colleagues.yaml`** (identity of record — version-controlled, shared):
+
+```yaml
+colleagues:
+  - id: vanessa
+    mailbox: vanessa@company.com
+    persona: personas/vanessa/AGENTS.md
+    tools: [docs-v1, kanban-v1]         # MCP allow-list
+    auto_approve: ["doc_*", "kanban_read*"]
+    model: gpt-5.2                      # per-colleague override allowed
+```
+
+**Secrets — three kinds, none in files:**
+
+| Secret | Obtained | Stored |
+|---|---|---|
+| Graph tokens (one per colleague mailbox) | device-code sign-in during install | OS keychain (Keychain / DPAPI / libsecret) |
+| LLM credential (`OPENAI_API_KEY` / Azure key, or ChatGPT login) | `codex login` or key paste during install | codex's own auth store / keychain; injected as env at service start |
+| MCP tool credentials (e.g. kanban API) | install prompts, per tool | OS keychain |
+
+Rules: secrets never appear in `adapter.toml`, `colleagues.yaml`, logs, or
+traces (trace writer redacts `Authorization` fields). Air-gapped deploys point
+`[llm]` at internal vLLM — no key leaves the network, possibly none at all.
+
+**Graph auth model — the one real IT decision:**
+
+- **Edge (v0.1): delegated, device-code.** Each colleague mailbox is a real
+  account (or shared mailbox the installing user owns). Install runs one
+  device-code sign-in per colleague; refresh token lives in that device's
+  keychain. Scopes: `Mail.ReadWrite`, `Mail.Send`, `offline_access`. No admin
+  consent beyond normal mailbox ownership — deployable without platform-team
+  involvement.
+- **Resident box (v0.2+): application permissions.** One app registration,
+  client credential on one managed machine, scoped by `ApplicationAccessPolicy`
+  to exactly the colleague mailboxes. Cleaner, but needs tenant-admin consent —
+  which is why it is not the v0.1 path.
+- Rejected: client credentials distributed to every laptop (secret sprawl).
+
+## 5. Install flow (what the installer actually does)
+
+1. Install pinned `codex` binary + adapter binary
+2. Read `colleagues.yaml` → write `~/.codex/config.toml` profiles + personas
+3. Prompt: LLM credential (`codex login` / API key) → keychain
+4. Per colleague: Graph device-code sign-in → keychain
+5. Write `adapter.toml`; create workspace + traces dirs
+6. Register services (launchd / systemd / Task Scheduler): `codex app-server`
+   and the adapter, restart-on-crash, start-on-boot
+7. Smoke test: send self-mail to each colleague → expect reply + both trace
+   layers correlated; print result
+
+Uninstall reverses it (services, keychain entries, optionally data dirs).
+
+## 6. Failure modes summary
+
+| Failure | Behavior |
+|---|---|
+| Device asleep | Colleague offline; mail queues in mailbox; drains on wake |
+| app-server crash | OS restarts it; in-flight turns retried via §2; history in rollouts |
+| Adapter crash | OS restarts; delta token + processed table resume cleanly |
+| Graph token expired | Adapter emails operator; colleague auto-replies "temporarily offline" if mail still readable, else silent until re-auth |
+| LLM endpoint down | Retry with backoff within the turn; then §2 retry path |
+| Poison message (always crashes turn) | 3 strikes → dead_letter → both parties notified |

@@ -58,7 +58,10 @@ official harness or configuration.
   `config.toml` + an allow-listed MCP tool set. Declared in one `colleagues.yaml`
   that the installer compiles into `~/.codex` layout. Adding a colleague is a
   config change, not a deploy.
-- **Channel adapter (the owned surface).** A single small service that:
+- **Channel adapter (the owned surface).** Internals, message lifecycle,
+  approval policy, and the full configuration/secrets surface are specified in
+  [adapter-spec.md](./adapter-spec.md). In one line, it is a single small
+  service that:
   1. polls Microsoft Graph (Outlook) with delta queries — outbound-only, works
      behind NAT / corporate proxies, no inbound port ever
   2. routes each message to the right colleague session (per-colleague address,
