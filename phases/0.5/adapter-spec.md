@@ -111,6 +111,10 @@ discovered → claimed → turn_running → replying → done
   and the *operator* (owner address in config). No silent drops, ever.
 - Per-conversation serialization: one turn at a time per thread; parallel
   threads to the same colleague are fine (sessions are cheap, ADR-015).
+- Ordering: FIFO across threads by `receivedDateTime`, best-effort only —
+  what must be strict is the *within-thread* serialization above. Global
+  ordering and priorities are deliberately not built (YAGNI for email
+  latency); `max_turns` (default 2) bounds concurrency device-wide.
 
 ## 3. Approval policy — native knobs, not a custom engine
 

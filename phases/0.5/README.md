@@ -22,7 +22,11 @@ gone when I close it. A digital colleague is a *shared, persistent identity*: it
 its own mailbox, its own memory, its own audit trail, and anyone in the team can
 reach it without installing anything. Three things "just teach codex" cannot give:
 
-1. **Shared identity** — Vanessa is one colleague, not a prompt each employee re-creates
+1. **Shared identity** — Vanessa is one colleague, not a prompt each employee
+   re-creates. (In personal mode this weakens to a shared *template*: the
+   persona file is common, but each install is an independent instance —
+   `victor+vanessa@…` and `alice+vanessa@…` are different individuals with the
+   same job description. One global Vanessa is resident-box/cloud territory.)
 2. **Zero-install reach** — legal staff won't install a CLI (and often aren't allowed to),
    but they already send email and type in Teams
 3. **Governance** — personal CLI output scatters across laptops; a colleague's every
