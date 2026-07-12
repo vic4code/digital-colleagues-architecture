@@ -38,21 +38,32 @@ event including the stranger's rejected attempt.
 
 ## Layout → spec mapping
 
-| File | Spec section |
+| File | What it is |
 |---|---|
-| `adapter/mailbox.py` | §0 the mailbox is in the cloud; §2 mailbox-as-queue; `GraphMailbox` names the two real REST calls |
-| `adapter/codex_client.py` | §1 JSON-RPC seat — spawn + stdio, five requests / five events; `MockCodex` fakes the same stream |
-| `adapter/core.py` | §1 router (sender gate → +tag → thread map), §2 lifecycle + idempotency, ADR-016 trace tap |
-| `adapter/config.py` | §4 `colleagues.yaml` — identity of record |
+| `adapter/core.py` | router (sender gate → tag → thread map), lifecycle + idempotency, trace tap — channel-agnostic |
+| `adapter/mailbox.py` | Outlook channel: `MockMailbox` (runs anywhere) behind the same interface as the real thing |
+| `adapter/graph.py` | **real Outlook** — MSAL device-code auth + delta poll / reply / move-to-Processed, implemented |
+| `adapter/teams.py` | Teams channel: `MockTeamsChat` (in the demo) + `GraphTeamsChat` (delegated polling, v0.2 stub) |
+| `adapter/codex_client.py` | JSON-RPC seat — spawn + stdio, published method names; `MockCodex` fakes the same stream |
+| `adapter/config.py` | `colleagues.yaml` — identity of record |
 | `colleagues.yaml`, `personas/` | persona = template; instance = template × owner |
 
-## Going real (v0.1 checklist)
+Channels implement one interface (`poll_new` / `send_reply` / `mark_processed`)
+and messages carry `colleague_tag()` — email routes on the plus-address, Teams
+on a leading `@vanessa`. A Teams chat is a thread: one dedicated chat = one
+persistent session with that colleague.
 
-1. `GraphMailbox`: implement the three named endpoints with MSAL device-code
-   auth (token → OS keychain)
-2. `CodexAppServer`: already speaks the boundary; pin method names to your
-   codex release and verify against the IDE extension source (ADR-015)
-3. Wrap `Adapter.run_cycle()` in a `while True: sleep(poll_seconds)` loop,
+## Going real
+
+1. **Outlook (v0.1)** — `pip install msal requests`, register a public-client
+   app (delegated `Mail.ReadWrite`, `Mail.Send`, `offline_access`), point
+   `GraphOutlook` at it. The code is written; it needs your tenant to run.
+2. **codex** — swap `MockCodex` for `CodexAppServer`; regenerate schemas with
+   `codex app-server generate-ts` on every upgrade and diff (ADR-015)
+3. **Service** — wrap `Adapter.run_cycle()` in `while True: sleep(poll_seconds)`,
    register with launchd / Task Scheduler
-4. Keep `demo.py` green — it is the executable form of the spec's semantics
+4. **Teams (v0.2)** — implement `GraphTeamsChat.poll_new/send_reply` (endpoints
+   named in the class); add `Chat.Read` + `ChatMessage.Send` to the same
+   sign-in; list watched chat ids in `adapter.toml [teams]`
+5. Keep `demo.py` green — it is the executable form of the spec's semantics
    (FIFO, same-thread-same-session, sender gate, single rejection per message)

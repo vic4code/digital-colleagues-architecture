@@ -49,7 +49,10 @@ nothing custom between the channel and the harness except one thin adapter.
 - **Shared / team colleagues** — deferred to the resident-box variant (see
   deployment modes); v0.x is strictly one user, one device, their own colleagues
 - Always-on when the device sleeps (accept downtime; see deployment modes)
-- Teams (requires a reachable webhook — resident-box territory, not edge)
+- Teams **bot identity** (colleague as its own Teams user — needs an Azure Bot
+  webhook, resident-box territory). Personal-mode Teams — the adapter polls the
+  owner's own chats with delegated permissions, `@vanessa …` as the trigger —
+  is outbound-only and edge-compatible; it ships as v0.2 after mail
 - Any custom orchestration: scheduling, sub-agents, tool lifecycle all stay official
 
 ## Architecture

@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from adapter import config as cfg                     # noqa: E402
 from adapter.mailbox import MockMailbox               # noqa: E402
+from adapter.teams import MockTeamsChat               # noqa: E402
 from adapter.codex_client import MockCodex            # noqa: E402
 from adapter.core import Adapter, State, Traces       # noqa: E402
 
@@ -35,7 +36,8 @@ def main():
         shutil.rmtree(RUN)
     conf = cfg.load(HERE / "colleagues.yaml")
     mailbox = MockMailbox(RUN / "mailbox")
-    adapter = Adapter(conf, mailbox, MockCodex(),
+    teams = MockTeamsChat(RUN / "teams")
+    adapter = Adapter(conf, [mailbox, teams], MockCodex(),
                       State(RUN / "state.sqlite"), Traces(RUN / "traces" / "audit.jsonl"))
 
     print("═══ 1. You send a task to Vanessa (from your phone, say) ═══")
@@ -65,7 +67,19 @@ def main():
     print()
     adapter.run_cycle()
 
-    print("\n═══ 6. The interaction trace (traces/audit.jsonl) ═══")
+    print("\n═══ 6. Teams: you message '@david …' in your dedicated chat ═══")
+    t1 = teams.deliver(conf.owner, "@david which sandbox mode should the "
+                       "contract-review colleague run with?")
+    print(f"  [teams chat {t1.thread_id}] you: {t1.body}")
+    adapter.run_cycle()
+    for p in sorted((RUN / "teams" / "posted").glob("*.json")):
+        r = json.loads(p.read_text())
+        print(f"  [teams chat {r['thread_id']}] {r['sender']}:")
+        for line in r["body"].splitlines()[:3]:
+            print(f"    | {line}")
+        print("    | …")
+
+    print("\n═══ 7. The interaction trace (traces/audit.jsonl) ═══")
     for line in (RUN / "traces" / "audit.jsonl").read_text().splitlines():
         rec = json.loads(line)
         ts = rec.pop("ts")

@@ -187,6 +187,11 @@ dir       = "~/DigitalColleagues/traces"
 sync      = "sharepoint"                # or "s3" | "none" (air-gapped: none + manual)
 sync_url  = "https://…"
 
+[teams]                                 # v0.2 · personal mode: delegated polling
+enabled      = false
+watched_chats = []                      # chat ids to poll (e.g. your "Vanessa" chat)
+poll_seconds = 20                       # gentler than mail — Graph chat throttling
+
 [policy]
 allowed_senders = ["you@company.com"]   # who may trigger turns; default: owner only
 

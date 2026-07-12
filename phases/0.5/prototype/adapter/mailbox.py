@@ -24,10 +24,15 @@ class Message:
     subject: str
     body: str
     received_at: float
+    channel: str = "email"
 
-    def plus_tag(self):
+    def colleague_tag(self):
+        """Email addressing: the plus-tag names the colleague (ADR-010)."""
         local = self.to.split("@", 1)[0]
-        return local.split("+", 1)[1] if "+" in local else None
+        return local.split("+", 1)[1].lower() if "+" in local else None
+
+    def text(self):
+        return f"Subject: {self.subject}\n\n{self.body}"
 
 
 class MockMailbox:
