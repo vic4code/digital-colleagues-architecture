@@ -55,13 +55,19 @@ grow it back into a worse app-server client.
 There is nothing to host: the adapter **spawns `codex app-server` as a child
 process** at boot (restart-on-exit) and exchanges newline-delimited JSON over
 the child's stdin/stdout — same transport idea as MCP stdio. No port, no HTTP.
-This is exactly the seat the official VS Code / Cursor extension occupies
-(editor pane = its channel; extension = the JSON-RPC client; it spawns the
-same child) — read the extension source as the reference client. The wire
-traffic is five requests down (`initialize`, `newConversation`,
-`sendUserTurn`, approval responses, `interruptConversation`) and five event
-kinds up (message deltas, tool begin/end, `turn_complete`, `token_count`,
-approval requests) — names representative, pinned per release (ADR-015).
+This is exactly the seat the official VS Code extension occupies (editor pane
+= its channel; extension = the JSON-RPC client; it spawns the same child).
+The extension itself is **closed-source** (openai/codex#5822), but that
+doesn't matter: the protocol is published — method names in the
+[app-server README](https://github.com/openai/codex/blob/main/codex-rs/app-server/README.md)
+(`initialize`, `thread/start`, `thread/resume`, `turn/start`,
+`turn/interrupt` down; `item/agentMessage/delta`, `turn/completed`,
+`thread/tokenUsage/updated`, approval requests up), types in
+`app-server-protocol/src/protocol/*.rs`, official docs at
+[developers.openai.com/codex/app-server](https://developers.openai.com/codex/app-server),
+and — the real contract — **`codex app-server generate-ts --out ./schemas`**
+emits the machine-readable schema. Regenerate and diff on every codex upgrade
+(ADR-015); the schema, not anyone's source code, is the reference.
 
 A runnable skeleton of everything below lives in [`prototype/`](./prototype/)
 — zero-dependency, mock mailbox + mock codex behind the real interfaces
@@ -251,7 +257,34 @@ shared-colleague / ADR-010-full territory, not personal mode.
 
 Uninstall reverses it (services, keychain entries, optionally data dirs).
 
-## 6. Failure modes summary
+## 6. Why each stage is shaped this way — references
+
+None of the pipeline is invented here. Each stage is a named pattern from
+*Enterprise Integration Patterns* (Hohpe & Woolf,
+[enterpriseintegrationpatterns.com](https://www.enterpriseintegrationpatterns.com/patterns/messaging/)),
+the standard vocabulary for exactly this kind of system:
+
+| Stage | Pattern(s) | Why |
+|---|---|---|
+| poller | Polling Consumer | consumer behind NAT can only pull; push needs a reachable endpoint |
+| normalizer | Normalizer / Canonical Data Model | N channels → 1 `IncomingTurn` shape, so everything downstream is channel-agnostic |
+| router | Content-Based Router + Idempotent Receiver | address decides the colleague; processed-ids table makes at-least-once safe |
+| scheduler | Competing Consumers + Dead Letter Channel | bounded parallel workers; poison messages exit the loop visibly, never silently |
+| whole adapter | Channel Adapter | the pattern is literally named after this component |
+| mailbox-as-queue | (maildir/IMAP worker convention) | move-after-success = the ack; crash before move ⇒ automatic redelivery |
+
+Protocol and platform references:
+
+- **codex app-server** — [README + protocol types](https://github.com/openai/codex/tree/main/codex-rs/app-server)
+  ([official docs](https://developers.openai.com/codex/app-server)); the
+  machine-readable contract is `codex app-server generate-ts`. The VS Code
+  extension sits in the same client seat but is closed-source
+  ([openai/codex#5822](https://github.com/openai/codex/issues/5822)) — build
+  against the schema, not against anyone's client.
+- **Graph delta query** — [learn.microsoft.com: delta query for messages](https://learn.microsoft.com/en-us/graph/delta-query-messages)
+- **MSAL device-code flow** — [learn.microsoft.com: device code flow](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-device-code)
+
+## 7. Failure modes summary
 
 | Failure | Behavior |
 |---|---|

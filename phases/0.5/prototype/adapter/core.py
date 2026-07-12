@@ -86,7 +86,7 @@ class Adapter:
         for event, params in self.codex.send_user_turn(conv, prompt):
             self.traces.emit(event=event, conversation_id=conv, **{
                 k: v for k, v in params.items() if k != "delta"})
-            if event.endswith("turn_complete"):
+            if event == "turn/completed":
                 final = params["finalMessage"]
 
         reply = self.mailbox.send_reply(msg, final, from_display=colleague.display_name)

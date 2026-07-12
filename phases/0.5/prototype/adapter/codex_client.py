@@ -4,9 +4,13 @@ JSON-RPC 2.0 is a message FORMAT, not a server: we spawn `codex app-server`
 as a child process and exchange newline-delimited JSON over its stdin/stdout.
 No port, no HTTP. This is the same seat the VS Code / Cursor extension sits in.
 
-CodexAppServer speaks the real boundary; MockCodex fakes the same five events
-so the adapter is demoable without a codex install or an LLM key. Method names
-are representative — pin them to your codex release (ADR-015).
+CodexAppServer speaks the real boundary; MockCodex fakes the same events so
+the adapter is demoable without a codex install or an LLM key.
+
+Method names below are the PUBLISHED ones from the app-server README
+(github.com/openai/codex -> codex-rs/app-server). The machine-readable
+contract is `codex app-server generate-ts --out ./schemas` — regenerate and
+diff on every codex upgrade (ADR-015).
 """
 import json
 import subprocess
@@ -35,24 +39,24 @@ class CodexAppServer:
                 return msg["result"]
 
     def new_conversation(self, colleague):
-        return self._request("newConversation", {
+        return self._request("thread/start", {
             "profile": colleague.id,           # compiled from colleagues.yaml
             "sandbox": colleague.sandbox_mode,
             "approvalPolicy": colleague.approval_policy,
-        })["conversationId"]
+        })["threadId"]
 
-    def send_user_turn(self, conversation_id, text):
-        """Yields the event stream: deltas, tool activity, turn_complete."""
+    def send_user_turn(self, thread_id, text):
+        """Yields the event stream: deltas, item activity, turn/completed."""
         self._id += 1
         self.proc.stdin.write(json.dumps(
-            {"jsonrpc": "2.0", "id": self._id, "method": "sendUserTurn",
-             "params": {"conversationId": conversation_id, "text": text}}) + "\n")
+            {"jsonrpc": "2.0", "id": self._id, "method": "turn/start",
+             "params": {"threadId": thread_id, "input": text}}) + "\n")
         self.proc.stdin.flush()
         while True:
             msg = json.loads(self.proc.stdout.readline())
             if "method" in msg:               # notification = event
                 yield msg["method"], msg.get("params", {})
-                if msg["method"].endswith("turn_complete"):
+                if msg["method"] == "turn/completed":
                     return
             elif msg.get("id") == self._id and "error" in msg:
                 raise RuntimeError(msg["error"])
@@ -68,14 +72,14 @@ class MockCodex:
         self._n += 1
         return f"conv-{colleague.id}-{self._n:03d}"
 
-    def send_user_turn(self, conversation_id, text):
-        persona = conversation_id.split("-")[1]
+    def send_user_turn(self, thread_id, text):
+        persona = thread_id.split("-")[1]
         reply = _CANNED.get(persona, "Done.").format(request=text.strip().splitlines()[0])
-        yield "codex/event/task_started", {"conversationId": conversation_id}
+        yield "turn/started", {"threadId": thread_id}
         for chunk in [reply[i:i + 40] for i in range(0, len(reply), 40)]:
-            yield "codex/event/agent_message_delta", {"delta": chunk}
-        yield "codex/event/token_count", {"input": 312, "output": len(reply) // 4}
-        yield "codex/event/turn_complete", {"finalMessage": reply}
+            yield "item/agentMessage/delta", {"delta": chunk}
+        yield "thread/tokenUsage/updated", {"input": 312, "output": len(reply) // 4}
+        yield "turn/completed", {"finalMessage": reply}
         time.sleep(0)  # keep generator semantics obvious
 
 
