@@ -22,7 +22,7 @@ This repo is the place to:
 | # | Phase | Status | Goal |
 |---|---|---|---|
 | 0 | [Prototype](./phases/0/) | ✅ Running | Prove the idea on a single machine |
-| 0.5 | [Edge / Personal Device](./phases/0.5/) | 🚧 Exploration | Parallel track — on-device, Slack/Email channels, no cloud |
+| 0.5 | [Codex-Native Edge Prototype](./phases/0.5/) | 🚧 In design | Parallel track — official codex harness on edge devices, Outlook/Teams channels |
 | 1 | [Legal MVP](./phases/1/) | 🚧 In design | First production scenario: contract review |
 | 2 | [Generalized Platform](./phases/2/) | ⏳ Planned | Multi-scenario, multi-department |
 | 3 | [Enterprise & Multi-Channel](./phases/3/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |

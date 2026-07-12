@@ -1,0 +1,237 @@
+<svg viewBox="0 0 840 1180" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Channels → adapter → codex app-server: data path, auth, config, audit</title>
+  <desc>Left: the data path with each adapter stage named after its Enterprise Integration Pattern. Right: the three operational planes — authentication, colleague configuration, audit. Bottom: the published protocol methods and the references each design step comes from.</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+
+  <style>
+    .label { font-size: 13px; font-weight: 500; fill: #111827; }
+    .sub { font-size: 11px; fill: #6b7280; }
+    .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .code { font-size: 10px; fill: #374151; font-family: ui-monospace, monospace; }
+    .tier { font-size: 11px; font-weight: 500; fill: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; }
+    .eip { font-size: 9px; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
+    .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
+    .edgeDash { stroke-dasharray: 4 3; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .boxFuture { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 4 3; }
+    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
+    .boxOwned { fill: #ffffff; stroke: #6b7280; stroke-width: 1.4; }
+    .boxShared { fill: #f9fafb; stroke: #d1d5db; stroke-dasharray: 4 3; stroke-width: 1; }
+    .boxCloud { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
+    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
+    .band { fill: #f3f4f6; stroke: #d1d5db; stroke-width: 1; }
+    .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.8; }
+  </style>
+
+  <!-- ════════ LEFT: DATA PATH ════════ -->
+  <text x="20" y="26" class="tier">DATA PATH</text>
+
+  <rect x="40" y="38" width="230" height="54" rx="27" class="boxCloud"/>
+  <text x="155" y="60" text-anchor="middle" class="label">Outlook / Exchange Online</text>
+  <text x="155" y="76" text-anchor="middle" class="port">delta query · sendMail</text>
+
+  <rect x="290" y="38" width="230" height="54" rx="27" class="boxFuture"/>
+  <text x="405" y="60" text-anchor="middle" class="label">Microsoft Teams — later</text>
+  <text x="405" y="76" text-anchor="middle" class="port">Azure Bot webhook (inbound)</text>
+
+  <line x1="155" y1="92" x2="155" y2="126" class="edge edgeDash" marker-end="url(#arr)"/>
+  <line x1="405" y1="92" x2="405" y2="126" class="edge edgeDash" marker-end="url(#arr)"/>
+
+  <!-- adapter -->
+  <rect x="40" y="130" width="490" height="380" rx="8" class="boxOwned"/>
+  <text x="56" y="152" class="label">Channel adapter</text>
+
+  <rect x="56" y="164" width="220" height="50" rx="6" class="box"/>
+  <text x="68" y="182" class="label" font-size="12">① poller</text>
+  <text x="68" y="196" class="sub">outbound pull · delta token in SQLite</text>
+  <rect x="286" y="164" width="228" height="50" rx="6" class="boxFuture"/>
+  <text x="298" y="182" class="label" font-size="12">① webhook receiver</text>
+  <text x="298" y="196" class="sub">resident box only</text>
+  <rect x="150" y="205" width="120" height="14" rx="7" class="chip"/>
+  <text x="210" y="215" text-anchor="middle" class="eip">EIP: Polling Consumer</text>
+
+  <line x1="285" y1="219" x2="285" y2="230" class="edge" marker-end="url(#arr)"/>
+  <rect x="56" y="234" width="458" height="46" rx="6" class="box"/>
+  <text x="68" y="252" class="label" font-size="12">② normalizer</text>
+  <text x="68" y="267" class="code">IncomingTurn {channel, sender, colleague, thread_id, text, attachments}</text>
+  <rect x="404" y="240" width="100" height="14" rx="7" class="chip"/>
+  <text x="454" y="250" text-anchor="middle" class="eip">EIP: Normalizer</text>
+
+  <line x1="285" y1="280" x2="285" y2="291" class="edge" marker-end="url(#arr)"/>
+  <rect x="56" y="295" width="458" height="60" rx="6" class="box"/>
+  <text x="68" y="313" class="label" font-size="12">③ router</text>
+  <text x="68" y="328" class="sub">sender allow-list → +tag → colleague → thread_id ↔ thread (SQLite map)</text>
+  <text x="68" y="342" class="sub">already-processed ids skipped → safe re-polls</text>
+  <rect x="300" y="301" width="204" height="14" rx="7" class="chip"/>
+  <text x="402" y="311" text-anchor="middle" class="eip">EIP: Router · Idempotent Receiver</text>
+
+  <line x1="285" y1="355" x2="285" y2="366" class="edge" marker-end="url(#arr)"/>
+  <rect x="56" y="370" width="458" height="60" rx="6" class="box"/>
+  <text x="68" y="388" class="label" font-size="12">④ turn scheduler</text>
+  <text x="68" y="403" class="sub">FIFO across threads · strict serial per thread · max_turns = 2</text>
+  <text x="68" y="417" class="sub">3 failures → dead_letter → notify owner</text>
+  <rect x="300" y="376" width="204" height="14" rx="7" class="chip"/>
+  <text x="402" y="386" text-anchor="middle" class="eip">EIP: Competing Consumers · Dead Letter</text>
+
+  <line x1="285" y1="430" x2="285" y2="441" class="edge" marker-end="url(#arr)"/>
+  <rect x="56" y="445" width="458" height="50" rx="6" class="box"/>
+  <text x="68" y="463" class="label" font-size="12">⑤ JSON-RPC client · reply relay</text>
+  <text x="68" y="478" class="sub">request/response correlation · event subscriber · approval responder · send + ack</text>
+  <rect x="380" y="451" width="124" height="14" rx="7" class="chip"/>
+  <text x="442" y="461" text-anchor="middle" class="eip">EIP: Channel Adapter</text>
+
+  <!-- boundary -->
+  <line x1="285" y1="510" x2="285" y2="530" class="edge" marker-end="url(#arr)"/>
+  <rect x="40" y="534" width="490" height="58" rx="8" class="band"/>
+  <text x="56" y="556" class="label" font-size="12">stdio boundary — JSON-RPC 2.0 is a message format, not a server</text>
+  <text x="56" y="571" class="sub">adapter spawns `codex app-server` (child process, restart-on-exit)</text>
+  <text x="56" y="585" class="sub">newline-delimited JSON over stdin/stdout · no port · same seat as the IDE extension</text>
+
+  <!-- methods -->
+  <line x1="180" y1="592" x2="180" y2="612" class="edge" marker-end="url(#arr)"/>
+  <line x1="400" y1="612" x2="400" y2="592" class="edge" marker-end="url(#arr)"/>
+  <rect x="40" y="616" width="240" height="128" rx="6" class="box"/>
+  <text x="52" y="636" class="label" font-size="12">requests ↓ (published names)</text>
+  <text x="52" y="654" class="code">initialize / initialized</text>
+  <text x="52" y="669" class="code">thread/start · thread/resume</text>
+  <text x="52" y="684" class="code">turn/start</text>
+  <text x="52" y="699" class="code">turn/interrupt</text>
+  <text x="52" y="714" class="code">approval responses</text>
+  <text x="52" y="732" class="port">schemas: codex app-server generate-ts</text>
+
+  <rect x="292" y="616" width="238" height="128" rx="6" class="box"/>
+  <text x="304" y="636" class="label" font-size="12">events ↑</text>
+  <text x="304" y="654" class="code">item/agentMessage/delta</text>
+  <text x="304" y="669" class="code">item/started · item/completed</text>
+  <text x="304" y="684" class="code">turn/completed → reply relay</text>
+  <text x="304" y="699" class="code">thread/tokenUsage/updated</text>
+  <text x="304" y="714" class="code">approval requests (policy=on-request)</text>
+  <text x="304" y="732" class="port">every event → audit trace</text>
+
+  <!-- app-server -->
+  <line x1="285" y1="744" x2="285" y2="764" class="edge" marker-end="url(#arr)"/>
+  <rect x="40" y="768" width="490" height="108" rx="8" class="box"/>
+  <text x="56" y="790" class="label">codex app-server — official harness, unmodified</text>
+  <rect x="56" y="802" width="150" height="62" rx="6" class="boxAgent"/>
+  <text x="68" y="820" class="sub">threads (1 per mail</text>
+  <text x="68" y="834" class="sub">thread) · rollouts in</text>
+  <text x="68" y="848" class="port">~/.codex/sessions/</text>
+  <rect x="216" y="802" width="150" height="62" rx="6" class="box"/>
+  <text x="228" y="820" class="sub">turn executor ·</text>
+  <text x="228" y="834" class="sub">sandbox · LLM HTTPS</text>
+  <text x="228" y="848" class="sub">out (only other line)</text>
+  <rect x="376" y="802" width="138" height="62" rx="6" class="box"/>
+  <text x="388" y="820" class="sub">MCP tools:</text>
+  <text x="388" y="834" class="port">doc_* · memory_*</text>
+  <text x="388" y="848" class="port">outlook-mcp (search)</text>
+
+  <!-- ════════ RIGHT: OPS PLANES ════════ -->
+  <text x="560" y="26" class="tier">AUTH</text>
+  <rect x="560" y="38" width="250" height="252" rx="8" class="boxShared"/>
+  <text x="576" y="60" class="label" font-size="12">Graph (mail) — one sign-in</text>
+  <text x="576" y="76" class="sub">MSAL device-code flow, at install:</text>
+  <rect x="576" y="86" width="218" height="16" rx="8" class="pill"/>
+  <text x="584" y="98" class="port">Mail.ReadWrite · Mail.Send · offline</text>
+  <text x="576" y="116" class="sub">refresh token → OS keychain</text>
+  <text x="576" y="130" class="sub">(Keychain / DPAPI / libsecret)</text>
+  <text x="576" y="144" class="sub">no admin consent, no new mailboxes</text>
+  <line x1="576" y1="154" x2="794" y2="154" class="edge edgeDash"/>
+  <text x="576" y="172" class="label" font-size="12">LLM</text>
+  <text x="576" y="188" class="sub">`codex login` (ChatGPT auth) or API key</text>
+  <text x="576" y="202" class="sub">→ codex's own auth store; env-injected</text>
+  <text x="576" y="216" class="sub">at service start · air-gapped: vLLM URL</text>
+  <line x1="576" y1="226" x2="794" y2="226" class="edge edgeDash"/>
+  <text x="576" y="244" class="label" font-size="12">Rules</text>
+  <text x="576" y="260" class="sub">secrets never in config files, logs,</text>
+  <text x="576" y="274" class="sub">or traces (Authorization redacted)</text>
+
+  <text x="560" y="318" class="tier">COLLEAGUE CONFIG</text>
+  <rect x="560" y="330" width="250" height="230" rx="8" class="boxShared"/>
+  <rect x="576" y="346" width="218" height="76" rx="6" class="box"/>
+  <text x="588" y="364" class="code">colleagues.yaml (versioned)</text>
+  <text x="588" y="380" class="code">- id: vanessa</text>
+  <text x="588" y="394" class="code">  persona: personas/vanessa/AGENTS.md</text>
+  <text x="588" y="408" class="code">  sandbox_mode: workspace-write</text>
+  <line x1="685" y1="422" x2="685" y2="438" class="edge" marker-end="url(#arr)"/>
+  <text x="694" y="434" class="port">installer compiles</text>
+  <rect x="576" y="442" width="218" height="62" rx="6" class="box"/>
+  <text x="588" y="460" class="code">~/.codex/config.toml profiles</text>
+  <text x="588" y="474" class="code">+ AGENTS.md per colleague</text>
+  <text x="588" y="490" class="sub">native codex knobs — no custom engine</text>
+  <text x="576" y="522" class="sub">consumed by BOTH sides: router reads</text>
+  <text x="576" y="536" class="sub">the yaml (routing); app-server loads the</text>
+  <text x="576" y="550" class="sub">compiled profile (behavior). Only the</text>
+  <text x="576" y="564" class="sub">profile NAME crosses the RPC line.</text>
+
+  <text x="560" y="588" class="tier">AUDIT</text>
+  <rect x="560" y="600" width="250" height="276" rx="8" class="boxShared"/>
+  <rect x="576" y="616" width="218" height="58" rx="6" class="box"/>
+  <text x="588" y="634" class="code">traces/audit.jsonl</text>
+  <text x="588" y="648" class="sub">adapter-written, one line per event:</text>
+  <text x="588" y="662" class="port">who · channel · colleague · tools</text>
+  <rect x="576" y="682" width="218" height="58" rx="6" class="box"/>
+  <text x="588" y="700" class="code">~/.codex/sessions/*.jsonl</text>
+  <text x="588" y="714" class="sub">codex-written full rollout:</text>
+  <text x="588" y="728" class="port">reasoning + tool I/O per thread</text>
+  <text x="576" y="760" class="sub">joined by correlation id:</text>
+  <text x="576" y="774" class="port">mail thread_id ↔ codex thread id</text>
+  <text x="576" y="794" class="sub">sub-agent spawns land in the parent</text>
+  <text x="576" y="808" class="sub">rollout → A→B delegation = one trace</text>
+  <line x1="685" y1="818" x2="685" y2="834" class="edge edgeDash" marker-end="url(#arr)"/>
+  <rect x="576" y="838" width="218" height="28" rx="6" class="boxCloud"/>
+  <text x="685" y="856" text-anchor="middle" class="sub">nightly sync → SharePoint / S3</text>
+
+  <!-- plane hooks into data path -->
+  <path d="M 558 100 Q 540 110 522 172" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 558 400 Q 538 388 520 350" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 558 460 Q 548 620 534 800" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 558 660 Q 544 660 534 668" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+
+  <!-- ════════ EXTENSION SURFACES ════════ -->
+  <text x="20" y="906" class="tier">EXTENSION SURFACES — HOW MEMORY · SKILLS · TOOLS PLUG IN (ALL DATA OR PROTOCOL EDGES; NO PLUGIN API, ADR-015)</text>
+  <rect x="40" y="918" width="770" height="104" rx="8" class="box"/>
+
+  <rect x="56" y="932" width="178" height="76" rx="6" class="boxAgent"/>
+  <text x="68" y="950" class="label" font-size="12">persona / behavior</text>
+  <text x="68" y="966" class="code">AGENTS.md (layered)</text>
+  <text x="68" y="980" class="sub">who the colleague is,</text>
+  <text x="68" y="994" class="sub">rules, domain knowledge</text>
+
+  <rect x="244" y="932" width="178" height="76" rx="6" class="box"/>
+  <text x="256" y="950" class="label" font-size="12">skills</text>
+  <text x="256" y="966" class="code">~/.codex/prompts/*.md</text>
+  <text x="256" y="980" class="sub">reusable procedures the</text>
+  <text x="256" y="994" class="sub">colleague can invoke</text>
+
+  <rect x="432" y="932" width="178" height="76" rx="6" class="box"/>
+  <text x="444" y="950" class="label" font-size="12">tools (the hands)</text>
+  <text x="444" y="966" class="code">config.toml [mcp_servers]</text>
+  <text x="444" y="980" class="sub">doc_* · kanban_* · outlook</text>
+  <text x="444" y="994" class="sub">search — stdio children</text>
+
+  <rect x="620" y="932" width="178" height="76" rx="6" class="box"/>
+  <text x="632" y="950" class="label" font-size="12">memory</text>
+  <text x="632" y="966" class="code">workspace/memory/ (MCP)</text>
+  <text x="632" y="980" class="sub">durable notes per colleague;</text>
+  <text x="632" y="994" class="sub">rollouts = episodic history</text>
+
+  <line x1="285" y1="876" x2="285" y2="916" class="edge edgeDash" marker-end="url(#arr)"/>
+
+  <!-- ════════ REFERENCES ════════ -->
+  <rect x="40" y="1040" width="770" height="126" rx="8" class="band"/>
+  <text x="56" y="1062" class="label" font-size="12">References — none of this pipeline is invented here</text>
+  <text x="56" y="1082" class="sub">①–⑤  Enterprise Integration Patterns (Hohpe &amp; Woolf) — enterpriseintegrationpatterns.com: Polling Consumer, Normalizer,</text>
+  <text x="56" y="1096" class="sub">Content-Based Router, Idempotent Receiver, Competing Consumers, Dead Letter Channel, Channel Adapter</text>
+  <text x="56" y="1114" class="sub">Mail sync — Microsoft Graph delta query + MSAL device-code flow: learn.microsoft.com/graph · learn.microsoft.com/entra</text>
+  <text x="56" y="1132" class="sub">Protocol — github.com/openai/codex → codex-rs/app-server (README + protocol/*.rs) · developers.openai.com/codex/app-server</text>
+  <text x="56" y="1150" class="sub">Machine-readable contract: `codex app-server generate-ts` — the IDE extension is closed-source; the schema IS the reference</text>
+</svg>
