@@ -48,6 +48,25 @@ grow it back into a worse app-server client.
 
 ## 1. Internal structure
 
+![Channels through the adapter to app-server — protocol detail](./channel-protocol.svg)
+
+**The JSON-RPC boundary, demystified.** JSON-RPC 2.0 is a *message format*
+(request / response / notification as JSON objects), not a server technology.
+There is nothing to host: the adapter **spawns `codex app-server` as a child
+process** at boot (restart-on-exit) and exchanges newline-delimited JSON over
+the child's stdin/stdout — same transport idea as MCP stdio. No port, no HTTP.
+This is exactly the seat the official VS Code / Cursor extension occupies
+(editor pane = its channel; extension = the JSON-RPC client; it spawns the
+same child) — read the extension source as the reference client. The wire
+traffic is five requests down (`initialize`, `newConversation`,
+`sendUserTurn`, approval responses, `interruptConversation`) and five event
+kinds up (message deltas, tool begin/end, `turn_complete`, `token_count`,
+approval requests) — names representative, pinned per release (ADR-015).
+
+A runnable skeleton of everything below lives in [`prototype/`](./prototype/)
+— zero-dependency, mock mailbox + mock codex behind the real interfaces
+(`python3 demo.py`).
+
 Five loops/components sharing one small local state store:
 
 ```
