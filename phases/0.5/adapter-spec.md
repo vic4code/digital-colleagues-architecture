@@ -141,6 +141,28 @@ discovered → claimed → turn_running → replying → done
   ordering and priorities are deliberately not built (YAGNI for email
   latency); `max_turns` (default 2) bounds concurrency device-wide.
 
+## 2.5 Session lifecycle & context — the harness manages both
+
+Confirmed against the published app-server README:
+
+- **Thread lifecycle is harness-managed.** Threads stay in memory while
+  subscribed; 30 minutes after the last subscriber and activity they are
+  unloaded (`thread/closed` notification). History is always on disk (JSONL
+  rollouts), and **`thread/resume` reconstructs the full turn history across
+  app-server restarts** — thread ids are persistent. Adapter recovery is
+  therefore trivial: mapped thread → `thread/resume`; unmapped → `thread/start`.
+  The adapter never manages in-memory session lifetime.
+- **Context overflow doesn't error — it compacts.** The harness may compact
+  automatically mid-turn (`contextCompaction` item), and `thread/compact/start`
+  triggers it on demand. Adapter policy: on `thread/tokenUsage/updated`
+  crossing a threshold, fire `thread/compact/start`. Long-term memory survives
+  compaction via `workspace/memory/` (MCP) and the rollout files (audit is
+  never affected — rollouts are append-only on disk).
+- **"Start fresh" = `thread/start` + remap.** A user who wants a clean slate
+  opens a new mail thread (new subject) — new thread, new session, old rollout
+  retained. `thread/fork` exists for branching. The VS Code extension's "New
+  chat" / conversation list is exactly these methods behind a UI.
+
 ## 3. Approval policy — native knobs, not a custom engine
 
 Codex already has two orthogonal, per-profile controls: `sandbox_mode`

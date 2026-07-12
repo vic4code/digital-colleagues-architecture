@@ -45,6 +45,17 @@ class CodexAppServer:
             "approvalPolicy": colleague.approval_policy,
         })["threadId"]
 
+    def resume_conversation(self, thread_id):
+        """Works across app-server restarts — history rebuilt from rollouts.
+        The harness unloads idle threads itself (30 min → thread/closed);
+        we just resume by id and never manage in-memory lifetime."""
+        return self._request("thread/resume", {"threadId": thread_id})
+
+    def compact(self, thread_id):
+        """Fire on thread/tokenUsage/updated crossing a threshold; the
+        harness also auto-compacts mid-turn (contextCompaction item)."""
+        return self._request("thread/compact/start", {"threadId": thread_id})
+
     def send_user_turn(self, thread_id, text):
         """Yields the event stream: deltas, item activity, turn/completed."""
         self._id += 1
