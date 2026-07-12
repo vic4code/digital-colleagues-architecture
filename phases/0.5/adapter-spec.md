@@ -206,6 +206,18 @@ traces (trace writer redacts `Authorization` fields). Air-gapped deploys point
   which is why it is not the v0.1 path.
 - Rejected: client credentials distributed to every laptop (secret sprawl).
 
+**Mailbox setup — there is none.** A plus address is a receiving-side
+convention, not an object: Exchange Online (default-on since ~2022) and Gmail
+deliver `victor+anything@` straight to `victor@`'s inbox with the tag intact in
+the To: field. No new mailbox, no alias, no admin-center visit. If the tenant
+has it disabled: ask IT for one line
+(`Set-OrganizationConfig -AllowPlusAddressInRecipients $true`) or use the
+subject-tag fallback. One honest limitation: replies go out via
+`POST /me/sendMail`, so the From: is the owner's own address — the colleague's
+identity shows as thread + signature + optional `[Vanessa]` subject prefix. A
+real distinct From (`vanessa@company.com`) requires a real mailbox, which is
+shared-colleague / ADR-010-full territory, not personal mode.
+
 ## 5. Install flow (what the installer actually does)
 
 1. Install pinned `codex` binary + adapter binary
