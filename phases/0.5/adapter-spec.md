@@ -5,6 +5,24 @@ the adapter actually does inside, and everything a deployment must configure.
 The adapter is the only component we own (ADR-015), so this file plus
 `colleagues.yaml` **is** the implementation contract.
 
+## 0. One message, end to end
+
+![One message end to end](./adapter-flow.svg)
+
+Two facts this picture pins down:
+
+- **The mail service is not on the edge.** The mailbox lives in Exchange
+  Online (Microsoft's cloud). We implement no SMTP server, no MX records —
+  "implementing email" means calling two Graph REST endpoints with a token:
+  `GET …/messages/delta` and `POST /me/sendMail`.
+- **Why polling, not event-driven push:** push requires something reachable to
+  deliver the event *to*. Graph change notifications call a public HTTPS
+  webhook — a laptop behind NAT has none. The outbound-held-connection
+  alternative (IMAP IDLE with OAuth) buys ~seconds of latency for a second
+  protocol to maintain; email's latency budget is minutes, so v0.1 takes the
+  15-second delta poll. Internally the adapter is still event-driven — the
+  poller merely converts "new mail in the cloud" into a local event.
+
 ## 1. Internal structure
 
 Five loops/components sharing one small local state store:
