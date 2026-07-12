@@ -23,6 +23,29 @@ Two facts this picture pins down:
   15-second delta poll. Internally the adapter is still event-driven — the
   poller merely converts "new mail in the cloud" into a local event.
 
+**Why the channel isn't just an MCP server — MCP is the hands, not the ears.**
+MCP servers are tools the agent *calls mid-turn* (pull, agent-initiated). A
+channel is *ingress*: a new mail must wake the agent and start a turn, and MCP
+has no "server wakes the client" mechanism. Something must notice the message,
+pick the colleague, and open the turn — that irreducible job is the adapter,
+and it is precisely the one gap the harness's extension surfaces (MCP,
+AGENTS.md, profiles) don't cover. An **Outlook MCP server is still welcome as
+a tool**: mid-turn the colleague can search old threads, read attachments,
+send extra mails — channel and source connector sharing one Graph token
+(ADR-009). One boundary: queue semantics (send reply + move to Processed =
+the ack) stay deterministic adapter code — an LLM that forgets to ack via a
+tool call would make the same mail loop forever.
+
+**Why `app-server` and not the other codex run modes.** Codex runs five ways:
+interactive TUI, `codex exec` (headless one-shot), `codex app-server`
+(headless resident service speaking JSON-RPC — *not* a GUI app; "server for
+apps"), the SDK, and `codex mcp-server` (codex as a tool inside another
+agent). We use app-server because we need exactly its three properties:
+conversation continuity across mails in a thread, the event stream (our trace
+source), and the approval callback channel. Per-message `codex exec` is the
+simpler alternative, but thread resume + output parsing + approvals would
+grow it back into a worse app-server client.
+
 ## 1. Internal structure
 
 Five loops/components sharing one small local state store:
