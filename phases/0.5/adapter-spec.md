@@ -65,13 +65,19 @@ Five loops/components sharing one small local state store:
   per colleague mailbox.) Delta tokens are persisted, so a restart resumes
   where it left off instead of re-reading the mailbox. New messages land in
   the inbox queue as normalized `IncomingTurn` records.
-- **Router.** Maps address → colleague and email thread → codex conversation.
-  Personal mode routes on the plus-tag (`me+vanessa@…` → `vanessa`, from
-  `colleagues.yaml`); if the tenant has plus addressing disabled, fallback is
-  a subject tag (`[vanessa] …`). Threading key: Graph `conversationId` (falls
-  back to `In-Reply-To`/`References`). First message of a thread ⇒
-  `newConversation` with that colleague's profile; later messages ⇒ resume the
-  mapped conversation.
+- **Router.** First gate: **sender allow-list** — anyone can mail your address,
+  and inbound mail is untrusted input (LLM budget, prompt injection, local file
+  access). Default list is the owner alone; mail from anyone else is not
+  processed, not auto-replied to (that would make the assistant a probe
+  target), and logged to the trace. Several people wanting the *same* colleague
+  is by definition the shared-colleague scenario → resident-box variant, not a
+  reason to widen this list. Then: maps address → colleague and email thread →
+  codex conversation. Personal mode routes on the plus-tag (`me+vanessa@…` →
+  `vanessa`, from `colleagues.yaml`); if the tenant has plus addressing
+  disabled, fallback is a subject tag (`[vanessa] …`). Threading key: Graph
+  `conversationId` (falls back to `In-Reply-To`/`References`). First message of
+  a thread ⇒ `newConversation` with that colleague's profile; later messages ⇒
+  resume the mapped conversation.
 - **Turn runner (the core).** A pool of N workers (default 2 on edge). Each
   runs one turn as a state machine (§2) over the app-server JSON-RPC
   connection: send the user turn, consume the event stream, answer approval
@@ -151,6 +157,9 @@ base_url  = "https://…"                 # required for azure/vllm
 dir       = "~/DigitalColleagues/traces"
 sync      = "sharepoint"                # or "s3" | "none" (air-gapped: none + manual)
 sync_url  = "https://…"
+
+[policy]
+allowed_senders = ["you@company.com"]   # who may trigger turns; default: owner only
 
 [operator]
 email = "you@company.com"               # dead-letter + health notifications
