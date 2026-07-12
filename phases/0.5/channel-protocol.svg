@@ -167,8 +167,10 @@
   <text x="588" y="460" class="code">~/.codex/config.toml profiles</text>
   <text x="588" y="474" class="code">+ AGENTS.md per colleague</text>
   <text x="588" y="490" class="sub">native codex knobs — no custom engine</text>
-  <text x="576" y="524" class="sub">add a colleague = add yaml entry +</text>
-  <text x="576" y="538" class="sub">persona file, re-run installer. No IT.</text>
+  <text x="576" y="522" class="sub">consumed by BOTH sides: router reads</text>
+  <text x="576" y="536" class="sub">the yaml (routing); app-server loads the</text>
+  <text x="576" y="550" class="sub">compiled profile (behavior). Only the</text>
+  <text x="576" y="564" class="sub">profile NAME crosses the RPC line.</text>
 
   <text x="560" y="588" class="tier">AUDIT</text>
   <rect x="560" y="600" width="250" height="276" rx="8" class="boxShared"/>
@@ -190,7 +192,8 @@
 
   <!-- plane hooks into data path -->
   <path d="M 558 100 Q 540 110 522 172" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <path d="M 558 470 Q 546 480 534 560" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 558 400 Q 538 388 520 350" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
+  <path d="M 558 460 Q 548 620 534 800" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
   <path d="M 558 660 Q 544 660 534 668" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
 
   <!-- ════════ EXTENSION SURFACES ════════ -->
