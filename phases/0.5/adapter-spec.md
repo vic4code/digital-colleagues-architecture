@@ -36,6 +36,24 @@ send extra mails — channel and source connector sharing one Graph token
 the ack) stay deterministic adapter code — an LLM that forgets to ack via a
 tool call would make the same mail loop forever.
 
+**Why not cron + `codex exec` + MCP tools — the adapter-less variant.** A
+scheduled agent run ("check the inbox via outlook-mcp, handle new colleague
+mail, reply, mark processed") genuinely works and is the legitimate ~80-line
+minimum for a low-stakes personal toy. What it changes is that every adapter
+responsibility degrades from deterministic to probabilistic: the queue ack
+depends on the agent remembering a tool call (forget = infinite reruns,
+double = duplicate replies); every empty-inbox poll burns an LLM turn;
+session continuity needs the agent to maintain the thread map itself —
+reimplementing the adapter in prompt-space; one poller agent can't *be* N
+colleagues with distinct profiles; and the sender gate disappears — untrusted
+mail reaches an LLM before any deterministic check, moving prompt injection
+to the trigger layer. A scheduler gives you a *trigger*; a channel is trigger
++ identity + session continuity + exactly-once + security gate + audit
+correlation. Rule: **the reliability contract itself is never delegated to
+the LLM.** (ADR-015's exit clause stands: when the harness ships a native,
+deterministic email channel, delete the adapter — the bar is "official code
+does it", not "an agent can be prompted to do it".)
+
 **Why `app-server` and not the other codex run modes.** Codex runs five ways:
 interactive TUI, `codex exec` (headless one-shot), `codex app-server`
 (headless resident service speaking JSON-RPC — *not* a GUI app; "server for

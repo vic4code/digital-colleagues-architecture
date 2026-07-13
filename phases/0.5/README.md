@@ -1,18 +1,29 @@
 # Phase 0.5 — Codex-Native Edge Prototype
 
-**Status:** 🚧 In design. Parallel track — not on the cloud progression (0 → 1 → 2 → 3).
+**Status:** 📐 Reference architecture, deliberately **not being built yet** —
+see the initiator test below and
+[ADR-017](../../decisions/ADR-017-initiator-test.md). Parallel track — not on
+the cloud progression (0 → 1 → 2 → 3).
 
-**Scope:** A reference architecture others can implement digital colleagues from.
-**Focus: personal colleagues on the user's own edge device** (macOS / Windows,
-restricted intranets included) — my assistants, my files, my mailbox. Shared
-team colleagues (the resident-box variant) are documented but deferred. The
-agent runtime is **`codex app-server` as-is** — the Phase 0 custom dispatcher
-(`server.py` + DaemonPool) is deliberately dropped. Channel: Outlook first,
-Teams later (and only with the resident box). Phase 0 stays untouched as the
-record of the implemented prototype; this phase is the redesigned successor on
-the edge track.
+**Scope:** A reference architecture others can implement digital colleagues
+from: edge device (macOS / Windows, restricted intranets included), runtime is
+**`codex app-server` as-is** — the Phase 0 custom dispatcher (`server.py` +
+DaemonPool) is deliberately dropped. Channel: Outlook first, Teams later.
+Phase 0 stays untouched as the record of the implemented prototype.
 
 ![Phase 0.5 architecture](./architecture.svg)
+
+## The initiator test — read this before building anything
+
+**A channel integration is justified if and only if the initiator is not the
+user** ([ADR-017](../../decisions/ADR-017-initiator-test.md)). If you are the
+only one who ever triggers your colleagues, mailing `me+vanessa@` is strictly
+worse than opening the codex app and running a skill — use the app, skip this
+entire document. Build the machinery below only when work arrives from someone
+else (a teammate, a customer, another agent), from something else (a schedule,
+a webhook), or the person reaching the colleague can't install the agent app.
+The prototype in this folder is the executable proof that the design works —
+it is not a request to deploy it.
 
 ## Why this exists — and when NOT to use it
 
