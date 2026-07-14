@@ -1,202 +1,77 @@
-# Phase 0.5 — Codex-Native Edge Prototype
+# Phase 0.5 — Digital Colleague on OpenClaw + Codex
 
-**Status:** 📐 Reference architecture, deliberately **not being built yet** —
-see the initiator test below and
-[ADR-017](../../decisions/ADR-017-initiator-test.md). Parallel track — not on
-the cloud progression (0 → 1 → 2 → 3).
+**Status:** 📐 Design note. The **implementation lives in a separate code repo**
+(this repo is architecture only). Parallel track — not on the cloud progression
+(0 → 1 → 2 → 3).
 
-**Scope:** A reference architecture others can implement digital colleagues
-from: edge device (macOS / Windows, restricted intranets included), runtime is
-**`codex app-server` as-is** — the Phase 0 custom dispatcher (`server.py` +
-DaemonPool) is deliberately dropped. Channel: Outlook first, Teams later.
-Phase 0 stays untouched as the record of the implemented prototype.
+**One line:** a digital colleague is a **customized OpenClaw persona running on
+the Codex engine**, given real accounts (Gmail, Slack, …) and a skill that lets
+it pick up work from any of those channels and schedule the tasks itself.
 
-![Phase 0.5 architecture](./architecture.svg)
+![Phase 0.5 layering](./architecture.svg)
 
-## The initiator test — read this before building anything
+## What this replaced (and why)
 
-**A channel integration is justified if and only if the initiator is not the
-user** ([ADR-017](../../decisions/ADR-017-initiator-test.md)). If you are the
-only one who ever triggers your colleagues, mailing `me+vanessa@` is strictly
-worse than opening the codex app and running a skill — use the app, skip this
-entire document. Build the machinery below only when work arrives from someone
-else (a teammate, a customer, another agent), from something else (a schedule,
-a webhook), or the person reaching the colleague can't install the agent app.
-The prototype in this folder is the executable proof that the design works —
-it is not a request to deploy it.
+Earlier drafts of Phase 0.5 hand-built a channel adapter — poller, router,
+scheduler, JSON-RPC client, trace tap — around `codex app-server`. That work is
+**retired** ([ADR-018](../../decisions/ADR-018-adopt-openclaw-codex.md)):
+**OpenClaw already is that layer.** Building it ourselves was reconstructing a
+shipped product by hand. See the teardown decision for the full reasoning.
 
-## Why this exists — and when NOT to use it
+## The stack — three layers, we own the middle of one
 
-The honest question first: **why not just teach everyone codex CLI?** Because they
-are different products. Codex CLI is a *personal* tool — my session, my context,
-gone when I close it. A digital colleague is a *shared, persistent identity*: it has
-its own mailbox, its own memory, its own audit trail, and anyone in the team can
-reach it without installing anything. Three things "just teach codex" cannot give:
+| Layer | Provided by | We do |
+|---|---|---|
+| **Engine** — agent loop, thread resume, tool continuation, compaction | **Codex** (`app-server`, via OpenClaw's codex-harness plugin) | nothing — use it |
+| **Runtime** — channels, chat/web UI, session files, approvals, transcript | **OpenClaw** | configure it |
+| **Persona** — `SOUL.md` / `IDENTITY.md`, Soul·Body·Faculty·Skill | OpenClaw persona format | **author it — this is the colleague** |
+| **Skills** — what the colleague can do, incl. task intake & scheduling | OpenClaw skills + MCP tools | **write the few we need** |
 
-1. **Shared identity** — Vanessa is one colleague, not a prompt each employee
-   re-creates. (In personal mode this weakens to a shared *template*: the
-   persona file is common, but each install is an independent instance —
-   `victor+vanessa@…` and `alice+vanessa@…` are different individuals with the
-   same job description. One global Vanessa is resident-box/cloud territory.)
-2. **Zero-install reach** — legal staff won't install a CLI (and often aren't allowed to),
-   but they already send email and type in Teams
-3. **Governance** — personal CLI output scatters across laptops; a colleague's every
-   turn is captured in one trace (see below)
+The colleague *is* data: a persona plus a skill set. The runtime and engine are
+off-the-shelf. Our surface shrinks from "a service" to "a persona + a handful of
+skills" — the ADR-015 principle, taken one layer further.
 
-**If your audience is all engineers and codex is allowed on their machines, do not
-build this — teach codex + share an AGENTS.md convention.** This track exists for
-everyone else.
+## The one thing worth designing: multi-channel intake + self-scheduling
 
-## Goal
+OpenClaw gives channels; the behaviour we actually want to add is: **the
+colleague notices work arriving on any of its accounts (mail, Slack, a Notion or
+kanban change), queues it as tasks, works them, and reports back on a channel** —
+without a human forwarding each item. This is a **skill** (task intake +
+dispatch), not new infrastructure. The old "dispatcher" idea becomes exactly this
+skill; nothing about it is a bespoke service.
 
-A user runs one installer on their own machine. From then on, mailing
-`me+vanessa@company.com` from any device — phone included — triggers a turn on
-their laptop, using the official codex harness, and every interaction is
-preserved in a queryable trace. Their colleagues, their files, their compute;
-nothing custom between the channel and the harness except one thin adapter.
+Open design questions for that skill (to answer against OpenClaw's real
+capabilities, in the code repo — not to over-spec here):
 
-## Non-goals
+- Does OpenClaw already surface Gmail/Slack as first-class channels, or do those
+  come in as MCP tools the intake skill polls? (verify before designing)
+- Where does the task queue live — an OpenClaw session artifact, or the
+  colleague's own workspace file?
+- Scheduling trigger: OpenClaw event → skill, or a skill that wakes on a timer
+  and sweeps its accounts? (the initiator test decides which is worth building)
 
-- **Shared / team colleagues** — deferred to the resident-box variant (see
-  deployment modes); v0.x is strictly one user, one device, their own colleagues
-- Always-on when the device sleeps (accept downtime; see deployment modes)
-- Teams **bot identity** (colleague as its own Teams user — needs an Azure Bot
-  webhook, resident-box territory). Personal-mode Teams — the adapter polls the
-  owner's own chats with delegated permissions, `@vanessa …` as the trigger —
-  is outbound-only and edge-compatible; it ships as v0.2 after mail
-- Any custom orchestration: scheduling, sub-agents, tool lifecycle all stay official
+## The initiator test still governs scope
 
-## Architecture
+[ADR-017](../../decisions/ADR-017-initiator-test.md) holds: build the
+multi-channel intake only where **the initiator is not you** — a teammate, a
+customer, another system, or someone who can't run the agent app. If the only
+initiator is yourself, talk to the colleague in its web chat (OpenClaw gives you
+that for free) and skip the intake plumbing until a real second party appears.
 
-**Own exactly one component: the channel adapter.** Everything else is the
-official harness or configuration.
+## Short-term vs long-term (unchanged in spirit)
 
-- **codex app-server is the runtime.** One long-running `codex app-server`
-  process per device, spoken to over JSON-RPC. Sessions, turn lifecycle,
-  sandboxing, tool execution, and **native agent spawning** (colleague A
-  delegating to colleague B as a sub-agent) are all harness features we consume,
-  not code we write. When the harness iterates, we upgrade — we don't port.
-- **Personas are configuration.** Each colleague = an `AGENTS.md` + profile in
-  `config.toml` + an allow-listed MCP tool set. Declared in one `colleagues.yaml`
-  that the installer compiles into `~/.codex` layout. Adding a colleague is a
-  config change, not a deploy.
-- **Channel adapter (the owned surface).** Internals, message lifecycle,
-  approval policy, and the full configuration/secrets surface are specified in
-  [adapter-spec.md](./adapter-spec.md). In one line, it is a single small
-  service that:
-  1. polls Microsoft Graph (Outlook) with delta queries — outbound-only, works
-     behind NAT / corporate proxies, no inbound port ever. **Personal mode
-     watches one mailbox: the user's own**
-  2. routes each message to the right colleague session via plus-addressing
-     (`me+vanessa@company.com`) — each colleague keeps its own address
-     ([ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md))
-     without provisioning any new mailbox
-  3. relays the reply back out, and
-  4. **taps the JSON-RPC event stream as the audit source** (see traces below)
-- **Installer per OS.** macOS: script installs codex + adapter, registers
-  launchd agent. Windows: PowerShell + Task Scheduler (no Docker — Docker Desktop
-  on corporate Windows means WSL2 + admin rights + licensing; rejected).
-  Air-gapped: offline bundle (binaries + config zip), LLM endpoint pointed at
-  internal vLLM. Docker image exists only for the *resident Linux box* variant.
-- **LLM endpoint is config** — cloud API, Azure OpenAI, or internal vLLM per site.
+- **Short term — the colleague as your local분신.** OpenClaw + codex-harness on
+  your own device, one persona, its own Gmail/Slack accounts. Mail it or DM it;
+  it runs on your machine's compute. This is the boss-facing demo.
+- **Long term — centralized.** The same persona deployed to an always-on cloud
+  runtime; hand it tasks by mail/Slack and it works them unattended. Persona and
+  skills transfer unchanged — the move is a deployment change, and it rejoins the
+  Phase 1 cloud line.
 
-## Interaction traces — how colleague activity is preserved
+## Where the implementation goes
 
-Two layers, both already flowing; we capture rather than invent:
-
-| Layer | Producer | Where | Contains |
-|---|---|---|---|
-| **Business audit** | channel adapter (event-stream tap) | `traces/audit.jsonl` per device | who asked, via which channel, which colleague, tool calls made, approvals, what was sent back |
-| **Harness rollout** | codex itself | `~/.codex/sessions/*.jsonl` | the full turn: every message, reasoning step, tool input/output |
-
-Records in both layers share a correlation id (channel message id ↔ codex session
-id), so an auditor can go from "this email reply" to the exact reasoning trace.
-**Co-work is covered by the same two layers**: a native sub-agent spawn appears in
-the parent's rollout (and as an event the adapter records), so A→B delegation is
-one linked trace, not two orphans. The adapter ships `traces/` to a shared store
-(SharePoint / S3 / network drive) on a nightly sync — that same sink becomes the
-Phase 1 audit backbone later. Retention policy per
-[ADR-006](../../decisions/ADR-006-audit-log-retention.md); the two-layer split is
-[ADR-016](../../decisions/ADR-016-two-layer-interaction-traces.md).
-
-## Co-work: colleagues working together
-
-- **Same device (now):** use codex-native agent spawning. Vanessa (PM) delegates a
-  sub-task to David (SA) as a sub-agent within the harness. No custom message bus,
-  no fan-out trigger reimplementation — that was Phase 0's dispatcher, and it's gone.
-- **Across devices / across people (later):** colleagues reach each other through
-  the same channels humans use — colleague A emails colleague B's address. This
-  keeps cross-device co-work on the audited path with zero new infrastructure,
-  at the cost of email-grade latency. Acceptable for the edge tier.
-- **When co-work outgrows this** (needs shared queues, low latency, shared memory),
-  that is the signal to move those colleagues to the cloud version — not to build
-  a mesh between laptops.
-
-## Trade-offs
-
-- **Official harness over own dispatcher.** We give up control over scheduling
-  internals and accept the harness's release cadence; in exchange every line of
-  orchestration code we'd otherwise maintain (and race against upstream) is
-  deleted. See [ADR-015](../../decisions/ADR-015-codex-harness-own-surface.md).
-  Rejected: keeping Phase 0's FastAPI dispatcher (permanent fork tax); generic
-  agent frameworks (second harness to learn, same fork tax).
-- **Outlook first, Teams second.** Graph delta polling is outbound-only and works
-  from any device. Teams bots require an Azure Bot Service public webhook — an
-  edge laptop can't receive it, and Graph chat-polling needs tenant-admin-heavy
-  permissions. Teams therefore lands with the *resident machine* variant, not v0.1.
-- **Device sleep = colleague offline.** Accepted. The mitigation path is the
-  resident Linux box / cloud version, not keep-awake hacks.
-- **Polling latency (~seconds–minute) over push.** Accepted for email-shaped work;
-  the cloud version restores push.
-
-## Choosing a deployment mode
-
-The adapter is placement-agnostic; the choice is forced by one question —
-**is the colleague shared or personal?** A colleague's identity is its mailbox
-(ADR-010), and the mailbox is the work queue (adapter-spec §2). If a *shared*
-colleague's runtime ran on every team member's laptop, N adapters would race on
-one mailbox — solving that needs distributed locking, which destroys the
-simplicity this track exists for. So:
-
-- **Personal colleagues (my assistant, my files, my mailbox) → edge device.**
-  Naturally one-runtime-per-person, no race — the adapter watches only the
-  user's own mailbox and routes on plus-address tags. **This is the current
-  focus (v0.1)**; the per-OS installers serve it.
-- **Shared colleagues (team-facing — the legal scenario) → resident box.**
-  One always-on intranet Linux host (or VM), adapter + app-server as a Docker
-  pair; unlocks laptop-sleep immunity, Teams webhook, application-permission
-  auth, centralized traces. **Deferred** — documented so the personal design
-  doesn't paint it out, not being built now.
-- **Cloud (Phase 1)** — when scale/HA demands it: the adapter becomes the
-  channel-adapter layer in front of the Phase 1 orchestrator
-  ([ADR-014](../../decisions/ADR-014-worker-pool-placement.md) pull-based
-  pools); the `traces/` sink becomes Postgres + S3 audit. Personas
-  (`colleagues.yaml`) transfer unchanged.
-
-## Deliverables (the reference repo)
-
-Separate code repo; this document is its architectural contract:
-
-```
-digital-colleague-edge/
-├── adapter/            # channel adapter (Graph polling, routing, trace tap)
-├── install/            # install.sh (macOS) · install.ps1 (Windows) · offline bundle
-├── colleagues.yaml     # persona declarations → compiled to ~/.codex layout
-├── personas/           # AGENTS.md per colleague
-└── traces/             # audit.jsonl + sync config
-```
-
-v0.1 vertical slice (personal mode): **one persona + plus-address polling on the
-user's own mailbox + OS service (macOS first) + linked traces.** Prove
-email-in → codex turn → email-out → both trace layers correlated. Then the
-Windows installer. Resident-box/Teams only when a shared-colleague use case
-actually pulls it.
-
-## Key decisions
-
-- [ADR-015](../../decisions/ADR-015-codex-harness-own-surface.md) — build on the
-  official codex harness; own surface = channel adapter only
-- [ADR-016](../../decisions/ADR-016-two-layer-interaction-traces.md) — two-layer
-  interaction trace retention
-- [ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md) — per-colleague
-  email identity (shared with the cloud track)
+A separate code repo (e.g. `digital-colleague`) holds the OpenClaw config, the
+`SOUL.md`/`IDENTITY.md` persona, the intake/scheduling skill, and account setup.
+This repo keeps only the thinking: this note, the layering diagram, and the ADRs
+([017](../../decisions/ADR-017-initiator-test.md),
+[018](../../decisions/ADR-018-adopt-openclaw-codex.md)).

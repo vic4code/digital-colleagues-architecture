@@ -22,6 +22,7 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 015 | [Build on the official codex harness; own surface = channel adapter only](./ADR-015-codex-harness-own-surface.md) | Proposed |
 | 016 | [Two-layer interaction trace retention](./ADR-016-two-layer-interaction-traces.md) | Proposed |
 | 017 | [The initiator test: channels are justified by who initiates](./ADR-017-initiator-test.md) | Accepted |
+| 018 | [Adopt OpenClaw + Codex; retire the hand-built channel adapter](./ADR-018-adopt-openclaw-codex.md) | Accepted |
 
 ## Conventions
 
