@@ -22,7 +22,7 @@ This repo is the place to:
 | # | Phase | Status | Goal |
 |---|---|---|---|
 | 0 | [Prototype](./phases/0/) | ✅ Running | Prove the idea on a single machine |
-| 0.5 | [Colleague on OpenClaw + Codex](./phases/0.5/) | 📐 Design note | Parallel track — persona on OpenClaw runtime + Codex engine; impl in a separate repo |
+| 0.5 | [Layered persona on Codex](./phases/0.5/) | 📐 Design note | Parallel track — persona (borrowed layer model) on an agent runtime + Codex engine; impl in a separate repo |
 | 1 | [Legal MVP](./phases/1/) | 🚧 In design | First production scenario: contract review |
 | 2 | [Generalized Platform](./phases/2/) | ⏳ Planned | Multi-scenario, multi-department |
 | 3 | [Enterprise & Multi-Channel](./phases/3/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
