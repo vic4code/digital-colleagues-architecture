@@ -11,7 +11,7 @@ Planned topics:
 - Memory architectures (per-agent vs per-tenant vs shared)
 - Multi-tenant isolation patterns
 - Codex vs Claude vs open models — capability and cost comparison
-- [Channel selection for a Codex-based digital colleague](./channel-selection.md) —
-  evidence-backed portfolio, selection gates, and Outlook/Teams assessment
+- [Historical channel-selection research](./channel-selection.md) — evidence and
+  alternatives that informed, and were superseded by, ADR-019's single-interface model
 - Stateful vs stateless colleagues — when to use which
 - `/goal` as autonomy boundary for long-running agents

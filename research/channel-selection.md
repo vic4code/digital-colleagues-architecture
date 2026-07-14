@@ -1,6 +1,7 @@
 # Channel Selection for a Codex-Based Digital Colleague
 
-- **Status:** Research note — recommendation ready for validation, not an accepted ADR
+- **Status:** Historical research note — superseded by
+  [ADR-019](../decisions/ADR-019-single-interaction-surface.md)
 - **Research cutoff:** 2026-07-14
 - **Scope:** Human and machine initiation, collaboration, review, approval, and notification channels
 - **Runtime constraint:** The digital colleague is based on Codex; model selection is out of scope
@@ -9,6 +10,12 @@
   evidence.
 
 ## Executive decision
+
+> This note records the evidence and the multi-surface alternatives considered.
+> ADR-019 made the later product decision: one human-facing interaction surface;
+> Outlook, Teams, Slack, Linear, email, and similar systems are bidirectional
+> integrations/tools. Treat recommendations below as decision history, not the
+> current architecture.
 
 Do not choose one universal channel, and do not make Outlook or Teams mandatory.
 Choose a channel separately for each interaction role and only after it beats the

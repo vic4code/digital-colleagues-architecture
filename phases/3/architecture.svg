@@ -1,6 +1,6 @@
-<svg viewBox="0 0 800 760" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 3 — Enterprise &amp; multi-channel at 1000+ colleague scale</title>
-  <desc>Channel adapters, stateless worker fleet + stateful long-running colleagues, multi-region, observability</desc>
+<svg viewBox="0 0 800 830" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 3 — Enterprise reach and resilience at 1000+ colleague scale</title>
+  <desc>One interaction surface, bidirectional enterprise integrations, stateless worker fleet plus stateful long-running colleagues, multi-region, and observability</desc>
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
     <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
@@ -23,28 +23,23 @@
     .badge { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
   </style>
 
-  <text x="20" y="22" class="tier">PHASE 3 · ENTERPRISE · 1000+ COLLEAGUES · MULTI-CHANNEL · MULTI-REGION</text>
+  <text x="20" y="22" class="tier">PHASE 3 · ENTERPRISE · 1000+ COLLEAGUES · ONE INTERFACE · MULTI-REGION</text>
 
-  <text x="20" y="50" class="tier">CHANNELS · ANY HUMAN-FACING SURFACE</text>
-  <rect x="40" y="64" width="100" height="46" rx="6" class="box"/><text x="90" y="84" text-anchor="middle" class="label">Claw3D</text><text x="90" y="100" text-anchor="middle" class="sub">3D office</text>
-  <rect x="148" y="64" width="100" height="46" rx="6" class="box"/><text x="198" y="84" text-anchor="middle" class="label">Slack</text><text x="198" y="100" text-anchor="middle" class="sub">DM · mention</text>
-  <rect x="256" y="64" width="100" height="46" rx="6" class="box"/><text x="306" y="84" text-anchor="middle" class="label">Teams</text><text x="306" y="100" text-anchor="middle" class="sub">DM · channel</text>
-  <rect x="364" y="64" width="100" height="46" rx="6" class="box"/><text x="414" y="84" text-anchor="middle" class="label">Linear</text><text x="414" y="100" text-anchor="middle" class="sub">issue · cmt</text>
-  <rect x="472" y="64" width="100" height="46" rx="6" class="box"/><text x="522" y="84" text-anchor="middle" class="label">Email</text><text x="522" y="100" text-anchor="middle" class="sub">SES inbound</text>
-  <rect x="580" y="64" width="100" height="46" rx="6" class="box"/><text x="630" y="84" text-anchor="middle" class="label">Webhook / API</text><text x="630" y="100" text-anchor="middle" class="sub">programmatic</text>
-  <rect x="688" y="64" width="92" height="46" rx="6" class="box"/><text x="734" y="84" text-anchor="middle" class="label">Voice</text><text x="734" y="100" text-anchor="middle" class="sub">Connect</text>
+  <text x="20" y="50" class="tier">EXPERIENCE + SURROUNDING SERVICES</text>
+  <rect x="40" y="64" width="250" height="46" rx="6" class="box"/>
+  <text x="165" y="84" text-anchor="middle" class="label">ONE INTERACTION SURFACE</text>
+  <text x="165" y="100" text-anchor="middle" class="sub">Claw3D / approved enterprise UI</text>
+  <rect x="310" y="64" width="470" height="46" rx="6" class="boxAgent"/>
+  <text x="545" y="84" text-anchor="middle" class="label">BIDIRECTIONAL SERVICE TOOLS</text>
+  <text x="545" y="100" text-anchor="middle" class="sub">Outlook · Gmail · Slack · Teams · Linear · documents · voice · APIs</text>
 
-  <text x="20" y="142" class="tier">CHANNEL ADAPTER LAYER · NORMALIZE TO TURN EVENTS</text>
+  <text x="20" y="142" class="tier">INTEGRATION TOOL GATEWAY · EVENTS IN, ACTIONS OUT</text>
   <rect x="40" y="156" width="740" height="50" rx="6" class="box"/>
-  <text x="60" y="176" class="label">Channel adapters</text>
-  <text x="60" y="192" class="sub">One service per channel · ECS Fargate · translates vendor payload → canonical Turn event (tenant, colleague, user, content)</text>
-  <line x1="90" y1="110" x2="90" y2="154" class="edge" marker-end="url(#arr)"/>
-  <line x1="198" y1="110" x2="198" y2="154" class="edge" marker-end="url(#arr)"/>
-  <line x1="306" y1="110" x2="306" y2="154" class="edge" marker-end="url(#arr)"/>
-  <line x1="414" y1="110" x2="414" y2="154" class="edge" marker-end="url(#arr)"/>
-  <line x1="522" y1="110" x2="522" y2="154" class="edge" marker-end="url(#arr)"/>
-  <line x1="630" y1="110" x2="630" y2="154" class="edge" marker-end="url(#arr)"/>
-  <line x1="734" y1="110" x2="734" y2="154" class="edge" marker-end="url(#arr)"/>
+  <text x="60" y="176" class="label">Integration gateway</text>
+  <text x="60" y="192" class="sub">normalizes service events · exposes approved actions · preserves provenance · enforces per-tool scopes and approvals</text>
+  <line x1="165" y1="110" x2="165" y2="154" class="edge" marker-end="url(#arr)"/>
+  <line x1="530" y1="110" x2="530" y2="154" class="edgeAccent" marker-end="url(#arrAccent)"/>
+  <line x1="560" y1="154" x2="560" y2="110" class="edgeAccent" marker-end="url(#arrAccent)"/>
 
   <text x="20" y="238" class="tier">REGION · US-EAST-1 (PRIMARY) ⇄ US-WEST-2 (PASSIVE)</text>
   <rect x="40" y="250" width="500" height="380" rx="10" class="boxRegion"/>
@@ -52,7 +47,7 @@
 
   <rect x="56" y="266" width="468" height="62" rx="6" class="box"/>
   <text x="74" y="286" class="label">Orchestrator (stateless · Fargate · 10–100 tasks)</text>
-  <text x="74" y="302" class="sub">routing · auth · RBAC · fan-out · cost meter · channel context</text>
+  <text x="74" y="302" class="sub">routing · auth · RBAC · fan-out · cost meter · event/task context</text>
   <rect x="74" y="308" width="140" height="14" rx="7" class="pill"/><text x="144" y="318" text-anchor="middle" class="sub">global rate limit</text>
   <rect x="222" y="308" width="140" height="14" rx="7" class="pill"/><text x="292" y="318" text-anchor="middle" class="sub">backpressure / fairness</text>
   <rect x="370" y="308" width="140" height="14" rx="7" class="pill"/><text x="440" y="318" text-anchor="middle" class="sub">circuit breaker</text>
@@ -98,7 +93,7 @@
   <line x1="576" y1="310" x2="764" y2="310" class="edge"/>
 
   <text x="576" y="328" class="label">SLO &amp; alerting</text>
-  <text x="576" y="342" class="sub">PagerDuty · per-channel SLO</text>
+  <text x="576" y="342" class="sub">PagerDuty · per-integration SLO</text>
   <text x="576" y="356" class="sub">queue depth · turn latency · errors</text>
   <line x1="576" y1="366" x2="764" y2="366" class="edge"/>
 
@@ -135,7 +130,7 @@
   <text x="576" y="720" class="sub">vendor-agnostic LLM routing</text>
   <text x="576" y="734" class="sub">prompt cache · fallback chain</text>
 
-  <text x="20" y="694" class="tier">WHAT IS NEW VS PHASE 2</text>
-  <text x="20" y="712" class="sub">① Channel adapter layer for every human surface  ·  ② Stateless / stateful colleague split (95 / 5)  ·  ③ EventBridge for long-running triggers</text>
-  <text x="20" y="728" class="sub">④ Multi-region (Aurora Global · S3 CRR)  ·  ⑤ Full observability + SLOs  ·  ⑥ Model gateway with vendor fallback  ·  ⑦ /goal as autonomy boundary</text>
+  <text x="20" y="782" class="tier">WHAT IS NEW VS PHASE 2</text>
+  <text x="20" y="802" class="sub">① One interaction surface + bidirectional integration gateway  ·  ② Stateless / stateful colleague split (95 / 5)  ·  ③ EventBridge triggers</text>
+  <text x="20" y="818" class="sub">④ Multi-region (Aurora Global · S3 CRR)  ·  ⑤ Full observability + SLOs  ·  ⑥ Model gateway with vendor fallback  ·  ⑦ /goal boundary</text>
 </svg>

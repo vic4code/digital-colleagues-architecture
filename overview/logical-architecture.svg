@@ -1,6 +1,6 @@
 <svg viewBox="0 0 880 624" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
   <title>Logical architecture — capability view, cloud-agnostic</title>
-  <desc>Capability components (channels, gateway, orchestrator, queue, worker pool, colleague identity plane, shared business state, observability) named by role, not by cloud product. Phase 1 binds these to AWS; the same model binds on-prem.</desc>
+  <desc>Capability components (one interaction surface, bidirectional service integrations, gateway, orchestrator, queue, worker pool, colleague identity plane, shared business state, observability) named by role, not by cloud product. Phase 1 binds these to AWS; the same model binds on-prem.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
@@ -26,19 +26,16 @@
 
   <text x="20" y="20" class="tier">LOGICAL ARCHITECTURE · CAPABILITY VIEW · CLOUD-AGNOSTIC</text>
 
-  <!-- Channels -->
-  <text x="20" y="44" class="tier">CHANNELS (ANY) → NORMALIZED TO A TURN</text>
-  <rect x="40" y="52" width="84" height="28" rx="6" class="box"/><text x="82" y="70" text-anchor="middle" class="sub">Claw3D</text>
-  <rect x="132" y="52" width="84" height="28" rx="6" class="box"/><text x="174" y="70" text-anchor="middle" class="sub">Linear</text>
-  <rect x="224" y="52" width="84" height="28" rx="6" class="box"/><text x="266" y="70" text-anchor="middle" class="sub">Email</text>
-  <rect x="316" y="52" width="84" height="28" rx="6" class="box"/><text x="358" y="70" text-anchor="middle" class="sub">Voice</text>
-  <rect x="408" y="52" width="92" height="28" rx="6" class="box"/><text x="454" y="70" text-anchor="middle" class="sub">Webhook / API</text>
+  <!-- Experience and service integrations -->
+  <text x="20" y="44" class="tier">ONE INTERACTION SURFACE + BIDIRECTIONAL SERVICE TOOLS</text>
+  <rect x="40" y="52" width="180" height="28" rx="6" class="box"/>
+  <text x="130" y="70" text-anchor="middle" class="sub">Approved colleague interface</text>
+  <rect x="232" y="52" width="268" height="28" rx="6" class="boxAgent"/>
+  <text x="366" y="70" text-anchor="middle" class="sub">Mail · Slack · Linear · docs · voice · APIs</text>
 
-  <line x1="82" y1="80" x2="82" y2="106" class="edge" marker-end="url(#arr)"/>
-  <line x1="174" y1="80" x2="174" y2="106" class="edge" marker-end="url(#arr)"/>
-  <line x1="266" y1="80" x2="266" y2="106" class="edge" marker-end="url(#arr)"/>
-  <line x1="358" y1="80" x2="358" y2="106" class="edge" marker-end="url(#arr)"/>
-  <line x1="454" y1="80" x2="454" y2="106" class="edge" marker-end="url(#arr)"/>
+  <line x1="130" y1="80" x2="130" y2="106" class="edge" marker-end="url(#arr)"/>
+  <line x1="350" y1="80" x2="350" y2="106" class="edgeAccent" marker-end="url(#arrAccent)"/>
+  <line x1="376" y1="106" x2="376" y2="80" class="edgeAccent" marker-end="url(#arrAccent)"/>
 
   <!-- Edge / gateway -->
   <rect x="40" y="108" width="460" height="34" rx="6" class="box"/>
@@ -80,9 +77,9 @@
   <text x="158" y="409" text-anchor="middle" class="sub">spawned per turn</text>
 
   <rect x="272" y="360" width="212" height="64" rx="6" class="box"/>
-  <text x="378" y="380" text-anchor="middle" class="label">Tool layer — MCP ports</text>
-  <text x="378" y="395" text-anchor="middle" class="sub">doc · kanban · message · memory</text>
-  <text x="378" y="409" text-anchor="middle" class="sub">storage-agnostic interface</text>
+  <text x="378" y="380" text-anchor="middle" class="label">Integration/tool layer — MCP ports</text>
+  <text x="378" y="395" text-anchor="middle" class="sub">doc · kanban · mail · calendar · memory</text>
+  <text x="378" y="409" text-anchor="middle" class="sub">events in · approved actions out</text>
 
   <text x="56" y="446" class="sub">A colleague = persona + memory + skills, loaded at turn start.</text>
   <text x="56" y="462" class="sub">Identity is data, not a deployment. Any worker runs any colleague.</text>
@@ -110,14 +107,14 @@
   <text x="520" y="308" class="tier">SHARED BUSINESS STATE</text>
   <rect x="520" y="314" width="340" height="168" rx="8" class="boxShared"/>
   <text x="536" y="338" class="label">Document / artifact store</text>
-  <text x="536" y="352" class="sub">via source connectors (S3 / SharePoint / …)</text>
+  <text x="536" y="352" class="sub">via scoped tools (S3 / SharePoint / …)</text>
   <line x1="536" y1="364" x2="844" y2="364" class="divider"/>
   <text x="536" y="384" class="label">Work state store</text>
   <text x="536" y="398" class="sub">kanban · messages · tickets · sessions</text>
   <line x1="536" y1="410" x2="844" y2="410" class="divider"/>
   <text x="536" y="430" class="label">Audit store</text>
   <text x="536" y="444" class="sub">immutable · append-only · retained</text>
-  <text x="536" y="468" class="sub">Every state box is a capability — backed by whatever the binding chooses.</text>
+  <text x="536" y="468" class="sub">Capability only; physical backing belongs to the binding.</text>
 
   <!-- orange edges: worker loads identity, reads/writes business state -->
   <path d="M 500 372 C 512 372 514 200 518 180" class="edgeAccent edgeDash" marker-end="url(#arrAccent)"/>
@@ -131,6 +128,6 @@
   <!-- Binding footer -->
   <text x="20" y="552" class="tier">BINDING — EVERY BOX IS A CAPABILITY, NOT A PRODUCT</text>
   <text x="20" y="570" class="sub">Phase 1 binds to AWS: ALB+WAF+Cognito · ECS Fargate · SQS · Redis Pub/Sub · RDS Postgres · S3 · Secrets Manager · CloudWatch.</text>
-  <text x="20" y="586" class="sub">The same model binds on-prem: reverse proxy+OIDC · k8s/VMs · RabbitMQ/NATS · Redis · Postgres · MinIO · Vault · Prometheus. See ADR-013, ADR-008.</text>
+  <text x="20" y="586" class="sub">The same model binds on-prem: reverse proxy+OIDC · k8s/VMs · RabbitMQ/NATS · Redis · Postgres · MinIO · Vault · Prometheus. See ADR-013, ADR-019.</text>
   <text x="20" y="608" class="edgeLabel">— solid: sync call    – – dashed: async / events    ▬ orange: agent ↔ colleague identity &amp; tool ports</text>
 </svg>

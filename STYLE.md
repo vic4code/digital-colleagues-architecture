@@ -9,7 +9,7 @@ and they're not editable. If a tool exports only PNG, find another tool.
 
 **Layout pattern (use the same skeleton across phases so diagrams compare cleanly):**
 
-- Tier 1 (top): users, frontends, channels
+- Tier 1 (top): users + one interaction surface; surrounding services grouped as integrations/tools
 - Tier 2: orchestrator / API gateway
 - Tier 3: agent runtime
 - Tier 4 (side): persistent state (DB, S3, files)

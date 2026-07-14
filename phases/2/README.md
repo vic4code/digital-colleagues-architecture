@@ -12,7 +12,7 @@ shipping new code per scenario.
 
 By the end of Phase 2, a non-engineering team can onboard their own digital
 colleagues in a day: pick a persona, pick a skill bundle, configure access, ship.
-Engineering is only needed to add new *primitives* (a new skill, a new channel),
+Engineering is only needed to add new *primitives* (a new skill or integration),
 not new *scenarios*.
 
 Phase 1 proves the runtime works for one team. Phase 2 proves the runtime is a
@@ -20,7 +20,7 @@ platform.
 
 ## Non-goals (deferred to Phase 3+)
 
-- New channels beyond Phase 1 (Claw3D + Linear)
+- New service integrations beyond Phase 1's Linear tool
 - 1000-agent scale — design for ~100 colleagues across ~10 tenants
 - Cross-region / DR
 - Long-running stateful colleagues
@@ -36,6 +36,9 @@ Phase 2 adds **abstractions on top**, not new infrastructure.
   live as versioned rows in Postgres, not under `agents/<id>/`.
 - **Skill bundles.** Named, versioned sets of MCP tools + config. A colleague =
   `persona × skill_bundle × tenant`. Adding one is data, not a deploy.
+- **Integration registry.** Versioned, permission-scoped service tools. An
+  integration defines inbound events and outbound actions without adding another
+  human-facing conversation surface.
 - **RBAC service.** New control-plane service in front of the orchestrator. Decides
   who can talk to which colleague, who approves output, who reads audit logs.
 - **Workflow templates.** Patterns like *request → review → approve → notify* as

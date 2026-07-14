@@ -2,8 +2,9 @@
 
 **Status:** 🚧 In design. Target ship: ~2 months from repo creation.
 
-**Scope:** One scenario only — **legal contract review**. One channel — Claw3D + Linear.
-One team — legal. Multi-colleague but small (3–5 personas).
+**Scope:** One scenario only — **legal contract review**. One interaction surface —
+Claw3D. One bidirectional work integration — Linear. One team — legal.
+Multi-colleague but small (3–5 personas).
 
 > This phase is the **AWS binding** of the
 > [logical architecture](../../overview/logical-architecture.md). The AWS services below
@@ -20,7 +21,7 @@ auditable, recoverable, and able to be operated without the original developer p
 ## Non-goals for Phase 1 (deferred to later phases)
 
 - Multi-team / multi-tenant — single team workspace is fine
-- Channels beyond Claw3D + Linear — no Slack/Teams/Email yet
+- Integrations beyond Linear — no Slack/Teams/Email tools yet
 - 1000-agent scale — design for ~20 concurrent colleague turns
 - Multi-region / DR — single AWS region, accept ~1hr RTO
 
@@ -32,7 +33,7 @@ auditable, recoverable, and able to be operated without the original developer p
 - **RDS Postgres** for sessions, audit, kanban, message log
 - **S3** for documents (contracts) and large artifacts
 - **Secrets Manager + KMS** for per-colleague codex/LLM credentials
-- **Linear webhook** as the second ingress (issue → turn)
+- **Linear integration** as a bidirectional tool (issue event → turn; status/comment actions → Linear)
 - **CloudTrail + immutable audit log** for legal compliance story
 
 ![Phase 1 architecture](./architecture.svg)
@@ -80,14 +81,15 @@ Which situation applies is a question for IT/legal, not an architecture choice �
   machine, workflow-as-data colleague config, and bounded continuation turns — informs ADR-004
 - [ADR-011](../../decisions/ADR-011-alb-not-api-gateway.md): ALB + orchestrator as the gateway, not API Gateway
 - [ADR-012](../../decisions/ADR-012-streaming-return-path.md): worker → orchestrator streaming return path (Redis Pub/Sub)
+- [ADR-019](../../decisions/ADR-019-single-interaction-surface.md): one interaction surface; Linear and future services are bidirectional tools
 
 ## Migration from Phase 0
 
 - `workspace/messages/messages.jsonl` → Postgres `messages` table
 - `workspace/kanban/kanban.json` → Postgres `kanban_cards` table
-- `workspace/docs/` → S3 bucket (with KMS encryption), as the **default** source connector for
+- `workspace/docs/` → S3 bucket (with KMS encryption), as the default document integration for
   content we originate — if a team's contracts actually live in SharePoint, `doc_*` tools resolve
-  through a SharePoint connector instead; see [ADR-009](../../decisions/ADR-009-source-connectors-distinct-from-channels.md)
+  through a SharePoint tool instead; see [ADR-019](../../decisions/ADR-019-single-interaction-surface.md)
 - `runtime/pending/pending.jsonl` → SQS queue + Postgres `pending_tickets` table
 - `KNOWN_AGENTS` list → `colleagues` table
 

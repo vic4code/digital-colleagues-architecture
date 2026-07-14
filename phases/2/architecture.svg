@@ -42,10 +42,10 @@
   <text x="596" y="100" class="sub">Marketing · Ops · HR</text>
   <text x="596" y="114" class="sub">self-service onboarding</text>
 
-  <text x="20" y="152" class="tier">EDGE · AUTH · RBAC</text>
+  <text x="20" y="152" class="tier">ONE INTERACTION SURFACE · AUTH · RBAC</text>
   <rect x="40" y="166" width="700" height="40" rx="6" class="box"/>
   <text x="60" y="190" class="label">ALB → API Gateway</text>
-  <text x="220" y="190" class="sub">Cognito / OIDC · tenant claim in JWT · per-tenant rate limit · WAF</text>
+  <text x="220" y="190" class="sub">consistent UX · tenant claim in JWT · per-tenant rate limit · WAF</text>
 
   <line x1="120" y1="120" x2="120" y2="164" class="edge" marker-end="url(#arr)"/>
   <line x1="300" y1="120" x2="300" y2="164" class="edge" marker-end="url(#arr)"/>
@@ -115,9 +115,9 @@
   <text x="536" y="356" class="sub">contract-review · brd · close</text>
   <line x1="536" y1="366" x2="724" y2="366" class="edge"/>
 
-  <text x="536" y="384" class="label">RBAC store</text>
-  <text x="536" y="398" class="sub">Who can talk · approve · audit</text>
-  <text x="536" y="412" class="sub">per-tenant role graph</text>
+  <text x="536" y="384" class="label">Integration + RBAC registry</text>
+  <text x="536" y="398" class="sub">service events/actions · tool scopes</text>
+  <text x="536" y="412" class="sub">per-tenant role + permission graph</text>
   <line x1="536" y1="422" x2="724" y2="422" class="edge"/>
 
   <text x="536" y="440" class="label">Postgres (tenant-scoped)</text>
@@ -143,6 +143,6 @@
   <path d="M 500 550 Q 510 550 520 550" class="edgeAccent edgeDash" marker-end="url(#arrAccent)"/>
 
   <text x="20" y="668" class="tier">WHAT IS NEW VS PHASE 1</text>
-  <text x="20" y="686" class="sub">① Tenant boundary throughout · row-level security · per-tenant S3 prefix  ·  ② Persona library + skill marketplace as registries  ·  ③ RBAC service</text>
+  <text x="20" y="686" class="sub">① Tenant boundary throughout · row-level security · per-tenant S3 prefix  ·  ② Persona + skill + integration registries  ·  ③ RBAC service</text>
   <text x="20" y="702" class="sub">④ Cost attribution per tenant/colleague  ·  ⑤ Workflow template engine (reusable request → review → approve)  ·  ⑥ Self-service team onboarding</text>
 </svg>

@@ -34,8 +34,8 @@
   <text x="70" y="196" class="sub">Fargate service · autoscale</text>
   <text x="56" y="218" class="mono">├── worker-pool/</text>
   <text x="70" y="232" class="sub">Fargate service · scale on SQS</text>
-  <text x="56" y="254" class="mono">├── stateful-runtime/</text>
-  <text x="70" y="268" class="sub">EKS · StatefulSet helm chart</text>
+  <text x="56" y="254" class="mono">├── integration-gateway/</text>
+  <text x="70" y="268" class="sub">service events · actions · tool scopes</text>
   <text x="56" y="290" class="mono">├── queues/</text>
   <text x="70" y="304" class="sub">SQS · DLQ · EventBridge</text>
   <text x="56" y="326" class="mono">├── postgres/</text>
