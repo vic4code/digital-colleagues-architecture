@@ -1,203 +1,93 @@
-<svg viewBox="0 0 840 1170" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 0.5 architecture — capability-zoned view</title>
-  <desc>The personal-colleague edge architecture organized by capability: channel, identity and access (auth + RBAC), persona, session and lifecycle, memory, audit. Orange chips mark where each capability materializes; the numbered message flow runs top to bottom.</desc>
+<svg viewBox="0 0 760 620" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — digital colleague on OpenClaw + Codex</title>
+  <desc>Three layers: Codex is the engine, OpenClaw is the runtime (channels, UI, sessions, persona loading), and the colleague is a persona plus a few skills. We author only the persona and the multi-channel task-intake skill; everything else is off-the-shelf.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
     </marker>
-    <marker id="arrAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
-    </marker>
   </defs>
 
   <style>
-    .label { font-size: 13px; font-weight: 500; fill: #111827; }
     .title { font-size: 13px; font-weight: 700; fill: #111827; }
+    .label { font-size: 12px; font-weight: 500; fill: #111827; }
     .sub { font-size: 11px; fill: #6b7280; }
     .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
-    .code { font-size: 10px; fill: #374151; font-family: ui-monospace, monospace; }
     .tier { font-size: 11px; font-weight: 700; fill: #4b5563; letter-spacing: 0.5px; text-transform: uppercase; }
-    .cap { font-size: 9px; font-weight: 600; fill: #c2410c; font-family: ui-monospace, monospace; letter-spacing: 0.3px; }
+    .own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
     .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
-    .edgeAccent { stroke: #c2410c; stroke-width: 1.3; fill: none; }
-    .edgeDash { stroke-dasharray: 4 3; }
     .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
-    .boxFuture { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 4 3; }
-    .boxAgent { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
-    .boxOwned { fill: #ffffff; stroke: #6b7280; stroke-width: 1.4; }
-    .boxZone { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 1; }
-    .boxDevice { fill: none; stroke: #9ca3af; stroke-width: 1.2; stroke-dasharray: 6 4; }
-    .boxCloud { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
+    .boxOwn { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.4; }
+    .boxOff { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
     .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
     .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.8; }
-    .step { font-size: 11px; font-weight: 600; fill: #ffffff; }
-    .stepDot { fill: #6b7280; }
   </style>
 
-  <text x="20" y="24" class="sub">Orange chips mark where a capability materializes — cross-cutting capabilities (RBAC, SESSION, AUDIT, LIFECYCLE) appear at every point they touch.</text>
+  <text x="20" y="26" class="sub">Orange = the only thing we author. Everything grey is off-the-shelf OpenClaw or Codex.</text>
 
-  <!-- ═══════════ CHANNEL (cloud) ═══════════ -->
-  <text x="20" y="52" class="tier">CHANNEL — where colleagues are reached · nothing runs here, messages queue here</text>
-  <rect x="24" y="62" width="792" height="96" rx="10" class="boxZone"/>
-  <rect x="40" y="76" width="170" height="66" rx="8" class="box"/>
-  <text x="125" y="100" text-anchor="middle" class="title">You, any device</text>
-  <text x="125" y="116" text-anchor="middle" class="sub">phone · web · desktop</text>
-  <rect x="240" y="76" width="270" height="66" rx="8" class="boxCloud"/>
-  <text x="375" y="98" text-anchor="middle" class="title">Outlook mailbox · Exchange Online</text>
-  <text x="375" y="114" text-anchor="middle" class="port">me+vanessa@company.com · v0.1</text>
-  <text x="375" y="130" text-anchor="middle" class="sub">the inbox IS the work queue</text>
-  <rect x="540" y="76" width="260" height="66" rx="8" class="boxFuture"/>
-  <text x="670" y="98" text-anchor="middle" class="title">Teams chats · personal mode</text>
-  <text x="670" y="114" text-anchor="middle" class="port">"@vanessa …" in watched chat · v0.2</text>
-  <text x="670" y="130" text-anchor="middle" class="sub">one chat = one session</text>
-  <line x1="210" y1="100" x2="238" y2="100" class="edge" marker-end="url(#arr)"/>
-  <circle cx="224" cy="86" r="9" class="stepDot"/><text x="224" y="90" text-anchor="middle" class="step">1</text>
+  <!-- Channels / people -->
+  <text x="20" y="54" class="tier">PEOPLE &amp; ACCOUNTS</text>
+  <rect x="24" y="66" width="712" height="70" rx="10" class="boxOff"/>
+  <rect x="40" y="80" width="150" height="44" rx="8" class="box"/>
+  <text x="115" y="99" text-anchor="middle" class="label">You / teammates</text>
+  <text x="115" y="114" text-anchor="middle" class="sub">web chat · DM · mail</text>
+  <rect x="204" y="80" width="150" height="44" rx="8" class="box"/>
+  <text x="279" y="99" text-anchor="middle" class="label">Gmail account</text>
+  <text x="279" y="114" text-anchor="middle" class="port">colleague@…</text>
+  <rect x="368" y="80" width="150" height="44" rx="8" class="box"/>
+  <text x="443" y="99" text-anchor="middle" class="label">Slack account</text>
+  <text x="443" y="114" text-anchor="middle" class="port">@colleague</text>
+  <rect x="532" y="80" width="188" height="44" rx="8" class="box"/>
+  <text x="626" y="99" text-anchor="middle" class="label">Notion · kanban · …</text>
+  <text x="626" y="114" text-anchor="middle" class="sub">source of task signals</text>
 
-  <!-- ═══════════ DEVICE BOUNDARY ═══════════ -->
-  <rect x="24" y="186" width="792" height="856" rx="12" class="boxDevice"/>
-  <text x="40" y="208" class="tier">PERSONAL DEVICE · no inbound port — every cloud arrow starts here</text>
-  <rect x="592" y="196" width="214" height="16" rx="8" class="chip"/>
-  <text x="600" y="207" class="cap">LIFECYCLE · launchd / Task Scheduler</text>
+  <line x1="380" y1="136" x2="380" y2="164" class="edge" marker-end="url(#arr)"/>
 
-  <!-- ═══════════ ADAPTER ═══════════ -->
-  <text x="40" y="238" class="tier">ADAPTER — the one owned process</text>
-  <rect x="40" y="250" width="760" height="150" rx="8" class="boxOwned"/>
+  <!-- OpenClaw runtime -->
+  <text x="20" y="186" class="tier">RUNTIME · OpenClaw</text>
+  <text x="736" y="186" text-anchor="end" class="sub">configure, don't build</text>
+  <rect x="24" y="198" width="712" height="132" rx="10" class="boxOff"/>
+  <rect x="40" y="214" width="210" height="42" rx="6" class="box"/>
+  <text x="145" y="232" text-anchor="middle" class="label">channels + web/chat UI</text>
+  <text x="145" y="247" text-anchor="middle" class="sub">the colleague's home + inboxes</text>
+  <rect x="264" y="214" width="210" height="42" rx="6" class="box"/>
+  <text x="369" y="232" text-anchor="middle" class="label">sessions · approvals</text>
+  <text x="369" y="247" text-anchor="middle" class="sub">transcript · media · model select</text>
+  <rect x="488" y="214" width="232" height="42" rx="6" class="box"/>
+  <text x="604" y="232" text-anchor="middle" class="label">persona loader</text>
+  <text x="604" y="247" text-anchor="middle" class="sub">SOUL.md · IDENTITY.md → engine</text>
 
-  <rect x="56" y="266" width="230" height="54" rx="6" class="box"/>
-  <text x="68" y="284" class="title">poller + normalizer</text>
-  <text x="68" y="299" class="sub">outbound pull → IncomingTurn</text>
-  <rect x="68" y="304" width="76" height="13" rx="6" class="chip"/><text x="76" y="313" class="cap">CHANNEL</text>
+  <!-- persona + skills (owned), sit inside runtime -->
+  <rect x="40" y="268" width="330" height="48" rx="8" class="boxOwn"/>
+  <rect x="52" y="276" width="60" height="14" rx="7" class="chip"/><text x="60" y="286" class="own">WE AUTHOR</text>
+  <text x="52" y="308" class="label">Persona — this IS the colleague</text>
+  <text x="250" y="308" class="sub">soul · voice · role</text>
+  <rect x="384" y="268" width="336" height="48" rx="8" class="boxOwn"/>
+  <rect x="396" y="276" width="60" height="14" rx="7" class="chip"/><text x="404" y="286" class="own">WE WRITE</text>
+  <text x="396" y="308" class="label">Skills — incl. task intake + scheduling</text>
 
-  <rect x="300" y="266" width="230" height="54" rx="6" class="box"/>
-  <text x="312" y="284" class="title">sender allow-list gate</text>
-  <text x="312" y="299" class="sub">default: owner only · reject silently</text>
-  <rect x="312" y="304" width="50" height="13" rx="6" class="chip"/><text x="320" y="313" class="cap">RBAC</text>
+  <line x1="380" y1="330" x2="380" y2="358" class="edge" marker-end="url(#arr)"/>
+  <text x="392" y="348" class="port">codex-harness plugin (JSON-RPC)</text>
 
-  <rect x="544" y="266" width="240" height="54" rx="6" class="box"/>
-  <text x="556" y="284" class="title">thread map · SQLite</text>
-  <text x="556" y="299" class="sub">mail/chat thread ↔ codex thread id</text>
-  <rect x="556" y="304" width="64" height="13" rx="6" class="chip"/><text x="564" y="313" class="cap">SESSION</text>
+  <!-- Codex engine -->
+  <text x="20" y="380" class="tier">ENGINE · Codex app-server</text>
+  <text x="736" y="380" text-anchor="end" class="sub">use as-is, own nothing</text>
+  <rect x="24" y="392" width="712" height="70" rx="10" class="boxOff"/>
+  <text x="40" y="416" class="label">agent loop · thread resume · tool continuation · compaction · sandbox execution</text>
+  <rect x="40" y="428" width="220" height="22" rx="11" class="pill"/>
+  <text x="150" y="443" text-anchor="middle" class="sub">MCP tools = the colleague's hands</text>
+  <rect x="272" y="428" width="220" height="22" rx="11" class="pill"/>
+  <text x="382" y="443" text-anchor="middle" class="sub">rollouts on disk = its memory/audit</text>
+  <rect x="504" y="428" width="216" height="22" rx="11" class="pill"/>
+  <text x="612" y="443" text-anchor="middle" class="sub">LLM endpoint = config, not code</text>
 
-  <rect x="56" y="330" width="300" height="54" rx="6" class="box"/>
-  <text x="68" y="348" class="title">turn scheduler</text>
-  <text x="68" y="363" class="sub">FIFO · serial per thread · retry ×3 → dead-letter</text>
-  <rect x="68" y="368" width="80" height="13" rx="6" class="chip"/><text x="76" y="377" class="cap">LIFECYCLE</text>
+  <!-- The one design question -->
+  <rect x="24" y="486" width="712" height="60" rx="10" class="boxOwn"/>
+  <text x="40" y="508" class="title">The one thing worth designing: the intake + scheduling skill</text>
+  <text x="40" y="527" class="sub">Colleague notices work on any account → queues tasks → works them → reports back. A skill, not a service.</text>
+  <text x="40" y="541" class="sub">Verify against OpenClaw first: are Gmail/Slack native channels or MCP-tool polls? Where does the queue live? (see README)</text>
 
-  <rect x="370" y="330" width="230" height="54" rx="6" class="box"/>
-  <text x="382" y="348" class="title">JSON-RPC client · reply relay</text>
-  <text x="382" y="363" class="sub">stdio to app-server · send + ack</text>
-  <rect x="382" y="368" width="76" height="13" rx="6" class="chip"/><text x="390" y="377" class="cap">CHANNEL</text>
-
-  <rect x="614" y="330" width="170" height="54" rx="6" class="box"/>
-  <text x="626" y="348" class="title">trace tap</text>
-  <text x="626" y="363" class="sub">every event, always on</text>
-  <rect x="626" y="368" width="52" height="13" rx="6" class="chip"/><text x="634" y="377" class="cap">AUDIT</text>
-
-  <line x1="280" y1="142" x2="280" y2="264" class="edge edgeDash" marker-end="url(#arr)"/>
-  <circle cx="294" cy="166" r="9" class="stepDot"/><text x="294" y="170" text-anchor="middle" class="step">2</text>
-  <text x="308" y="170" class="port">poll ≤15 s</text>
-  <line x1="286" y1="293" x2="298" y2="293" class="edge" marker-end="url(#arr)"/>
-  <line x1="530" y1="293" x2="542" y2="293" class="edge" marker-end="url(#arr)"/>
-  <circle cx="513" cy="281" r="9" class="stepDot"/><text x="513" y="285" text-anchor="middle" class="step">3</text>
-
-  <!-- ═══════════ IDENTITY & ACCESS + PERSONA ═══════════ -->
-  <text x="40" y="432" class="tier">IDENTITY &amp; ACCESS — who may trigger, what may run</text>
-  <text x="440" y="432" class="tier">PERSONA — who the colleague is</text>
-
-  <rect x="40" y="444" width="380" height="128" rx="8" class="boxZone"/>
-  <rect x="56" y="458" width="168" height="13" rx="6" class="chip"/><text x="64" y="467" class="cap">AUTH · one device-code sign-in</text>
-  <text x="56" y="488" class="sub">Graph delegated → refresh token in OS keychain</text>
-  <text x="56" y="503" class="sub">LLM: `codex login` / API key · air-gapped: vLLM URL</text>
-  <rect x="56" y="514" width="196" height="13" rx="6" class="chip"/><text x="64" y="523" class="cap">RBAC · personal mode = three controls</text>
-  <text x="56" y="543" class="sub">① sender allow-list ② sandbox_mode ③ approval_policy</text>
-  <text x="56" y="558" class="sub">full multi-user RBAC is Phase 2 — not needed on one device</text>
-
-  <rect x="440" y="444" width="360" height="128" rx="8" class="boxZone"/>
-  <rect x="456" y="458" width="176" height="13" rx="6" class="chip"/><text x="464" y="467" class="cap">PERSONA · template × owner = instance</text>
-  <rect x="456" y="480" width="328" height="38" rx="6" class="box"/>
-  <text x="468" y="496" class="code">colleagues.yaml — id · persona · sandbox · approval</text>
-  <text x="468" y="510" class="code">personas/&lt;id&gt;/AGENTS.md + skills (prompts/*.md)</text>
-  <line x1="620" y1="518" x2="620" y2="532" class="edge" marker-end="url(#arr)"/>
-  <text x="630" y="530" class="port">installer compiles</text>
-  <rect x="456" y="536" width="328" height="24" rx="6" class="box"/>
-  <text x="468" y="552" class="code">~/.codex/config.toml profiles — native knobs only</text>
-
-  <!-- ═══════════ RUNTIME: SESSION & LIFECYCLE ═══════════ -->
-  <text x="40" y="604" class="tier">RUNTIME — codex app-server · harness-managed sessions</text>
-  <text x="800" y="604" text-anchor="end" class="sub">unmodified — upstream's code, our config</text>
-  <rect x="40" y="616" width="760" height="188" rx="8" class="box"/>
-
-  <rect x="56" y="632" width="300" height="156" rx="8" class="boxAgent"/>
-  <text x="72" y="652" class="title">threads — one per conversation</text>
-  <rect x="72" y="660" width="64" height="13" rx="6" class="chip"/><text x="80" y="669" class="cap">SESSION</text>
-  <text x="72" y="686" class="code">thread/start · resume · fork</text>
-  <text x="72" y="700" class="sub">resume rebuilds history from disk, survives restarts</text>
-  <rect x="72" y="708" width="80" height="13" rx="6" class="chip"/><text x="80" y="717" class="cap">LIFECYCLE</text>
-  <text x="72" y="734" class="sub">idle 30 min → auto-unload (thread/closed)</text>
-  <text x="72" y="748" class="sub">context full → compact, never error:</text>
-  <text x="72" y="762" class="code">auto contextCompaction · thread/compact/start</text>
-  <text x="72" y="778" class="sub">on tokenUsage threshold (adapter fires it)</text>
-
-  <rect x="372" y="632" width="200" height="156" rx="8" class="box"/>
-  <text x="388" y="652" class="title">turn executor</text>
-  <rect x="388" y="660" width="130" height="13" rx="6" class="chip"/><text x="396" y="669" class="cap">RBAC · enforcement point</text>
-  <text x="388" y="686" class="sub">sandbox_mode bounds what</text>
-  <text x="388" y="700" class="sub">the colleague can touch;</text>
-  <text x="388" y="714" class="sub">approval_policy decides when</text>
-  <text x="388" y="728" class="sub">a human is asked</text>
-  <text x="388" y="750" class="sub">LLM call = only other</text>
-  <text x="388" y="764" class="sub">outbound line ↓</text>
-
-  <rect x="588" y="632" width="196" height="156" rx="8" class="box"/>
-  <text x="604" y="652" class="title">MCP tools</text>
-  <rect x="604" y="660" width="64" height="13" rx="6" class="chip"/><text x="612" y="669" class="cap">MEMORY</text>
-  <text x="604" y="686" class="code">memory_* → durable notes</text>
-  <text x="604" y="700" class="code">doc_* · kanban_*</text>
-  <text x="604" y="714" class="code">outlook-mcp (search mail)</text>
-  <text x="604" y="736" class="sub">tools = the hands; stdio</text>
-  <text x="604" y="750" class="sub">children of the harness</text>
-
-  <path d="M 485 384 Q 485 404 430 412 L 430 614" class="edge" fill="none" marker-end="url(#arr)"/>
-  <circle cx="430" cy="572" r="9" class="stepDot"/><text x="430" y="576" text-anchor="middle" class="step">4</text>
-  <text x="446" y="576" class="port">turn/start over stdio</text>
-
-  <!-- reply: the relay box itself sends + acks -->
-  <circle cx="584" cy="359" r="9" class="stepDot"/><text x="584" y="363" text-anchor="middle" class="step">5</text>
-
-  <!-- ═══════════ MEMORY + AUDIT ═══════════ -->
-  <text x="40" y="836" class="tier">MEMORY — what survives the session</text>
-  <text x="440" y="836" class="tier">AUDIT — what happened, provable</text>
-
-  <rect x="40" y="848" width="380" height="128" rx="8" class="boxZone"/>
-  <rect x="56" y="862" width="64" height="13" rx="6" class="chip"/><text x="64" y="871" class="cap">MEMORY</text>
-  <text x="56" y="892" class="sub">three layers, three lifetimes:</text>
-  <text x="56" y="908" class="code">context window — one turn, compacted as needed</text>
-  <text x="56" y="923" class="code">rollouts — episodic, whole thread, on disk</text>
-  <text x="56" y="938" class="code">workspace/memory/ — durable notes via memory_*</text>
-  <text x="56" y="960" class="sub">compaction can drop context; it never touches the other two</text>
-
-  <rect x="440" y="848" width="360" height="128" rx="8" class="boxZone"/>
-  <rect x="456" y="862" width="52" height="13" rx="6" class="chip"/><text x="464" y="871" class="cap">AUDIT</text>
-  <text x="456" y="892" class="code">traces/audit.jsonl — adapter tap, business events</text>
-  <text x="456" y="907" class="code">~/.codex/sessions/*.jsonl — full rollouts</text>
-  <text x="456" y="928" class="sub">joined by correlation id: mail thread ↔ codex thread</text>
-  <text x="456" y="943" class="sub">A→B delegation shows in the parent rollout — one trace</text>
-  <circle cx="470" cy="960" r="9" class="stepDot"/><text x="470" y="964" text-anchor="middle" class="step">6</text>
-  <text x="486" y="964" class="sub">every turn lands here before the reply is sent</text>
-
-  <path d="M 740 384 Q 810 430 810 600 Q 810 790 740 846" class="edgeAccent edgeDash" fill="none" marker-end="url(#arrAccent)"/>
-  <line x1="206" y1="788" x2="206" y2="846" class="edge edgeDash" marker-end="url(#arr)"/>
-
-  <!-- ═══════════ EXTERNAL (below device) ═══════════ -->
-  <text x="40" y="1072" class="tier">EXTERNAL — outbound only</text>
-  <rect x="40" y="1084" width="380" height="58" rx="8" class="box"/>
-  <text x="56" y="1106" class="title">LLM endpoint — config, not code</text>
-  <text x="56" y="1122" class="sub">cloud API · Azure OpenAI · intranet vLLM (air-gapped)</text>
-  <path d="M 472 788 Q 430 820 430 900 L 430 990 Q 430 1050 280 1084" class="edge edgeDash" fill="none" marker-end="url(#arr)"/>
-
-  <rect x="440" y="1084" width="360" height="58" rx="8" class="boxCloud"/>
-  <text x="456" y="1106" class="title">Shared trace store</text>
-  <text x="456" y="1122" class="sub">SharePoint / S3 · nightly sync → becomes Phase 1 audit backbone</text>
-  <line x1="620" y1="976" x2="620" y2="1082" class="edge edgeDash" marker-end="url(#arr)"/>
+  <text x="20" y="576" class="tier">SCOPE GATE · ADR-017</text>
+  <text x="20" y="596" class="sub">Build the intake skill only where the initiator is not you. Self-initiated? Use the OpenClaw web chat and skip it.</text>
+  <text x="20" y="612" class="sub">Implementation lives in a separate code repo — this repo is architecture only (ADR-018).</text>
 </svg>
