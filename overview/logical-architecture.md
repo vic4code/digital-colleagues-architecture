@@ -20,9 +20,10 @@ Why this exists as a separate view (see [ADR-013](../decisions/ADR-013-capabilit
 
 ## The capability components
 
-**Edge**
-- **Channel adapters** — normalize any channel (Claw3D, Linear, email, voice, webhook) into one
-  canonical *Turn* event. The colleague never knows which channel it came from.
+**Experience edge**
+- **Interaction surface** — the single approved human-facing interface for a
+  deployment. It carries the live conversational *Turn* contract; replacing the
+  presentation does not create another colleague identity.
 - **Gateway** — edge authentication, rate-limiting, TLS, load-balancing. Coarse "can this request
   pass" — *not* business authorization.
 
@@ -38,12 +39,14 @@ Why this exists as a separate view (see [ADR-013](../decisions/ADR-013-capabilit
   any colleague.
 - **Agent runtime** — the per-turn LLM agent process (Codex / Claude Code / future). Pluggable;
   this is the replaceable part, not the platform.
-- **Tool layer (MCP ports)** — `doc` / `kanban` / `message` / `memory` tools as a
-  storage-agnostic interface. The interface is stable across phases; only the backing changes.
+- **Integration/tool layer (MCP ports)** — `doc` / `kanban` / `message` /
+  `memory` / `mail` / `calendar` tools as a storage- and vendor-agnostic
+  interface. Each integration can accept service events and expose actions; the
+  interface is stable across phases while the backing changes.
   **This is the platform's main extension seam:** adding a tool adds a capability a colleague can
   use (e.g. `calendar`, `search`, `email`) without touching the orchestrator or worker; swapping a
   tool's adapter changes where it's backed (e.g. `doc` → S3 *or* SharePoint, per
-  [ADR-009](../decisions/ADR-009-source-connectors-distinct-from-channels.md)). It runs inside each
+  [ADR-019](../decisions/ADR-019-single-interaction-surface.md)). It runs inside each
   worker per turn, so it scales with the worker pool — there is no separate service to scale.
 
 **Colleague identity plane** *(this is the part that makes a colleague a colleague)*
@@ -61,8 +64,8 @@ Why this exists as a separate view (see [ADR-013](../decisions/ADR-013-capabilit
 > binding column and the same capabilities live on Postgres / MinIO / Vault on-prem.
 
 **Shared business state**
-- **Document / artifact store** — the actual business content, reached through source connectors
-  ([ADR-009](../decisions/ADR-009-source-connectors-distinct-from-channels.md)).
+- **Document / artifact store** — the actual business content, reached through
+  permission-scoped integrations/tools ([ADR-019](../decisions/ADR-019-single-interaction-surface.md)).
 - **Work state store** — kanban, messages, tickets, sessions.
 - **Audit store** — immutable, append-only, retained ([ADR-006](../decisions/ADR-006-audit-log-retention.md)).
 

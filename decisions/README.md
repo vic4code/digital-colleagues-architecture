@@ -12,17 +12,18 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 005 | [Human-in-the-loop gates for contract output](./ADR-005-human-in-the-loop-gates.md) | Proposed |
 | 006 | [Audit log storage and retention](./ADR-006-audit-log-retention.md) | Proposed |
 | 007 | [Symphony-inspired orchestration model for Phase 1+](./ADR-007-symphony-inspired-orchestration.md) | Proposed |
-| 008 | [VDI is a presentation-only channel](./ADR-008-vdi-presentation-only-channel.md) | Proposed |
-| 009 | [Source connectors distinct from channel adapters](./ADR-009-source-connectors-distinct-from-channels.md) | Proposed |
-| 010 | [Email dispatch addresses the colleague, not a shared inbox](./ADR-010-email-per-colleague-identity.md) | Proposed |
+| 008 | [VDI is a presentation-only channel](./ADR-008-vdi-presentation-only-channel.md) | Superseded by ADR-019 |
+| 009 | [Source connectors distinct from channel adapters](./ADR-009-source-connectors-distinct-from-channels.md) | Superseded by ADR-019 |
+| 010 | [Email dispatch addresses the colleague, not a shared inbox](./ADR-010-email-per-colleague-identity.md) | Superseded by ADR-019 |
 | 011 | [ALB + orchestrator as the gateway, not AWS API Gateway](./ADR-011-alb-not-api-gateway.md) | Proposed |
 | 012 | [Worker → orchestrator streaming return path](./ADR-012-streaming-return-path.md) | Proposed |
 | 013 | [Capability-oriented logical architecture; clouds are bindings](./ADR-013-capability-oriented-logical-architecture.md) | Proposed |
 | 014 | [Worker pool placement: federated, pull-based pools by location](./ADR-014-worker-pool-placement.md) | Proposed |
 | 015 | [Build on the official codex harness; own surface = channel adapter only](./ADR-015-codex-harness-own-surface.md) | Proposed |
 | 016 | [Two-layer interaction trace retention](./ADR-016-two-layer-interaction-traces.md) | Proposed |
-| 017 | [The initiator test: channels are justified by who initiates](./ADR-017-initiator-test.md) | Accepted |
+| 017 | [The initiator test: channels are justified by who initiates](./ADR-017-initiator-test.md) | Superseded by ADR-019 |
 | 018 | [Adopt OpenClaw + Codex; retire the hand-built channel adapter](./ADR-018-adopt-openclaw-codex.md) | Accepted |
+| 019 | [One interaction surface; surrounding services are bidirectional tools](./ADR-019-single-interaction-surface.md) | Accepted |
 
 ## Conventions
 

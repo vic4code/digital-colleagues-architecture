@@ -1,125 +1,120 @@
-<svg viewBox="0 0 780 800" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 0.5 — digital colleague: persona layers, engine, and the access/permission surface</title>
-  <desc>A colleague is a layered persona (Soul / Body / Faculty / Skill) running on the Codex engine through an agent runtime. We borrow the persona layer model from an open-source framework but own the persona, the skills, and the access-and-permission design: credential custody, least-privilege scopes, sandbox and approval bounds, and audit.</desc>
+<svg viewBox="0 0 780 840" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — one interaction surface with bidirectional service tools</title>
+  <desc>A person meets one digital colleague through one consistent face-to-face interface. The colleague is a layered persona on an agent runtime and Codex engine. Outlook, Gmail, Slack, calendars, Notion, and kanban are bidirectional tools: events flow in and actions flow out. Access, permissions, approvals, and audit bound every service interaction.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
     </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
   </defs>
 
   <style>
-    .title { font-size: 13px; font-weight: 700; fill: #111827; }
     .label { font-size: 12px; font-weight: 500; fill: #111827; }
     .sub { font-size: 11px; fill: #6b7280; }
     .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
-    .tier { font-size: 11px; font-weight: 700; fill: #4b5563; letter-spacing: 0.5px; text-transform: uppercase; }
+    .tier { font-size: 11px; font-weight: 700; fill: #4b5563; letter-spacing: 0.5px; }
     .own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
     .sec { font-size: 9px; font-weight: 700; fill: #1d4ed8; font-family: ui-monospace, monospace; }
     .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
+    .edgeTool { stroke: #c2410c; stroke-width: 1.3; fill: none; }
     .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
-    .boxOwn { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.4; }
     .boxOff { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
+    .boxOwn { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.4; }
     .boxSec { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
-    .pill { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
-    .layer { fill: #fff7ed; stroke: #fdba74; stroke-width: 1; }
     .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.8; }
     .chipSec { fill: #eff6ff; stroke: #93c5fd; stroke-width: 0.8; }
+    .service { fill: #ffffff; stroke: #fdba74; stroke-width: 1; }
   </style>
 
-  <text x="20" y="26" class="sub">Orange = we author. Blue = access/permission surface we design + security reviews. Grey = off-the-shelf.</text>
+  <text x="20" y="24" class="sub">One relationship, one interface. Surrounding services are the colleague's tools — events in, actions out.</text>
 
-  <!-- People & accounts -->
-  <text x="20" y="54" class="tier">PEOPLE &amp; ACCOUNTS</text>
-  <rect x="24" y="66" width="732" height="70" rx="10" class="boxOff"/>
-  <rect x="40" y="80" width="156" height="44" rx="8" class="box"/>
-  <text x="118" y="99" text-anchor="middle" class="label">You / teammates</text>
-  <text x="118" y="114" text-anchor="middle" class="sub">web chat · DM · mail</text>
-  <rect x="210" y="80" width="156" height="44" rx="8" class="box"/>
-  <text x="288" y="99" text-anchor="middle" class="label">Gmail account</text>
-  <text x="288" y="114" text-anchor="middle" class="port">colleague@…</text>
-  <rect x="380" y="80" width="156" height="44" rx="8" class="box"/>
-  <text x="458" y="99" text-anchor="middle" class="label">Slack account</text>
-  <text x="458" y="114" text-anchor="middle" class="port">@colleague</text>
-  <rect x="550" y="80" width="190" height="44" rx="8" class="box"/>
-  <text x="645" y="99" text-anchor="middle" class="label">Notion · kanban · …</text>
-  <text x="645" y="114" text-anchor="middle" class="sub">source of task signals</text>
+  <!-- Human and the single interaction surface -->
+  <text x="20" y="52" class="tier">FACE-TO-FACE · THE ONLY HUMAN-FACING CHANNEL</text>
+  <rect x="24" y="64" width="732" height="82" rx="10" class="boxOff"/>
+  <rect x="48" y="82" width="170" height="46" rx="8" class="box"/>
+  <text x="133" y="102" text-anchor="middle" class="label">You / teammate</text>
+  <text x="133" y="117" text-anchor="middle" class="sub">one person, one intent</text>
+  <line x1="218" y1="105" x2="300" y2="105" class="edge" marker-end="url(#arr)"/>
+  <rect x="300" y="78" width="432" height="54" rx="8" class="box"/>
+  <text x="516" y="99" text-anchor="middle" class="label">ONE INTERACTION SURFACE</text>
+  <text x="516" y="116" text-anchor="middle" class="sub">web / desktop / embodied UI — one approved binding per deployment</text>
 
-  <line x1="390" y1="136" x2="390" y2="162" class="edge" marker-end="url(#arr)"/>
+  <line x1="390" y1="146" x2="390" y2="174" class="edge" marker-end="url(#arr)"/>
 
-  <!-- Runtime -->
-  <text x="20" y="184" class="tier">COLLEAGUE RUNTIME</text>
-  <text x="756" y="184" text-anchor="end" class="sub">off-the-shelf agent gateway — configure, don't build</text>
-  <rect x="24" y="196" width="732" height="72" rx="10" class="boxOff"/>
-  <rect x="40" y="210" width="222" height="44" rx="6" class="box"/>
-  <text x="151" y="229" text-anchor="middle" class="label">channels + web/chat UI</text>
-  <text x="151" y="244" text-anchor="middle" class="sub">the colleague's home + inboxes</text>
-  <rect x="276" y="210" width="222" height="44" rx="6" class="box"/>
-  <text x="387" y="229" text-anchor="middle" class="label">sessions · approvals</text>
-  <text x="387" y="244" text-anchor="middle" class="sub">transcript · media · model select</text>
-  <rect x="512" y="210" width="228" height="44" rx="6" class="box"/>
-  <text x="626" y="229" text-anchor="middle" class="label">persona loader</text>
-  <text x="626" y="244" text-anchor="middle" class="sub">reads the layers below → engine</text>
+  <!-- Digital colleague -->
+  <text x="20" y="196" class="tier">THE DIGITAL COLLEAGUE · PERSONA + SKILLS + RUNTIME</text>
+  <rect x="24" y="208" width="732" height="222" rx="10" class="boxOwn"/>
+  <rect x="38" y="220" width="66" height="14" rx="7" class="chip"/>
+  <text x="46" y="230" class="own">WE AUTHOR</text>
 
-  <line x1="390" y1="268" x2="390" y2="294" class="edge" marker-end="url(#arr)"/>
+  <rect x="48" y="248" width="160" height="48" rx="6" class="boxOwn"/>
+  <text x="128" y="267" text-anchor="middle" class="label">Soul</text>
+  <text x="128" y="283" text-anchor="middle" class="sub">values · voice · purpose</text>
+  <rect x="222" y="248" width="160" height="48" rx="6" class="boxOwn"/>
+  <text x="302" y="267" text-anchor="middle" class="label">Body</text>
+  <text x="302" y="283" text-anchor="middle" class="sub">identity · presence</text>
+  <rect x="396" y="248" width="160" height="48" rx="6" class="boxOwn"/>
+  <text x="476" y="267" text-anchor="middle" class="label">Faculty</text>
+  <text x="476" y="283" text-anchor="middle" class="sub">reasoning · memory policy</text>
+  <rect x="570" y="248" width="162" height="48" rx="6" class="boxOwn"/>
+  <text x="651" y="267" text-anchor="middle" class="label">Skills</text>
+  <text x="651" y="283" text-anchor="middle" class="sub">decide what tool to use</text>
 
-  <!-- The colleague = layered persona + skills -->
-  <text x="20" y="316" class="tier">THE COLLEAGUE · we author this — persona layer model borrowed, content ours</text>
-  <rect x="24" y="328" width="732" height="118" rx="10" class="boxOwn"/>
-  <rect x="36" y="338" width="66" height="14" rx="7" class="chip"/><text x="44" y="348" class="own">WE AUTHOR</text>
-  <rect x="40" y="360" width="170" height="46" rx="6" class="layer"/>
-  <text x="125" y="378" text-anchor="middle" class="label">Soul</text>
-  <text x="125" y="394" text-anchor="middle" class="sub">values · voice · purpose</text>
-  <rect x="222" y="360" width="170" height="46" rx="6" class="layer"/>
-  <text x="307" y="378" text-anchor="middle" class="label">Body</text>
-  <text x="307" y="394" text-anchor="middle" class="sub">identity · accounts · form</text>
-  <rect x="404" y="360" width="170" height="46" rx="6" class="layer"/>
-  <text x="489" y="378" text-anchor="middle" class="label">Faculty</text>
-  <text x="489" y="394" text-anchor="middle" class="sub">reasoning · memory policy</text>
-  <rect x="586" y="360" width="154" height="46" rx="6" class="layer"/>
-  <text x="663" y="378" text-anchor="middle" class="label">Skill</text>
-  <text x="663" y="394" text-anchor="middle" class="sub">what it can do</text>
-  <rect x="40" y="412" width="700" height="24" rx="6" class="box"/>
-  <text x="52" y="428" class="sub">Skills we write — chiefly <tspan font-weight="700" fill="#111827">task intake + self-scheduling</tspan>: notice work on any account → queue → work → report back</text>
+  <rect x="48" y="312" width="684" height="44" rx="6" class="box"/>
+  <text x="60" y="330" class="label">Agent runtime</text>
+  <text x="60" y="346" class="sub">session · approval · transcript · persona loading · durable event-to-task continuity</text>
+  <rect x="48" y="370" width="684" height="44" rx="6" class="boxOff"/>
+  <text x="60" y="388" class="label">Codex engine</text>
+  <text x="60" y="404" class="sub">agent loop · thread resume · tool continuation · compaction · sandbox execution</text>
 
-  <line x1="390" y1="446" x2="390" y2="472" class="edge" marker-end="url(#arr)"/>
-  <text x="402" y="464" class="port">turns run on the engine (JSON-RPC)</text>
+  <line x1="390" y1="430" x2="390" y2="466" class="edgeTool" marker-end="url(#arrOrange)"/>
+  <line x1="414" y1="466" x2="414" y2="430" class="edgeTool" marker-end="url(#arrOrange)"/>
+  <text x="428" y="453" class="port">events in · actions out</text>
 
-  <!-- Engine -->
-  <text x="20" y="494" class="tier">ENGINE · Codex app-server</text>
-  <text x="756" y="494" text-anchor="end" class="sub">use as-is, own nothing</text>
-  <rect x="24" y="506" width="732" height="66" rx="10" class="boxOff"/>
-  <text x="40" y="530" class="label">agent loop · thread resume · tool continuation · compaction · sandbox execution</text>
-  <rect x="40" y="542" width="224" height="22" rx="11" class="pill"/>
-  <text x="152" y="557" text-anchor="middle" class="sub">MCP tools = the colleague's hands</text>
-  <rect x="276" y="542" width="224" height="22" rx="11" class="pill"/>
-  <text x="388" y="557" text-anchor="middle" class="sub">rollouts on disk = memory / audit</text>
-  <rect x="512" y="542" width="228" height="22" rx="11" class="pill"/>
-  <text x="626" y="557" text-anchor="middle" class="sub">LLM endpoint = config, not code</text>
+  <!-- Tool/service boundary -->
+  <text x="20" y="490" class="tier">BIDIRECTIONAL INTEGRATIONS / TOOLS · THE COLLEAGUE CONNECTS AND ACTS</text>
+  <rect x="24" y="502" width="732" height="146" rx="10" class="boxOff"/>
+  <rect x="42" y="516" width="696" height="34" rx="6" class="box"/>
+  <text x="390" y="531" text-anchor="middle" class="label">Integration tool boundary</text>
+  <text x="390" y="545" text-anchor="middle" class="sub">normalize event · expose actions · preserve provenance · correlate audit</text>
 
-  <!-- Access & permission surface -->
-  <text x="20" y="596" class="tier">ACCESS &amp; PERMISSIONS · the security surface — spell this out, security reviews it</text>
-  <rect x="24" y="608" width="732" height="128" rx="10" class="boxSec"/>
-  <rect x="36" y="618" width="150" height="14" rx="7" class="chipSec"/><text x="44" y="628" class="sec">WE DESIGN · REVIEWED</text>
+  <rect x="42" y="566" width="126" height="54" rx="7" class="service"/>
+  <text x="105" y="587" text-anchor="middle" class="label">Outlook</text>
+  <text x="105" y="604" text-anchor="middle" class="sub">mail · calendar</text>
+  <rect x="180" y="566" width="126" height="54" rx="7" class="service"/>
+  <text x="243" y="587" text-anchor="middle" class="label">Gmail</text>
+  <text x="243" y="604" text-anchor="middle" class="sub">receive · send</text>
+  <rect x="318" y="566" width="126" height="54" rx="7" class="service"/>
+  <text x="381" y="587" text-anchor="middle" class="label">Slack</text>
+  <text x="381" y="604" text-anchor="middle" class="sub">events · replies</text>
+  <rect x="456" y="566" width="126" height="54" rx="7" class="service"/>
+  <text x="519" y="587" text-anchor="middle" class="label">Notion</text>
+  <text x="519" y="604" text-anchor="middle" class="sub">read · update</text>
+  <rect x="594" y="566" width="144" height="54" rx="7" class="service"/>
+  <text x="666" y="587" text-anchor="middle" class="label">Kanban · APIs · …</text>
+  <text x="666" y="604" text-anchor="middle" class="sub">trigger · act · report</text>
 
-  <rect x="40" y="640" width="222" height="40" rx="6" class="box"/>
-  <text x="52" y="657" class="label">Credential custody</text>
-  <text x="52" y="671" class="sub">OAuth tokens / keys in a secrets store</text>
-  <rect x="276" y="640" width="222" height="40" rx="6" class="box"/>
-  <text x="288" y="657" class="label">Least-privilege scopes</text>
-  <text x="288" y="671" class="sub">per account + per MCP tool, minimal</text>
-  <rect x="512" y="640" width="228" height="40" rx="6" class="box"/>
-  <text x="524" y="657" class="label">Sandbox + approval bounds</text>
-  <text x="524" y="671" class="sub">Codex-native: reach + when it asks</text>
+  <!-- Access and permission surface -->
+  <text x="20" y="674" class="tier">ACCESS &amp; PERMISSIONS · CROSS-CUTTING SECURITY BOUNDARY</text>
+  <rect x="24" y="686" width="732" height="112" rx="10" class="boxSec"/>
+  <rect x="38" y="698" width="150" height="14" rx="7" class="chipSec"/>
+  <text x="46" y="708" class="sec">WE DESIGN · REVIEWED</text>
 
-  <rect x="40" y="686" width="342" height="40" rx="6" class="box"/>
-  <text x="52" y="703" class="label">Audit trail</text>
-  <text x="52" y="717" class="sub">every tool call + channel action logged</text>
-  <rect x="396" y="686" width="344" height="40" rx="6" class="box"/>
-  <text x="408" y="703" class="label">Runtime trust boundary — the review target</text>
-  <text x="408" y="717" class="sub">holds real-account tokens → self-host / broker it</text>
+  <rect x="42" y="726" width="162" height="48" rx="6" class="box"/>
+  <text x="54" y="744" class="label">Credential custody</text>
+  <text x="54" y="760" class="sub">tokens stay in a broker/store</text>
+  <rect x="216" y="726" width="162" height="48" rx="6" class="box"/>
+  <text x="228" y="744" class="label">Least privilege</text>
+  <text x="228" y="760" class="sub">read/write scope per tool</text>
+  <rect x="390" y="726" width="162" height="48" rx="6" class="box"/>
+  <text x="402" y="744" class="label">Approval bounds</text>
+  <text x="402" y="760" class="sub">human gates side effects</text>
+  <rect x="564" y="726" width="174" height="48" rx="6" class="box"/>
+  <text x="576" y="744" class="label">Audit + provenance</text>
+  <text x="576" y="760" class="sub">event → task → action</text>
 
-  <!-- Footer notes -->
-  <text x="20" y="760" class="sub">We borrow the persona layer model (the spirit) from an open-source framework — named only in ADR-018, not a brand we ship.</text>
-  <text x="20" y="778" class="sub">Scope gate (ADR-017): build the intake skill only where the initiator is not you. Implementation lives in a separate code repo.</text>
+  <text x="20" y="824" class="sub">ADR-019: a new service adds a capability, not a new conversation surface or a new colleague identity.</text>
 </svg>

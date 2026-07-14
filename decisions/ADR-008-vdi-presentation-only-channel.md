@@ -1,6 +1,6 @@
 # ADR-008 — VDI is a presentation-only channel, never an execution target
 
-- **Status:** Proposed
+- **Status:** Superseded by [ADR-019](./ADR-019-single-interaction-surface.md)
 - **Date:** 2026-06-23
 - **Deciders:** (architecture review)
 

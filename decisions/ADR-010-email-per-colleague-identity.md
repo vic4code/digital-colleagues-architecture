@@ -1,6 +1,6 @@
 # ADR-010 — Email dispatch addresses the colleague, not a shared inbox
 
-- **Status:** Proposed
+- **Status:** Superseded by [ADR-019](./ADR-019-single-interaction-surface.md)
 - **Date:** 2026-06-23
 - **Deciders:** (architecture review)
 - **Scope note:** Email is a [Phase 3](../phases/3/README.md) channel (Phase 1 is Claw3D + Linear

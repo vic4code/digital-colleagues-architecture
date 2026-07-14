@@ -2,7 +2,8 @@
 
 Architecture exploration for the digital colleague platform — independent from any
 single code repository. This repo tracks how the system evolves from a single-machine
-prototype to an enterprise-grade, multi-channel platform serving 1000+ agents.
+prototype to an enterprise-grade platform serving 1000+ agents through one
+consistent interaction model and many bidirectional service integrations.
 
 ## Why a separate repo
 
@@ -22,10 +23,10 @@ This repo is the place to:
 | # | Phase | Status | Goal |
 |---|---|---|---|
 | 0 | [Prototype](./phases/0/) | ✅ Running | Prove the idea on a single machine |
-| 0.5 | [Layered persona on Codex](./phases/0.5/) | 📐 Design note | Parallel track — persona (borrowed layer model) on an agent runtime + Codex engine; impl in a separate repo |
+| 0.5 | [One face-to-face interface, many tools](./phases/0.5/) | 📐 Design note | Parallel track — layered persona on Codex; one interaction surface + bidirectional service integrations |
 | 1 | [Legal MVP](./phases/1/) | 🚧 In design | First production scenario: contract review |
 | 2 | [Generalized Platform](./phases/2/) | ⏳ Planned | Multi-scenario, multi-department |
-| 3 | [Enterprise & Multi-Channel](./phases/3/) | ⏳ Planned | 1000+ agents, Slack/Teams/Linear/Email, HA |
+| 3 | [Enterprise Reach & Resilience](./phases/3/) | ⏳ Planned | 1000+ agents, enterprise integrations, HA |
 | 4 | [Terraform / IaC](./phases/4/) | ⏳ Planned | Production-grade IaC, multi-env, DR |
 
 Phases 0 → 1 → 2 → 3 are the **centralized SaaS** progression — cumulative, Phase 2

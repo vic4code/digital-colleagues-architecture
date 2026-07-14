@@ -60,16 +60,20 @@ later phases keep everything earlier phases built. (Full detail and diagrams liv
 | Phase | The essential new thing | One-sentence difference | Still can't do |
 |---|---|---|---|
 | **[0](../phases/0/)** | It exists at all | Many colleagues collaborate on one machine, all state in local files. | Survive a second machine, a crash, or a stranger. |
-| **[1](../phases/1/)** | Identity decoupled from the process | Same behavior, but state is externalized (Postgres/S3/SQS) so any worker can run any colleague — HA, autoscale, auditable. Legal contract review only. | Serve more than one team, or any channel beyond Claw3D + Linear. |
-| **[2](../phases/2/)** | Many teams, many scenarios | The legal MVP generalizes: multi-tenant, persona library, skill marketplace, RBAC, per-tenant cost — adding a colleague is data, not deploy. | Reach colleagues where employees already are (Slack/Teams/Email); run at enterprise scale. |
-| **[3](../phases/3/)** | Reach + scale + resilience | The same colleague is reachable from any channel (Slack, Teams, Linear, Email, voice, VDI), at 1000+ colleagues, with observability, compliance, multi-region. | — (this is the robust target state). |
+| **[0.5](../phases/0.5/)** | One face-to-face model | A layered Codex colleague is met through one interaction surface and uses surrounding services as bidirectional tools. Parallel design track, not a prerequisite for Phase 1. | Stay always-on or provide production durability. |
+| **[1](../phases/1/)** | Identity decoupled from the process | Same behavior, but state is externalized (Postgres/S3/SQS) so any worker can run any colleague — HA, autoscale, auditable. One Claw3D interaction surface + Linear integration. | Serve more than one team or integrate more business services. |
+| **[2](../phases/2/)** | Many teams, many scenarios | The legal MVP generalizes: multi-tenant, persona library, skill marketplace, integration registry, RBAC, per-tenant cost — adding a colleague is data, not deploy. | Run at enterprise scale and resilience. |
+| **[3](../phases/3/)** | Reach + scale + resilience | One consistent colleague interface plus permission-scoped Outlook, Slack, Teams, Linear, document, and API integrations at 1000+ colleague scale. | — (this is the robust target state). |
 | **[4](../phases/4/)** | It's reproducible | Everything in Phases 1–3 expressed as reviewed, versioned Terraform across dev/staging/prod. | — (this hardens, it doesn't add product capability). |
 
-The thread running through all of them: **Phase 0 proves the idea, Phase 1 makes a colleague's
+The thread running through the centralized phases: **Phase 0 proves the idea, Phase 1 makes a colleague's
 identity outlive any single process, Phase 2 makes the platform serve anyone, Phase 3 makes it
 reachable and resilient everywhere, Phase 4 makes it reproducible.** The hard conceptual leap is
 Phase 0 → 1 (identity stops being "a running process"); everything after is scale and reach on
 top of that foundation.
+
+Phase 0.5 runs in parallel and establishes the interaction/tool boundary adopted
+by every later phase: one face-to-face surface, many permission-scoped integrations.
 
 ## Audiences for this repo
 
@@ -91,7 +95,8 @@ top of that foundation.
 | **Memory** | Persistent state across sessions: facts, preferences, prior decisions |
 | **Skill** | A bundled capability the colleague can invoke (e.g. `contract-review`, `brd-writing`) |
 | **Workspace** | Shared business artifacts (docs, kanban, messages) all colleagues see |
-| **Channel** | How humans reach colleagues: Claw3D, Slack, Teams, Linear, email, etc. |
+| **Interaction surface / channel** | The one approved face-to-face interface through which humans meet a colleague |
+| **Integration / tool** | A bidirectional service capability the colleague can observe and act through, such as Outlook, Slack, Linear, or SharePoint |
 | **Goal** | A success criterion that bounds an agent's autonomous loop |
 | **Codex / Claude Code / app-server** | Vendor agent runtimes we build on (no vendor lock at the platform layer) |
 | **Linear sprint board** | The current control plane for task dispatch and status |
@@ -107,7 +112,9 @@ product constraints.
    based on what context, with what permissions. Immutable.
 3. **Identity, memory, and tools are data.** A digital colleague is not a deployed
    service. Adding a colleague is a config change, not a CI/CD push.
-4. **Channels are pluggable.** The same colleague is reachable from Claw3D, Slack,
-   Linear, etc. — different interface, same identity and memory.
+4. **One interaction model; integrations are pluggable.** A person meets the
+   colleague through one consistent surface. Outlook, Slack, Linear, and other
+   services extend what it can observe and do without creating new identities or
+   conversation models ([ADR-019](../decisions/ADR-019-single-interaction-surface.md)).
 5. **No vendor lock at the platform layer.** Codex today, maybe Claude or open
    models tomorrow. The orchestrator owns the agent abstraction.

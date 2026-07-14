@@ -34,9 +34,10 @@ piece of engineering, not a marketing word:
 
 1. **Group.** Colleagues address each other, hand off work, and can be reasoned about as a
    team — not N independent chat windows that happen to share a company name.
-2. **Multimodal / voice triggering.** A colleague is reachable through whatever channel a
-   human is already in (voice, Slack, Linear, Claw3D) without becoming a different colleague
-   each time. The channel is metadata, not identity. (See [flows/channel-routing.svg](../flows/channel-routing.svg).)
+2. **One presence, many tools.** A colleague has one consistent face-to-face
+   interaction surface. Voice, Slack, Linear, mail, and other services are
+   communication or work tools it can observe and act through without becoming a
+   different colleague each time. (See [ADR-019](../decisions/ADR-019-single-interaction-surface.md).)
 3. **Scheduling / proactivity.** A colleague can act because a schedule, an event, or its own
    plan triggered it — not only because a human just typed a message. This is the load-bearing
    difference between "assistant you summon" and "colleague who has a job."
@@ -57,8 +58,8 @@ orchestration layer this repo is designing.
   research framing we explicitly rejected for production use)? We have not picked a model.
   This is the single most important open question in this document — it determines whether
   Non-negotiable #1 (human-in-the-loop) and "autonomous reasoning" are compatible or in tension.
-- **Voice/always-on presence is a different beast than "another channel."** Treating voice as
-  just another channel adapter (current design) assumes request/response. An always-listening
+- **Voice/always-on presence is a different beast than another tool.** Treating voice as
+  a request/response integration assumes deliberate calls. An always-listening
   presence implies continuous audio processing, a different privacy model, and probably a
   different trigger architecture (wake-word / ambient attention) than "colleague replies when
   spoken to." We haven't decided which of these voice actually means yet.

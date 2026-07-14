@@ -11,7 +11,7 @@ versioned, reviewed, and deployable to multiple environments without manual step
 
 ## Scope
 
-- **Modular Terraform** — one module per logical component (orchestrator, worker pool, db, queues, secrets, audit, channel adapters)
+- **Modular Terraform** — one module per logical component (interaction surface, orchestrator, worker pool, db, queues, secrets, audit, integration gateway)
 - **Multi-environment** — dev / staging / prod with the same modules, different inputs
 - **Pipeline** — GitHub Actions or equivalent: plan on PR, apply on merge to main
 - **Secrets** — managed via Secrets Manager / Parameter Store, never in tfstate
@@ -41,7 +41,7 @@ terraform/
 │   ├── object-store/
 │   ├── secrets/
 │   ├── audit-log/
-│   └── channel-adapter/
+│   └── integration-gateway/
 ├── envs/
 │   ├── dev/
 │   ├── staging/

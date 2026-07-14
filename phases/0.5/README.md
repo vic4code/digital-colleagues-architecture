@@ -1,113 +1,134 @@
-# Phase 0.5 — Digital Colleague: layered persona on the Codex engine
+# Phase 0.5 — One face-to-face interface, many tools
 
 **Status:** 📐 Design note. The **implementation lives in a separate code repo**
 (this repo is architecture only). Parallel track — not on the cloud progression
 (0 → 1 → 2 → 3).
 
 **One line:** a digital colleague is a **layered persona running on the Codex
-engine through an agent runtime**, given real accounts (Gmail, Slack, …) and a
-skill that lets it pick up work from any of those channels and schedule the
-tasks itself.
+engine through an agent runtime**. A person meets it through one consistent
+interaction surface; the colleague itself uses Outlook, Gmail, Slack, calendars,
+Notion, and other services as bidirectional tools to receive and complete work.
+
+This is deliberately not a multi-channel UX. As with a human colleague, the
+relationship is face-to-face; phone, mail, chat, and work systems are tools the
+colleague uses, not separate versions of the colleague that the user must learn
+to operate. [ADR-019](../../decisions/ADR-019-single-interaction-surface.md)
+records that boundary.
 
 We **borrow the persona layer model** — Soul · Body · Faculty · Skill, the
 "spirit" of an open-source agent framework (named in
 [ADR-018](../../decisions/ADR-018-adopt-openclaw-codex.md)) — but the persona
-*content*, the *skills*, and the whole **access-and-permission design are ours**.
-The framework is a design reference, not a brand we ship and not a black-box
-dependency that quietly holds our credentials.
+*content*, the *skills*, the integrations, and the whole
+**access-and-permission design are ours**. The framework is a design reference,
+not a brand we ship and not a black-box dependency that quietly holds our
+credentials.
 
 ![Phase 0.5 layering](./architecture.svg)
 
-## What this replaced (and why)
+## Goal
 
-Earlier drafts of Phase 0.5 hand-built a channel adapter — poller, router,
-scheduler, JSON-RPC client, trace tap — around `codex app-server`. That work is
-**retired** ([ADR-018](../../decisions/ADR-018-adopt-openclaw-codex.md)): an
-existing agent framework already *is* that layer, so building it ourselves was
-reconstructing a shipped product by hand. See the teardown decision for the full
-reasoning and the framework it names.
+Prove the smallest believable digital-colleague experience:
 
-## The stack — three layers, we own the middle of one
+1. A person opens one approved interface and talks to the same colleague every
+   time — no channel selection or routing knowledge required.
+2. The colleague knows which services it may use and chooses the appropriate
+   tool from the task context.
+3. Service events can create or resume work, and the colleague can act or reply
+   through that same service.
+4. Every inbound event and outbound action is permission-bounded and auditable.
+
+## The stack
 
 | Layer | Provided by | We do |
 |---|---|---|
-| **Engine** — agent loop, thread resume, tool continuation, compaction | **Codex** `app-server` (via the runtime's codex-harness plugin) | nothing — use it |
-| **Runtime** — channels, chat/web UI, session files, approvals, transcript | off-the-shelf agent gateway | configure it |
+| **Interaction surface** — the one face-to-face UI | approved web/desktop/embodied client | choose one binding; keep the interaction contract stable |
+| **Runtime** — sessions, approvals, transcript, persona loading | off-the-shelf agent runtime | configure it |
 | **Persona** — `SOUL.md` / `IDENTITY.md`, Soul·Body·Faculty·Skill | borrowed layer model | **author it — this is the colleague** |
-| **Skills** — what the colleague can do, incl. task intake & scheduling | our code + MCP tools | **write the few we need** |
-| **Access & permissions** — credentials, scopes, sandbox, audit | **ours to design** | **spell it out; security reviews it** |
+| **Engine** — agent loop, thread resume, tool continuation, compaction | **Codex** `app-server` | use it |
+| **Integrations/tools** — Outlook, Gmail, Slack, calendar, Notion, kanban, … | vendor APIs + MCP/tool adapters | make them bidirectional and composable |
+| **Access & permissions** — credentials, scopes, sandbox, approval, audit | **ours to design** | **spell it out; security reviews it** |
 
-The colleague *is* data: a persona plus a skill set. The runtime and engine are
-off-the-shelf; the persona layer model is borrowed. What is genuinely ours is
-two things: the **skills**, and the **access-and-permission design** — the ADR-015
-principle taken one layer further, plus the security surface no framework hands
-you for free.
+The colleague *is* data: a persona, skills, memory policy, and permission set.
+The interface, runtime, engine, and service adapters are replaceable bindings.
 
-## The one thing worth designing (behaviour): multi-channel intake + self-scheduling
+## The interaction model
 
-The runtime gives channels; the behaviour we want to add is: **the colleague
-notices work arriving on any of its accounts (mail, Slack, a Notion or kanban
-change), queues it as tasks, works them, and reports back on a channel** —
-without a human forwarding each item. This is a **skill** (task intake +
-dispatch), not new infrastructure. The old "dispatcher" idea becomes exactly this
-skill; nothing about it is a bespoke service.
+There is exactly one component called the **channel**: the human-facing
+interaction surface. It may be implemented as a web app, desktop app, or an
+embodied office UI, but a deployment presents one consistent place to meet the
+colleague.
 
-Open design questions (answer against the runtime's real capabilities, in the
-code repo — not to over-spec here):
+Outlook, Gmail, Slack, Teams, Linear, Notion, and calendars are **not peer
+channels**. They are bidirectional integrations the colleague can operate:
 
-- Are Gmail/Slack first-class channels of the runtime, or do they arrive as MCP
-  tools the intake skill polls? (verify before designing)
-- Where does the task queue live — a runtime session artifact, or the
-  colleague's own workspace file?
-- Scheduling trigger: a runtime event → skill, or a skill that wakes on a timer
-  and sweeps its accounts? (the initiator test decides which is worth building)
+- **Inbound:** webhook, subscription, or bounded polling turns a service event
+  into a trusted event envelope and an untrusted content payload.
+- **Decision:** persona + skills + policy decide whether the event becomes a
+  task, needs clarification, requires approval, or is ignored.
+- **Outbound:** the colleague uses the same integration to search, create,
+  update, send, reply, or report completion.
+- **Continuity:** the resulting task/session is visible from the one interaction
+  surface, even if nobody had that surface open when work arrived.
 
-## The other thing worth designing (security): access & permissions
+The old "dispatcher" idea therefore becomes a small **event-to-task skill and
+policy**, not a collection of channel-specific conversation services.
 
-A colleague with its own Gmail + Slack + reach into internal services is a real
-security surface — this is what "資安疑慮" actually points at, and no framework
-answers it for you. Spell out, and put in front of security review:
+## What this replaced (and why)
+
+Earlier Phase 0.5 drafts hand-built channel adapters around `codex app-server`.
+[ADR-018](../../decisions/ADR-018-adopt-openclaw-codex.md) retired that bespoke
+runtime layer. The next draft still described Gmail and Slack as parallel
+channels supplied by the runtime; [ADR-019](../../decisions/ADR-019-single-interaction-surface.md)
+corrects the product model: runtime capabilities may be reusable internally,
+but the architecture exposes one interaction surface and treats surrounding
+services as tools.
+
+## Access & permissions
+
+A colleague that can read mail, post to Slack, schedule meetings, and update work
+systems is a real security surface:
 
 - **Credential custody.** OAuth tokens and API keys live in a secrets store (OS
-  keychain locally, a secrets manager in cloud) — never in persona files, config,
-  logs, or traces. The runtime uses them at execution time only.
-- **Least privilege.** Each account and each MCP tool gets the minimal scope the
-  colleague actually needs — per colleague, not a shared god-token.
-- **Sandbox + approval bounds.** Codex-native `sandbox_mode` bounds what the
-  colleague can touch; `approval_policy` bounds what it does unattended. These
-  are the blast-radius controls if a persona is prompt-injected.
-- **Audit.** Every tool call and channel action is logged (Codex rollouts + a
-  business trace) so "what did it do, on whose behalf" is always answerable.
-- **Runtime trust boundary — the review target.** The runtime is the process
-  that holds real-account tokens. If it is third-party, *that* is what security
-  reviews: prefer **self-hosting** it or fronting credentials with a **broker you
-  control**, rather than handing an external service standing access to company
-  accounts. Borrowing the *design* (the persona layers) carries no such risk;
-  running someone else's *binary with your tokens* does — keep the two decisions
-  separate.
+  keychain locally, a secrets manager in cloud), never in persona files, config,
+  logs, or traces.
+- **Least privilege.** Each integration gets the minimal read/write scopes the
+  colleague needs, per colleague — never a shared god-token.
+- **Inbound trust boundary.** Service content is untrusted input even when the
+  sender is known. Adapters preserve provenance; skills enforce sender/resource
+  allow-lists and prompt-injection controls.
+- **Sandbox + approval bounds.** Sandbox policy limits reach; approval policy
+  decides which writes, sends, and external side effects require a human.
+- **Audit.** Every service event, tool call, approval, and outbound action records
+  what happened, on whose behalf, with which permission and correlation id.
+- **Runtime trust boundary.** Any runtime or broker holding real-account tokens
+  is a security-review target; prefer self-hosting or a credential broker we
+  control.
 
-## The initiator test still governs scope
+## Open implementation questions
 
-[ADR-017](../../decisions/ADR-017-initiator-test.md) holds: build the
-multi-channel intake only where **the initiator is not you** — a teammate, a
-customer, another system, or someone who can't run the agent app. If the only
-initiator is yourself, talk to the colleague in its web chat (the runtime gives
-you that for free) and skip the intake plumbing until a real second party appears.
+- Which single interaction surface is the Phase 0.5 binding?
+- For each service, is event delivery a webhook/subscription or bounded polling?
+- Which operations are read-only, auto-approved writes, or human-approved writes?
+- Where does the durable event/task queue live while the local device is offline?
+- How are service event ids, agent sessions, approvals, and outbound actions
+  correlated in the audit trail?
 
-## Short-term vs long-term (unchanged in spirit)
+These are answered against the runtime and vendor APIs in the implementation
+repo; they do not change the conceptual boundary above.
 
-- **Short term — the colleague as your local 分身.** The runtime + codex-harness
-  on your own device, one persona, its own Gmail/Slack accounts. Mail it or DM it;
-  it runs on your machine's compute. This is the boss-facing demo.
-- **Long term — centralized.** The same persona deployed to an always-on cloud
-  runtime; hand it tasks by mail/Slack and it works them unattended. Persona and
-  skills transfer unchanged — the move is a deployment change, and it rejoins the
-  Phase 1 cloud line.
+## Short term vs long term
+
+- **Short term — local colleague.** One persona on a user's device, reached
+  through one interface, with a small allow-listed set of integrations. The
+  device supplies compute; integrations can wake work while it is online.
+- **Long term — centralized colleague.** The same persona and skills run on an
+  always-on runtime. The interaction contract and tool contracts stay the same;
+  only deployment, durability, and scale change as the work rejoins Phase 1+.
 
 ## Where the implementation goes
 
-A separate code repo (e.g. `digital-colleague`) holds the runtime config, the
-`SOUL.md`/`IDENTITY.md` persona, the intake/scheduling skill, and account setup.
-This repo keeps only the thinking: this note, the layering diagram, and the ADRs
-([017](../../decisions/ADR-017-initiator-test.md),
-[018](../../decisions/ADR-018-adopt-openclaw-codex.md)).
+A separate code repo holds the runtime config, persona files, interaction-surface
+binding, event-to-task skill, service integrations, and account setup. This repo
+keeps the architectural intent, diagram, and decisions
+([018](../../decisions/ADR-018-adopt-openclaw-codex.md),
+[019](../../decisions/ADR-019-single-interaction-surface.md)).

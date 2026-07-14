@@ -32,7 +32,7 @@
   <text x="98" y="89" text-anchor="middle" class="label">Browser → Claw3D</text>
   <text x="98" y="106" text-anchor="middle" class="sub">3D office (web)</text>
   <rect x="170" y="66" width="124" height="54" rx="6" class="box"/>
-  <text x="232" y="89" text-anchor="middle" class="label">Linear webhook</text>
+  <text x="232" y="89" text-anchor="middle" class="label">Linear integration</text>
   <text x="232" y="106" text-anchor="middle" class="sub">issue → turn</text>
   <rect x="304" y="66" width="110" height="54" rx="6" class="box"/>
   <text x="359" y="89" text-anchor="middle" class="label">Legal admin</text>

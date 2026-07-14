@@ -1,4 +1,4 @@
-# Phase 3 — Enterprise & Multi-Channel
+# Phase 3 — Enterprise Reach & Resilience
 
 **Status:** ⏳ Planned. The robust, scale-out version.
 
@@ -6,9 +6,10 @@
 
 ## Goal
 
-Run 1000+ digital colleagues across a 1000+ person company, reachable from any
-channel employees already use, with HA, observability, compliance, and cost
-controls a real enterprise needs.
+Run 1000+ digital colleagues across a 1000+ person company through one consistent
+interaction surface, while each colleague can receive work from and act through
+enterprise services with the HA, observability, compliance, and cost controls a
+real enterprise needs.
 
 ## Scale targets
 
@@ -18,32 +19,30 @@ controls a real enterprise needs.
 - p95 turn latency < acceptable threshold (TBD per scenario)
 - 99.9% control-plane availability
 
-## Channels
+## Interaction surface and integrations
 
-Each colleague is reachable from any of these — same identity, same memory:
+Each deployment presents **one approved human-facing surface** — for example the
+Claw3D office, a web client, or an enterprise desktop shell. Employees do not pick
+a vendor channel before talking to a colleague.
 
-- Claw3D 3D office (the differentiator, kept)
-- Slack (DM, channel mention, slash command, modal)
-- Microsoft Teams (chat triggers)
-- Linear (issue assignment, comment)
-- Email (inbound + outbound) — each colleague has its own address; see [ADR-010](../../decisions/ADR-010-email-per-colleague-identity.md)
-- Webhook / API (for programmatic callers)
-- VDI-bound desktops (presentation-only — see [ADR-008](../../decisions/ADR-008-vdi-presentation-only-channel.md))
-- Voice / phone (future)
+Each colleague can use permission-scoped, bidirectional integrations:
 
-**Key insight:** channels are thin adapters in front of the same orchestrator.
-The colleague doesn't know which channel they're being reached on, except as metadata.
+- Outlook / Gmail — message events, search, send, reply, calendar actions
+- Slack / Microsoft Teams — message events, read context, post or reply
+- Linear / kanban — assignment and comment events, issue/status updates
+- SharePoint / Google Drive / DMS — document discovery, read, create, update
+- Webhooks / APIs — system events and approved business actions
+- Voice / phone — future communication tool, not a second agent identity
 
-**Channels are not document sources.** Where a document actually lives (S3, SharePoint, a DMS)
-is a separate concern handled by **source connectors**, not channel adapters — see
-[ADR-009](../../decisions/ADR-009-source-connectors-distinct-from-channels.md). Microsoft Teams,
-for example, is a channel adapter for chat and a source connector for files at the same time —
-they share Graph API auth, not architecture.
+**Key insight:** a new service adds something the colleague can observe or do; it
+does not add another way the user must operate the colleague. Service events and
+tool actions share the same identity, permission, approval, and audit boundary.
+See [ADR-019](../../decisions/ADR-019-single-interaction-surface.md).
 
 ## What gets added vs Phase 2
 
-- **Channel adapter layer** — one service per channel, normalized event shape
-- **Per-channel ingress queues** — backpressure isolation
+- **Integration tool gateway** — one contract for inbound events and outbound actions
+- **Per-integration event queues** — backpressure and failure isolation without changing the UX
 - **Long-running colleagues** — for the small subset that needs persistent state
   (e.g. on-call monitor, always-on assistant), introduce a stateful runtime
   (probably k8s StatefulSet for *those few*, not all)
@@ -59,7 +58,7 @@ they share Graph API auth, not architecture.
 
 - A microservice for every colleague — colleagues are data, not services
 - Service mesh between agents — the orchestrator is the integration point
-- Custom-built channel implementations when vendor SDKs are good enough
+- Custom-built service transports when vendor SDKs are good enough
 
 ## Open questions
 

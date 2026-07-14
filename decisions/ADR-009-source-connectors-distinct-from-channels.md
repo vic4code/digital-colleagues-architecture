@@ -1,6 +1,6 @@
 # ADR-009 — Source connectors are a distinct abstraction from channel adapters
 
-- **Status:** Proposed
+- **Status:** Superseded by [ADR-019](./ADR-019-single-interaction-surface.md)
 - **Date:** 2026-06-23
 - **Deciders:** (architecture review)
 
