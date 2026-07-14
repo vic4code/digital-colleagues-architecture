@@ -1,6 +1,6 @@
 # ADR-017 — The initiator test: channels are justified by who initiates, not by reach
 
-- **Status:** Accepted
+- **Status:** Superseded by [ADR-019](./ADR-019-single-interaction-surface.md)
 - **Date:** Phase 0.5 design review
 - **Deciders:** architecture owner
 
