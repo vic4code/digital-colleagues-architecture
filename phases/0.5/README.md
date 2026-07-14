@@ -73,6 +73,22 @@ channels**. They are bidirectional integrations the colleague can operate:
 The old "dispatcher" idea therefore becomes a small **event-to-task skill and
 policy**, not a collection of channel-specific conversation services.
 
+### Peer colleagues (agent-to-agent)
+
+A third relationship, distinct from both the human interface and service tools:
+colleagues coordinate with **each other** directly — delegation, hand-off, "ask
+David the SA to review this" — over an **agent-to-agent protocol, a service
+API, or plain networking**, machine-to-machine, **never through the human
+interaction surface**. Humans meet a colleague one way (face-to-face); colleagues
+reach each other a different way (peer). The single-surface rule is about the
+*human* relationship — it does not mean a colleague can only ever be reached one
+way.
+
+A2A rides the **same identity, permission, and audit rules** as any tool: a peer
+call is a bounded, credentialed, logged action, not a backdoor around approval.
+This is a forward-looking dimension — short-term demos need only one colleague,
+so it is recorded to keep the model honest, not to build now.
+
 ## What this replaced (and why)
 
 Earlier Phase 0.5 drafts hand-built channel adapters around `codex app-server`.

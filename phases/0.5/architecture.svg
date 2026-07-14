@@ -1,6 +1,6 @@
-<svg viewBox="0 0 780 840" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 0.5 — one interaction surface with bidirectional service tools</title>
-  <desc>A person meets one digital colleague through one consistent face-to-face interface. The colleague is a layered persona on an agent runtime and Codex engine. Outlook, Gmail, Slack, calendars, Notion, and kanban are bidirectional tools: events flow in and actions flow out. Access, permissions, approvals, and audit bound every service interaction.</desc>
+<svg viewBox="0 0 780 970" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — one interaction surface, service tools, and peer (A2A) coordination</title>
+  <desc>A person meets one digital colleague through one consistent face-to-face interface. The colleague is a layered persona on an agent runtime and Codex engine. Outlook, Gmail, Slack, calendars, Notion, and kanban are bidirectional tools. Colleagues also coordinate with each other peer-to-peer over an agent-to-agent protocol, API, or networking layer. Access, permissions, approvals, and audit bound every service and peer interaction.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -27,9 +27,11 @@
     .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.8; }
     .chipSec { fill: #eff6ff; stroke: #93c5fd; stroke-width: 0.8; }
     .service { fill: #ffffff; stroke: #fdba74; stroke-width: 1; }
+    .peer { fill: #ffffff; stroke: #a78bfa; stroke-width: 1; }
+    .edgePeer { stroke: #7c3aed; stroke-width: 1.3; fill: none; }
   </style>
 
-  <text x="20" y="24" class="sub">One relationship, one interface. Surrounding services are the colleague's tools — events in, actions out.</text>
+  <text x="20" y="24" class="sub">One relationship, one interface. Services are the colleague's tools; other colleagues are peers reached agent-to-agent.</text>
 
   <!-- Human and the single interaction surface -->
   <text x="20" y="52" class="tier">FACE-TO-FACE · THE ONLY HUMAN-FACING CHANNEL</text>
@@ -61,7 +63,7 @@
   <text x="476" y="283" text-anchor="middle" class="sub">reasoning · memory policy</text>
   <rect x="570" y="248" width="162" height="48" rx="6" class="boxOwn"/>
   <text x="651" y="267" text-anchor="middle" class="label">Skills</text>
-  <text x="651" y="283" text-anchor="middle" class="sub">decide what tool to use</text>
+  <text x="651" y="283" text-anchor="middle" class="sub">decide what tool / peer to use</text>
 
   <rect x="48" y="312" width="684" height="44" rx="6" class="box"/>
   <text x="60" y="330" class="label">Agent runtime</text>
@@ -97,24 +99,39 @@
   <text x="666" y="587" text-anchor="middle" class="label">Kanban · APIs · …</text>
   <text x="666" y="604" text-anchor="middle" class="sub">trigger · act · report</text>
 
+  <!-- Peer / agent-to-agent -->
+  <text x="20" y="674" class="tier">PEER COLLEAGUES · AGENT-TO-AGENT</text>
+  <text x="736" y="674" text-anchor="end" class="sub">coordination, not a human channel · same permission &amp; audit as any tool</text>
+  <rect x="24" y="686" width="732" height="84" rx="10" class="boxOff"/>
+  <text x="42" y="706" class="sub">Colleagues delegate to and coordinate with each other directly — machine-to-machine, never through the human interface.</text>
+  <rect x="42" y="716" width="222" height="42" rx="7" class="peer"/>
+  <text x="153" y="734" text-anchor="middle" class="label">A2A protocol</text>
+  <text x="153" y="749" text-anchor="middle" class="sub">agent-to-agent hand-off</text>
+  <rect x="276" y="716" width="222" height="42" rx="7" class="peer"/>
+  <text x="387" y="734" text-anchor="middle" class="label">Service API</text>
+  <text x="387" y="749" text-anchor="middle" class="sub">direct REST / RPC calls</text>
+  <rect x="510" y="716" width="228" height="42" rx="7" class="peer"/>
+  <text x="624" y="734" text-anchor="middle" class="label">Networking</text>
+  <text x="624" y="749" text-anchor="middle" class="sub">discovery · addressing · transport</text>
+
   <!-- Access and permission surface -->
-  <text x="20" y="674" class="tier">ACCESS &amp; PERMISSIONS · CROSS-CUTTING SECURITY BOUNDARY</text>
-  <rect x="24" y="686" width="732" height="112" rx="10" class="boxSec"/>
-  <rect x="38" y="698" width="150" height="14" rx="7" class="chipSec"/>
-  <text x="46" y="708" class="sec">WE DESIGN · REVIEWED</text>
+  <text x="20" y="806" class="tier">ACCESS &amp; PERMISSIONS · CROSS-CUTTING SECURITY BOUNDARY</text>
+  <rect x="24" y="818" width="732" height="112" rx="10" class="boxSec"/>
+  <rect x="38" y="830" width="150" height="14" rx="7" class="chipSec"/>
+  <text x="46" y="840" class="sec">WE DESIGN · REVIEWED</text>
 
-  <rect x="42" y="726" width="162" height="48" rx="6" class="box"/>
-  <text x="54" y="744" class="label">Credential custody</text>
-  <text x="54" y="760" class="sub">tokens stay in a broker/store</text>
-  <rect x="216" y="726" width="162" height="48" rx="6" class="box"/>
-  <text x="228" y="744" class="label">Least privilege</text>
-  <text x="228" y="760" class="sub">read/write scope per tool</text>
-  <rect x="390" y="726" width="162" height="48" rx="6" class="box"/>
-  <text x="402" y="744" class="label">Approval bounds</text>
-  <text x="402" y="760" class="sub">human gates side effects</text>
-  <rect x="564" y="726" width="174" height="48" rx="6" class="box"/>
-  <text x="576" y="744" class="label">Audit + provenance</text>
-  <text x="576" y="760" class="sub">event → task → action</text>
+  <rect x="42" y="858" width="162" height="48" rx="6" class="box"/>
+  <text x="54" y="876" class="label">Credential custody</text>
+  <text x="54" y="892" class="sub">tokens stay in a broker/store</text>
+  <rect x="216" y="858" width="162" height="48" rx="6" class="box"/>
+  <text x="228" y="876" class="label">Least privilege</text>
+  <text x="228" y="892" class="sub">read/write scope per tool</text>
+  <rect x="390" y="858" width="162" height="48" rx="6" class="box"/>
+  <text x="402" y="876" class="label">Approval bounds</text>
+  <text x="402" y="892" class="sub">human gates side effects</text>
+  <rect x="564" y="858" width="174" height="48" rx="6" class="box"/>
+  <text x="576" y="876" class="label">Audit + provenance</text>
+  <text x="576" y="892" class="sub">event → task → action</text>
 
-  <text x="20" y="824" class="sub">ADR-019: a new service adds a capability, not a new conversation surface or a new colleague identity.</text>
+  <text x="20" y="956" class="sub">ADR-019: a new service adds a capability, not a new conversation surface or a new colleague identity. Peers are reached agent-to-agent, not by opening a second UI.</text>
 </svg>
