@@ -84,7 +84,10 @@ Reuse off-the-shelf pieces rather than build a bus:
 
 The old "dispatcher" idea therefore becomes a small **event-to-task skill plus a
 triage policy**, not a collection of channel-specific conversation services.
-Event-driven and time-driven coexist and feed the same gate.
+Event-driven and time-driven coexist and feed the same gate. The full inbound
+pipeline (sources → ingress → triage → outcome) is drawn in
+[integration-flow.svg](./integration-flow.svg); the main diagram shows the same
+tools as the colleague's ring.
 
 ### Peer colleagues (agent-to-agent)
 
@@ -100,7 +103,9 @@ way.
 A2A rides the **same identity, permission, and audit rules** as any tool: a peer
 call is a bounded, credentialed, logged action, not a backdoor around approval.
 This is a forward-looking dimension — short-term demos need only one colleague,
-so it is recorded to keep the model honest, not to build now.
+so it is recorded to keep the model honest, not to build now. The main diagram
+deliberately shows **one colleague**; peers get drawn side by side once a second
+colleague is real.
 
 ## What this replaced (and why)
 
