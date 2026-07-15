@@ -97,8 +97,8 @@
   <text x="324" y="459" text-anchor="middle" class="labelS">Scheduler</text>
   <text x="324" y="474" text-anchor="middle" class="sub">cron · heartbeat (no-push)</text>
   <rect x="424" y="440" width="184" height="48" rx="6" class="box"/>
-  <text x="516" y="459" text-anchor="middle" class="labelS">Runtime triage policy</text>
-  <text x="516" y="474" text-anchor="middle" class="sub">a rule (not the LLM)</text>
+  <text x="516" y="459" text-anchor="middle" class="labelS">Subscription renewal</text>
+  <text x="516" y="474" text-anchor="middle" class="sub">renew push TTL · else events stop</text>
   <rect x="616" y="440" width="184" height="48" rx="6" class="box"/>
   <text x="708" y="459" text-anchor="middle" class="labelS">MCP Tool Servers</text>
   <text x="708" y="474" text-anchor="middle" class="sub">vendor APIs · outbound actions</text>
