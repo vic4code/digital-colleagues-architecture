@@ -59,19 +59,32 @@ embodied office UI, but a deployment presents one consistent place to meet the
 colleague.
 
 Outlook, Gmail, Slack, Teams, Linear, Notion, and calendars are **not peer
-channels**. They are bidirectional integrations the colleague can operate:
+channels**. They are bidirectional integrations the colleague can operate, and
+the inbound direction is **event-driven — services wake the colleague, it does
+not poll them by hand.** This is a webhook job, not an MCP job (MCP is how an
+agent *fetches* data mid-session; it cannot wake an agent whose session ended —
+see [ADR-020](../../decisions/ADR-020-event-driven-service-integration.md)).
+Reuse off-the-shelf pieces rather than build a bus:
 
-- **Inbound:** webhook, subscription, or bounded polling turns a service event
-  into a trusted event envelope and an untrusted content payload.
-- **Decision:** persona + skills + policy decide whether the event becomes a
-  task, needs clarification, requires approval, or is ignored.
-- **Outbound:** the colleague uses the same integration to search, create,
-  update, send, reply, or report completion.
+- **Sources.** Where a service pushes natively — Microsoft Graph (Outlook),
+  Google Calendar `watch()`, Gmail watch — use it. These carry a **~7-day TTL
+  that must be auto-renewed**, or events silently stop. Where a service has no
+  push (punch-clock, periodic summaries), a **scheduler (cron / heartbeat)**
+  plays the same role, time-driven.
+- **Ingress.** A small always-on **webhook receiver** (public HTTPS) verifies
+  signature + source and de-duplicates. Its content is untrusted input.
+- **Triage gate — a rule, not the LLM.** "Does this need agent reasoning?"
+  **No → deliver-only:** forward the notice with no LLM turn (saves tokens).
+  **Yes →** spawn a bounded agent session with the event as context.
+- **Outcome.** The colleague acts/replies through the **same integration**
+  (outbound: search, create, update, send, reply), or returns **`[SILENT]`**
+  when nothing is worth interrupting a human for.
 - **Continuity:** the resulting task/session is visible from the one interaction
-  surface, even if nobody had that surface open when work arrived.
+  surface, even if nobody had it open when the event arrived.
 
-The old "dispatcher" idea therefore becomes a small **event-to-task skill and
-policy**, not a collection of channel-specific conversation services.
+The old "dispatcher" idea therefore becomes a small **event-to-task skill plus a
+triage policy**, not a collection of channel-specific conversation services.
+Event-driven and time-driven coexist and feed the same gate.
 
 ### Peer colleagues (agent-to-agent)
 
@@ -147,4 +160,5 @@ A separate code repo holds the runtime config, persona files, interaction-surfac
 binding, event-to-task skill, service integrations, and account setup. This repo
 keeps the architectural intent, diagram, and decisions
 ([018](../../decisions/ADR-018-adopt-openclaw-codex.md),
-[019](../../decisions/ADR-019-single-interaction-surface.md)).
+[019](../../decisions/ADR-019-single-interaction-surface.md),
+[020](../../decisions/ADR-020-event-driven-service-integration.md)).

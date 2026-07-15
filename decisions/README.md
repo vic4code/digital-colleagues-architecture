@@ -24,6 +24,7 @@ Each decision lives in its own file: `ADR-NNN-short-slug.md`.
 | 017 | [The initiator test: channels are justified by who initiates](./ADR-017-initiator-test.md) | Superseded by ADR-019 |
 | 018 | [Adopt OpenClaw + Codex; retire the hand-built channel adapter](./ADR-018-adopt-openclaw-codex.md) | Accepted |
 | 019 | [One interaction surface; surrounding services are bidirectional tools](./ADR-019-single-interaction-surface.md) | Accepted |
+| 020 | [Event-driven service integration: webhook, not MCP; reuse off-the-shelf](./ADR-020-event-driven-service-integration.md) | Accepted |
 
 ## Conventions
 

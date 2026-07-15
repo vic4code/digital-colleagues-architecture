@@ -1,6 +1,6 @@
-<svg viewBox="0 0 780 970" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 0.5 — one interaction surface, service tools, and peer (A2A) coordination</title>
-  <desc>A person meets one digital colleague through one consistent face-to-face interface. The colleague is a layered persona on an agent runtime and Codex engine. Outlook, Gmail, Slack, calendars, Notion, and kanban are bidirectional tools. Colleagues also coordinate with each other peer-to-peer over an agent-to-agent protocol, API, or networking layer. Access, permissions, approvals, and audit bound every service and peer interaction.</desc>
+<svg viewBox="0 0 780 1050" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — one interaction surface, event-driven service integration, and peer (A2A) coordination</title>
+  <desc>A person meets one digital colleague through one face-to-face interface. Services reach the colleague through an event-driven pipeline: native push subscriptions or a scheduler feed a webhook receiver, a triage gate decides deliver-only vs a reasoning agent session, and the colleague acts back through the same integration. Colleagues also coordinate peer-to-peer over agent-to-agent protocols. Access, permission, and audit bound everything.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -27,111 +27,139 @@
     .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.8; }
     .chipSec { fill: #eff6ff; stroke: #93c5fd; stroke-width: 0.8; }
     .service { fill: #ffffff; stroke: #fdba74; stroke-width: 1; }
+    .stage { fill: #ffffff; stroke: #fdba74; stroke-width: 1; }
     .peer { fill: #ffffff; stroke: #a78bfa; stroke-width: 1; }
-    .edgePeer { stroke: #7c3aed; stroke-width: 1.3; fill: none; }
   </style>
 
-  <text x="20" y="24" class="sub">One relationship, one interface. Services are the colleague's tools; other colleagues are peers reached agent-to-agent.</text>
+  <text x="20" y="24" class="sub">One human interface. Services reach the colleague event-driven (reuse off-the-shelf push + webhook). Peers reach it agent-to-agent.</text>
 
   <!-- Human and the single interaction surface -->
   <text x="20" y="52" class="tier">FACE-TO-FACE · THE ONLY HUMAN-FACING CHANNEL</text>
-  <rect x="24" y="64" width="732" height="82" rx="10" class="boxOff"/>
-  <rect x="48" y="82" width="170" height="46" rx="8" class="box"/>
-  <text x="133" y="102" text-anchor="middle" class="label">You / teammate</text>
-  <text x="133" y="117" text-anchor="middle" class="sub">one person, one intent</text>
-  <line x1="218" y1="105" x2="300" y2="105" class="edge" marker-end="url(#arr)"/>
-  <rect x="300" y="78" width="432" height="54" rx="8" class="box"/>
-  <text x="516" y="99" text-anchor="middle" class="label">ONE INTERACTION SURFACE</text>
-  <text x="516" y="116" text-anchor="middle" class="sub">web / desktop / embodied UI — one approved binding per deployment</text>
+  <rect x="24" y="64" width="732" height="72" rx="10" class="boxOff"/>
+  <rect x="48" y="78" width="170" height="44" rx="8" class="box"/>
+  <text x="133" y="97" text-anchor="middle" class="label">You / teammate</text>
+  <text x="133" y="112" text-anchor="middle" class="sub">one person, one intent</text>
+  <line x1="218" y1="100" x2="300" y2="100" class="edge" marker-end="url(#arr)"/>
+  <rect x="300" y="76" width="432" height="48" rx="8" class="box"/>
+  <text x="516" y="95" text-anchor="middle" class="label">ONE INTERACTION SURFACE</text>
+  <text x="516" y="111" text-anchor="middle" class="sub">web / desktop / embodied UI — one approved binding</text>
 
-  <line x1="390" y1="146" x2="390" y2="174" class="edge" marker-end="url(#arr)"/>
+  <line x1="390" y1="136" x2="390" y2="162" class="edge" marker-end="url(#arr)"/>
 
   <!-- Digital colleague -->
-  <text x="20" y="196" class="tier">THE DIGITAL COLLEAGUE · PERSONA + SKILLS + RUNTIME</text>
-  <rect x="24" y="208" width="732" height="222" rx="10" class="boxOwn"/>
-  <rect x="38" y="220" width="66" height="14" rx="7" class="chip"/>
-  <text x="46" y="230" class="own">WE AUTHOR</text>
+  <text x="20" y="184" class="tier">THE DIGITAL COLLEAGUE · PERSONA + SKILLS + RUNTIME</text>
+  <rect x="24" y="196" width="732" height="200" rx="10" class="boxOwn"/>
+  <rect x="38" y="208" width="66" height="14" rx="7" class="chip"/>
+  <text x="46" y="218" class="own">WE AUTHOR</text>
 
-  <rect x="48" y="248" width="160" height="48" rx="6" class="boxOwn"/>
-  <text x="128" y="267" text-anchor="middle" class="label">Soul</text>
-  <text x="128" y="283" text-anchor="middle" class="sub">values · voice · purpose</text>
-  <rect x="222" y="248" width="160" height="48" rx="6" class="boxOwn"/>
-  <text x="302" y="267" text-anchor="middle" class="label">Body</text>
-  <text x="302" y="283" text-anchor="middle" class="sub">identity · presence</text>
-  <rect x="396" y="248" width="160" height="48" rx="6" class="boxOwn"/>
-  <text x="476" y="267" text-anchor="middle" class="label">Faculty</text>
-  <text x="476" y="283" text-anchor="middle" class="sub">reasoning · memory policy</text>
-  <rect x="570" y="248" width="162" height="48" rx="6" class="boxOwn"/>
-  <text x="651" y="267" text-anchor="middle" class="label">Skills</text>
-  <text x="651" y="283" text-anchor="middle" class="sub">decide what tool / peer to use</text>
+  <rect x="48" y="234" width="160" height="44" rx="6" class="boxOwn"/>
+  <text x="128" y="252" text-anchor="middle" class="label">Soul</text>
+  <text x="128" y="267" text-anchor="middle" class="sub">values · voice · purpose</text>
+  <rect x="222" y="234" width="160" height="44" rx="6" class="boxOwn"/>
+  <text x="302" y="252" text-anchor="middle" class="label">Body</text>
+  <text x="302" y="267" text-anchor="middle" class="sub">identity · presence</text>
+  <rect x="396" y="234" width="160" height="44" rx="6" class="boxOwn"/>
+  <text x="476" y="252" text-anchor="middle" class="label">Faculty</text>
+  <text x="476" y="267" text-anchor="middle" class="sub">reasoning · memory</text>
+  <rect x="570" y="234" width="162" height="44" rx="6" class="boxOwn"/>
+  <text x="651" y="252" text-anchor="middle" class="label">Skills</text>
+  <text x="651" y="267" text-anchor="middle" class="sub">choose tool / peer</text>
 
-  <rect x="48" y="312" width="684" height="44" rx="6" class="box"/>
-  <text x="60" y="330" class="label">Agent runtime</text>
-  <text x="60" y="346" class="sub">session · approval · transcript · persona loading · durable event-to-task continuity</text>
-  <rect x="48" y="370" width="684" height="44" rx="6" class="boxOff"/>
-  <text x="60" y="388" class="label">Codex engine</text>
-  <text x="60" y="404" class="sub">agent loop · thread resume · tool continuation · compaction · sandbox execution</text>
+  <rect x="48" y="290" width="684" height="42" rx="6" class="box"/>
+  <text x="60" y="307" class="label">Agent runtime</text>
+  <text x="60" y="323" class="sub">session · approval · transcript · persona loading · durable event-to-task continuity</text>
+  <rect x="48" y="342" width="684" height="42" rx="6" class="boxOff"/>
+  <text x="60" y="359" class="label">Codex engine</text>
+  <text x="60" y="375" class="sub">agent loop · thread resume · tool continuation · compaction · sandbox execution</text>
 
-  <line x1="390" y1="430" x2="390" y2="466" class="edgeTool" marker-end="url(#arrOrange)"/>
-  <line x1="414" y1="466" x2="414" y2="430" class="edgeTool" marker-end="url(#arrOrange)"/>
-  <text x="428" y="453" class="port">events in · actions out</text>
+  <line x1="390" y1="396" x2="390" y2="424" class="edgeTool" marker-end="url(#arrOrange)"/>
+  <line x1="414" y1="424" x2="414" y2="396" class="edgeTool" marker-end="url(#arrOrange)"/>
+  <text x="428" y="415" class="port">events in · actions out</text>
 
-  <!-- Tool/service boundary -->
-  <text x="20" y="490" class="tier">BIDIRECTIONAL INTEGRATIONS / TOOLS · THE COLLEAGUE CONNECTS AND ACTS</text>
-  <rect x="24" y="502" width="732" height="146" rx="10" class="boxOff"/>
-  <rect x="42" y="516" width="696" height="34" rx="6" class="box"/>
-  <text x="390" y="531" text-anchor="middle" class="label">Integration tool boundary</text>
-  <text x="390" y="545" text-anchor="middle" class="sub">normalize event · expose actions · preserve provenance · correlate audit</text>
+  <!-- Service integration: event-driven pipeline -->
+  <text x="20" y="448" class="tier">SERVICE INTEGRATION · EVENT-DRIVEN — SERVICES WAKE THE COLLEAGUE (NOT THE REVERSE)</text>
+  <rect x="24" y="460" width="732" height="214" rx="10" class="boxOff"/>
+  <text x="40" y="480" class="sub">Inbound is a webhook job, not an MCP job. Reuse off-the-shelf push + receiver + deliver-only / silent patterns (tools compared in ADR-020).</text>
 
-  <rect x="42" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="105" y="587" text-anchor="middle" class="label">Outlook</text>
-  <text x="105" y="604" text-anchor="middle" class="sub">mail · calendar</text>
-  <rect x="180" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="243" y="587" text-anchor="middle" class="label">Gmail</text>
-  <text x="243" y="604" text-anchor="middle" class="sub">receive · send</text>
-  <rect x="318" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="381" y="587" text-anchor="middle" class="label">Slack</text>
-  <text x="381" y="604" text-anchor="middle" class="sub">events · replies</text>
-  <rect x="456" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="519" y="587" text-anchor="middle" class="label">Notion</text>
-  <text x="519" y="604" text-anchor="middle" class="sub">read · update</text>
-  <rect x="594" y="566" width="144" height="54" rx="7" class="service"/>
-  <text x="666" y="587" text-anchor="middle" class="label">Kanban · APIs · …</text>
-  <text x="666" y="604" text-anchor="middle" class="sub">trigger · act · report</text>
+  <!-- stage 1: sources -->
+  <rect x="40" y="492" width="158" height="120" rx="7" class="stage"/>
+  <text x="119" y="510" text-anchor="middle" class="label">Event sources</text>
+  <text x="119" y="528" text-anchor="middle" class="sub">Outlook · Gmail · GCal</text>
+  <text x="119" y="543" text-anchor="middle" class="sub">native push, renew ~7d TTL</text>
+  <text x="119" y="561" text-anchor="middle" class="sub">Slack · Notion · Kanban</text>
+  <text x="119" y="583" text-anchor="middle" class="sub">punch-clock · summaries</text>
+  <text x="119" y="598" text-anchor="middle" class="sub">no push → time-driven</text>
+
+  <!-- stage 2: ingress -->
+  <rect x="216" y="492" width="158" height="120" rx="7" class="stage"/>
+  <text x="295" y="510" text-anchor="middle" class="label">Ingress</text>
+  <text x="295" y="530" text-anchor="middle" class="sub">Webhook receiver</text>
+  <text x="295" y="545" text-anchor="middle" class="sub">HTTPS · verify sig · dedup</text>
+  <text x="295" y="569" text-anchor="middle" class="sub">— or for no-push —</text>
+  <text x="295" y="588" text-anchor="middle" class="sub">Scheduler: cron · heartbeat</text>
+
+  <!-- stage 3: triage -->
+  <rect x="392" y="492" width="150" height="120" rx="7" class="stage"/>
+  <text x="467" y="510" text-anchor="middle" class="label">Triage gate</text>
+  <text x="467" y="532" text-anchor="middle" class="sub">needs agent</text>
+  <text x="467" y="547" text-anchor="middle" class="sub">reasoning?</text>
+  <text x="467" y="573" text-anchor="middle" class="sub">a rule, not the LLM —</text>
+  <text x="467" y="588" text-anchor="middle" class="sub">saves tokens on "no"</text>
+
+  <!-- stage 4: outcome -->
+  <rect x="560" y="492" width="178" height="120" rx="7" class="stage"/>
+  <text x="649" y="510" text-anchor="middle" class="label">Outcome</text>
+  <text x="649" y="530" text-anchor="middle" class="sub">No → deliver-only:</text>
+  <text x="649" y="545" text-anchor="middle" class="sub">forward notice, no LLM</text>
+  <text x="649" y="569" text-anchor="middle" class="sub">Yes → agent session:</text>
+  <text x="649" y="584" text-anchor="middle" class="sub">act, or [SILENT] if nothing</text>
+
+  <line x1="198" y1="552" x2="214" y2="552" class="edge" marker-end="url(#arr)"/>
+  <line x1="374" y1="552" x2="390" y2="552" class="edge" marker-end="url(#arr)"/>
+  <line x1="542" y1="552" x2="558" y2="552" class="edge" marker-end="url(#arr)"/>
+
+  <!-- outbound return -->
+  <path d="M 649 612 L 649 640 L 119 640 L 119 614" class="edgeTool" fill="none" marker-end="url(#arrOrange)"/>
+  <text x="384" y="636" text-anchor="middle" class="port">outbound — same integration reversed: search · create · update · send · reply</text>
 
   <!-- Peer / agent-to-agent -->
-  <text x="20" y="674" class="tier">PEER COLLEAGUES · AGENT-TO-AGENT</text>
-  <text x="736" y="674" text-anchor="end" class="sub">coordination, not a human channel · same permission &amp; audit as any tool</text>
-  <rect x="24" y="686" width="732" height="84" rx="10" class="boxOff"/>
-  <text x="42" y="706" class="sub">Colleagues delegate to and coordinate with each other directly — machine-to-machine, never through the human interface.</text>
-  <rect x="42" y="716" width="222" height="42" rx="7" class="peer"/>
-  <text x="153" y="734" text-anchor="middle" class="label">A2A protocol</text>
-  <text x="153" y="749" text-anchor="middle" class="sub">agent-to-agent hand-off</text>
-  <rect x="276" y="716" width="222" height="42" rx="7" class="peer"/>
-  <text x="387" y="734" text-anchor="middle" class="label">Service API</text>
-  <text x="387" y="749" text-anchor="middle" class="sub">direct REST / RPC calls</text>
-  <rect x="510" y="716" width="228" height="42" rx="7" class="peer"/>
-  <text x="624" y="734" text-anchor="middle" class="label">Networking</text>
-  <text x="624" y="749" text-anchor="middle" class="sub">discovery · addressing · transport</text>
+  <text x="20" y="700" class="tier">PEER COLLEAGUES · AGENT-TO-AGENT</text>
+  <text x="736" y="700" text-anchor="end" class="sub">coordination, not a human channel · same permission &amp; audit as any tool</text>
+  <rect x="24" y="712" width="732" height="80" rx="10" class="boxOff"/>
+  <text x="42" y="732" class="sub">Colleagues delegate to and coordinate with each other directly — machine-to-machine, never through the human interface.</text>
+  <rect x="42" y="742" width="222" height="40" rx="7" class="peer"/>
+  <text x="153" y="759" text-anchor="middle" class="label">A2A protocol</text>
+  <text x="153" y="773" text-anchor="middle" class="sub">agent-to-agent hand-off</text>
+  <rect x="276" y="742" width="222" height="40" rx="7" class="peer"/>
+  <text x="387" y="759" text-anchor="middle" class="label">Service API</text>
+  <text x="387" y="773" text-anchor="middle" class="sub">direct REST / RPC calls</text>
+  <rect x="510" y="742" width="228" height="40" rx="7" class="peer"/>
+  <text x="624" y="759" text-anchor="middle" class="label">Networking</text>
+  <text x="624" y="773" text-anchor="middle" class="sub">discovery · addressing · transport</text>
 
   <!-- Access and permission surface -->
-  <text x="20" y="806" class="tier">ACCESS &amp; PERMISSIONS · CROSS-CUTTING SECURITY BOUNDARY</text>
-  <rect x="24" y="818" width="732" height="112" rx="10" class="boxSec"/>
-  <rect x="38" y="830" width="150" height="14" rx="7" class="chipSec"/>
-  <text x="46" y="840" class="sec">WE DESIGN · REVIEWED</text>
+  <text x="20" y="822" class="tier">ACCESS &amp; PERMISSIONS · CROSS-CUTTING SECURITY BOUNDARY</text>
+  <rect x="24" y="834" width="732" height="140" rx="10" class="boxSec"/>
+  <rect x="38" y="846" width="150" height="14" rx="7" class="chipSec"/>
+  <text x="46" y="856" class="sec">WE DESIGN · REVIEWED</text>
 
-  <rect x="42" y="858" width="162" height="48" rx="6" class="box"/>
-  <text x="54" y="876" class="label">Credential custody</text>
-  <text x="54" y="892" class="sub">tokens stay in a broker/store</text>
-  <rect x="216" y="858" width="162" height="48" rx="6" class="box"/>
-  <text x="228" y="876" class="label">Least privilege</text>
-  <text x="228" y="892" class="sub">read/write scope per tool</text>
-  <rect x="390" y="858" width="162" height="48" rx="6" class="box"/>
-  <text x="402" y="876" class="label">Approval bounds</text>
-  <text x="402" y="892" class="sub">human gates side effects</text>
-  <rect x="564" y="858" width="174" height="48" rx="6" class="box"/>
-  <text x="576" y="876" class="label">Audit + provenance</text>
-  <text x="576" y="892" class="sub">event → task → action</text>
+  <rect x="42" y="874" width="222" height="44" rx="6" class="box"/>
+  <text x="54" y="892" class="label">Credential custody</text>
+  <text x="54" y="908" class="sub">tokens in a broker/store</text>
+  <rect x="276" y="874" width="222" height="44" rx="6" class="box"/>
+  <text x="288" y="892" class="label">Least privilege</text>
+  <text x="288" y="908" class="sub">read/write scope per tool</text>
+  <rect x="510" y="874" width="228" height="44" rx="6" class="box"/>
+  <text x="522" y="892" class="label">Approval bounds</text>
+  <text x="522" y="908" class="sub">human gates side effects</text>
 
-  <text x="20" y="956" class="sub">ADR-019: a new service adds a capability, not a new conversation surface or a new colleague identity. Peers are reached agent-to-agent, not by opening a second UI.</text>
+  <rect x="42" y="922" width="342" height="42" rx="6" class="box"/>
+  <text x="54" y="940" class="label">Inbound trust boundary</text>
+  <text x="54" y="955" class="sub">webhook sig + dedup · service content is untrusted input</text>
+  <rect x="396" y="922" width="342" height="42" rx="6" class="box"/>
+  <text x="408" y="940" class="label">Audit + provenance</text>
+  <text x="408" y="955" class="sub">event → task → action, one correlation id</text>
+
+  <text x="20" y="1000" class="sub">ADR-020: event-driven where a service pushes (Outlook/GCal/Gmail); time-driven where it can't (punch-clock/summaries); both feed one gate.</text>
+  <text x="20" y="1020" class="sub">ADR-019: a new service adds a capability, not a new conversation surface. Peers are reached agent-to-agent, not by opening a second UI.</text>
 </svg>
