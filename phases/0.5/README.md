@@ -43,6 +43,22 @@ Component diagrams are optional and deployment/runtime flows are separate
 supporting views. We include C3 and Dynamic here because they resolve the one
 important Phase 0.5 boundary: webhook ingress versus MCP tool execution.
 
+### Supporting layered reference architecture
+
+The earlier layered view remains useful because it shows the whole design
+language on one page: human surface, persona, runtime and engine, service
+integration, external services, and the cross-cutting access/permission/audit
+boundary.
+
+![Phase 0.5 layered reference architecture](./reference-architecture.svg)
+
+This is intentionally a **supporting layered reference architecture**, not a
+numbered C4 level. It is closest to a C2/container overview, but it mixes
+containers with persona concepts, internal responsibilities, and a
+cross-cutting security concern. Use it for stakeholder orientation; use the C1,
+C2, C3, Dynamic, and Deployment views above when an implementation boundary or
+runtime sequence must be precise.
+
 ## Goal
 
 Prove the smallest believable digital-colleague experience:
