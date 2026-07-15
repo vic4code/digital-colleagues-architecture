@@ -1,0 +1,85 @@
+<svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — C4 Code (level 4): inside the Triage Policy</title>
+  <desc>A C4 code-level (class) diagram zooming into the Triage Policy component of the Runtime Controller. A TriagePolicy uses an ordered RuleSet of Rule implementations (sender allow-list, keyword filter) to return a Decision: deliver-only, reason, silent, or ignore. Orthogonal connectors. Level 4 is rarely maintained; the code is the source of truth.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+    <marker id="tri" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#ffffff" stroke="#64748b"/></marker>
+  </defs>
+  <style>
+    .title { font-size: 21px; font-weight: 750; fill: #0f172a; }
+    .subtitle { font-size: 11px; fill: #64748b; }
+    .cn { font-size: 13px; font-weight: 750; fill: #0f172a; }
+    .stereo { font-size: 9.5px; fill: #64748b; font-style: italic; }
+    .mem { font-size: 10px; fill: #334155; font-family: ui-monospace, monospace; }
+    .rel { font-size: 9.5px; fill: #475569; font-style: italic; }
+    .edge { stroke: #64748b; stroke-width: 1.3; fill: none; }
+    .cls { fill: #fff7ed; stroke: #f97316; stroke-width: 1.5; }
+    .iface { fill: #ffffff; stroke: #f97316; stroke-width: 1.5; stroke-dasharray: 5 3; }
+    .enum { fill: #eef2ff; stroke: #6366f1; stroke-width: 1.5; }
+    .divider { stroke: #f97316; stroke-width: 1; }
+    .legend { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  </style>
+
+  <rect width="860" height="520" fill="#ffffff"/>
+
+  <text x="28" y="34" class="title">Phase 0.5 · Code level (C4) — inside the Triage Policy</text>
+  <text x="28" y="54" class="subtitle">Zoom into ONE component of the Runtime Controller. Level 4 is optional and rarely kept in sync — the code is the source of truth.</text>
+
+  <!-- TriagePolicy -->
+  <rect x="60" y="108" width="220" height="96" rx="6" class="cls"/>
+  <text x="170" y="130" text-anchor="middle" class="cn">TriagePolicy</text>
+  <line x1="60" y1="140" x2="280" y2="140" class="divider"/>
+  <text x="74" y="159" class="mem">- rules: RuleSet</text>
+  <text x="74" y="177" class="mem">+ evaluate(evt): Decision</text>
+  <text x="74" y="195" class="mem">+ reload(config)</text>
+
+  <!-- RuleSet -->
+  <rect x="360" y="108" width="220" height="96" rx="6" class="cls"/>
+  <text x="470" y="130" text-anchor="middle" class="cn">RuleSet</text>
+  <line x1="360" y1="140" x2="580" y2="140" class="divider"/>
+  <text x="374" y="159" class="mem">- rules: Rule[]</text>
+  <text x="374" y="177" class="mem">+ load(config)</text>
+  <text x="374" y="195" class="mem">+ firstMatch(evt): Decision</text>
+
+  <!-- Decision enum -->
+  <rect x="654" y="100" width="176" height="112" rx="6" class="enum"/>
+  <text x="742" y="122" text-anchor="middle" class="cn">Decision</text>
+  <text x="742" y="137" text-anchor="middle" class="stereo">«enum»</text>
+  <line x1="654" y1="145" x2="830" y2="145" class="divider" stroke="#6366f1"/>
+  <text x="668" y="164" class="mem">DELIVER_ONLY</text>
+  <text x="668" y="181" class="mem">REASON</text>
+  <text x="668" y="198" class="mem">SILENT · IGNORE</text>
+
+  <!-- Rule interface -->
+  <rect x="360" y="288" width="220" height="84" rx="6" class="iface"/>
+  <text x="470" y="309" text-anchor="middle" class="cn">Rule</text>
+  <text x="470" y="324" text-anchor="middle" class="stereo">«interface»</text>
+  <line x1="360" y1="331" x2="580" y2="331" class="divider"/>
+  <text x="374" y="350" class="mem">+ matches(evt): bool</text>
+  <text x="374" y="367" class="mem">+ decision(): Decision</text>
+
+  <!-- implementations -->
+  <rect x="180" y="416" width="190" height="62" rx="6" class="cls"/>
+  <text x="275" y="440" text-anchor="middle" class="cn">SenderAllowList</text>
+  <text x="275" y="461" text-anchor="middle" class="mem">owner-only by default</text>
+
+  <rect x="480" y="416" width="190" height="62" rx="6" class="cls"/>
+  <text x="575" y="440" text-anchor="middle" class="cn">KeywordFilter</text>
+  <text x="575" y="461" text-anchor="middle" class="mem">urgency / topic rules</text>
+
+  <!-- relations -->
+  <line x1="280" y1="156" x2="360" y2="156" class="edge" marker-end="url(#arr)"/>
+  <text x="320" y="149" text-anchor="middle" class="rel">uses</text>
+  <line x1="580" y1="156" x2="654" y2="156" class="edge" marker-end="url(#arr)"/>
+  <text x="617" y="149" text-anchor="middle" class="rel">returns</text>
+  <line x1="470" y1="204" x2="470" y2="288" class="edge" marker-end="url(#arr)"/>
+  <text x="478" y="250" class="rel">contains *</text>
+
+  <path d="M 275 416 L 275 392 L 430 392 L 430 372" class="edge" marker-end="url(#tri)"/>
+  <text x="330" y="385" text-anchor="middle" class="rel">implements</text>
+  <path d="M 575 416 L 575 392 L 510 392 L 510 372" class="edge" marker-end="url(#tri)"/>
+
+  <!-- legend -->
+  <rect x="60" y="492" width="740" height="0" fill="none"/>
+  <text x="28" y="504" class="subtitle">Hollow triangle = implements/inheritance. Same visual family as the C4 set (architecture.svg → system-architecture.svg → runtime-components.svg → here).</text>
+</svg>

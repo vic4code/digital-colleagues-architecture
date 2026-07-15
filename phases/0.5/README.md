@@ -37,8 +37,17 @@ mixing them is what made the app-server / MCP / webhook boundary ambiguous.
 | **C1 — System Context** | Who and which external systems interact with the digital colleague? | [architecture.svg](./architecture.svg) |
 | **C2 — Container** | Which applications/processes exist, and how do app-server, MCP, and webhook ingress connect? | [system-architecture.svg](./system-architecture.svg) |
 | **C3 — Component** | What lives inside the colleague runtime/control container? | [runtime-components.svg](./runtime-components.svg) |
+| **C4 — Code** | What classes make up one component (the Triage Policy)? | [triage-policy-code.svg](./triage-policy-code.svg) |
 | **Dynamic** | How does a SaaS event wake a colleague and lead to an outbound action? | [integration-flow.svg](./integration-flow.svg) |
 | **Deployment** | What runs on the user device versus the always-on public edge? | [deployment.svg](./deployment.svg) |
+
+**Where triage lives — one home.** The deterministic triage gate (deliver-only /
+reason / silent) is a **Runtime Controller** concern: it decides what to do with
+an *accepted* event. Event Ingress only verifies, de-duplicates, and buffers — it
+does **not** triage. So triage appears once, inside the Runtime Controller (C2),
+as the `Triage Policy` component (C3), whose classes are the C4 code view. The
+service-integration tier holds transport pieces only (ingress, scheduler,
+subscription renewal, MCP tool servers).
 
 C4 uses “container” to mean an independently running application, service,
 process, or data store — **not necessarily a Docker container**. To avoid that

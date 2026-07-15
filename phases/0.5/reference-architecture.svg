@@ -1,6 +1,6 @@
 <svg viewBox="0 0 840 742" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
   <title>Phase 0.5 — digital colleague reference architecture (one colleague)</title>
-  <desc>A layered reference architecture for one digital colleague. A person reaches it through one interaction surface. The colleague is defined through OpenClaw-aligned workspace files for identity, persona, operating instructions, user context, skills, and memory, running on a Runtime Controller and Codex app-server. Each external-service integration adds an inbound trigger through a webhook or bounded polling, plus outbound capabilities through an MCP tool adapter and the vendor API. Access, permission, and audit are a cross-cutting concern beneath all layers.</desc>
+  <desc>A layered reference architecture for one digital colleague. A person reaches it through one interaction surface. The colleague is defined through agent workspace files for identity, persona, operating instructions, user context, skills, and memory, running on a Runtime Controller and Codex app-server. Each external-service integration adds an inbound trigger through a webhook or bounded polling, plus outbound capabilities through an MCP tool adapter and the vendor API. Access, permission, and audit are a cross-cutting concern beneath all layers.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -51,7 +51,7 @@
   <line x1="523" y1="136" x2="523" y2="166" class="edgeB" marker-end="url(#arrB)"/>
 
   <!-- Tier 2: the colleague -->
-  <text x="24" y="184" class="tier">DIGITAL COLLEAGUE · WE AUTHOR OPENCLAW WORKSPACE FILES + SKILLS; RUNTIME &amp; ENGINE ARE OFF-THE-SHELF</text>
+  <text x="24" y="184" class="tier">DIGITAL COLLEAGUE · WE AUTHOR AGENT WORKSPACE FILES + SKILLS; RUNTIME &amp; ENGINE ARE OFF-THE-SHELF</text>
   <rect x="24" y="194" width="792" height="176" rx="10" class="container"/>
   <rect x="38" y="206" width="66" height="14" rx="7" class="chip"/>
   <text x="46" y="216" class="own">WE AUTHOR</text>
@@ -97,8 +97,8 @@
   <text x="324" y="459" text-anchor="middle" class="labelS">Scheduler</text>
   <text x="324" y="474" text-anchor="middle" class="sub">cron · heartbeat (no-push)</text>
   <rect x="424" y="440" width="184" height="48" rx="6" class="box"/>
-  <text x="516" y="459" text-anchor="middle" class="labelS">Runtime triage policy</text>
-  <text x="516" y="474" text-anchor="middle" class="sub">a rule (not the LLM)</text>
+  <text x="516" y="459" text-anchor="middle" class="labelS">Subscription renewal</text>
+  <text x="516" y="474" text-anchor="middle" class="sub">renew push TTL · else events stop</text>
   <rect x="616" y="440" width="184" height="48" rx="6" class="box"/>
   <text x="708" y="459" text-anchor="middle" class="labelS">MCP Tool Servers</text>
   <text x="708" y="474" text-anchor="middle" class="sub">vendor APIs · outbound actions</text>
