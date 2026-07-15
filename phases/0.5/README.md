@@ -23,12 +23,25 @@ We **borrow the persona layer model** — Soul · Body · Faculty · Skill, the
 not a brand we ship and not a black-box dependency that quietly holds our
 credentials.
 
-![Phase 0.5 reference architecture](./architecture.svg)
+![Phase 0.5 system context](./architecture.svg)
 
-Three views at different altitudes (C4-style): **[architecture.svg](./architecture.svg)**
-— the component/logical layers (above); **[system-architecture.svg](./system-architecture.svg)**
-— the container/deployment view (what runs where, over which protocol);
-**[integration-flow.svg](./integration-flow.svg)** — the inbound event sequence.
+## C4 diagram set
+
+The diagrams deliberately separate structure, runtime behavior, and deployment;
+mixing them is what made the app-server / MCP / webhook boundary ambiguous.
+
+| View | Question answered | Diagram |
+|---|---|---|
+| **C1 — System Context** | Who and which external systems interact with the digital colleague? | [architecture.svg](./architecture.svg) |
+| **C2 — Container** | Which applications/processes exist, and how do app-server, MCP, and webhook ingress connect? | [system-architecture.svg](./system-architecture.svg) |
+| **C3 — Component** | What lives inside the colleague runtime/control container? | [runtime-components.svg](./runtime-components.svg) |
+| **Dynamic** | How does a SaaS event wake a colleague and lead to an outbound action? | [integration-flow.svg](./integration-flow.svg) |
+| **Deployment** | What runs on the user device versus the always-on public edge? | [deployment.svg](./deployment.svg) |
+
+C4 recommends System Context and Container diagrams for most teams, while
+Component diagrams are optional and deployment/runtime flows are separate
+supporting views. We include C3 and Dynamic here because they resolve the one
+important Phase 0.5 boundary: webhook ingress versus MCP tool execution.
 
 ## Goal
 
@@ -49,8 +62,9 @@ Prove the smallest believable digital-colleague experience:
 | **Interaction surface** — the one face-to-face UI | approved web/desktop/embodied client | choose one binding; keep the interaction contract stable |
 | **Runtime** — sessions, approvals, transcript, persona loading | off-the-shelf agent runtime | configure it |
 | **Persona** — `SOUL.md` / `IDENTITY.md`, Soul·Body·Faculty·Skill | borrowed layer model | **author it — this is the colleague** |
-| **Engine** — agent loop, thread resume, tool continuation, compaction | **Codex** `app-server` | use it |
-| **Integrations/tools** — Outlook, Gmail, Slack, calendar, Notion, kanban, … | vendor APIs + MCP/tool adapters | make them bidirectional and composable |
+| **Engine/control API** — thread/turn lifecycle, streamed events, approvals, agent loop | **Codex** `app-server` | use it through its JSON-RPC client protocol |
+| **Integrations/tools** — Outlook, Gmail, Slack, calendar, Notion, kanban, … | Codex MCP client + MCP servers/tool adapters + vendor APIs | configure/build the tool boundary; keep it composable |
+| **Event intake** — SaaS push, webhook verification, de-duplication, buffered hand-off | vendor webhooks + a small always-on receiver | send accepted events to runtime triage, then into an app-server turn |
 | **Access & permissions** — credentials, scopes, sandbox, approval, audit | **ours to design** | **spell it out; security reviews it** |
 
 The colleague *is* data: a persona, skills, memory policy, and permission set.
@@ -64,31 +78,45 @@ embodied office UI, but a deployment presents one consistent place to meet the
 colleague.
 
 Outlook, Gmail, Slack, Teams, Linear, Notion, and calendars are **not peer
-channels**. They are bidirectional integrations the colleague can operate, and
-the inbound direction is **event-driven — services wake the colleague, it does
-not poll them by hand.** This is a webhook job, not an MCP job (MCP is how an
-agent *fetches* data mid-session; it cannot wake an agent whose session ended —
-see [ADR-020](../../decisions/ADR-020-event-driven-service-integration.md)).
-Reuse off-the-shelf pieces rather than build a bus:
+channels**. They are bidirectional integrations, but the two directions use
+different runtime paths ([ADR-020](../../decisions/ADR-020-event-driven-service-integration.md)):
+
+- **Outbound / during a turn:** Codex app-server runs the agent. Its Codex host
+  invokes a configured MCP tool; the MCP server/tool adapter calls the SaaS API.
+  App-server controls the thread/turn and streams tool events, but it is not
+  itself a Gmail/Slack/Outlook API adapter.
+- **Inbound / outside a turn:** a SaaS webhook cannot be sent to an MCP tool and
+  automatically create a Codex turn. An always-on webhook receiver verifies and
+  de-duplicates the event, then a runtime/app-server client calls
+  `thread/start` or `thread/resume`, followed by `turn/start`.
+
+So the short answer is: **SaaS actions run under the Codex app-server agent
+lifecycle via MCP; SaaS wake-up events enter through a separate webhook path
+that converges at the app-server control API.** Reuse off-the-shelf pieces
+rather than build a bus:
 
 - **Sources.** Where a service pushes natively — Microsoft Graph (Outlook),
-  Google Calendar `watch()`, Gmail watch — use it. These carry a **~7-day TTL
-  that must be auto-renewed**, or events silently stop. Where a service has no
-  push (punch-clock, periodic summaries), a **scheduler (cron / heartbeat)**
+  Google Calendar `watch()`, Gmail watch — use it. Subscription expiry is
+  **service-specific and must be renewed**, or events silently stop. Where a
+  service has no push (punch-clock, periodic summaries), a **scheduler (cron / heartbeat)**
   plays the same role, time-driven.
 - **Ingress.** A small always-on **webhook receiver** (public HTTPS) verifies
-  signature + source and de-duplicates. Its content is untrusted input.
+  signature + source and de-duplicates. Its content is untrusted input. The
+  receiver/runtime then acts as an app-server client; app-server does not expose
+  a generic SaaS webhook endpoint.
 - **Triage gate — a rule, not the LLM.** "Does this need agent reasoning?"
   **No → deliver-only:** forward the notice with no LLM turn (saves tokens).
-  **Yes →** spawn a bounded agent session with the event as context.
+  **Yes →** use app-server JSON-RPC to start/resume the thread and start a
+  bounded turn with the event as context.
 - **Outcome.** The colleague acts/replies through the **same integration**
   (outbound: search, create, update, send, reply), or returns **`[SILENT]`**
   when nothing is worth interrupting a human for.
 - **Continuity:** the resulting task/session is visible from the one interaction
   surface, even if nobody had it open when the event arrived.
 
-The old "dispatcher" idea therefore becomes a small **event-to-task skill plus a
-triage policy**, not a collection of channel-specific conversation services.
+The old "dispatcher" idea therefore becomes a small **event ingress +
+deterministic triage + app-server client**, not a collection of channel-specific
+conversation services and not an MCP responsibility.
 Event-driven and time-driven coexist and feed the same gate. The full inbound
 pipeline (sources → ingress → triage → outcome) is drawn in
 [integration-flow.svg](./integration-flow.svg); the main diagram shows the same
@@ -147,6 +175,8 @@ systems is a real security surface:
 
 - Which single interaction surface is the Phase 0.5 binding?
 - For each service, is event delivery a webhook/subscription or bounded polling?
+- Is each outbound SaaS capability an existing remote MCP server or a small
+  adapter we host, and where are its OAuth tokens brokered?
 - Which operations are read-only, auto-approved writes, or human-approved writes?
 - Where does the durable event/task queue live while the local device is offline?
 - How are service event ids, agent sessions, approvals, and outbound actions
@@ -172,3 +202,13 @@ keeps the architectural intent, diagram, and decisions
 ([018](../../decisions/ADR-018-adopt-openclaw-codex.md),
 [019](../../decisions/ADR-019-single-interaction-surface.md),
 [020](../../decisions/ADR-020-event-driven-service-integration.md)).
+
+## Sources for the protocol boundary
+
+- [Codex app-server](https://learn.chatgpt.com/docs/app-server.md) — app-server
+  is the programmatic control interface for clients: initialization,
+  thread/turn lifecycle, approvals, and streamed agent/tool events.
+- [Codex MCP](https://learn.chatgpt.com/docs/extend/mcp.md) — MCP connects the
+  Codex host to tools and context through STDIO or Streamable HTTP servers.
+- [C4 diagrams](https://c4model.com/diagrams) — static zoom levels are separate
+  from Dynamic and Deployment supporting views.
