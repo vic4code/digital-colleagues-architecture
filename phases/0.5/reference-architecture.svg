@@ -1,0 +1,138 @@
+<svg viewBox="0 0 840 712" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — digital colleague reference architecture (one colleague)</title>
+  <desc>A layered reference architecture for one digital colleague. A person reaches it through one interaction surface. The colleague is a layered persona on a Runtime Controller and Codex app-server. Event Ingress handles inbound service events, while MCP Tool Servers handle outbound actions. Access, permission, and audit are a cross-cutting concern beneath all layers.</desc>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <style>
+    .h1 { font-size: 15px; font-weight: 700; fill: #111827; }
+    .label { font-size: 12px; font-weight: 600; fill: #111827; }
+    .labelS { font-size: 11px; font-weight: 600; fill: #111827; }
+    .sub { font-size: 10.5px; fill: #6b7280; }
+    .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .tier { font-size: 10.5px; font-weight: 700; fill: #4b5563; letter-spacing: 0.4px; }
+    .own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .sec { font-size: 9px; font-weight: 700; fill: #1d4ed8; font-family: ui-monospace, monospace; }
+    .edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .edgeB { stroke: #2563eb; stroke-width: 1.3; fill: none; }
+    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .container { fill: #fafafa; stroke: #d1d5db; stroke-width: 1.2; }
+    .own1 { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.3; }
+    .human { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.4; }
+    .secband { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
+    .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.9; }
+    .chipB { fill: #dbeafe; stroke: #93c5fd; stroke-width: 0.9; }
+  </style>
+
+  <rect width="840" height="712" fill="#ffffff"/>
+
+  <text x="24" y="26" class="h1">Digital colleague — reference architecture (one colleague)</text>
+  <text x="24" y="44" class="sub">Layered components. Orange = we author. Blue = human surface &amp; the security boundary. Grey = off-the-shelf runtime, engine, and services.</text>
+
+  <!-- Tier 1: human + interaction surface -->
+  <text x="24" y="72" class="tier">HUMAN · ONE INTERACTION SURFACE</text>
+  <rect x="24" y="82" width="170" height="54" rx="8" class="box"/>
+  <text x="109" y="104" text-anchor="middle" class="label">Person / teammate</text>
+  <text x="109" y="120" text-anchor="middle" class="sub">one person, one intent</text>
+  <line x1="194" y1="109" x2="228" y2="109" class="edgeB" marker-end="url(#arrB)"/>
+  <rect x="230" y="82" width="586" height="54" rx="8" class="human"/>
+  <text x="523" y="104" text-anchor="middle" class="label">Interaction surface — one approved binding</text>
+  <text x="523" y="120" text-anchor="middle" class="sub">web / desktop / embodied UI · the only human-facing channel (ADR-019)</text>
+
+  <line x1="523" y1="136" x2="523" y2="166" class="edgeB" marker-end="url(#arrB)"/>
+
+  <!-- Tier 2: the colleague -->
+  <text x="24" y="184" class="tier">DIGITAL COLLEAGUE · we author persona + skills; runtime &amp; engine are off-the-shelf</text>
+  <rect x="24" y="194" width="792" height="176" rx="10" class="container"/>
+  <rect x="38" y="206" width="66" height="14" rx="7" class="chip"/>
+  <text x="46" y="216" class="own">WE AUTHOR</text>
+
+  <rect x="40" y="226" width="184" height="44" rx="6" class="own1"/>
+  <text x="132" y="245" text-anchor="middle" class="labelS">Soul</text>
+  <text x="132" y="260" text-anchor="middle" class="sub">values · voice · purpose</text>
+  <rect x="232" y="226" width="184" height="44" rx="6" class="own1"/>
+  <text x="324" y="245" text-anchor="middle" class="labelS">Body</text>
+  <text x="324" y="260" text-anchor="middle" class="sub">identity · presence</text>
+  <rect x="424" y="226" width="184" height="44" rx="6" class="own1"/>
+  <text x="516" y="245" text-anchor="middle" class="labelS">Faculty</text>
+  <text x="516" y="260" text-anchor="middle" class="sub">reasoning · memory policy</text>
+  <rect x="616" y="226" width="184" height="44" rx="6" class="own1"/>
+  <text x="708" y="245" text-anchor="middle" class="labelS">Skills</text>
+  <text x="708" y="260" text-anchor="middle" class="sub">event-to-task · choose tool</text>
+
+  <rect x="40" y="278" width="760" height="38" rx="6" class="box"/>
+  <text x="52" y="295" class="labelS">Runtime Controller</text>
+  <text x="52" y="309" class="sub">sessions · approvals · persona loading · triage · app-server client</text>
+  <rect x="40" y="322" width="760" height="38" rx="6" class="box"/>
+  <text x="52" y="339" class="labelS">Codex app-server</text>
+  <text x="52" y="353" class="sub">agent loop · thread/turn lifecycle · MCP client · approvals · streamed events</text>
+
+  <!-- bidirectional colleague <-> integration -->
+  <line x1="411" y1="370" x2="411" y2="398" class="edge" marker-end="url(#arr)"/>
+  <line x1="435" y1="398" x2="435" y2="370" class="edge" marker-end="url(#arr)"/>
+  <text x="449" y="389" class="port">events in · actions out</text>
+
+  <!-- Tier 3: service integration -->
+  <text x="24" y="416" class="tier">SERVICE INTEGRATION · event-driven inbound + outbound actions (detail: integration-flow.svg · ADR-020)</text>
+  <rect x="24" y="426" width="792" height="74" rx="10" class="container"/>
+  <rect x="40" y="440" width="184" height="48" rx="6" class="box"/>
+  <text x="132" y="459" text-anchor="middle" class="labelS">Event Ingress</text>
+  <text x="132" y="474" text-anchor="middle" class="sub">webhook · verify · dedup · buffer</text>
+  <rect x="232" y="440" width="184" height="48" rx="6" class="box"/>
+  <text x="324" y="459" text-anchor="middle" class="labelS">Scheduler</text>
+  <text x="324" y="474" text-anchor="middle" class="sub">cron · heartbeat (no-push)</text>
+  <rect x="424" y="440" width="184" height="48" rx="6" class="box"/>
+  <text x="516" y="459" text-anchor="middle" class="labelS">Runtime triage policy</text>
+  <text x="516" y="474" text-anchor="middle" class="sub">a rule (not the LLM)</text>
+  <rect x="616" y="440" width="184" height="48" rx="6" class="box"/>
+  <text x="708" y="459" text-anchor="middle" class="labelS">MCP Tool Servers</text>
+  <text x="708" y="474" text-anchor="middle" class="sub">vendor APIs · outbound actions</text>
+
+  <!-- bidirectional integration <-> services -->
+  <line x1="411" y1="500" x2="411" y2="528" class="edge" marker-end="url(#arr)"/>
+  <line x1="435" y1="528" x2="435" y2="500" class="edge" marker-end="url(#arr)"/>
+
+  <!-- Tier 4: external services -->
+  <text x="24" y="546" class="tier">EXTERNAL SERVICES · native push where offered (renew per vendor TTL), else time-driven</text>
+  <rect x="40" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="85" y="580" text-anchor="middle" class="sub">Gmail</text>
+  <rect x="136" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="181" y="580" text-anchor="middle" class="sub">Outlook</text>
+  <rect x="232" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="277" y="580" text-anchor="middle" class="sub">Calendar</text>
+  <rect x="328" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="373" y="580" text-anchor="middle" class="sub">Slack</text>
+  <rect x="424" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="469" y="580" text-anchor="middle" class="sub">Teams</text>
+  <rect x="520" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="565" y="580" text-anchor="middle" class="sub">Notion</text>
+  <rect x="616" y="556" width="90" height="40" rx="6" class="box"/>
+  <text x="661" y="580" text-anchor="middle" class="sub">Database</text>
+  <rect x="712" y="556" width="88" height="40" rx="6" class="box"/>
+  <text x="756" y="580" text-anchor="middle" class="sub">APIs · …</text>
+
+  <!-- cross-cutting: access & permissions & audit -->
+  <text x="24" y="626" class="tier">ACCESS · PERMISSIONS · AUDIT · cross-cutting — bounds every layer above</text>
+  <rect x="24" y="636" width="792" height="60" rx="10" class="secband"/>
+  <rect x="38" y="648" width="150" height="14" rx="7" class="chipB"/>
+  <text x="46" y="658" class="sec">WE DESIGN · REVIEWED</text>
+  <rect x="200" y="646" width="146" height="40" rx="6" class="box"/>
+  <text x="273" y="663" text-anchor="middle" class="sub">credential custody</text>
+  <text x="273" y="677" text-anchor="middle" class="sub">least privilege</text>
+  <rect x="354" y="646" width="146" height="40" rx="6" class="box"/>
+  <text x="427" y="663" text-anchor="middle" class="sub">approval bounds</text>
+  <text x="427" y="677" text-anchor="middle" class="sub">on side effects</text>
+  <rect x="508" y="646" width="146" height="40" rx="6" class="box"/>
+  <text x="581" y="663" text-anchor="middle" class="sub">inbound content</text>
+  <text x="581" y="677" text-anchor="middle" class="sub">is untrusted</text>
+  <rect x="662" y="646" width="146" height="40" rx="6" class="box"/>
+  <text x="735" y="663" text-anchor="middle" class="sub">audit + provenance</text>
+  <text x="735" y="677" text-anchor="middle" class="sub">event → task → action</text>
+</svg>
