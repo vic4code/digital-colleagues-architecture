@@ -23,7 +23,12 @@ We **borrow the persona layer model** — Soul · Body · Faculty · Skill, the
 not a brand we ship and not a black-box dependency that quietly holds our
 credentials.
 
-![Phase 0.5 layering](./architecture.svg)
+![Phase 0.5 reference architecture](./architecture.svg)
+
+Three views at different altitudes (C4-style): **[architecture.svg](./architecture.svg)**
+— the component/logical layers (above); **[system-architecture.svg](./system-architecture.svg)**
+— the container/deployment view (what runs where, over which protocol);
+**[integration-flow.svg](./integration-flow.svg)** — the inbound event sequence.
 
 ## Goal
 
