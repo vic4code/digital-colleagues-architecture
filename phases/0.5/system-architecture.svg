@@ -1,0 +1,134 @@
+<svg viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — C2 Container Diagram</title>
+  <desc>A C4 Container diagram for the Digital Colleague System. SaaS webhooks enter through an always-on Event Ingress, which asks the Runtime Controller to start or resume a Codex app-server turn. During the turn, Codex app-server invokes MCP Tool Servers, which call SaaS APIs. The two paths are separate and converge at the app-server turn.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .title { font-size: 20px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 11px; fill: #6b7280; }
+    .boundary { fill: none; stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 8 5; }
+    .boundaryLabel { font-size: 11px; font-weight: 700; fill: #4b5563; letter-spacing: .4px; }
+    .container { fill: #fff7ed; stroke: #f97316; stroke-width: 1.5; }
+    .containerOff { fill: #ffffff; stroke: #9ca3af; stroke-width: 1.2; }
+    .person { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; }
+    .external { fill: #f9fafb; stroke: #9ca3af; stroke-width: 1.2; }
+    .name { font-size: 13px; font-weight: 700; fill: #111827; }
+    .type { font-size: 9px; font-weight: 700; fill: #6b7280; letter-spacing: .4px; }
+    .desc { font-size: 10.5px; fill: #4b5563; }
+    .rel { font-size: 9.5px; fill: #4b5563; font-family: ui-monospace, monospace; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .relIn { font-size: 9.5px; fill: #dc2626; font-family: ui-monospace, monospace; font-weight: 700; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .relOut { font-size: 9.5px; fill: #c2410c; font-family: ui-monospace, monospace; font-weight: 700; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .edge { fill: none; stroke: #6b7280; stroke-width: 1.3; }
+    .edgeBlue { fill: none; stroke: #2563eb; stroke-width: 1.4; }
+    .edgeIn { fill: none; stroke: #dc2626; stroke-width: 1.6; }
+    .edgeOut { fill: none; stroke: #c2410c; stroke-width: 1.5; }
+    .legend { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  </style>
+
+  <rect width="1100" height="820" fill="#ffffff"/>
+
+  <text x="24" y="34" class="title">Phase 0.5 · C2 Container Diagram</text>
+  <text x="24" y="54" class="subtitle">Scope: Digital Colleague System · Applications/processes and their protocols · Deployment intentionally omitted</text>
+
+  <rect x="24" y="292" width="170" height="104" rx="10" class="person"/>
+  <text x="109" y="319" text-anchor="middle" class="type">PERSON</text>
+  <text x="109" y="344" text-anchor="middle" class="name">Person / teammate</text>
+  <text x="109" y="368" text-anchor="middle" class="desc">Uses the colleague UI</text>
+
+  <rect x="294" y="78" width="310" height="90" rx="10" class="external"/>
+  <text x="449" y="104" text-anchor="middle" class="type">EXTERNAL SOFTWARE SYSTEMS</text>
+  <text x="449" y="128" text-anchor="middle" class="name">SaaS services</text>
+  <text x="449" y="149" text-anchor="middle" class="desc">Outlook · Gmail · Slack · calendar · work systems</text>
+
+  <rect x="890" y="290" width="184" height="104" rx="10" class="external"/>
+  <text x="982" y="317" text-anchor="middle" class="type">EXTERNAL SYSTEM</text>
+  <text x="982" y="342" text-anchor="middle" class="name">LLM platform</text>
+  <text x="982" y="366" text-anchor="middle" class="desc">Model inference endpoint</text>
+
+  <rect x="220" y="190" width="640" height="500" rx="14" class="boundary"/>
+  <text x="244" y="216" class="boundaryLabel">DIGITAL COLLEAGUE SYSTEM</text>
+
+  <rect x="252" y="254" width="190" height="104" rx="9" class="containerOff"/>
+  <text x="347" y="278" text-anchor="middle" class="type">CONTAINER · WEB / DESKTOP UI</text>
+  <text x="347" y="303" text-anchor="middle" class="name">Interaction Client</text>
+  <text x="347" y="326" text-anchor="middle" class="desc">One face-to-face surface</text>
+  <text x="347" y="344" text-anchor="middle" class="desc">conversation · review · approval</text>
+
+  <rect x="252" y="420" width="190" height="124" rx="9" class="container"/>
+  <text x="347" y="444" text-anchor="middle" class="type">CONTAINER · ALWAYS-ON HTTPS SERVICE</text>
+  <text x="347" y="469" text-anchor="middle" class="name">Event Ingress</text>
+  <text x="347" y="492" text-anchor="middle" class="desc">verify · de-duplicate · normalize</text>
+  <text x="347" y="510" text-anchor="middle" class="desc">buffer accepted events</text>
+  <text x="347" y="530" text-anchor="middle" class="relIn">public webhook endpoint</text>
+
+  <rect x="485" y="254" width="180" height="124" rx="9" class="container"/>
+  <text x="575" y="278" text-anchor="middle" class="type">CONTAINER · SERVICE / PROCESS</text>
+  <text x="575" y="303" text-anchor="middle" class="name">Runtime Controller</text>
+  <text x="575" y="326" text-anchor="middle" class="desc">session map · persona loading</text>
+  <text x="575" y="344" text-anchor="middle" class="desc">app-server client · audit</text>
+  <text x="575" y="364" text-anchor="middle" class="desc">turn policy and continuity</text>
+
+  <rect x="704" y="238" width="126" height="160" rx="9" class="containerOff"/>
+  <text x="767" y="262" text-anchor="middle" class="type">CONTAINER · CODEX</text>
+  <text x="767" y="288" text-anchor="middle" class="name">app-server</text>
+  <text x="767" y="313" text-anchor="middle" class="desc">thread / turn API</text>
+  <text x="767" y="331" text-anchor="middle" class="desc">agent loop</text>
+  <text x="767" y="349" text-anchor="middle" class="desc">approvals · events</text>
+  <text x="767" y="368" text-anchor="middle" class="desc">MCP client host</text>
+
+  <rect x="704" y="478" width="126" height="128" rx="9" class="container"/>
+  <text x="767" y="502" text-anchor="middle" class="type">CONTAINER(S) · STDIO / HTTP</text>
+  <text x="767" y="527" text-anchor="middle" class="name">MCP Tool Servers</text>
+  <text x="767" y="551" text-anchor="middle" class="desc">SaaS tool contracts</text>
+  <text x="767" y="569" text-anchor="middle" class="desc">OAuth API adapters</text>
+  <text x="767" y="588" text-anchor="middle" class="relOut">outbound actions</text>
+
+  <rect x="485" y="500" width="180" height="106" rx="9" class="containerOff"/>
+  <text x="575" y="524" text-anchor="middle" class="type">CONTAINER · DATA STORE</text>
+  <text x="575" y="549" text-anchor="middle" class="name">Colleague State</text>
+  <text x="575" y="572" text-anchor="middle" class="desc">persona · tasks · session map</text>
+  <text x="575" y="590" text-anchor="middle" class="desc">audit correlation</text>
+
+  <rect x="252" y="590" width="190" height="72" rx="9" class="containerOff"/>
+  <text x="347" y="613" text-anchor="middle" class="type">CONTAINER · SECURE STORE</text>
+  <text x="347" y="638" text-anchor="middle" class="name">Secrets Broker</text>
+  <text x="347" y="654" text-anchor="middle" class="desc">OAuth tokens · API keys</text>
+
+  <line x1="194" y1="344" x2="250" y2="314" class="edgeBlue" marker-end="url(#arrBlue)"/>
+  <text x="216" y="319" class="rel">UI</text>
+  <line x1="442" y1="306" x2="483" y2="306" class="edge" marker-end="url(#arr)"/>
+  <text x="462" y="294" text-anchor="middle" class="rel">local API / IPC</text>
+
+  <path d="M382 168 L232 202 L232 482 L250 482" class="edgeIn" marker-end="url(#arrRed)"/>
+  <text x="238" y="396" class="relIn">1 · webhook HTTPS</text>
+  <path d="M442 468 L470 468 L470 350 L483 350" class="edgeIn" marker-end="url(#arrRed)"/>
+  <text x="449" y="455" class="relIn">2 · accepted event</text>
+
+  <line x1="665" y1="296" x2="702" y2="296" class="edge" marker-end="url(#arr)"/>
+  <line x1="702" y1="344" x2="665" y2="344" class="edge" marker-end="url(#arr)"/>
+  <text x="684" y="236" text-anchor="middle" class="rel">3 · JSON-RPC</text>
+  <text x="684" y="412" text-anchor="middle" class="rel">thread/turn + events</text>
+
+  <line x1="767" y1="398" x2="767" y2="476" class="edgeOrange" marker-end="url(#arrOrange)"/>
+  <text x="780" y="442" class="relOut">4 · MCP</text>
+
+  <path d="M830 542 L852 542 L852 202 C780 202 700 154 604 140" class="edgeOut" marker-end="url(#arrOrange)"/>
+  <text x="704" y="190" class="relOut">5 · SaaS API HTTPS</text>
+
+  <line x1="830" y1="320" x2="888" y2="342" class="edge" marker-end="url(#arr)"/>
+  <text x="850" y="310" class="rel">HTTPS inference</text>
+
+  <line x1="575" y1="378" x2="575" y2="498" class="edge" marker-end="url(#arr)"/>
+  <text x="585" y="458" class="rel">read / write</text>
+  <path d="M704 572 C640 650 500 646 444 642" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="24" y="738" width="1050" height="54" rx="8" class="legend"/>
+  <text x="44" y="760" class="relIn">RED = inbound wake-up</text>
+  <text x="226" y="760" class="relOut">ORANGE = outbound tool action</text>
+  <text x="466" y="760" class="desc">Grey = control/data flow · Ingress and tool execution remain separate containers.</text>
+  <text x="44" y="780" class="subtitle">C4 rule: containers are deployable/runnable applications or data stores; deployment nodes belong in the separate Deployment view.</text>
+</svg>

@@ -1,0 +1,118 @@
+<svg viewBox="0 0 1080 760" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — C4 Deployment Diagram</title>
+  <desc>A C4 Deployment diagram mapping the Phase 0.5 containers to a user workstation and an always-on public edge. SaaS webhooks terminate at the edge, while Codex app-server and MCP tool servers run on the workstation in the Phase 0.5 local-first deployment.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .title { font-size: 20px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 11px; fill: #6b7280; }
+    .node { fill: #f9fafb; stroke: #6b7280; stroke-width: 1.5; }
+    .nodeEdge { fill: #fef2f2; stroke: #ef4444; stroke-width: 1.5; }
+    .nodeLabel { font-size: 11px; font-weight: 700; fill: #374151; letter-spacing: .4px; }
+    .instance { fill: #fff7ed; stroke: #f97316; stroke-width: 1.3; }
+    .data { fill: #fff; stroke: #9ca3af; stroke-width: 1.2; }
+    .external { fill: #fff; stroke: #9ca3af; stroke-width: 1.2; }
+    .name { font-size: 12px; font-weight: 700; fill: #111827; }
+    .type { font-size: 8.5px; font-weight: 700; fill: #6b7280; letter-spacing: .35px; }
+    .desc { font-size: 10px; fill: #4b5563; }
+    .edge { fill: none; stroke: #6b7280; stroke-width: 1.3; }
+    .inbound { fill: none; stroke: #dc2626; stroke-width: 1.5; }
+    .outbound { fill: none; stroke: #c2410c; stroke-width: 1.5; }
+    .rel { font-size: 9px; fill: #4b5563; font-family: ui-monospace, monospace; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .relIn { font-size: 9px; font-weight: 700; fill: #b91c1c; font-family: ui-monospace, monospace; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .relOut { font-size: 9px; font-weight: 700; fill: #9a3412; font-family: ui-monospace, monospace; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .note { fill: #fff; stroke: #d1d5db; stroke-width: 1; }
+  </style>
+
+  <rect width="1080" height="760" fill="#ffffff"/>
+
+  <text x="24" y="34" class="title">Phase 0.5 · Deployment · local runtime + always-on event edge</text>
+  <text x="24" y="54" class="subtitle">Container instances mapped to execution nodes. This is the Phase 0.5 deployment choice, not a new logical layer.</text>
+
+  <rect x="24" y="92" width="188" height="104" rx="9" class="external"/>
+  <text x="118" y="116" text-anchor="middle" class="type">EXTERNAL SYSTEM</text>
+  <text x="118" y="142" text-anchor="middle" class="name">SaaS Services</text>
+  <text x="118" y="164" text-anchor="middle" class="desc">Outlook · Gmail · Slack</text>
+  <text x="118" y="182" text-anchor="middle" class="desc">webhooks + vendor APIs</text>
+
+  <rect x="24" y="554" width="188" height="92" rx="9" class="external"/>
+  <text x="118" y="578" text-anchor="middle" class="type">EXTERNAL SYSTEM</text>
+  <text x="118" y="604" text-anchor="middle" class="name">LLM Platform</text>
+  <text x="118" y="626" text-anchor="middle" class="desc">model inference</text>
+
+  <rect x="264" y="82" width="330" height="278" rx="12" class="nodeEdge"/>
+  <text x="286" y="108" class="nodeLabel">DEPLOYMENT NODE · ALWAYS-ON PUBLIC EDGE</text>
+  <text x="286" y="128" class="subtitle">HTTPS endpoint · managed identity · durable storage</text>
+
+  <rect x="292" y="154" width="274" height="82" rx="8" class="instance"/>
+  <text x="429" y="176" text-anchor="middle" class="type">CONTAINER INSTANCE</text>
+  <text x="429" y="200" text-anchor="middle" class="name">Event Ingress</text>
+  <text x="429" y="220" text-anchor="middle" class="desc">signature verification · normalization · deduplication</text>
+
+  <rect x="292" y="254" width="274" height="78" rx="8" class="data"/>
+  <text x="429" y="276" text-anchor="middle" class="type">DATA STORE INSTANCE</text>
+  <text x="429" y="300" text-anchor="middle" class="name">Event Buffer + Dedup Store</text>
+  <text x="429" y="318" text-anchor="middle" class="desc">holds accepted events until runtime is online</text>
+
+  <rect x="638" y="82" width="418" height="574" rx="12" class="node"/>
+  <text x="660" y="108" class="nodeLabel">DEPLOYMENT NODE · USER WORKSTATION</text>
+  <text x="660" y="128" class="subtitle">Phase 0.5 local-first runtime · macOS / managed desktop</text>
+
+  <rect x="666" y="154" width="166" height="78" rx="8" class="instance"/>
+  <text x="749" y="176" text-anchor="middle" class="type">CONTAINER INSTANCE</text>
+  <text x="749" y="200" text-anchor="middle" class="name">Interaction Client</text>
+  <text x="749" y="218" text-anchor="middle" class="desc">single human interface</text>
+
+  <rect x="860" y="154" width="168" height="78" rx="8" class="instance"/>
+  <text x="944" y="176" text-anchor="middle" class="type">CONTAINER INSTANCE</text>
+  <text x="944" y="200" text-anchor="middle" class="name">Runtime Controller</text>
+  <text x="944" y="218" text-anchor="middle" class="desc">app-server client</text>
+
+  <rect x="666" y="280" width="362" height="84" rx="8" class="instance"/>
+  <text x="847" y="302" text-anchor="middle" class="type">CONTAINER INSTANCE</text>
+  <text x="847" y="326" text-anchor="middle" class="name">Codex app-server</text>
+  <text x="847" y="346" text-anchor="middle" class="desc">agent loop · thread / turn API · MCP client</text>
+
+  <rect x="666" y="412" width="166" height="84" rx="8" class="instance"/>
+  <text x="749" y="434" text-anchor="middle" class="type">CONTAINER INSTANCE</text>
+  <text x="749" y="458" text-anchor="middle" class="name">MCP Tool Servers</text>
+  <text x="749" y="478" text-anchor="middle" class="desc">SaaS adapters</text>
+
+  <rect x="860" y="412" width="168" height="84" rx="8" class="data"/>
+  <text x="944" y="434" text-anchor="middle" class="type">DATA STORE INSTANCE</text>
+  <text x="944" y="458" text-anchor="middle" class="name">Colleague State</text>
+  <text x="944" y="478" text-anchor="middle" class="desc">persona · thread map · audit</text>
+
+  <rect x="666" y="544" width="362" height="76" rx="8" class="data"/>
+  <text x="847" y="566" text-anchor="middle" class="type">INFRASTRUCTURE NODE</text>
+  <text x="847" y="590" text-anchor="middle" class="name">OS Keychain / Enterprise Secrets Broker</text>
+  <text x="847" y="608" text-anchor="middle" class="desc">OAuth tokens and credentials never enter prompts</text>
+
+  <line x1="212" y1="144" x2="290" y2="190" class="inbound" marker-end="url(#arrRed)"/>
+  <text x="214" y="122" text-anchor="end" class="relIn">webhook [HTTPS]</text>
+
+  <line x1="429" y1="236" x2="429" y2="252" class="edge" marker-end="url(#arr)"/>
+  <path d="M566 292 L612 292 L612 193 L858 193" class="inbound" marker-end="url(#arrRed)"/>
+  <text x="600" y="278" class="relIn">accepted event [authenticated HTTPS / pull]</text>
+
+  <line x1="832" y1="193" x2="858" y2="193" class="edge" marker-end="url(#arr)"/>
+  <path d="M944 232 L944 258 L847 258 L847 278" class="edge" marker-end="url(#arr)"/>
+  <text x="866" y="250" class="rel">JSON-RPC</text>
+
+  <line x1="847" y1="364" x2="749" y2="410" class="outbound" marker-end="url(#arrOrange)"/>
+  <text x="770" y="388" class="relOut">MCP</text>
+  <path d="M666 454 L610 454 L610 388 L238 388 L238 170 L212 170" class="outbound" marker-end="url(#arrOrange)"/>
+  <text x="326" y="378" class="relOut">vendor API [HTTPS]</text>
+
+  <line x1="832" y1="454" x2="858" y2="454" class="edge" marker-end="url(#arr)"/>
+  <line x1="847" y1="364" x2="847" y2="542" class="edge" marker-end="url(#arr)"/>
+  <path d="M666 322 L618 322 L618 600 L214 600" class="edge" marker-end="url(#arr)"/>
+  <text x="346" y="590" class="rel">model request [HTTPS]</text>
+
+  <rect x="264" y="686" width="792" height="50" rx="8" class="note"/>
+  <text x="284" y="706" class="subtitle">Availability boundary: the edge can safely receive and buffer events while the workstation is offline.</text>
+  <text x="284" y="723" class="subtitle">Production may co-locate runtime containers on an always-on host later; that deployment change does not alter the C1/C2 model.</text>
+</svg>

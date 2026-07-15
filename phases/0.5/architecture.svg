@@ -1,120 +1,81 @@
-<svg viewBox="0 0 780 840" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title>Phase 0.5 — one interaction surface with bidirectional service tools</title>
-  <desc>A person meets one digital colleague through one consistent face-to-face interface. The colleague is a layered persona on an agent runtime and Codex engine. Outlook, Gmail, Slack, calendars, Notion, and kanban are bidirectional tools: events flow in and actions flow out. Access, permissions, approvals, and audit bound every service interaction.</desc>
-
+<svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — C1 System Context</title>
+  <desc>A C4 System Context diagram. A person uses one interaction surface to work with the Digital Colleague System. External SaaS systems publish events to it and receive approved actions from it. The system requests reasoning from an LLM platform and may delegate to a peer colleague system.</desc>
   <defs>
-    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
-    </marker>
-    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
-    </marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
   </defs>
-
   <style>
-    .label { font-size: 12px; font-weight: 500; fill: #111827; }
-    .sub { font-size: 11px; fill: #6b7280; }
-    .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
-    .tier { font-size: 11px; font-weight: 700; fill: #4b5563; letter-spacing: 0.5px; }
-    .own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
-    .sec { font-size: 9px; font-weight: 700; fill: #1d4ed8; font-family: ui-monospace, monospace; }
-    .edge { stroke: #9ca3af; stroke-width: 1.2; fill: none; }
-    .edgeTool { stroke: #c2410c; stroke-width: 1.3; fill: none; }
-    .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
-    .boxOff { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
-    .boxOwn { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.4; }
-    .boxSec { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
-    .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.8; }
-    .chipSec { fill: #eff6ff; stroke: #93c5fd; stroke-width: 0.8; }
-    .service { fill: #ffffff; stroke: #fdba74; stroke-width: 1; }
+    .title { font-size: 20px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 11px; fill: #6b7280; }
+    .name { font-size: 14px; font-weight: 700; fill: #111827; }
+    .type { font-size: 10px; font-weight: 700; fill: #6b7280; letter-spacing: .4px; }
+    .desc { font-size: 11px; fill: #4b5563; }
+    .rel { font-size: 10px; fill: #4b5563; font-family: ui-monospace, monospace; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .person { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; }
+    .system { fill: #fff7ed; stroke: #f97316; stroke-width: 2; }
+    .external { fill: #f9fafb; stroke: #9ca3af; stroke-width: 1.2; }
+    .edge { fill: none; stroke: #6b7280; stroke-width: 1.3; }
+    .edgeBlue { fill: none; stroke: #2563eb; stroke-width: 1.4; }
+    .edgeOrange { fill: none; stroke: #c2410c; stroke-width: 1.4; }
+    .legend { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
   </style>
 
-  <text x="20" y="24" class="sub">One relationship, one interface. Surrounding services are the colleague's tools — events in, actions out.</text>
+  <rect width="900" height="620" fill="#ffffff"/>
 
-  <!-- Human and the single interaction surface -->
-  <text x="20" y="52" class="tier">FACE-TO-FACE · THE ONLY HUMAN-FACING CHANNEL</text>
-  <rect x="24" y="64" width="732" height="82" rx="10" class="boxOff"/>
-  <rect x="48" y="82" width="170" height="46" rx="8" class="box"/>
-  <text x="133" y="102" text-anchor="middle" class="label">You / teammate</text>
-  <text x="133" y="117" text-anchor="middle" class="sub">one person, one intent</text>
-  <line x1="218" y1="105" x2="300" y2="105" class="edge" marker-end="url(#arr)"/>
-  <rect x="300" y="78" width="432" height="54" rx="8" class="box"/>
-  <text x="516" y="99" text-anchor="middle" class="label">ONE INTERACTION SURFACE</text>
-  <text x="516" y="116" text-anchor="middle" class="sub">web / desktop / embodied UI — one approved binding per deployment</text>
+  <text x="24" y="34" class="title">Phase 0.5 · C1 System Context</text>
+  <text x="24" y="54" class="subtitle">Scope: one Digital Colleague System · Audience: everyone · Technology details intentionally omitted</text>
 
-  <line x1="390" y1="146" x2="390" y2="174" class="edge" marker-end="url(#arr)"/>
+  <rect x="40" y="230" width="210" height="118" rx="10" class="person"/>
+  <text x="145" y="258" text-anchor="middle" class="type">PERSON</text>
+  <text x="145" y="284" text-anchor="middle" class="name">Person / teammate</text>
+  <text x="145" y="307" text-anchor="middle" class="desc">Talks to one persistent colleague</text>
+  <text x="145" y="325" text-anchor="middle" class="desc">through one approved interface</text>
 
-  <!-- Digital colleague -->
-  <text x="20" y="196" class="tier">THE DIGITAL COLLEAGUE · PERSONA + SKILLS + RUNTIME</text>
-  <rect x="24" y="208" width="732" height="222" rx="10" class="boxOwn"/>
-  <rect x="38" y="220" width="66" height="14" rx="7" class="chip"/>
-  <text x="46" y="230" class="own">WE AUTHOR</text>
+  <rect x="330" y="176" width="330" height="220" rx="14" class="system"/>
+  <text x="495" y="210" text-anchor="middle" class="type">SOFTWARE SYSTEM · IN SCOPE</text>
+  <text x="495" y="240" text-anchor="middle" class="name">Digital Colleague System</text>
+  <text x="495" y="270" text-anchor="middle" class="desc">Maintains persona, memory, skills, permissions,</text>
+  <text x="495" y="289" text-anchor="middle" class="desc">and task continuity across human and service events.</text>
+  <text x="495" y="321" text-anchor="middle" class="desc">Reasons about work and performs approved actions</text>
+  <text x="495" y="340" text-anchor="middle" class="desc">through external service integrations.</text>
+  <text x="495" y="371" text-anchor="middle" class="type">ONE HUMAN SURFACE · MANY SERVICE TOOLS</text>
 
-  <rect x="48" y="248" width="160" height="48" rx="6" class="boxOwn"/>
-  <text x="128" y="267" text-anchor="middle" class="label">Soul</text>
-  <text x="128" y="283" text-anchor="middle" class="sub">values · voice · purpose</text>
-  <rect x="222" y="248" width="160" height="48" rx="6" class="boxOwn"/>
-  <text x="302" y="267" text-anchor="middle" class="label">Body</text>
-  <text x="302" y="283" text-anchor="middle" class="sub">identity · presence</text>
-  <rect x="396" y="248" width="160" height="48" rx="6" class="boxOwn"/>
-  <text x="476" y="267" text-anchor="middle" class="label">Faculty</text>
-  <text x="476" y="283" text-anchor="middle" class="sub">reasoning · memory policy</text>
-  <rect x="570" y="248" width="162" height="48" rx="6" class="boxOwn"/>
-  <text x="651" y="267" text-anchor="middle" class="label">Skills</text>
-  <text x="651" y="283" text-anchor="middle" class="sub">decide what tool to use</text>
+  <rect x="710" y="86" width="166" height="104" rx="10" class="external"/>
+  <text x="793" y="112" text-anchor="middle" class="type">EXTERNAL SYSTEMS</text>
+  <text x="793" y="136" text-anchor="middle" class="name">SaaS services</text>
+  <text x="793" y="157" text-anchor="middle" class="desc">Mail · chat · calendar</text>
+  <text x="793" y="175" text-anchor="middle" class="desc">work systems · documents</text>
 
-  <rect x="48" y="312" width="684" height="44" rx="6" class="box"/>
-  <text x="60" y="330" class="label">Agent runtime</text>
-  <text x="60" y="346" class="sub">session · approval · transcript · persona loading · durable event-to-task continuity</text>
-  <rect x="48" y="370" width="684" height="44" rx="6" class="boxOff"/>
-  <text x="60" y="388" class="label">Codex engine</text>
-  <text x="60" y="404" class="sub">agent loop · thread resume · tool continuation · compaction · sandbox execution</text>
+  <rect x="710" y="244" width="166" height="96" rx="10" class="external"/>
+  <text x="793" y="270" text-anchor="middle" class="type">EXTERNAL SYSTEM</text>
+  <text x="793" y="294" text-anchor="middle" class="name">Peer colleague</text>
+  <text x="793" y="317" text-anchor="middle" class="desc">Delegation and hand-off</text>
 
-  <line x1="390" y1="430" x2="390" y2="466" class="edgeTool" marker-end="url(#arrOrange)"/>
-  <line x1="414" y1="466" x2="414" y2="430" class="edgeTool" marker-end="url(#arrOrange)"/>
-  <text x="428" y="453" class="port">events in · actions out</text>
+  <rect x="710" y="406" width="166" height="96" rx="10" class="external"/>
+  <text x="793" y="432" text-anchor="middle" class="type">EXTERNAL SYSTEM</text>
+  <text x="793" y="456" text-anchor="middle" class="name">LLM platform</text>
+  <text x="793" y="479" text-anchor="middle" class="desc">Reasoning and generation</text>
 
-  <!-- Tool/service boundary -->
-  <text x="20" y="490" class="tier">BIDIRECTIONAL INTEGRATIONS / TOOLS · THE COLLEAGUE CONNECTS AND ACTS</text>
-  <rect x="24" y="502" width="732" height="146" rx="10" class="boxOff"/>
-  <rect x="42" y="516" width="696" height="34" rx="6" class="box"/>
-  <text x="390" y="531" text-anchor="middle" class="label">Integration tool boundary</text>
-  <text x="390" y="545" text-anchor="middle" class="sub">normalize event · expose actions · preserve provenance · correlate audit</text>
+  <line x1="250" y1="288" x2="328" y2="288" class="edgeBlue" marker-end="url(#arrBlue)"/>
+  <text x="289" y="277" text-anchor="middle" class="rel">uses one interface</text>
 
-  <rect x="42" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="105" y="587" text-anchor="middle" class="label">Outlook</text>
-  <text x="105" y="604" text-anchor="middle" class="sub">mail · calendar</text>
-  <rect x="180" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="243" y="587" text-anchor="middle" class="label">Gmail</text>
-  <text x="243" y="604" text-anchor="middle" class="sub">receive · send</text>
-  <rect x="318" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="381" y="587" text-anchor="middle" class="label">Slack</text>
-  <text x="381" y="604" text-anchor="middle" class="sub">events · replies</text>
-  <rect x="456" y="566" width="126" height="54" rx="7" class="service"/>
-  <text x="519" y="587" text-anchor="middle" class="label">Notion</text>
-  <text x="519" y="604" text-anchor="middle" class="sub">read · update</text>
-  <rect x="594" y="566" width="144" height="54" rx="7" class="service"/>
-  <text x="666" y="587" text-anchor="middle" class="label">Kanban · APIs · …</text>
-  <text x="666" y="604" text-anchor="middle" class="sub">trigger · act · report</text>
+  <path d="M710 126 C690 126 681 207 661 220" class="edge" marker-end="url(#arr)"/>
+  <text x="675" y="150" text-anchor="middle" class="rel">publishes events</text>
+  <path d="M660 254 C682 239 690 165 710 158" class="edgeOrange" marker-end="url(#arrOrange)"/>
+  <text x="679" y="213" text-anchor="middle" class="rel">reads / acts</text>
 
-  <!-- Access and permission surface -->
-  <text x="20" y="674" class="tier">ACCESS &amp; PERMISSIONS · CROSS-CUTTING SECURITY BOUNDARY</text>
-  <rect x="24" y="686" width="732" height="112" rx="10" class="boxSec"/>
-  <rect x="38" y="698" width="150" height="14" rx="7" class="chipSec"/>
-  <text x="46" y="708" class="sec">WE DESIGN · REVIEWED</text>
+  <line x1="660" y1="292" x2="708" y2="292" class="edgeOrange" marker-end="url(#arrOrange)"/>
+  <line x1="708" y1="310" x2="660" y2="310" class="edge" marker-end="url(#arr)"/>
+  <text x="684" y="280" text-anchor="middle" class="rel">delegates</text>
 
-  <rect x="42" y="726" width="162" height="48" rx="6" class="box"/>
-  <text x="54" y="744" class="label">Credential custody</text>
-  <text x="54" y="760" class="sub">tokens stay in a broker/store</text>
-  <rect x="216" y="726" width="162" height="48" rx="6" class="box"/>
-  <text x="228" y="744" class="label">Least privilege</text>
-  <text x="228" y="760" class="sub">read/write scope per tool</text>
-  <rect x="390" y="726" width="162" height="48" rx="6" class="box"/>
-  <text x="402" y="744" class="label">Approval bounds</text>
-  <text x="402" y="760" class="sub">human gates side effects</text>
-  <rect x="564" y="726" width="174" height="48" rx="6" class="box"/>
-  <text x="576" y="744" class="label">Audit + provenance</text>
-  <text x="576" y="760" class="sub">event → task → action</text>
+  <path d="M660 354 C684 373 688 452 708 452" class="edge" marker-end="url(#arr)"/>
+  <text x="684" y="404" text-anchor="middle" class="rel">requests reasoning</text>
 
-  <text x="20" y="824" class="sub">ADR-019: a new service adds a capability, not a new conversation surface or a new colleague identity.</text>
+  <rect x="40" y="544" width="836" height="48" rx="8" class="legend"/>
+  <rect x="58" y="558" width="30" height="20" rx="4" class="person"/><text x="98" y="573" class="desc">Person</text>
+  <rect x="180" y="558" width="30" height="20" rx="4" class="system"/><text x="220" y="573" class="desc">System in scope</text>
+  <rect x="356" y="558" width="30" height="20" rx="4" class="external"/><text x="396" y="573" class="desc">External system</text>
+  <text x="548" y="573" class="desc">Arrows state intent, not protocol · Zoom to C2 for technology</text>
 </svg>

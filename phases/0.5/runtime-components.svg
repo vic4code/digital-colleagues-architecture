@@ -1,0 +1,117 @@
+<svg viewBox="0 0 940 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — C3 Runtime Controller Components</title>
+  <desc>A C4 Component diagram zooming into the Runtime Controller container. Human requests and accepted service events enter through separate adapters, converge at the session and thread mapper, and are sent by the app-server JSON-RPC client to Codex app-server. Persona loading, deterministic triage, approval policy, and audit correlation are explicit components.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+  </defs>
+  <style>
+    .title { font-size: 20px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 11px; fill: #6b7280; }
+    .boundary { fill: none; stroke: #f97316; stroke-width: 1.8; stroke-dasharray: 8 5; }
+    .boundaryLabel { font-size: 11px; font-weight: 700; fill: #c2410c; letter-spacing: .4px; }
+    .component { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.3; }
+    .componentRule { fill: #ffffff; stroke: #f97316; stroke-width: 1.4; }
+    .external { fill: #f9fafb; stroke: #9ca3af; stroke-width: 1.2; }
+    .name { font-size: 12px; font-weight: 700; fill: #111827; }
+    .type { font-size: 8.5px; font-weight: 700; fill: #6b7280; letter-spacing: .35px; }
+    .desc { font-size: 10px; fill: #4b5563; }
+    .rel { font-size: 9px; fill: #4b5563; font-family: ui-monospace, monospace; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .relIn { font-size: 9px; fill: #dc2626; font-family: ui-monospace, monospace; font-weight: 700; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+    .edge { fill: none; stroke: #6b7280; stroke-width: 1.2; }
+    .edgeIn { fill: none; stroke: #dc2626; stroke-width: 1.4; }
+    .edgeOut { fill: none; stroke: #c2410c; stroke-width: 1.4; }
+    .legend { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  </style>
+
+  <rect width="940" height="720" fill="#ffffff"/>
+
+  <text x="24" y="34" class="title">Phase 0.5 · C3 Runtime Controller Components</text>
+  <text x="24" y="54" class="subtitle">Scope: Runtime Controller container · Components and responsibilities · Zoom target from the C2 diagram</text>
+
+  <rect x="28" y="168" width="156" height="82" rx="9" class="external"/>
+  <text x="106" y="192" text-anchor="middle" class="type">CONNECTED CONTAINER</text>
+  <text x="106" y="216" text-anchor="middle" class="name">Interaction Client</text>
+  <text x="106" y="236" text-anchor="middle" class="desc">human request</text>
+
+  <rect x="28" y="372" width="156" height="82" rx="9" class="external"/>
+  <text x="106" y="396" text-anchor="middle" class="type">CONNECTED CONTAINER</text>
+  <text x="106" y="420" text-anchor="middle" class="name">Event Ingress</text>
+  <text x="106" y="440" text-anchor="middle" class="desc">verified service event</text>
+
+  <rect x="756" y="246" width="156" height="116" rx="9" class="external"/>
+  <text x="834" y="270" text-anchor="middle" class="type">CONNECTED CONTAINER</text>
+  <text x="834" y="294" text-anchor="middle" class="name">Codex app-server</text>
+  <text x="834" y="316" text-anchor="middle" class="desc">thread/turn API</text>
+  <text x="834" y="334" text-anchor="middle" class="desc">agent + MCP client host</text>
+  <text x="834" y="352" text-anchor="middle" class="desc">streamed notifications</text>
+
+  <rect x="756" y="470" width="156" height="92" rx="9" class="external"/>
+  <text x="834" y="494" text-anchor="middle" class="type">CONNECTED DATA STORE</text>
+  <text x="834" y="518" text-anchor="middle" class="name">Colleague State</text>
+  <text x="834" y="540" text-anchor="middle" class="desc">persona · session map · audit</text>
+
+  <rect x="214" y="92" width="512" height="538" rx="14" class="boundary"/>
+  <text x="234" y="118" class="boundaryLabel">RUNTIME CONTROLLER · CONTAINER IN SCOPE</text>
+
+  <rect x="246" y="148" width="196" height="88" rx="8" class="component"/>
+  <text x="344" y="171" text-anchor="middle" class="type">COMPONENT</text>
+  <text x="344" y="194" text-anchor="middle" class="name">Interaction Adapter</text>
+  <text x="344" y="216" text-anchor="middle" class="desc">normalizes UI request + identity</text>
+
+  <rect x="246" y="332" width="196" height="100" rx="8" class="component"/>
+  <text x="344" y="355" text-anchor="middle" class="type">COMPONENT</text>
+  <text x="344" y="378" text-anchor="middle" class="name">Event Normalizer</text>
+  <text x="344" y="400" text-anchor="middle" class="desc">provenance · correlation · dedup result</text>
+  <text x="344" y="418" text-anchor="middle" class="desc">content remains untrusted</text>
+
+  <rect x="246" y="462" width="196" height="100" rx="8" class="componentRule"/>
+  <text x="344" y="485" text-anchor="middle" class="type">COMPONENT · DETERMINISTIC</text>
+  <text x="344" y="508" text-anchor="middle" class="name">Triage Policy</text>
+  <text x="344" y="530" text-anchor="middle" class="desc">deliver-only / ignore / start turn</text>
+  <text x="344" y="548" text-anchor="middle" class="desc">no LLM required for the gate</text>
+
+  <rect x="482" y="148" width="212" height="88" rx="8" class="component"/>
+  <text x="588" y="171" text-anchor="middle" class="type">COMPONENT</text>
+  <text x="588" y="194" text-anchor="middle" class="name">Persona + Skill Loader</text>
+  <text x="588" y="216" text-anchor="middle" class="desc">materializes identity and tool policy</text>
+
+  <rect x="482" y="278" width="212" height="100" rx="8" class="component"/>
+  <text x="588" y="301" text-anchor="middle" class="type">COMPONENT</text>
+  <text x="588" y="324" text-anchor="middle" class="name">Session / Thread Mapper</text>
+  <text x="588" y="346" text-anchor="middle" class="desc">selects start vs resume</text>
+  <text x="588" y="364" text-anchor="middle" class="desc">binds task ↔ thread ↔ colleague</text>
+
+  <rect x="482" y="408" width="212" height="100" rx="8" class="component"/>
+  <text x="588" y="431" text-anchor="middle" class="type">COMPONENT</text>
+  <text x="588" y="454" text-anchor="middle" class="name">App-server Client</text>
+  <text x="588" y="476" text-anchor="middle" class="desc">initialize · thread/start|resume</text>
+  <text x="588" y="494" text-anchor="middle" class="desc">turn/start · consume notifications</text>
+
+  <rect x="482" y="538" width="212" height="66" rx="8" class="componentRule"/>
+  <text x="588" y="561" text-anchor="middle" class="type">CROSS-CUTTING COMPONENT</text>
+  <text x="588" y="584" text-anchor="middle" class="name">Approval + Audit Policy</text>
+
+  <line x1="184" y1="209" x2="244" y2="192" class="edge" marker-end="url(#arr)"/>
+  <line x1="184" y1="413" x2="244" y2="382" class="edgeIn" marker-end="url(#arrRed)"/>
+  <text x="190" y="370" class="relIn">accepted event</text>
+
+  <path d="M442 192 L466 192 L466 316 L480 316" class="edge" marker-end="url(#arr)"/>
+  <line x1="344" y1="432" x2="344" y2="460" class="edgeIn" marker-end="url(#arrRed)"/>
+  <path d="M442 512 L458 512 L458 348 L480 348" class="edgeIn" marker-end="url(#arrRed)"/>
+  <text x="464" y="398" class="relIn" transform="rotate(-90 464 398)">start turn</text>
+
+  <line x1="588" y1="236" x2="588" y2="276" class="edge" marker-end="url(#arr)"/>
+  <line x1="588" y1="378" x2="588" y2="406" class="edge" marker-end="url(#arr)"/>
+  <line x1="694" y1="458" x2="754" y2="314" class="edgeOut" marker-end="url(#arrOrange)"/>
+  <text x="706" y="398" class="rel">JSON-RPC</text>
+  <path d="M756 342 L720 342 L720 486 L694 486" class="edge" marker-end="url(#arr)"/>
+  <text x="706" y="470" class="rel" transform="rotate(-90 706 470)">notifications</text>
+
+  <path d="M756 516 L716 516 L716 328 L694 328" class="edge" marker-end="url(#arr)"/>
+  <path d="M694 570 L730 570 L730 540 L754 540" class="edge" marker-end="url(#arr)"/>
+
+  <rect x="28" y="660" width="884" height="38" rx="8" class="legend"/>
+  <text x="48" y="684" class="subtitle">C4 rule: components are cohesive functionality inside one container. MCP Tool Servers are not shown inside this boundary because they are separate C2 containers.</text>
+</svg>

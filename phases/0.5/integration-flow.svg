@@ -1,0 +1,108 @@
+<svg viewBox="0 0 1120 790" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — C4 Dynamic Diagram for a SaaS-triggered task</title>
+  <desc>A numbered C4 Dynamic diagram showing the inbound webhook path from a SaaS service through Event Ingress and Runtime Controller into a Codex app-server turn, followed by an outbound MCP tool call through an MCP Tool Server to the SaaS API.</desc>
+  <defs>
+    <marker id="redArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="orangeArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+    <marker id="grayArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+  </defs>
+  <style>
+    .title { font-size: 20px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 11px; fill: #6b7280; }
+    .participant { fill: #fff; stroke: #9ca3af; stroke-width: 1.2; }
+    .owned { fill: #fff7ed; stroke: #f97316; stroke-width: 1.4; }
+    .name { font-size: 12px; font-weight: 700; fill: #111827; }
+    .type { font-size: 8.5px; font-weight: 700; fill: #6b7280; letter-spacing: .35px; }
+    .life { stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 5 5; }
+    .inbound { stroke: #dc2626; stroke-width: 1.5; fill: none; }
+    .outbound { stroke: #c2410c; stroke-width: 1.5; fill: none; }
+    .return { stroke: #6b7280; stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+    .stepIn { font-size: 10px; font-weight: 700; fill: #b91c1c; }
+    .stepOut { font-size: 10px; font-weight: 700; fill: #9a3412; }
+    .stepReturn { font-size: 10px; fill: #4b5563; }
+    .note { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1; }
+    .noteText { font-size: 10px; fill: #4b5563; }
+    .legend { font-size: 10px; font-weight: 700; }
+  </style>
+
+  <rect width="1120" height="790" fill="#ffffff"/>
+
+  <text x="24" y="34" class="title">Phase 0.5 · Dynamic · SaaS event → agent turn → SaaS action</text>
+  <text x="24" y="54" class="subtitle">One scenario, numbered in execution order. Red is inbound wake-up; orange is outbound tool execution.</text>
+
+  <rect x="24" y="82" width="156" height="72" rx="8" class="participant"/>
+  <text x="102" y="104" text-anchor="middle" class="type">EXTERNAL SYSTEM</text>
+  <text x="102" y="128" text-anchor="middle" class="name">SaaS Service</text>
+  <text x="102" y="145" text-anchor="middle" class="subtitle">Outlook · Gmail · Slack</text>
+
+  <rect x="216" y="82" width="156" height="72" rx="8" class="owned"/>
+  <text x="294" y="104" text-anchor="middle" class="type">CONTAINER</text>
+  <text x="294" y="128" text-anchor="middle" class="name">Event Ingress</text>
+  <text x="294" y="145" text-anchor="middle" class="subtitle">always-on receiver</text>
+
+  <rect x="408" y="82" width="156" height="72" rx="8" class="owned"/>
+  <text x="486" y="104" text-anchor="middle" class="type">CONTAINER</text>
+  <text x="486" y="128" text-anchor="middle" class="name">Runtime Controller</text>
+  <text x="486" y="145" text-anchor="middle" class="subtitle">triage + app-server client</text>
+
+  <rect x="600" y="82" width="156" height="72" rx="8" class="owned"/>
+  <text x="678" y="104" text-anchor="middle" class="type">CONTAINER</text>
+  <text x="678" y="128" text-anchor="middle" class="name">Codex app-server</text>
+  <text x="678" y="145" text-anchor="middle" class="subtitle">thread / turn lifecycle</text>
+
+  <rect x="792" y="82" width="156" height="72" rx="8" class="owned"/>
+  <text x="870" y="104" text-anchor="middle" class="type">CONTAINER</text>
+  <text x="870" y="128" text-anchor="middle" class="name">MCP Tool Server</text>
+  <text x="870" y="145" text-anchor="middle" class="subtitle">vendor adapter</text>
+
+  <rect x="984" y="82" width="112" height="72" rx="8" class="participant"/>
+  <text x="1040" y="104" text-anchor="middle" class="type">EXTERNAL API</text>
+  <text x="1040" y="128" text-anchor="middle" class="name">SaaS API</text>
+  <text x="1040" y="145" text-anchor="middle" class="subtitle">read / write</text>
+
+  <line x1="102" y1="154" x2="102" y2="710" class="life"/>
+  <line x1="294" y1="154" x2="294" y2="710" class="life"/>
+  <line x1="486" y1="154" x2="486" y2="710" class="life"/>
+  <line x1="678" y1="154" x2="678" y2="710" class="life"/>
+  <line x1="870" y1="154" x2="870" y2="710" class="life"/>
+  <line x1="1040" y1="154" x2="1040" y2="710" class="life"/>
+
+  <line x1="102" y1="198" x2="292" y2="198" class="inbound" marker-end="url(#redArrow)"/>
+  <text x="116" y="188" class="stepIn">1 · webhook / push event [HTTPS]</text>
+
+  <path d="M294 232 h54 v54 h-52" class="inbound" marker-end="url(#redArrow)"/>
+  <text x="310" y="252" class="stepIn">2 · verify signature</text>
+  <text x="310" y="268" class="stepIn">deduplicate + persist</text>
+
+  <line x1="294" y1="318" x2="484" y2="318" class="inbound" marker-end="url(#redArrow)"/>
+  <text x="310" y="308" class="stepIn">3 · accepted event [authenticated HTTPS]</text>
+
+  <path d="M486 350 h54 v52 h-52" class="inbound" marker-end="url(#redArrow)"/>
+  <text x="502" y="370" class="stepIn">4 · deterministic triage</text>
+  <text x="502" y="386" class="stepIn">deliver / ignore / start turn</text>
+
+  <line x1="486" y1="438" x2="676" y2="438" class="inbound" marker-end="url(#redArrow)"/>
+  <text x="502" y="428" class="stepIn">5 · thread/start|resume + turn/start [JSON-RPC]</text>
+
+  <line x1="678" y1="486" x2="868" y2="486" class="outbound" marker-end="url(#orangeArrow)"/>
+  <text x="694" y="476" class="stepOut">6 · tools/call [MCP]</text>
+
+  <line x1="870" y1="532" x2="1038" y2="532" class="outbound" marker-end="url(#orangeArrow)"/>
+  <text x="886" y="522" class="stepOut">7 · vendor API call [HTTPS]</text>
+
+  <line x1="1040" y1="576" x2="872" y2="576" class="return" marker-end="url(#grayArrow)"/>
+  <text x="890" y="566" class="stepReturn">8 · API result</text>
+
+  <line x1="870" y1="616" x2="680" y2="616" class="return" marker-end="url(#grayArrow)"/>
+  <text x="730" y="606" class="stepReturn">9 · tool result [MCP]</text>
+
+  <line x1="678" y1="658" x2="488" y2="658" class="return" marker-end="url(#grayArrow)"/>
+  <text x="514" y="648" class="stepReturn">10 · streamed notifications + turn/completed</text>
+
+  <rect x="216" y="726" width="540" height="44" rx="7" class="note"/>
+  <text x="232" y="744" class="noteText">If triage chooses deliver-only or ignore, the flow stops before step 5.</text>
+  <text x="232" y="760" class="noteText">A webhook is untrusted input; it does not directly become an agent instruction.</text>
+
+  <text x="792" y="744" class="legend" fill="#b91c1c">INBOUND · wake-up path</text>
+  <text x="792" y="762" class="legend" fill="#9a3412">OUTBOUND · MCP tool path</text>
+</svg>
