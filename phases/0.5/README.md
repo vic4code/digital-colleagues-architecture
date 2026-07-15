@@ -38,6 +38,13 @@ mixing them is what made the app-server / MCP / webhook boundary ambiguous.
 | **Dynamic** | How does a SaaS event wake a colleague and lead to an outbound action? | [integration-flow.svg](./integration-flow.svg) |
 | **Deployment** | What runs on the user device versus the always-on public edge? | [deployment.svg](./deployment.svg) |
 
+C4 uses “container” to mean an independently running application, service,
+process, or data store — **not necessarily a Docker container**. To avoid that
+common ambiguity, the C2 view keeps the standard C4 title but labels each box
+with its concrete runtime type. Docker, VM, workstation, and clustering details
+remain in the Deployment view. See the [C4 container
+definition](https://c4model.com/abstractions/container).
+
 C4 recommends System Context and Container diagrams for most teams, while
 Component diagrams are optional and deployment/runtime flows are separate
 supporting views. We include C3 and Dynamic here because they resolve the one
