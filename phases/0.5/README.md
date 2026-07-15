@@ -15,13 +15,15 @@ colleague uses, not separate versions of the colleague that the user must learn
 to operate. [ADR-019](../../decisions/ADR-019-single-interaction-surface.md)
 records that boundary.
 
-We **borrow the persona layer model** — Soul · Body · Faculty · Skill, the
-"spirit" of an open-source agent framework (named in
-[ADR-018](../../decisions/ADR-018-adopt-openclaw-codex.md)) — but the persona
-*content*, the *skills*, the integrations, and the whole
-**access-and-permission design are ours**. The framework is a design reference,
-not a brand we ship and not a black-box dependency that quietly holds our
-credentials.
+We align the colleague definition with OpenClaw's official
+[agent workspace](https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md):
+`IDENTITY.md` defines name and presentation, `SOUL.md` defines persona, tone,
+and boundaries, `AGENTS.md` defines operating instructions, `USER.md` records
+teammate context, and `skills/` plus memory files provide capabilities and
+continuity. `Body` and `Faculty` are not OpenClaw workspace components and are
+therefore not part of this architecture. The *content*, integrations, and whole
+**access-and-permission design are ours**; the framework is a design reference,
+not a black-box dependency that quietly holds our credentials.
 
 ![Phase 0.5 system context](./architecture.svg)
 
@@ -84,7 +86,7 @@ Prove the smallest believable digital-colleague experience:
 |---|---|---|
 | **Interaction surface** — the one face-to-face UI | approved web/desktop/embodied client | choose one binding; keep the interaction contract stable |
 | **Runtime** — sessions, approvals, transcript, persona loading | off-the-shelf agent runtime | configure it |
-| **Persona** — `SOUL.md` / `IDENTITY.md`, Soul·Body·Faculty·Skill | borrowed layer model | **author it — this is the colleague** |
+| **Colleague definition** — `IDENTITY.md`, `SOUL.md`, `AGENTS.md`, `USER.md`, `skills/`, memory | OpenClaw workspace model | **author and version it — this is the colleague** |
 | **Engine/control API** — thread/turn lifecycle, streamed events, approvals, agent loop | **Codex** `app-server` | use it through its JSON-RPC client protocol |
 | **Integrations/tools** — Outlook, Gmail, Slack, calendar, Notion, kanban, … | Codex MCP client + MCP servers/tool adapters + vendor APIs | configure/build the tool boundary; keep it composable |
 | **Event intake** — SaaS push, webhook verification, de-duplication, buffered hand-off | vendor webhooks + a small always-on receiver | send accepted events to runtime triage, then into an app-server turn |
@@ -226,8 +228,14 @@ keeps the architectural intent, diagram, and decisions
 [019](../../decisions/ADR-019-single-interaction-surface.md),
 [020](../../decisions/ADR-020-event-driven-service-integration.md)).
 
-## Sources for the protocol boundary
+## Sources for the architecture boundaries
 
+- [OpenClaw agent workspace](https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md)
+  — defines the responsibilities of `AGENTS.md`, `SOUL.md`, `USER.md`,
+  `IDENTITY.md`, skills, and memory files.
+- [OpenClaw `SOUL.md` personality guide](https://github.com/openclaw/openclaw/blob/main/docs/concepts/soul.md)
+  — keeps persona, tone, and boundaries in `SOUL.md`, separate from operating
+  rules in `AGENTS.md`.
 - [Codex app-server](https://learn.chatgpt.com/docs/app-server.md) — app-server
   is the programmatic control interface for clients: initialization,
   thread/turn lifecycle, approvals, and streamed agent/tool events.

@@ -14,8 +14,11 @@ mailbox-as-queue design. During review it surfaced that **OpenClaw already
 ships this layer.** Its codex-harness plugin runs agent turns through Codex's
 `app-server` (Codex owns thread resume, tool continuation, compaction,
 execution) while OpenClaw owns channels, session files, model selection,
-approvals, media, the visible transcript, and a persona system
-(`SOUL.md` / `IDENTITY.md`, the Soul·Body·Faculty·Skill model).
+approvals, media, the visible transcript, and an
+[agent workspace](https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md)
+whose files separate operating instructions (`AGENTS.md`), persona and tone
+(`SOUL.md`), user context (`USER.md`), identity metadata (`IDENTITY.md`),
+skills, and memory.
 
 In other words, the thing we were hand-building is a rebuild-by-hand of a
 shipped product. ADR-015 said "own surface = channel adapter only"; that was
@@ -29,7 +32,8 @@ engine.** Adopt the stack wholesale:
 - **Codex** — the agent engine (via OpenClaw's codex-harness plugin). Own nothing.
 - **OpenClaw** — the runtime: channels, chat/web UI, sessions, approvals,
   persona loading. Configure, don't build.
-- **Persona** — authored in OpenClaw's format. This *is* the colleague.
+- **Colleague definition** — authored as OpenClaw workspace files and skills.
+  This *is* the colleague.
 - **Skills** — the only code we write, and only the few we actually need —
   chiefly a multi-channel task-intake + self-scheduling skill (the old
   "dispatcher" idea, demoted to a skill).
