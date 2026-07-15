@@ -28,6 +28,7 @@
     .human { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.4; }
     .secband { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
     .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.9; }
+    .chipB { fill: #dbeafe; stroke: #93c5fd; stroke-width: 0.9; }
   </style>
 
   <text x="24" y="26" class="h1">Digital colleague — reference architecture (one colleague)</text>
@@ -118,7 +119,7 @@
   <!-- cross-cutting: access & permissions & audit -->
   <text x="24" y="626" class="tier">ACCESS · PERMISSIONS · AUDIT · cross-cutting — bounds every layer above</text>
   <rect x="24" y="636" width="792" height="60" rx="10" class="secband"/>
-  <rect x="38" y="648" width="150" height="14" rx="7" class="chip" fill="#eff6ff" stroke="#93c5fd"/>
+  <rect x="38" y="648" width="150" height="14" rx="7" class="chipB"/>
   <text x="46" y="658" class="sec">WE DESIGN · REVIEWED</text>
   <rect x="200" y="646" width="146" height="40" rx="6" class="box"/>
   <text x="273" y="663" text-anchor="middle" class="sub">credential custody</text>
