@@ -117,20 +117,24 @@
   <line x1="708" y1="544" x2="708" y2="610" class="edge" marker-end="url(#arr)"/>
   <text x="698" y="560" text-anchor="end" class="flowOut">OUTBOUND · plugin / connector → provider API</text>
 
-  <!-- Tier 4: external provider capabilities; individual service names are intentionally not catalogued -->
-  <text x="24" y="620" class="tier">EXTERNAL PROVIDERS · PHASE 0.5 CARES ABOUT THE INTEGRATION PATH, NOT THE SERVICE CATALOG</text>
-  <rect x="40" y="630" width="184" height="40" rx="6" class="box"/>
-  <text x="132" y="647" text-anchor="middle" class="labelS">Push-capable provider</text>
-  <text x="132" y="661" text-anchor="middle" class="sub">event → optional gateway</text>
-  <rect x="232" y="630" width="184" height="40" rx="6" class="box"/>
-  <text x="324" y="647" text-anchor="middle" class="labelS">Poll-only provider</text>
-  <text x="324" y="661" text-anchor="middle" class="sub">scheduled bounded read</text>
-  <rect x="424" y="630" width="184" height="40" rx="6" class="box"/>
-  <text x="516" y="647" text-anchor="middle" class="labelS">Same provider may do both</text>
-  <text x="516" y="661" text-anchor="middle" class="sub">choose the supported inbound path</text>
-  <rect x="616" y="630" width="184" height="40" rx="6" class="box"/>
-  <text x="708" y="647" text-anchor="middle" class="labelS">Action-capable provider</text>
-  <text x="708" y="661" text-anchor="middle" class="sub">connector / plugin API</text>
+  <!-- Tier 4: external services -->
+  <text x="24" y="620" class="tier">EXTERNAL SERVICES · EXPAND BY INTEGRATING, WITHOUT CHANGING THE COLLEAGUE RUNTIME</text>
+  <rect x="40" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="85" y="654" text-anchor="middle" class="sub">Gmail</text>
+  <rect x="136" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="181" y="654" text-anchor="middle" class="sub">Outlook</text>
+  <rect x="232" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="277" y="654" text-anchor="middle" class="sub">Calendar</text>
+  <rect x="328" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="373" y="654" text-anchor="middle" class="sub">Teams</text>
+  <rect x="424" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="469" y="654" text-anchor="middle" class="sub">SharePoint</text>
+  <rect x="520" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="565" y="654" text-anchor="middle" class="sub">Slack</text>
+  <rect x="616" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="661" y="654" text-anchor="middle" class="sub">Notion</text>
+  <rect x="712" y="630" width="88" height="40" rx="6" class="box"/>
+  <text x="756" y="654" text-anchor="middle" class="sub">APIs · …</text>
 
   <!-- cross-cutting: access & permissions & audit -->
   <text x="24" y="700" class="tier">ACCESS · PERMISSIONS · AUDIT · cross-cutting — bounds every layer above</text>
@@ -138,15 +142,15 @@
   <rect x="38" y="722" width="150" height="14" rx="7" class="chipB"/>
   <text x="46" y="732" class="sec">WE DESIGN · REVIEWED</text>
   <rect x="200" y="720" width="146" height="40" rx="6" class="box"/>
-  <text x="273" y="737" text-anchor="middle" class="sub">Codex + connector OAuth</text>
-  <text x="273" y="751" text-anchor="middle" class="sub">outside authored files</text>
+  <text x="273" y="737" text-anchor="middle" class="sub">credential custody</text>
+  <text x="273" y="751" text-anchor="middle" class="sub">least privilege</text>
   <rect x="354" y="720" width="146" height="40" rx="6" class="box"/>
-  <text x="427" y="737" text-anchor="middle" class="sub">Codex approvals</text>
-  <text x="427" y="751" text-anchor="middle" class="sub">+ email policy guard</text>
+  <text x="427" y="737" text-anchor="middle" class="sub">approval bounds</text>
+  <text x="427" y="751" text-anchor="middle" class="sub">on side effects</text>
   <rect x="508" y="720" width="146" height="40" rx="6" class="box"/>
-  <text x="581" y="737" text-anchor="middle" class="sub">loopback + bearer routes</text>
-  <text x="581" y="751" text-anchor="middle" class="sub">payloads untrusted</text>
+  <text x="581" y="737" text-anchor="middle" class="sub">inbound content</text>
+  <text x="581" y="751" text-anchor="middle" class="sub">is untrusted</text>
   <rect x="662" y="720" width="146" height="40" rx="6" class="box"/>
-  <text x="735" y="737" text-anchor="middle" class="sub">memory + event audit</text>
-  <text x="735" y="751" text-anchor="middle" class="sub">full tool trace partial</text>
+  <text x="735" y="737" text-anchor="middle" class="sub">audit + provenance</text>
+  <text x="735" y="751" text-anchor="middle" class="sub">event → task → action</text>
 </svg>
