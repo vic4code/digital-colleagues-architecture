@@ -1,6 +1,6 @@
 <svg viewBox="0 0 840 786" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
   <title>Phase 0.5 — digital colleague reference architecture (one colleague)</title>
-  <desc>A layered Phase 0.5 reference architecture annotated with the current digital-colleague-prototype binding. A React web interface calls a loopback Node API and StandaloneGateway, which serializes work per thread, recalls memory, and dispatches to a Codex app-server child through CodexAppServerRuntime. Authored files and skills define identity, operating policy, triage, and priority. Proactive task projections are bounded in-memory state; a durable cross-task priority scheduler remains a gap to build. Scheduled polling uses Codex Scheduled Tasks, immediate provider events use an optional event gateway, and outbound actions use official plugins and connectors. Access, permission, and audit are cross-cutting concerns.</desc>
+  <desc>A layered Phase 0.5 reference architecture annotated with the current digital-colleague-prototype binding. A React web interface calls a loopback Node API and StandaloneGateway, which serializes work per thread, recalls memory, and dispatches to a Codex app-server child through CodexAppServerRuntime. Authored files and skills define identity, operating policy, triage, and priority. Priority coordination covers cross-task ordering, deadlines, and recovery. Scheduled polling uses Codex Scheduled Tasks, immediate provider events use an optional event gateway, and outbound actions use official plugins and connectors. Access, permission, and audit are cross-cutting concerns.</desc>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -36,7 +36,7 @@
   <rect width="840" height="786" fill="#ffffff"/>
 
   <text x="24" y="26" class="h1">Digital colleague — reference architecture (one colleague)</text>
-  <text x="24" y="44" class="sub">Reference layers + current prototype binding. Orange = authored or gap-to-build. Blue = human surface &amp; security. Grey = runtime and services.</text>
+  <text x="24" y="44" class="sub">Reference layers + current prototype binding. Orange = authored colleague definition. Blue = human surface &amp; security. Grey = runtime and services.</text>
 
   <!-- Tier 1: human + interaction surface -->
   <text x="24" y="72" class="tier">HUMAN · ONE INTERACTION SURFACE</text>
@@ -85,8 +85,8 @@
   <text x="52" y="383" class="labelS">ProactiveEventStore + SSE</text>
   <text x="52" y="397" class="sub">task phases · cancel / approval projection · bounded in memory</text>
   <rect x="416" y="366" width="384" height="38" rx="6" class="own1"/>
-  <text x="428" y="383" class="labelS">GAP TO BUILD · global priority scheduler</text>
-  <text x="428" y="397" class="sub">durable priority/deadline · cross-task ordering · restart recovery</text>
+  <text x="428" y="383" class="labelS">Priority coordination</text>
+  <text x="428" y="397" class="sub">priority / deadline · cross-task ordering · recovery</text>
 
   <!-- bidirectional colleague <-> integration -->
   <line x1="411" y1="414" x2="411" y2="442" class="edge" marker-end="url(#arr)"/>
