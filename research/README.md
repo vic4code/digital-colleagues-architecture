@@ -6,6 +6,13 @@ Scratchpad for exploring questions before they become ADRs. Low formality on pur
 When a research note matures into a decision, distill it into an ADR and either
 delete the note or link to the ADR from the top of it.
 
+Notes:
+
+- [**Agent product landscape — build-vs-buy**](./agent-product-landscape.md) —
+  layer model, per-product comparison + trade-offs + architecture components,
+  coverage matrix ([svg](./agent-product-matrix.svg)), and direct answers to the
+  build-vs-buy meeting's open questions (maintainer-first, head-to-head validation).
+
 Planned topics:
 
 - Memory architectures (per-agent vs per-tenant vs shared)
