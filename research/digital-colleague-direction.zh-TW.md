@@ -374,6 +374,56 @@ Mentor / Owner 要做:指派工作 · 審核產出 · 糾正錯誤 · 決定何�
 | 所有同事共享**組織知識**（政策、術語、誰是誰） | 自組織的 agent 團隊 |
 | **skill 不要重複建設**（10 個同事不該有 10 份「怎麼寄信」） | 完整的 AI 組織圖 |
 
+### A-2. 競品實證:Grok Bot 根本沒有 A2A
+
+查了 [grok-bot-0.18-reconstructed](https://github.com/b-nnett/grok-bot-0.18-reconstructed)
+（社群對 Grok Bot 0.18 桌面版的逆向重建）,結論很直接:
+
+> **這個高度產品化的 AI coworker,程式碼裡沒有任何 bot-to-bot / 多代理委派機制。**
+
+它的實際架構是**單一 agent ＋ provider 路由**:
+
+```text
+UI (renderer)
+   ↓ RPC
+Electron Main  ── Remote Box Connector / Local Docker Connector
+   ↓
+Coordinator + Host
+   ↓
+Inference Router ── Cursor / Claude Code / Codex / OpenRouter
+   ↓
+MCP Tools
+```
+
+`node-agent-coordinator` 這個名字容易誤會 —— 從檔案組成看
+（`inference-router.ts`、`routed-mcp-bridge.ts`、`carrier.ts`、
+`control-port-client.ts`、`renderer-port-server.ts`）,
+**它協調的是「管線」（renderer ↔ main ↔ host ↔ providers）,不是「多個 agent」。**
+沒有 delegation、沒有 team、沒有 agent registry。
+
+**它把資源投在哪裡?**
+
+| 它有的 | 它沒有的 |
+|---|---|
+| **持久電腦**（Remote Box / Local Docker connector） | bot 之間的協定 |
+| MCP 工具（能力擴充） | 委派／交辦機制 |
+| Provider 路由（一個 agent,多個後端） | 團隊協調 |
+
+> **競品的賭注是「深度」不是「廣度」:
+> 把一位同事做得夠強（給它自己的電腦＋工具）,
+> 而不是讓很多位同事互相協調。**
+
+⚠️ **可信度標註:** 這是**桌面版 0.18 的社群重建**,不是官方原始碼;
+商用版可能有此版本沒有的團隊功能。但**「產品化的 AI coworker 在這個階段
+沒有押注 A2A」這個訊號是可信的**。
+
+**對我們的意義:**
+1. 前一段「先不要做 A2A」的建議,**有競品實證支持**,不只是保守。
+2. **「擴展一位同事的能力」比「讓多位同事協作」更早有價值** ——
+   roadmap 應該是:持久執行環境 ＋ skill library **先於**任何多同事協調。
+3. 我們的差異化如果要放在「同事之間」,那是**還沒有人驗證過的賭注** ——
+   要嘛先證明它,要嘛不要把它當成主打。
+
 ### B. 核心原則:協作是橫向的,責任是縱向到人的
 
 人類組織有層級,是因為**溝通頻寬有限**。AI 沒有頻寬問題,

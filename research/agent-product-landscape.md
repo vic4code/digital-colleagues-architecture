@@ -57,8 +57,26 @@ top four (identity, memory-as-product, proactivity, governance); the bottom two
 | **OpenClaw** *(research)* | Outer orchestration around a runtime | Persistent agent: channels, lifecycle, proactivity | identity · session routing · cron/heartbeat · event/webhook · approval/routing · workspace files |
 | **Hermes Agent** *(research)* | Autonomous agent runtime | **Agent learning** & memory | memory · skills · agent learning loop · cron/heartbeat · profile |
 | **Hermes Bot Mode** *(competitor)* | Profile → "a colleague" wrapper | Turns a profile into a persistent AI coworker identity | profile packaging · persistent presence |
-| **Grok Bot** *(competitor)* | Productized AI coworker | **Coworker product UX** | Bot · persistent computer · Skill · Routine · teach-by-demonstration |
+| **Grok Bot** *(competitor)* | Productized AI coworker | **Coworker product UX** | Bot · persistent computer · Skill · Routine · teach-by-demonstration · **no bot-to-bot protocol** (see note) |
 | **OpenBot** *(competitor)* | Open AI-coworker platform | **Enterprise governance** | governance gateway · audit · permission · computer isolation |
+
+### Evidence: a productized AI coworker ships **no** agent-to-agent layer
+
+A community reconstruction of Grok Bot 0.18 desktop
+([grok-bot-0.18-reconstructed](https://github.com/b-nnett/grok-bot-0.18-reconstructed))
+shows a **single-agent architecture with provider routing** — no bot-to-bot
+protocol, no delegation, no team coordination. Its `node-agent-coordinator`
+coordinates *plumbing* (renderer ↔ main ↔ host ↔ providers: `inference-router`,
+`routed-mcp-bridge`, port clients), not multiple agents. What it does invest in
+is a **persistent computer** (remote box / local Docker connectors), MCP tools,
+and provider routing.
+
+**Read:** the productized competitor bet on **depth** (make one colleague
+capable, give it its own computer) over **breadth** (many colleagues
+coordinating). This is direct support for deferring A2A, and for sequencing a
+persistent execution environment + skill library *before* any multi-colleague
+coordination. *(Caveat: a community reconstruction of a desktop build, not
+official source; the commercial product may differ.)*
 
 ### Codex App vs Codex App Server — the crux of build-vs-buy
 
