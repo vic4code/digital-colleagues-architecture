@@ -1,0 +1,88 @@
+<svg viewBox="0 0 980 528" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+<title>Agent product capability coverage matrix</title>
+<desc>Capability layers as rows, agent products as columns, coverage as filled/half/empty circles, plus our recommended ownership per layer.</desc>
+<rect width="980" height="528" fill="#ffffff"/>
+<style>.h1{font-size:16px;font-weight:700;fill:#0f172a}.sub{font-size:11px;fill:#64748b}.col{font-size:10.5px;font-weight:700;fill:#334155}.row{font-size:11.5px;font-weight:600;fill:#111827}.plan{font-size:10px;fill:#c2410c;font-weight:600}.planh{font-size:10px;font-weight:700;fill:#c2410c;letter-spacing:.4px}.lg{font-size:10.5px;fill:#475569}</style>
+<text x="24" y="30" class="h1">Agent product landscape — capability coverage</text>
+<text x="24" y="50" class="sub">Rows = capability layers · columns = products · ● full  ◐ partial  ○ little/none. OpenClaw/Hermes/Grok/OpenBot = our research (verify).</text>
+<circle cx="32" cy="64" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/><text x="46" y="68" class="lg">strong</text>
+<circle cx="120" cy="64" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 120 55 A 9 9 0 0 0 120 73 Z" fill="#f97316"/><text x="134" y="68" class="lg">partial</text>
+<circle cx="212" cy="64" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/><text x="226" y="68" class="lg">little / none</text>
+<text x="300.0" y="94" text-anchor="middle" class="col">Codex App</text>
+<text x="388.0" y="88" text-anchor="middle" class="col">Codex</text>
+<text x="388.0" y="101" text-anchor="middle" class="col">App Server</text>
+<text x="476.0" y="94" text-anchor="middle" class="col">OpenClaw</text>
+<text x="564.0" y="94" text-anchor="middle" class="col">Hermes</text>
+<text x="652.0" y="94" text-anchor="middle" class="col">Grok Bot</text>
+<text x="740.0" y="94" text-anchor="middle" class="col">OpenBot</text>
+<text x="880.0" y="94" text-anchor="middle" class="planh">OUR PLAN</text>
+<text x="24" y="150.0" class="row">Identity / Persona / Role</text>
+<circle cx="300.0" cy="146.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 300.0 137.0 A 9 9 0 0 0 300.0 155.0 Z" fill="#f97316"/>
+<circle cx="388.0" cy="146.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="476.0" cy="146.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="564.0" cy="146.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 564.0 137.0 A 9 9 0 0 0 564.0 155.0 Z" fill="#f97316"/>
+<circle cx="652.0" cy="146.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="740.0" cy="146.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 740.0 137.0 A 9 9 0 0 0 740.0 155.0 Z" fill="#f97316"/>
+<text x="794" y="150.0" class="plan">author (workspace)</text>
+<line x1="24" y1="170" x2="966" y2="170" stroke="#eef2f7" stroke-width="1"/>
+<text x="24" y="198.0" class="row">Memory / Skills / Routine</text>
+<circle cx="300.0" cy="194.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 300.0 185.0 A 9 9 0 0 0 300.0 203.0 Z" fill="#f97316"/>
+<circle cx="388.0" cy="194.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 388.0 185.0 A 9 9 0 0 0 388.0 203.0 Z" fill="#f97316"/>
+<circle cx="476.0" cy="194.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 476.0 185.0 A 9 9 0 0 0 476.0 203.0 Z" fill="#f97316"/>
+<circle cx="564.0" cy="194.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="652.0" cy="194.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="740.0" cy="194.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 740.0 185.0 A 9 9 0 0 0 740.0 203.0 Z" fill="#f97316"/>
+<text x="794" y="198.0" class="plan">build-thin · borrow Hermes</text>
+<line x1="24" y1="218" x2="966" y2="218" stroke="#eef2f7" stroke-width="1"/>
+<text x="24" y="246.0" class="row">Channel / Trigger / Proactivity</text>
+<circle cx="300.0" cy="242.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 300.0 233.0 A 9 9 0 0 0 300.0 251.0 Z" fill="#f97316"/>
+<circle cx="388.0" cy="242.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="476.0" cy="242.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="564.0" cy="242.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="652.0" cy="242.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 652.0 233.0 A 9 9 0 0 0 652.0 251.0 Z" fill="#f97316"/>
+<circle cx="740.0" cy="242.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 740.0 233.0 A 9 9 0 0 0 740.0 251.0 Z" fill="#f97316"/>
+<text x="794" y="246.0" class="plan">keep in OpenClaw</text>
+<line x1="24" y1="266" x2="966" y2="266" stroke="#eef2f7" stroke-width="1"/>
+<text x="24" y="294.0" class="row">Governance / Approval / Audit</text>
+<circle cx="300.0" cy="290.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 300.0 281.0 A 9 9 0 0 0 300.0 299.0 Z" fill="#f97316"/>
+<circle cx="388.0" cy="290.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 388.0 281.0 A 9 9 0 0 0 388.0 299.0 Z" fill="#f97316"/>
+<circle cx="476.0" cy="290.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 476.0 281.0 A 9 9 0 0 0 476.0 299.0 Z" fill="#f97316"/>
+<circle cx="564.0" cy="290.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="652.0" cy="290.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="740.0" cy="290.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<text x="794" y="294.0" class="plan">build-thin · borrow OpenBot</text>
+<line x1="24" y1="314" x2="966" y2="314" stroke="#eef2f7" stroke-width="1"/>
+<rect x="24" y="314" width="942" height="48" fill="#f8fafc"/>
+<line x1="24" y1="314" x2="966" y2="314" stroke="#eef2f7" stroke-width="1"/>
+<text x="24" y="342.0" class="row">Agent Runtime</text>
+<circle cx="300.0" cy="338.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="388.0" cy="338.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="476.0" cy="338.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="564.0" cy="338.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="652.0" cy="338.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="740.0" cy="338.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 740.0 329.0 A 9 9 0 0 0 740.0 347.0 Z" fill="#f97316"/>
+<text x="794" y="342.0" class="plan">off-the-shelf: Codex</text>
+<line x1="24" y1="362" x2="966" y2="362" stroke="#eef2f7" stroke-width="1"/>
+<rect x="24" y="362" width="942" height="48" fill="#f8fafc"/>
+<line x1="24" y1="362" x2="966" y2="362" stroke="#eef2f7" stroke-width="1"/>
+<text x="24" y="390.0" class="row">Tools / MCP / Computer Use</text>
+<circle cx="300.0" cy="386.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="388.0" cy="386.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="476.0" cy="386.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 476.0 377.0 A 9 9 0 0 0 476.0 395.0 Z" fill="#f97316"/>
+<circle cx="564.0" cy="386.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 564.0 377.0 A 9 9 0 0 0 564.0 395.0 Z" fill="#f97316"/>
+<circle cx="652.0" cy="386.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="740.0" cy="386.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 740.0 377.0 A 9 9 0 0 0 740.0 395.0 Z" fill="#f97316"/>
+<text x="794" y="390.0" class="plan">off-the-shelf: Codex+MCP</text>
+<line x1="24" y1="410" x2="966" y2="410" stroke="#eef2f7" stroke-width="1"/>
+<text x="24" y="438.0" class="row">Product UX (build/edit/deploy)</text>
+<circle cx="300.0" cy="434.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="388.0" cy="434.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="476.0" cy="434.0" r="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+<circle cx="564.0" cy="434.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 564.0 425.0 A 9 9 0 0 0 564.0 443.0 Z" fill="#f97316"/>
+<circle cx="652.0" cy="434.0" r="9" fill="#f97316" stroke="#ea580c" stroke-width="1"/>
+<circle cx="740.0" cy="434.0" r="9" fill="#ffffff" stroke="#fdba74" stroke-width="1.4"/><path d="M 740.0 425.0 A 9 9 0 0 0 740.0 443.0 Z" fill="#f97316"/>
+<text x="794" y="438.0" class="plan">decide by maintainer</text>
+<line x1="24" y1="458" x2="966" y2="458" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="24" y="482" class="sub">Bottom two rows (runtime, tools) are commodity — Codex wins, do not rebuild. Differentiated value is the top rows, spread across products.</text>
+<text x="24" y="500" class="sub">Decision is not "pick a framework" but "keep / off-the-shelf / build-thin per layer, chosen by who maintains it." See agent-product-landscape.md.</text>
+</svg>
