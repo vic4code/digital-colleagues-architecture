@@ -164,13 +164,17 @@ work out of the box). Keep it on the shortlist *per scenario and per maintainer*
   **different decisions**; don't let one dictate the other.
 
 **Q3 — Does the colleague need an independent identity?**
-Conditional, and it's the cleanest test we have:
-- *If it only works for its owner on the owner's machine* → **no** independent
-  identity needed (it acts as the user).
-- *If it receives/sends mail on its own, acts on others, or works unattended
-  without the owner in the loop* → **yes**: it needs its own identity,
-  permissions, and accountability. (This is the ADR-017 initiator test in
-  another form.)
+Not all agents do. Split identity into three levels and decide per level:
+
+| Level | What it is | Needed when |
+|---|---|---|
+| **L1 · Role identity** | role, persona, skills, memory | **essentially always** |
+| **L2 · System identity** | service account, OAuth, permissions, audit trail | the agent **operates enterprise systems on its own** |
+| **L3 · Human-facing identity** | `Legal Digital Colleague` in Teams, `legal-agent@company` | the agent **mails out on its own, approaches others, or completes work without its owner in the loop** |
+
+Key corollary: **decouple identity from compute.** "Has a persona" must not imply
+"needs its own machine and its own accounts." (L3 is the ADR-017 initiator test
+in another form.)
 
 **Q4 — The real blocker is Day-2 ops, not capability.**
 If a colleague needs a dedicated Windows machine / VM running long-term, the

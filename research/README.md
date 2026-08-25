@@ -12,6 +12,11 @@ Notes:
   layer model, per-product comparison + trade-offs + architecture components,
   coverage matrix ([svg](./agent-product-matrix.svg)), and direct answers to the
   build-vs-buy meeting's open questions (maintainer-first, head-to-head validation).
+- [**數位同事技術方向與後續落地建議報告**](./digital-colleague-direction.zh-TW.md)
+  (zh-TW) — the management-facing recommendation report: executive summary,
+  answers to the five meeting issues, maintenance-mode → architecture mapping,
+  per-pilot recommendations, target architecture, the three gaps to fill, and the
+  five decisions to take to leadership.
 
 Planned topics:
 
