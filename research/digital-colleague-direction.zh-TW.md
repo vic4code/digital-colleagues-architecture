@@ -218,6 +218,58 @@ Codex App 與 app-server **共用同一個 harness 與 `~/.codex`**。
 
 ---
 
+## 四之三、為什麼 Codex App 穩、app-server connector 不穩?（已查證,非臆測）
+
+### 根因:**Codex App 是「配對出貨」,我們的組合天生會版本漂移**
+
+Codex App 內含與它一起測過的 app-server —— **版本不會漂**。
+我們的組合是 **OpenClaw 與 Codex 各自獨立更新**,而
+**app-server 協定本身沒有版本協商機制**,所以漂移不會被擋下來,
+而是變成難懂的執行期錯誤。
+
+> **官方 README 查證結果:**
+> - `initialize` **沒有版本欄位** —— 「client 必須適應 server 實作的任何版本」
+> - **零穩定性承諾** —— 沒有 backwards compatibility 聲明、沒有 deprecation policy、
+>   沒有 breaking change 時間表；deprecated 的（如 `thread/rollback`）只寫「即將移除」,無日期
+> - 大量方法標 **experimental**（`thread/turns/list`、`thread/items/list`、
+>   `server/diagnostics`、`thread/queue/*`）,需 `capabilities.experimentalApi: true` 才可用
+
+### 具體的 mismatch 類型與症狀
+
+| # | Mismatch | 症狀 | 對策 |
+|---|---|---|---|
+| **M1** | **協定漂移（無版本協商）** | `Timed out waiting for initialize` —— 同類整合中**最常被回報的問題** | **自己做版本檢查**（官方沒有,只有 feature request）;不在支援範圍就**啟動時明確報錯**,不要等 runtime 崩 |
+| **M2** | **Experimental feature key 不符** | 未知／無效 feature key → **app-server 直接不可用**（如 `invalid experimental feature key apps_mcp_path_override`） | 啟動時用 **`experimentalFeature/list` 探測**我們依賴的 feature 是否存在且在預期 stage（beta／underDevelopment／stable）,**不要硬編** |
+| **M3** | **無 breaking-change 保證** | 升級後某方法行為變了或消失 | **只用 stable 面**;真要用 experimental 就**隔離在一層 adapter**,方便替換 |
+| **M4** | **傳輸層異常斷線** | `app-server websocket closed (1006)`（CLI 正常但連線掛掉） | 自動重連 ＋ **`thread/resume` 續跑**,**不要重跑整個 turn**（會重複動作） |
+| **M5** | **背壓** | `-32001 Server overloaded; retry later` | **指數退避 ＋ jitter**（官方要求）;turn 併發設上限 —— 我們的 triage gate 正好在做這件事 |
+| **M6** | **遠端／舊版本未自動處理** | 遠端 app-server 版本太舊,桌面端不會自動更新或重啟 | 部署時**把 Codex 版本當成工件的一部分**,不要讓它自動更新 |
+
+### 維運對策（建議直接納入實作規範）
+
+1. **版本 pin ＋ 相容矩陣** —— 維護「OpenClaw 版本 × Codex 版本」的已驗證組合表,
+   **Codex 不自動更新**,升級走排程。
+2. **啟動自檢** —— 版本檢查 ＋ `experimentalFeature/list` 能力探測,
+   **不符就拒絕啟動並明確報錯**（把 M1／M2 從「半夜隨機壞」變成「升級時當場擋下」）。
+3. **升級煙霧測試** —— 每次升級跑一組 E2E（收信→turn→動作→回覆→trace 完整）。
+4. **重連語意** —— 斷線用 `thread/resume` 續,不重跑;動作要冪等。
+5. **每季固定排升級** —— 這是**經常性成本,要編進人力規劃**。
+
+> ⚠️ **這驗證了風險 R3(雙上游依賴)不是理論,是已經在發生的維運成本。**
+> **「用現成的」不等於「免費」** —— 我們省下造 runtime 的成本,
+> 換來的是**版本相容性的經常性成本**。這筆帳要誠實編列。
+
+### 對「mentor 用 Codex App 審核」那個省力做法的影響
+
+⚠️ 該做法有**自身的版本風險**:Codex App 會**自動更新**,若其狀態格式與我們
+**pin 住的 app-server** 分歧,共用 `~/.codex` 可能出現不相容甚至污染。
+**驗證時要同時測「版本偏移」情境**,不能只測 happy path。
+
+*資料來源:openai/codex app-server README、issues #30378／#25607／#20492,
+以及同類整合（T3 Code）的相容性問題回報。*
+
+---
+
 ## 五、維運模式
 
 ### 三個角色（缺一不可)

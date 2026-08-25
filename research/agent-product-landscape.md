@@ -96,6 +96,52 @@ product layer" would add — or what Codex App gives you for free if you adopt i
 
 ---
 
+## 2b. Why Codex App feels stable and an app-server connector doesn't
+
+**Root cause: Codex App ships a *matched pair*; our composition drifts by
+construction.** The desktop app bundles the app-server it was tested against, so
+versions cannot skew. OpenClaw and Codex update independently — and the
+app-server protocol has **no version negotiation**, so drift isn't caught at the
+handshake, it surfaces as opaque runtime failures.
+
+Verified from the app-server README:
+
+- `initialize` carries **no protocol version field** — clients must adapt to
+  whatever version the server implements.
+- **No stability guarantees at all**: no backwards-compatibility statement, no
+  deprecation policy, no breaking-change timeline. Deprecated methods (e.g.
+  `thread/rollback`) say "removed soon" with no date.
+- Many methods are **experimental** (`thread/turns/list`, `thread/items/list`,
+  `server/diagnostics`, `thread/queue/*`), gated behind
+  `capabilities.experimentalApi: true`, with feature stages *beta /
+  underDevelopment / stable* discoverable via `experimentalFeature/list`.
+
+| # | Mismatch | Symptom | Mitigation |
+|---|---|---|---|
+| M1 | Protocol drift (no negotiation) | `Timed out waiting for initialize` — the single most reported problem in comparable integrations | Do our own version check (none exists upstream); refuse to start with a clear error |
+| M2 | Experimental feature-key mismatch | Unknown/invalid key makes app-server **unavailable** (e.g. `invalid experimental feature key apps_mcp_path_override`) | Probe with `experimentalFeature/list` at startup; never hard-code keys |
+| M3 | No breaking-change guarantee | A method changes behavior or disappears after upgrade | Prefer the stable surface; isolate experimental calls behind one adapter |
+| M4 | Transport drop | `app-server websocket closed (1006)` while the CLI works | Reconnect and `thread/resume` — do **not** replay the whole turn |
+| M5 | Backpressure | `-32001 Server overloaded; retry later` | Exponential backoff + jitter (as the docs require); cap concurrent turns |
+| M6 | Stale remote version | Remote app-server too old, no auto-update/restart | Treat the Codex version as part of the deployed artifact; disable auto-update |
+
+**Operational consequence:** pin versions and keep a validated
+`OpenClaw × Codex` compatibility matrix; self-check at startup (version +
+capability probe) so drift fails loudly at upgrade time instead of randomly at
+3am; run an end-to-end smoke test per upgrade; schedule upgrades quarterly.
+
+> **"Off-the-shelf" is not "free."** We trade the cost of building a runtime for
+> the recurring cost of version compatibility. Budget it explicitly.
+
+*This also puts a caveat on the "let mentors review in Codex App" shortcut: the
+desktop app auto-updates, so sharing `~/.codex` with a pinned app-server carries
+its own skew risk — validate the skew case, not just the happy path.*
+
+*Sources: openai/codex app-server README; issues #30378, #25607, #20492;
+compatibility reports from comparable integrations.*
+
+---
+
 ## 3. Coverage matrix — who covers which layer
 
 Legend: ● strong · ◐ partial · ○ little/none · *(research = unverified)*
