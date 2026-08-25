@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1000 780" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+<title>Agent 產品與數位同事的能力對照</title>
+<desc>雷達圖:八個能力維度上,現成 agent 產品與我們要打造的數位同事的覆蓋差異。競品集中在能力、產品UX、工具整合;我們的目標覆蓋組織身分、治理、組織世界觀,但在工具整合與產品UX上較弱。</desc>
+<rect width="1000" height="780" fill="#ffffff"/>
+<style>.t{font-size:17px;font-weight:750;fill:#0f172a}.st{font-size:11.5px;fill:#64748b}.ax{font-size:12px;font-weight:700;fill:#1e293b}.axs{font-size:9.5px;fill:#94a3b8}.lg{font-size:12px;fill:#334155}.lgb{font-size:12px;font-weight:750;fill:#0f172a}.nt{font-size:11px;fill:#475569}</style>
+<text x="28" y="34" class="t">現成 Agent 產品 vs 我們要打造的數位同事</text>
+<text x="28" y="54" class="st">八個能力維度 · 0=無 3=強 · 競品為我們的盤點研究(需查證);「我們」欄位是目標值,不是現況</text>
+<polygon points="372.0,336.0 424.3,357.7 446.0,410.0 424.3,462.3 372.0,484.0 319.7,462.3 298.0,410.0 319.7,357.7" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<polygon points="372.0,262.0 476.7,305.3 520.0,410.0 476.7,514.7 372.0,558.0 267.3,514.7 224.0,410.0 267.3,305.3" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<polygon points="372.0,188.0 529.0,253.0 594.0,410.0 529.0,567.0 372.0,632.0 215.0,567.0 150.0,410.0 215.0,253.0" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="372.0" y2="188.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="529.0" y2="253.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="594.0" y2="410.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="529.0" y2="567.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="372.0" y2="632.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="215.0" y2="567.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="150.0" y2="410.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="372" y1="410" x2="215.0" y2="253.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="372" y="154" text-anchor="middle" class="ax">Agent 能力</text>
+<text x="372" y="168" text-anchor="middle" class="axs">reasoning·tool·exec</text>
+<text x="553" y="229" text-anchor="start" class="ax">產品 UX</text>
+<text x="553" y="243" text-anchor="start" class="axs">建立/編輯/部署</text>
+<text x="628" y="410" text-anchor="start" class="ax">工具整合成熟度</text>
+<text x="628" y="424" text-anchor="start" class="axs">OAuth·連接器·生命週期</text>
+<text x="553" y="591" text-anchor="start" class="ax">長期存在·主動性</text>
+<text x="553" y="605" text-anchor="start" class="axs">cron·event·常駐</text>
+<text x="372" y="666" text-anchor="middle" class="ax">記憶·學習</text>
+<text x="372" y="680" text-anchor="middle" class="axs">累積·反思·技能沉澱</text>
+<text x="191" y="591" text-anchor="end" class="ax">組織身分</text>
+<text x="191" y="605" text-anchor="end" class="axs">帳號·權責·可轉移</text>
+<text x="116" y="410" text-anchor="end" class="ax">治理·稽核</text>
+<text x="116" y="424" text-anchor="end" class="axs">policy·approval·audit</text>
+<text x="191" y="229" text-anchor="end" class="ax">組織世界觀·多同事</text>
+<text x="191" y="243" text-anchor="end" class="axs">共享知識·skill library</text>
+<polygon points="372.0,188.0 529.0,253.0 594.0,410.0 424.3,462.3 372.0,521.0 345.8,436.2 298.0,410.0 372.0,410.0" fill="#64748b" fill-opacity="0.05" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="372.0,188.0 529.0,253.0 594.0,410.0 476.7,514.7 372.0,595.0 319.7,462.3 335.0,410.0 372.0,410.0" fill="#a78bfa" fill-opacity="0.05" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="372.0,225.0 450.5,331.5 520.0,410.0 502.8,540.8 372.0,632.0 319.7,462.3 335.0,410.0 372.0,410.0" fill="#38bdf8" fill-opacity="0.05" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="372.0,262.0 450.5,331.5 483.0,410.0 450.5,488.5 372.0,484.0 293.5,488.5 150.0,410.0 345.8,383.8" fill="#34d399" fill-opacity="0.05" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="372.0,188.0 476.7,305.3 520.0,410.0 529.0,567.0 372.0,595.0 215.0,567.0 150.0,410.0 215.0,253.0" fill="#f97316" fill-opacity="0.16" stroke="#f97316" stroke-width="2.6"/>
+<circle cx="372.0" cy="188.0" r="4" fill="#f97316"/>
+<circle cx="476.7" cy="305.3" r="4" fill="#f97316"/>
+<circle cx="520.0" cy="410.0" r="4" fill="#f97316"/>
+<circle cx="529.0" cy="567.0" r="4" fill="#f97316"/>
+<circle cx="372.0" cy="595.0" r="4" fill="#f97316"/>
+<circle cx="215.0" cy="567.0" r="4" fill="#f97316"/>
+<circle cx="150.0" cy="410.0" r="4" fill="#f97316"/>
+<circle cx="215.0" cy="253.0" r="4" fill="#f97316"/>
+<text x="700" y="122" class="lgb">圖例</text>
+<line x1="700" y1="140" x2="730" y2="140" stroke="#64748b" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="740" y="144" class="lg">Codex App</text>
+<line x1="700" y1="166" x2="730" y2="166" stroke="#a78bfa" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="740" y="170" class="lg">Grok Bot</text>
+<line x1="700" y1="192" x2="730" y2="192" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="740" y="196" class="lg">Hermes</text>
+<line x1="700" y1="218" x2="730" y2="218" stroke="#34d399" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="740" y="222" class="lg">OpenBot</text>
+<line x1="700" y1="244" x2="730" y2="244" stroke="#f97316" stroke-width="3"/>
+<text x="740" y="248" class="lgb">我們的數位同事(目標)</text>
+<text x="700" y="452" class="lgb">讀圖重點</text>
+<text x="700" y="471" class="nt">· 競品集中在左半(能力·UX·工具)——</text>
+<text x="700" y="490" class="nt">  commodity,不要重造</text>
+<text x="700" y="509" class="nt">· 右半(身分·治理·世界觀)幾乎空白 ——</text>
+<text x="700" y="528" class="nt">  這是我們的護城河</text>
+<text x="700" y="547" class="nt">· 我們在「工具整合·產品UX」較弱 ——</text>
+<text x="700" y="566" class="nt">  是工程成本,不是技術阻礙</text>
+</svg>
