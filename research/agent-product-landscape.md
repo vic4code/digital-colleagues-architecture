@@ -1,13 +1,23 @@
 # Agent product landscape — build-vs-buy for digital colleagues
 
-**Status:** Decision-support survey. Not a selection. Feeds the build-vs-buy
-meeting follow-ups.
+**Status:** Decision-support survey. Feeds the build-vs-buy meeting follow-ups.
+
+> **Premise.** Shipping digital colleagues is a **committed product direction**,
+> not an open question. This survey answers *"where do we draw the product
+> boundary so we ship fastest"* — every "take it off the shelf" recommendation
+> exists to **concentrate product effort on the product**, not to shrink ambition.
+> The product is a *digital colleague* (identity, governance, skills, evaluation,
+> lifecycle, mentor→autonomy), **not an agent framework**; Codex and OpenClaw are
+> **suppliers**, the way a SaaS product doesn't write its own database.
+> Hermes Bot Mode, Grok Bot, and OpenBot are **competitors** in this space — we
+> learn from them, we don't source from them.
 
 **One sentence:** the question is *not* "which agent framework do we pick"; it is
-*"which capability layers do we keep, which do we take off the shelf, and who
+*"which capability layers are our product, which are commodity parts, and who
 maintains the result."* This doc gives the layer model, a per-product comparison
 with architecture components and trade-offs, and direct answers to the meeting's
-open questions.
+open questions. The full product-facing recommendation (zh-TW) is in
+[digital-colleague-direction.zh-TW.md](./digital-colleague-direction.zh-TW.md).
 
 > **Sourcing note.** Codex claims are checked against OpenAI's docs (linked at the
 > end). Claims about OpenClaw, Hermes, Grok Bot, and OpenBot come from our own
@@ -46,9 +56,9 @@ top four (identity, memory-as-product, proactivity, governance); the bottom two
 | **Codex App Server** | Codex's runtime / harness API (JSON-RPC) | The real agent capability, headless & embeddable | thread · turn · tool · shell · file · skills · plugins · approval · sandbox · streamed events |
 | **OpenClaw** *(research)* | Outer orchestration around a runtime | Persistent agent: channels, lifecycle, proactivity | identity · session routing · cron/heartbeat · event/webhook · approval/routing · workspace files |
 | **Hermes Agent** *(research)* | Autonomous agent runtime | **Agent learning** & memory | memory · skills · agent learning loop · cron/heartbeat · profile |
-| **Hermes Bot Mode** *(research)* | Profile → "a colleague" wrapper | Turns a profile into a persistent AI coworker identity | profile packaging · persistent presence |
-| **Grok Bot** *(research)* | Productized AI coworker | **Coworker product UX** | Bot · persistent computer · Skill · Routine · teach-by-demonstration |
-| **OpenBot** *(research)* | Open AI-coworker platform | **Enterprise governance** | governance gateway · audit · permission · computer isolation |
+| **Hermes Bot Mode** *(competitor)* | Profile → "a colleague" wrapper | Turns a profile into a persistent AI coworker identity | profile packaging · persistent presence |
+| **Grok Bot** *(competitor)* | Productized AI coworker | **Coworker product UX** | Bot · persistent computer · Skill · Routine · teach-by-demonstration |
+| **OpenBot** *(competitor)* | Open AI-coworker platform | **Enterprise governance** | governance gateway · audit · permission · computer isolation |
 
 ### Codex App vs Codex App Server — the crux of build-vs-buy
 

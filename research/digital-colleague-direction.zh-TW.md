@@ -1,7 +1,12 @@
 # 數位同事技術方向與後續落地建議報告
 
-**狀態:** 建議報告（決策支援）。對應 build-vs-buy 會議的五個議題與後續待辦。
+**狀態:** 產品落地建議（決策支援）。對應 build-vs-buy 會議的五個議題與後續待辦。
 **英文版能力盤點:** [agent-product-landscape.md](./agent-product-landscape.md)
+
+> **前提（重要）。** 數位同事是**既定的產品方向**,不是待決策的選項。
+> 本報告要回答的是「**怎麼最快把這個產品做出來、沿路哪些牆必須撞**」,
+> 而不是「要不要做」。以下所有「用現成的」建議,目的都是**把產品能量集中在
+> 產品本身**,不是縮小產品野心。
 
 > **資料可信度說明。** Codex 相關敘述已對照 OpenAI 官方文件（文末附連結）。
 > OpenClaw、Hermes、Grok Bot、OpenBot 的能力描述來自我們自己的盤點研究,
@@ -11,27 +16,169 @@
 
 ## 一、Executive Summary
 
-數位同事已完成初步技術驗證。但隨著 Codex App、Codex App Server、OpenClaw 等
-Agent 能力快速成熟,下一階段**不宜再預設「一定要完整自研一套 Agent Platform」**,
-而應回到實際使用情境,確認不同角色需要什麼能力,再決定各層採用現成產品或自研。
+數位同事已完成初步技術驗證。隨著 Codex App、Codex App Server、OpenClaw 等
+Agent 能力快速成熟,**產品的邊界需要重新畫一次**:哪些是我們的產品、
+哪些是供應商已經給我們的。
 
-建議方向收斂為:
+**核心判斷:我們做的產品是「數位同事」,不是「Agent Framework」。**
 
-- **短期** — 先完成既有試點的 End-to-End 驗證。
-- **中期** — 以 **OpenClaw + Codex Runtime** 作為可客製的技術底座,
-  同時把 **Codex App 作為 BU 自助式工作的 baseline**。
-- **長期** — 數位同事聚焦在 **Identity、Governance、Skill、Evaluation、Lifecycle**,
-  而**不是**重新打造 Agent Runtime。
+- **Agent Runtime（Codex）是供應商** —— 就像做 SaaS 產品不會自己寫資料庫。
+- **OpenClaw 是中介層供應商** —— 解決「Agent 如何長期存在」。
+- **我們的產品面** = Identity、Governance、Skill、Evaluation、Lifecycle、
+  以及讓 BU 自己建立與管理數位同事的介面。**這才是差異化所在。**
 
-換言之:**現階段不是「Codex App 或自研架構二選一」**,而是依不同使用者與場景
-採用不同 surface,**共用企業治理與能力層**。
+因此建議:
+
+- **短期** — 完成既有試點的 End-to-End,**用試點找出產品必須突破的牆**
+  （不是驗證「要不要做」）。
+- **中期** — **OpenClaw + Codex Runtime** 作為可客製的技術底座；
+  **Codex App 作為能力 baseline 與部分場景的使用介面**。
+- **長期** — 產品資源集中在
+  **Identity、Governance、Skill、Evaluation、Lifecycle、BU Self-service**,
+  **不重造 Agent Runtime**。
+
+換言之:**不是「Codex App 或自研架構二選一」**,而是
+**用現成的零件,做我們自己的產品** —— 依不同使用者與場景採用不同 surface,
+共用同一套企業治理與能力層。
 
 ---
 
-## 二、先講清楚:數位同事是「分層」,不是一個產品
+## 一之二、先定義:我們的產品到底是什麼
+
+這是全篇最重要的一句話 —— 產品邊界不清,後面每個技術決策都會吵不完。
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│  我們的產品:數位同事平台                                  │
+│  讓一個組織可以「僱用、管理、信任」一個 AI 同事            │
+│                                                          │
+│  · Identity      同事是誰、代表誰、負什麼責               │
+│  · Skill         它會做什麼、怎麼教它、怎麼改它           │
+│  · Governance    它被允許做什麼、誰核准、如何稽核         │
+│  · Evaluation    它做得好不好、有沒有退步                 │
+│  · Lifecycle     建立 → 上線 → 修正 → 退役               │
+│  · Self-service  BU 自己就能建立與維護                    │
+└─────────────────────────────────────────────────────────┘
+                          ↑ 使用
+┌─────────────────────────────────────────────────────────┐
+│  供應商層（不自研,持續汰換）                              │
+│  · OpenClaw   → Agent 如何長期存在（channel/cron/event）  │
+│  · Codex      → Agent 如何完成工作（reasoning/tool/exec） │
+└─────────────────────────────────────────────────────────┘
+```
+
+**推論:** 「不重造 Agent Runtime」不等於「不做產品」。
+恰恰相反 —— 每一小時花在重造 runtime,就是**少一小時**花在上面那個框裡,
+而上面那個框才是別人沒有、我們必須自己做的東西。
+
+---
+
+## 一之三、產品願景:像人一樣的虛擬同事
+
+這是產品的北極星,也是與競品最大的差異點。
+
+**數位同事 = 一位虛擬的人。** 他有自己的身分、自己的帳號、自己的電腦 ——
+只是這些都是虛擬的。他**一開始需要 mentor 帶**,被指派工作、被檢查、被糾正；
+**帶熟之後就能自主工作**。
+
+### 入職到自主 —— 跟真人一樣的生命週期
+
+```text
+① 入職 Onboarding    工號 · 帳號 · 電腦（VM/容器）· 權限範圍 · 角色說明
+        ↓
+② 帶訓 Mentored      mentor 指派任務 · 每個動作都要核准 · 當場糾正
+        ↓
+③ 試用 Supervised    自己做 · mentor 抽查 · 只有高風險動作要核准
+        ↓
+④ 自主 Autonomous    例行工作完全自主 · 只有例外才升級給人
+        ↓
+⑤ 退役 Retire        收回帳號與權限 · 記憶與軌跡歸檔
+```
+
+### 關鍵設計:自主等級 = 核准強度的反函數
+
+這一步把「**培養**」與「**治理**」統一成同一個機制,而不是兩套系統:
+
+| 自主等級 | 核准要求 | Mentor 介入 | 對應真人 |
+|---|---|---|---|
+| L0 帶訓 | 每個動作都要核准 | 每件事 | 新人跟著做 |
+| L1 試用 | 寫入/對外動作要核准 | 抽查 | 試用期 |
+| L2 自主 | 只有高風險動作要核准 | 看報表 | 轉正 |
+| L3 資深 | 例外才升級 | 只看異常 | 獨當一面 |
+
+**同一個 agent 可以在不同技能上處於不同等級** —— 就像真人可以在 A 業務獨當一面、
+在 B 業務還是新手。**升級的依據是 Evaluation 的實際表現**,不是時間到了就升。
+
+### 這對架構的意義
+
+| 願景要素 | 架構後果 |
+|---|---|
+| 有自己的帳號 | L2 System Identity（service account / OAuth）**必要**,不是選配 |
+| 有自己的電腦 | 需要**隔離的執行環境**（VM / 容器），動作才可歸屬、可稽核 |
+| Mentor 帶訓 | 需要 **mentor 介面**:指派、審核、糾正、看軌跡 |
+| 漸進自主 | 需要 **autonomy level** 當一等公民,直接驅動 approval policy |
+| 會變強 | 需要 **Evaluation + Memory/Skill 沉澱**（糾正要能變成下次的能力） |
+
+⚠️ **與「Identity 與 Compute 解耦」的關係（澄清）:**
+「解耦」的意思是**不要為了給 Persona 就急著開一台實體機**,
+而不是「同事不該有自己的電腦」。正確的說法是:
+**身分一定是自己的;運算環境是可選的實作** —— 依風險等級決定給共用沙箱、
+容器、還是專屬 VM。等到同事要**自主對外行動**時,隔離的執行環境就變成必要,
+因為那時「這個動作是誰做的」必須查得到。
+
+---
+
+## 一之四、「現成工具好像已經能解決 BU 問題了」—— 這是好事,也是探針
+
+發展過程中我們一直看到:某些 BU 問題,現成工具（Codex App、各種 SaaS AI 功能）
+好像就解掉了。**這不是壞消息,要用對方式解讀。**
+
+### 正確的處理:讓工具先去解,不要擋
+
+- BU 現在就能拿到價值 → **就讓他們用**,不要等我們的平台。
+- 擋住 BU 用工具去換「都要走我們平台」,會同時失去信任與時間。
+- 我們反而應該**主動推薦**工具給適合的場景。
+
+### 更重要的:把它當成產品邊界的探針
+
+> **工具解得掉的 = commodity,從 roadmap 拿掉。
+> 工具解不掉的 = 我們的產品。**
+
+現成工具的天花板,恰好就是「工具」與「同事」的分界線:
+
+| 現成工具的限制 | 為什麼變成我們的產品 |
+|---|---|
+| 一次性、**要人主動發起** | 同事要**長期存在、自己醒來**做事 |
+| 綁在**個人帳號**上 | 同事要有**組織身分**,人離職了同事還在 |
+| **沒有權責歸屬** | 出事要查得到「是誰、憑什麼權限做的」 |
+| **不會累積** | 教過的東西要留下來,下次自己會 |
+| 沒有 mentor / 漸進自主 | 同事要**能被託付**,而且會愈來愈能被託付 |
+| 跨系統**要人手動接** | 同事要能自己串起整段工作 |
+
+### 判斷式（每個場景都用這個問）
+
+> **如果一個 BU 問題,用現成工具 ＋ 一個人願意每次去按,就能解決
+> → 那不是我們的產品,推薦他們去用。**
+>
+> **如果它需要「一個能被託付、被管理、被稽核、會變強的角色」
+> → 那才是數位同事。**
+
+### 誠實的風險（要跟主管講）
+
+如果試點跑完發現**所有場景都落在前者**（工具 ＋ 一個人按就夠），
+那產品的正當性就必須重新檢視 —— 這正是**先跑 pilot E2E** 的意義:
+不是驗證「要不要做」,而是**找出哪些問題只有「同事」能解**,
+並用這些問題定義產品的第一版範圍。
+
+目前看起來會落在後者的訊號:法務合約審閱（要權責、稽核、長期一致性）、
+主動式 PM（要長期存在與主動性）—— 這兩個場景值得優先驗證。
+
+---
+
+## 二、分層:產品邊界畫在哪一層
 
 數位同事 = **長期存在、有角色、有能力、有權限邊界的 AI Actor**。
-底層 runtime 可替換。逐層決定「保留 / 用現成 / 薄建」:
+底層 runtime 可替換。逐層決定「**這層是我們的產品,還是供應商的零件**」:
 
 ```text
 數位同事 Digital Colleague
@@ -43,8 +190,10 @@ Agent 能力快速成熟,下一階段**不宜再預設「一定要完整自研�
 └─ Tools / MCP / Computer Use         ← 它能碰什麼
 ```
 
-**推論:** 我們不需要自己做全部六層。真正能加值的是上面四層；
-下面兩層（runtime、tools）正是現成方案最強、最不該重造的地方。
+**推論:** 六層都要有,但**不是六層都要自己做**。
+上面四層（Identity、Memory/Skill、主動性、Governance）是**我們的產品**,
+別人給不了我們要的樣子；下面兩層（Runtime、Tools）是**零件**,
+現成方案最強,自己重造只會排擠產品開發的資源。
 
 ---
 
@@ -67,8 +216,14 @@ Codex App 特別適合（UI、自然語言互動、Skill、Automation 已相對�
 - 長期背景運作、主動監控事件
 - 企業特定 Permission / Audit
 
-**建議:** Codex App 定位為「**BU / Knowledge Worker 的 AI 工作介面**」,
-而非數位同事的唯一 runtime。
+**建議:** Codex App 定位為「**BU / Knowledge Worker 的 AI 工作介面**」與
+**能力 baseline**（用來比較我們做得夠不夠好）。
+
+⚠️ **不要誤讀成「有 Codex App 就不用做產品」。**
+Codex App 給的是**個人生產力工具**;我們要做的是**組織僱得起、管得動、
+信得過的數位同事**（身分、權責、治理、生命週期、BU 自助）。
+兩者是**互補**:Codex App 可以是其中一種 surface,但它不會替我們回答
+「這位同事是誰、能動哪些系統、誰核准、出事查得到嗎」。
 
 ---
 
@@ -150,8 +305,13 @@ ADR-019 約束的是*終端使用者*那一側,不是開發者工具。）
 | **L2 · System Identity** | Service account、OAuth、Permission、Audit trail | Agent 可**自主操作企業系統**時 |
 | **L3 · Human-facing Identity** | Teams: Legal Digital Colleague<br>Email: legal-agent@company | Agent 要**自己對外發信、自己找其他人、不經主人完成工作**時 |
 
-**建議:** 不要把「有 Persona」與「一定要一台獨立電腦 / 一組獨立帳號」綁在一起。
-> **Identity 應與 Compute 解耦。**
+**與產品願景的關係:** 我們的目標是「像人一樣的虛擬同事」——
+**終局是 L1+L2+L3 都有**（身分、帳號、電腦）。但**不必第一天就全給**:
+依同事的自主等級逐步開通,就像真人新人也是逐步取得系統權限。
+
+> **身分一定是自己的;運算環境是可選的實作。**
+> 早期用共用沙箱即可；等同事要**自主對外行動**時,隔離的執行環境
+> （容器 / 專屬 VM）就變成必要 —— 因為那時「這個動作是誰做的」必須查得到。
 
 ---
 
@@ -228,7 +388,8 @@ Human correction rate · 維護成本
 Create Colleague → 設 Role → 設 Skill → 設 Routine → Test → Deploy → 看 Activity → Correct
 ```
 
-可參考:Grok Bot、Hermes Bot Mode、OpenBot *(研究)*
+競品參考:Grok Bot、Hermes Bot Mode、OpenBot *(研究)* —— 它們證明這個市場成立,
+也標示出我們必須做得更好的地方（尤其 mentor 帶訓與漸進自主,是它們較弱的一塊）。
 
 ---
 
@@ -290,15 +451,15 @@ Backend agent capability 已經足夠。缺的是這三塊:
 
 ### 1. Productization
 Create Bot · Manage Persona · Manage Skill · Manage Routine · Observe ·
-Correct · Deploy　*(參考 Grok Bot、Hermes Bot Mode)*
+Correct · Deploy　*(競品參考:Grok Bot、Hermes Bot Mode)*
 
-### 2. Agent Learning　*(參考 Hermes)*
+### 2. Agent Learning　*(競品參考:Hermes)*
 ```text
 Experience → Reflection → Memory / Skill → Evaluation → Reuse
 ```
 **先從 Memory / Skill refinement 做,不需要一開始就做複雜 RL。**
 
-### 3. Enterprise Governance　*(參考 OpenBot)*
+### 3. Enterprise Governance　*(競品參考:OpenBot)*
 ```text
 Agent Action → Policy → Permission → Approval → Audit → Execute
 ```
@@ -331,13 +492,19 @@ OpenClaw / 外層 wrapper
 
 ## 九、建議主管拍板的五個方向
 
-1. **Codex App 納入正式 baseline**,不另外重做相同能力。
-2. **保留 OpenClaw + Codex Runtime**,作為 Enterprise Digital Colleague 的主要 PoC 架構。
-3. **短期優先驗證 End-to-End 是否真的解決 user problem**,
-   不要先投入大量長期 platform engineering。
-4. **同步定義 Day-2 owner / operating model** —— architecture 最終選擇應配合未來維護者。
-5. **下一階段自研重點不再是 Agent Runtime**,而是:
-   Digital Identity · Enterprise Skill · Governance · Evaluation · Lifecycle · BU Self-service。
+**大前提:數位同事是既定產品方向。以下是「產品邊界怎麼畫」,不是「要不要做」。**
+
+1. **確認產品定義** —— 我們做的是「**組織僱得起、管得動、信得過的虛擬同事**」
+   （身分／帳號／電腦、mentor 帶訓、漸進自主、治理、生命週期）,
+   **不是**再做一套 Agent Framework。
+2. **Runtime 用現成的** —— Codex App Server + OpenClaw 為技術底座,
+   **不自研 Agent loop**。省下的能量全部投入產品層。
+3. **Codex App 納入正式 baseline** —— 當能力對照組,也當部分場景的使用介面；
+   BU 現在就能用現成工具解掉的問題,**推薦他們去用,不要擋**。
+4. **短期先跑 Pilot E2E** —— 目的是**找出「只有同事能解、工具解不掉」的問題**,
+   用它定義產品第一版範圍;先不要投入大量長期 platform engineering。
+5. **同步定義 Day-2 owner / operating model** —— 維運模式決定架構選擇,
+   也決定產品要不要做 BU 自助介面。
 
 ---
 
@@ -349,22 +516,26 @@ OpenClaw / 外層 wrapper
 | **2** | 建立 Baseline:每個主要 Pilot 都與 Codex App 比較 | Accuracy · Task success · User effort · Developer effort · Maintenance effort · Cost |
 | **3** | 確認 Operating Model | 每個場景定義 Builder / User / Owner / Maintainer |
 | **4** | 補 Enterprise Gap | 只補現成產品沒有、但公司真的需要的能力 |
-| **5** | 再決定長期架構 | 依前面結果決定各層 Adopt / Integrate / Build |
+| **5** | **定義產品第一版範圍** | 依前面結果決定各層 Adopt / Integrate / Build,並鎖定 v1 產品範圍 |
 
-**Step 5 的重點:** 不是現在先預設「自研 / Codex App 哪個一定是答案」,
-而是用前面四步的實際結果來決定。
+**Step 5 的重點:** 產品要做是既定的;要用前四步的實際結果來決定
+**產品的邊界畫在哪** —— 哪些層直接採用、哪些整合、哪些自己做。
+特別是:**工具解得掉的場景從 roadmap 移除,把 v1 集中在只有「同事」能解的問題。**
 
 ---
 
 ## 十一、給主管的一句話結論
 
-> **數位同事不需要重新打造一套完整 Agent Framework。**
-> 短期以 **Codex 驗證工作能力**、**OpenClaw 補長期存在與企業整合**,
-> 並將真正的自研資源集中在
-> **Identity、Governance、Skill、Evaluation 與 Lifecycle**。
+> **我們要做的產品是「數位同事」,不是「Agent Framework」。**
+> Runtime 直接用現成的（Codex + OpenClaw）,把全部產品能量投入
+> **身分、治理、技能、評估、生命週期,以及 mentor 帶訓到漸進自主的機制** ——
+> 那才是別人給不了、而組織真正需要的東西。
 
-這樣既能保留現有技術投資,也能避免與快速成熟的 Agent Product 重複開發,
-同時保留未來企業數位同事真正需要的差異化能力。
+現成工具能幫 BU 解決的問題,**就讓他們用**;工具解不掉的部分,
+正好定義了我們產品的第一版範圍。這樣既保留既有技術投資,
+也避免與快速成熟的 Agent Product 重複開發,
+同時把資源集中在「**讓一個組織能夠僱用、管理、信任一位虛擬同事**」
+這件真正的差異化能力上。
 
 ---
 
