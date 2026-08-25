@@ -174,6 +174,50 @@ Codex App 另有閉源產品層 —— 桌面 UI、Projects、Automation UX 等�
 
 ---
 
+## 四之二、選 App Server + OpenClaw,比起直接用 Codex App 缺什麼?
+
+**這是選這條路要付的帳,先講清楚。**（Codex App = App Server ＋ 閉源產品層）
+
+| 缺口 | 影響 | 嚴重度 |
+|---|---|---|
+| **Diff／Review UX** | 看 agent 改了什麼、跑了什麼指令的專業檢視 | 🔴 **最高 —— 見下方** |
+| **Automation UX（GUI）** | Codex App 用畫面設定自動化;我們是 config／cron → **BU 自己設不了** | 🔴 高（＝我們說的 BU self-service gap） |
+| **桌面 UI** | 開箱即用的對話介面。我們要自己做或用 runtime 的 web UI,品質未必等同 | 🟠 中 |
+| **Projects／Worktree 管理** | 多案子並行的工作區管理（例如多份合約同時審）要自己管 | 🟠 中 |
+| **官方支援與相容性** | App Server 官方標示 **experimental** —— **breaking change 的風險由我們承擔**,不是官方保證 | 🟠 中（長期成本） |
+| 通知／OS 整合 | 桌面通知;我們改用 Teams／Telegram | 🟡 低（使用者本來就在 Teams） |
+| Remote Control | 從手機看／介入同事 | 🟡 低（要的話自己做） |
+| 生態與上手 | 官方文件／社群 vs 我們自己的組合知識,新人要學我們的 | 🟡 低但持續 |
+
+### 🔴 最尖銳的一點:缺的正好打在產品命脈上
+
+> **我們產品最核心的迴圈是「mentor 審核產出」。
+> 而 Codex App 的 diff／review UX 正是為這件事優化的 —— 那正是我們缺的。**
+
+如果 mentor 的審核體驗很差,**mentor 就不願意帶**,而 mentor 不帶 → 自主等級升不上去
+→ 人工覆核率不會下降 → **產品在第一步就死了**。
+所以這**不是「以後再說」的缺口,是要優先補的**。
+
+### 換到什麼（平衡看）
+
+Headless／無人值守（Codex App 要有人開著）· 多同事多 persona 管理 ·
+Channel 整合（Teams／Outlook 進得來）· 主動性（cron／heartbeat／webhook）·
+企業治理的掛載點 · 不綁單一供應商的 UI。
+
+**這些正是「數位同事」與「個人工具」的分野 —— 所以這筆帳付得有道理,
+但要知道自己在付。**
+
+### 💡 值得先驗證的省力做法（假設,未證實）
+
+Codex App 與 app-server **共用同一個 harness 與 `~/.codex`**。
+若 OpenClaw 驅動 app-server 產生的 thread,**mentor 能直接用 Codex App 打開來審核**,
+我們就**免費拿到 review UX**,不必自己做。
+
+> **建議列為優先驗證項:「mentor 能不能用 Codex App 審核同事跑出來的 thread?」**
+> 成立 → 最大的缺口直接補掉;不成立 → review UX 要自己排進 roadmap 第一順位。
+
+---
+
 ## 五、維運模式
 
 ### 三個角色（缺一不可)
