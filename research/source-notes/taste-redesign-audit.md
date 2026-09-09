@@ -58,3 +58,7 @@ Added an English-first bilingual problem → approach → technology overview wi
 ## Story-first reorganization — 2026-09-09
 
 Replaced the technical opening with an Outlook workday and four practical questions. Main sequence: story, questions, framework implementations, comparison, autonomous task selection, existing phases, original architecture integration, verification. Technical synthesis, observation details and design choices remain expandable in comparison. Preserved prior anchors, all 42 source excerpts and both original architecture views. Eight navigation targets, nested-reference links and framework reveal passed browser checks; 1440/768/390 widths have no document overflow or JavaScript errors. Independent storyline and clarity reviews passed; removed one stale appendix chapter number. See storyline-validation.json.
+
+## Adoption conclusion — 2026-09-09
+
+Added OpenClaw-first recommendation with five build priorities, component ownership, trade-offs, acceptance gates and targeted reinforcement criteria. Clearly labeled as proposed integration, separate from existing phases. Browser checks at 1440/768/390 pixels: no page overflow or JavaScript errors; five priority rows and all internal evidence targets present. Static verification: 42 preserved code excerpts, 153 source ranges, zero failures.

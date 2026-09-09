@@ -38,6 +38,10 @@ The report follows one story: an Outlook responsibility → four practical quest
 - Original source SVGs remain unchanged. Earlier simplified exports and annotation coordinates are retained as historical research assets; the report's current architecture section uses the original-first presentation.
 - [Colleague research notes/prototype](colleague-prototype.md): supporting research, not a peer framework or the authority for native framework phases.
 
+## Adoption recommendation
+
+[OpenClaw-first priorities and trade-offs](adoption-priorities.json) · [Report conclusion](../show-me-proactive-lifecycle.html#adoption-conclusion). P0–P4 describe proposed build order and acceptance gates within the existing architecture, not new phase definitions or deployed capabilities.
+
 ## Validation and evidence boundaries
 
 - [Verification plan](proactive-verification-plan.json): proposed acceptance cases, illustrative traces and component ownership; not executed runtime or connector E2E.
