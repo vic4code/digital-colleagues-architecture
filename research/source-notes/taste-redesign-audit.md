@@ -66,3 +66,7 @@ Added OpenClaw-first recommendation with five build priorities, component owners
 ## Environment observation implementation audit — 2026-09-09
 
 Added seven observation paths with five expandable details, three compact sequences and ten exact code excerpts. Distinguishes source acquisition, model wake and task selection; covers Voyager physicsTick sampling and OpenClaw upstream-polling caveat. Claude Monitor is explicitly official-documentation evidence. OpenClaw and Hermes source reviewers passed; renamed Hermes diagram lane to the executing gate rather than passive baseline. Three viewport checks and five detail toggles passed. Source verification: 42 prior excerpts preserved, 10 new excerpts matched pinned files, 166 reference ranges valid. Four isolated Voyager observation-module checks passed with mocked game state; no Minecraft or connector E2E.
+
+## Per-scenario proactive key — 2026-09-09
+
+Added 39 bilingual key callouts, one per mechanism scenario, explaining the specific automatic step or supporting-control boundary. Goal storage, lease renewal and progress guards are explicitly not new-work generators. Updated scenario JSON with corresponding English/Traditional Chinese key fields and clarified first-observation handling in the Hermes monitor story. Browser: all seven framework tabs have correct callout counts (10/9/4/4/2/4/6), 1440/768/390 widths have no document overflow, and no page errors. Existing 42 excerpts plus 10 observation excerpts remain source-verified; 166 source ranges valid.

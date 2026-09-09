@@ -8,7 +8,9 @@
       "zh_Hant": "你交代同事上班時間留意客戶來信。到了檢查時間，他用 Outlook 工具查新信；客戶要求今天答覆，就在你的私人收件匣提醒你，沒有急事就不打擾。",
       "example_setup": "Outlook reader + private inbox / Outlook 讀信工具＋私人收件匣",
       "framework": "claw",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "The check starts without another request; the agent decides whether the mail warrants a reminder.",
+      "proactive_key_zh_Hant": "不用你再叫他查信；檢查會自行啟動，是否提醒則由 agent 判斷。"
     },
     {
       "diagram_id": "flow-claw-1",
@@ -16,7 +18,9 @@
       "zh_Hant": "你設定每個上班日 09:00 收到信箱摘要。九點一到，同事就用 Outlook 工具讀新信，列出誰來信、要什麼、哪些等你回覆，再送到你指定的位置。",
       "example_setup": "Outlook reader + report delivery / Outlook 讀信工具＋報告送達管道",
       "framework": "claw",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "The saved schedule starts the inbox brief at the assigned time, without a new message from you.",
+      "proactive_key_zh_Hant": "排程到時就啟動信箱摘要，不必每天重新交辦。"
     },
     {
       "diagram_id": "flow-claw-2",
@@ -24,7 +28,9 @@
       "zh_Hant": "合約在文件系統被標成「待審查」。你接好的整合程式把通知送到 /hooks/agent，同事便用 SharePoint 工具讀合約，把審查意見整理到你的私人收件匣。",
       "example_setup": "Document-system webhook + SharePoint reader / 文件系統事件接線＋SharePoint 讀取工具",
       "framework": "claw",
-      "mechanism_index": 2
+      "mechanism_index": 2,
+      "proactive_key_en": "The document event starts the review; you do not have to notice the status change and assign it again.",
+      "proactive_key_zh_Hant": "文件狀態事件啟動審查，不必你先發現變更、再交辦一次。"
     },
     {
       "diagram_id": "flow-claw-3",
@@ -32,7 +38,9 @@
       "zh_Hant": "同事用命令列工具啟動一批資料檢查，可能要跑半小時。程式一結束，on-exit 就啟動後續處理：讀取結果檔，列出哪些資料沒過，不必由你一直追問跑完沒。",
       "example_setup": "Supervised command + result-file reader / 受管理的命令＋結果檔讀取工具",
       "framework": "claw",
-      "mechanism_index": 3
+      "mechanism_index": 3,
+      "proactive_key_en": "Command completion starts the result review, without waiting for you to ask whether it finished.",
+      "proactive_key_zh_Hant": "命令一結束就接續讀結果，不用等你追問跑完沒。"
     },
     {
       "diagram_id": "flow-claw-4",
@@ -40,7 +48,9 @@
       "zh_Hant": "同事讓一支程式持續讀系統紀錄。幾秒內先後出現「結帳失敗」「付款逾時」「結帳恢復」，stream 會先把這批訊息一起交給同事；他看完再告訴你：「結帳恢復了，但付款還要查。」",
       "example_setup": "Log watcher stdout/stderr + configured notification / 紀錄監看程式輸出＋指定通知管道",
       "framework": "claw",
-      "mechanism_index": 4
+      "mechanism_index": 4,
+      "proactive_key_en": "New watcher output prompts follow-up after batching; the agent interprets the collected messages.",
+      "proactive_key_zh_Hant": "監看程式有新輸出就交給同事處理；先收成一批，再由 agent 判斷狀況。"
     },
     {
       "diagram_id": "flow-claw-5",
@@ -48,7 +58,9 @@
       "zh_Hant": "你想知道夜間資料匯入有沒有失敗。小程式先查工作狀態 API：「執行中」就不叫同事，「失敗」才啟動他；他再用紀錄查詢工具找出卡在哪一步，整理原因給你。",
       "example_setup": "Custom status-check script + log reader / 自訂狀態檢查程式＋紀錄查詢工具",
       "framework": "claw",
-      "mechanism_index": 5
+      "mechanism_index": 5,
+      "proactive_key_en": "The checking script decides when to start the agent; a failed import triggers investigation without another request.",
+      "proactive_key_zh_Hant": "檢查 script 決定何時叫 agent；匯入失敗就啟動調查，不必再交辦。"
     },
     {
       "diagram_id": "flow-claw-6",
@@ -56,7 +68,9 @@
       "zh_Hant": "同事用監控 API 查付款異常，發現還沒恢復，就要求「五分鐘後再查，不要等半小時」。這次執行成功、間隔也符合設定限制，系統才把下次檢查改到五分鐘後。",
       "example_setup": "Monitoring API + next_check / 監控 API＋下次檢查時間設定",
       "framework": "claw",
-      "mechanism_index": 6
+      "mechanism_index": 6,
+      "proactive_key_en": "The agent proposes when to check again; the runtime applies the change only after a successful, valid run.",
+      "proactive_key_zh_Hant": "Agent 自己提出下次何時再查；執行成功且符合限制，runtime 才採用。"
     },
     {
       "diagram_id": "flow-claw-7",
@@ -64,7 +78,9 @@
       "zh_Hant": "同事做完一份很難整理的週報，找到可靠的試算表清理方法。這次工作若符合 Workshop 回顧條件，後續回顧就用檔案編輯工具，把做法補進允許修改的週報指引，供下次使用。",
       "example_setup": "Completed work + permitted skill files / 已完成工作紀錄＋允許修改的技能檔",
       "framework": "claw",
-      "mechanism_index": 7
+      "mechanism_index": 7,
+      "proactive_key_en": "Eligible completed work starts a background review that improves permitted instructions for next time.",
+      "proactive_key_zh_Hant": "符合條件的已完成工作會啟動背景回顧，把做法補進允許修改的指引。"
     },
     {
       "diagram_id": "flow-claw-8",
@@ -72,7 +88,9 @@
       "zh_Hant": "同事處理專案後，留下不少零散筆記。到了設定好的記憶整理時間，Dreaming 就整理已保存的內容，留下之後工作用得到的資訊；這次讀的是記憶檔，不是去 Outlook 找新任務。",
       "example_setup": "Stored memory + maintenance tools / 已保存記憶＋整理工具",
       "framework": "claw",
-      "mechanism_index": 8
+      "mechanism_index": 8,
+      "proactive_key_en": "Scheduled maintenance organizes stored memory without a new request; it does not discover external tasks.",
+      "proactive_key_zh_Hant": "記憶整理排程自行啟動，整理已存內容；這一步不是去外部找新任務。"
     },
     {
       "diagram_id": "flow-claw-9",
@@ -80,7 +98,9 @@
       "zh_Hant": "你交辦季報並設定預算，目標工具把這份交辦保存到對話狀態。",
       "example_setup": "Goal storage; automatic restart unverified / 目標儲存；自動再啟動未證實",
       "framework": "claw",
-      "mechanism_index": 9
+      "mechanism_index": 9,
+      "proactive_key_en": "This stores the assigned goal; storage alone does not start another working turn.",
+      "proactive_key_zh_Hant": "這一步只保存交辦目標；保存本身不會自動啟動下一輪工作。"
     },
     {
       "diagram_id": "flow-hermes-0",
@@ -88,7 +108,9 @@
       "zh_Hant": "你存下一項每天 09:00 的工作：「讀 Outlook，列出待回覆郵件。」九點到了，Cron 就開新工作對話，用接好的讀信工具查信，再把摘要送到指定聊天室，不必等你先開口。",
       "example_setup": "Configured Outlook reader + chat delivery / 已接好的 Outlook 讀信工具＋聊天室送達",
       "framework": "hermes",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "Cron starts the saved inbox task and delivery path without waiting for a morning message.",
+      "proactive_key_zh_Hant": "Cron 自行啟動已存的讀信工作與送達流程，不必等你早上開口。"
     },
     {
       "diagram_id": "flow-hermes-1",
@@ -96,7 +118,9 @@
       "zh_Hant": "客戶送出一張客服單，客服系統就用 webhook 傳來單號。通知通過檢查後，同事開始工作：用客服單查詢工具讀問題，準備一份給你確認的回覆草稿。",
       "example_setup": "Support webhook + ticket reader / 客服系統 webhook＋案件查詢工具",
       "framework": "hermes",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "An accepted ticket event starts the work; the integration supplies the trigger and the agent prepares the response.",
+      "proactive_key_zh_Hant": "通過檢查的客服單事件啟動工作；整合程式送事件，agent 準備回覆。"
     },
     {
       "diagram_id": "flow-hermes-2",
@@ -104,7 +128,9 @@
       "zh_Hant": "你在專案對話裡交代同事定期追供應商回覆。/heartbeat 到了可檢查的時間，就讓他用 Outlook 搜尋工具看看對方回信沒，必要時提醒你；若你正在交辦工作，先處理你的要求。",
       "example_setup": "Session instructions + Outlook search / 對話內交辦＋Outlook 搜尋工具",
       "framework": "hermes",
-      "mechanism_index": 2
+      "mechanism_index": 2,
+      "proactive_key_en": "The session heartbeat revisits the assigned follow-up when eligible, while giving your active requests priority.",
+      "proactive_key_zh_Hant": "Session heartbeat 在可執行時回來追交辦事項，並優先處理你正在提出的要求。"
     },
     {
       "diagram_id": "flow-hermes-3",
@@ -112,7 +138,9 @@
       "zh_Hant": "你請同事每隔幾分鐘看看大檔案上傳好了沒。每次 /loop 啟動，他就查上傳狀態 API，還沒好就等下一次；上傳完成，或到達設定上限，就停止檢查。",
       "example_setup": "Upload-status API + stop condition / 上傳狀態 API＋停止條件",
       "framework": "hermes",
-      "mechanism_index": 3
+      "mechanism_index": 3,
+      "proactive_key_en": "The loop repeats the assigned status check within its stop conditions; it is not choosing a new task.",
+      "proactive_key_zh_Hant": "Loop 在停止條件內重複查交辦的狀態，不必你一直追問；不是自己選新任務。"
     },
     {
       "diagram_id": "flow-hermes-4",
@@ -120,7 +148,9 @@
       "zh_Hant": "你請同事把測試修到通過。他用檔案編輯工具修改，再用命令列跑測試；如果還沒過，/goal 會判斷是否需要繼續、額度是否允許，再讓他查失敗原因、試下一個修正。",
       "example_setup": "File editor + test command / 檔案編輯工具＋測試命令",
       "framework": "hermes",
-      "mechanism_index": 4
+      "mechanism_index": 4,
+      "proactive_key_en": "After a turn, goal evaluation decides whether to continue the repair, wait or stop within its limits.",
+      "proactive_key_zh_Hant": "回合結束後，目標評估決定繼續修、等待或停止，並受設定限制。"
     },
     {
       "diagram_id": "flow-hermes-5",
@@ -128,7 +158,9 @@
       "zh_Hant": "分析同事的工作，要等另一位同事備妥銷售 CSV。前置任務標成完成後，下次 Kanban 掃描若有執行空間，就派送分析工作；分析同事再用資料分析工具讀 CSV、整理銷售摘要。",
       "example_setup": "Kanban task dependencies + CSV analysis / Kanban 任務依賴＋CSV 分析工具",
       "framework": "hermes",
-      "mechanism_index": 5
+      "mechanism_index": 5,
+      "proactive_key_en": "The dispatcher notices completed prerequisites on a scan and assigns ready work when capacity allows.",
+      "proactive_key_zh_Hant": "Dispatcher 掃描到前置工作完成、也有執行空間時，就派送下一份工作。"
     },
     {
       "diagram_id": "flow-hermes-6",
@@ -136,7 +168,9 @@
       "zh_Hant": "同事用紀錄與腳本查完一件報表產生失敗的問題。若已啟用回顧、工作也符合條件，背景回顧就重看這次處理經過，把有用的排查步驟寫進允許修改的檔案。",
       "example_setup": "Completed run + restricted file writes / 已完成執行紀錄＋受限制的檔案寫入",
       "framework": "hermes",
-      "mechanism_index": 6
+      "mechanism_index": 6,
+      "proactive_key_en": "Enabled review logic starts a qualifying retrospective without a separate request to document the lesson.",
+      "proactive_key_zh_Hant": "啟用的回顧邏輯會對符合條件的工作啟動回顧，不必另請他整理經驗。"
     },
     {
       "diagram_id": "flow-hermes-7",
@@ -144,15 +178,19 @@
       "zh_Hant": "公司用 Chronos 統一排每天的信箱摘要。09:00 到了，Chronos 通知 Hermes；Hermes 先取得這次工作的執行權，再請同事用接好的 Outlook 工具讀信、送出摘要。",
       "example_setup": "Chronos + configured Outlook reader / Chronos 排程＋已接好的 Outlook 讀信工具",
       "framework": "hermes",
-      "mechanism_index": 7
+      "mechanism_index": 7,
+      "proactive_key_en": "The external schedule supplies the wake; Hermes claims that occurrence before doing the assigned work.",
+      "proactive_key_zh_Hant": "外部排程提供喚醒；Hermes 先取得這次工作的執行權，再做交辦事項。"
     },
     {
       "diagram_id": "flow-hermes-8",
-      "english": "A configured script queries Outlook and returns a stable list of message IDs every few minutes. Hermes compares it with the previous output: an identical list skips the agent; a changed list wakes your colleague to read the new mail and decide whether to notify you.",
-      "zh_Hant": "你接一支小程式，每隔幾分鐘查 Outlook，固定格式列出郵件 ID。Hermes 發現清單沒變，就不叫同事；清單有變，才請他讀新信、判斷是否需要提醒你。",
+      "english": "A configured script queries Outlook and returns a stable list of message IDs every few minutes. Hermes compares it with the previous output: an identical list skips the agent; the first observation or a changed list wakes your colleague to read the mail and decide whether to notify you.",
+      "zh_Hant": "你接一支小程式，每隔幾分鐘查 Outlook，固定格式列出郵件 ID。Hermes 首次取得清單或發現內容有變，才請同事讀信、判斷是否需要提醒你；清單沒變就不叫他。",
       "example_setup": "Custom Outlook polling script + mail reader / 自訂 Outlook 輪詢程式＋讀信工具",
       "framework": "hermes",
-      "mechanism_index": 8
+      "mechanism_index": 8,
+      "proactive_key_en": "The source check runs on schedule; first or changed output starts the agent, while unchanged output skips it.",
+      "proactive_key_zh_Hant": "排程先查資料；首次或內容有變才啟動 agent，沒變就略過。"
     },
     {
       "diagram_id": "flow-ob-0",
@@ -160,7 +198,9 @@
       "zh_Hant": "你設定每週五整理團隊進度。排程到了，OpenBot 把工作交給同事；他用目前的權限讀已連接的專案頻道，整理本週完成事項，再回傳到指定頻道。",
       "example_setup": "Connected project channel + channel delivery / 已連接的專案頻道＋頻道送達",
       "framework": "ob",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "A saved routine becomes queued work at the scheduled time, without another assignment from you.",
+      "proactive_key_zh_Hant": "既定 routine 到時成為佇列工作，不必你重新派工。"
     },
     {
       "diagram_id": "flow-ob-1",
@@ -168,7 +208,9 @@
       "zh_Hant": "專案同事做報告時，發現一個數字解釋不清楚，就用 message_bot 請獲准協作的資料專家幫忙。專家收到任務後，用自己的資料庫工具與權限查數字來源，再回覆原因。",
       "example_setup": "message_bot + specialist database tool / message_bot 派工＋專家的資料庫工具",
       "framework": "ob",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "One bot delegates through message_bot so the specialist can receive the task without a human handoff.",
+      "proactive_key_zh_Hant": "Bot 用 message_bot 交給專家處理，不必由你在兩位同事間轉述任務。"
     },
     {
       "diagram_id": "flow-ob-2",
@@ -176,7 +218,9 @@
       "zh_Hant": "資料專家查完有疑問的銷售數字，交回答案。Handoff result relay 會把成果送回原本提問的專案同事，讓他收到後續資訊，不必由你在兩段對話之間複製貼上。",
       "example_setup": "message_bot result + requesting conversation / message_bot 成果＋原始求助對話",
       "framework": "ob",
-      "mechanism_index": 2
+      "mechanism_index": 2,
+      "proactive_key_en": "The result relay returns delegated findings to the requester without manual copying between conversations.",
+      "proactive_key_zh_Hant": "成果自動送回派工者，不必你在對話間複製貼上。"
     },
     {
       "diagram_id": "flow-ob-3",
@@ -184,7 +228,9 @@
       "zh_Hant": "同事正在用資料庫工具跑一份很久的分析。背後的 heartbeat 定期替任務續租，維持「這份工作由他負責」的紀錄；它不會叫同事去查別的系統，也不會另開一輪思考。",
       "example_setup": "Queue lease renewal during existing work / 既有工作執行中的佇列續租",
       "framework": "ob",
-      "mechanism_index": 3
+      "mechanism_index": 3,
+      "proactive_key_en": "This heartbeat renews work ownership; it supports reliable execution but starts no new agent turn.",
+      "proactive_key_zh_Hant": "這個 heartbeat 只續租工作執行權，支援可靠執行；不會啟動新的 agent 回合。"
     },
     {
       "diagram_id": "flow-gr-0",
@@ -192,7 +238,9 @@
       "zh_Hant": "雲端出現一筆自動化執行紀錄。本機程式輪詢讀到新紀錄，檢查要求後，啟動對應的自動化工作。",
       "example_setup": "Reconstructed cloud receiver + configured repository reader / 重建版雲端接收器＋需配置的程式庫讀取工具",
       "framework": "gr",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "The local consumer discovers a new automation record and starts its work; cloud scheduling is outside this trace.",
+      "proactive_key_zh_Hant": "本機接收程式讀到新自動化紀錄就啟動工作；這條路徑不說明雲端如何排程。"
     },
     {
       "diagram_id": "flow-gr-1",
@@ -200,7 +248,9 @@
       "zh_Hant": "你接好的整合程式收到建置失敗通知，把它放進同事原本的對話。對話閒置時，重建版程式可啟動後續處理；若已配置紀錄查詢工具，同事就能讀失敗紀錄、整理發現。",
       "example_setup": "Custom event integration + log reader / 自訂事件接線＋紀錄查詢工具",
       "framework": "gr",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "An incoming background event can resume an idle conversation without a new user message.",
+      "proactive_key_zh_Hant": "背景事件到來，可以接續閒置對話，不必你再送一則訊息。"
     },
     {
       "diagram_id": "flow-gr-2",
@@ -208,7 +258,9 @@
       "zh_Hant": "同事請另一個 agent 用程式庫工具調查問題，自己先等結果。對方完成後，重建版程式收下成果，要求接續原本的對話；同一份完成通知重送，不會再算一次。",
       "example_setup": "Delegated agent result + original conversation / 委派 agent 成果＋原始對話",
       "framework": "gr",
-      "mechanism_index": 2
+      "mechanism_index": 2,
+      "proactive_key_en": "A delegated result requests continuation of the waiting conversation; duplicate completions are checked.",
+      "proactive_key_zh_Hant": "委派成果回來會要求接續等待中的對話，並檢查重複完成通知。"
     },
     {
       "diagram_id": "flow-gr-3",
@@ -216,7 +268,9 @@
       "zh_Hant": "同事連續幾輪沒使用工具，又收到續跑要求。處理器檢查目標，達到空轉門檻就暫停，不再讓他一直回話。",
       "example_setup": "Continuation request + progress guard / 續跑要求＋進度檢查",
       "framework": "gr",
-      "mechanism_index": 3
+      "mechanism_index": 3,
+      "proactive_key_en": "This guard stops ineffective continuation after the no-tool threshold; it does not generate new work.",
+      "proactive_key_zh_Hant": "這個控制在無工具進展達門檻時停止無效續跑；本身不會產生新工作。"
     },
     {
       "diagram_id": "flow-v-0",
@@ -224,7 +278,9 @@
       "zh_Hant": "你啟動 Voyager，給它探索 Minecraft 的方向。它讀周遭環境、背包與任務歷史，由 curriculum 模型選下一個任務；操作並檢查成果後，再選下一件事。",
       "example_setup": "Minecraft state + game-action code / Minecraft 狀態＋遊戲操作程式",
       "framework": "v",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "The curriculum model chooses the next exploration task from observations and history, without an itemized task list.",
+      "proactive_key_zh_Hant": "Curriculum 模型依觀察與歷史選下一個探索任務，不必你逐件列出要做什麼。"
     },
     {
       "diagram_id": "flow-v-1",
@@ -232,7 +288,9 @@
       "zh_Hant": "Minecraft 同事執行合成程式，遊戲卻回報材料不夠。他會根據回饋修改操作程式、重試同一個任務；確認成功，或嘗試次數用完，就停止。",
       "example_setup": "Game feedback + code execution + verification / 遊戲回饋＋程式執行＋成果驗證",
       "framework": "v",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "Environment feedback drives a revised attempt on the same task, until success or the attempt limit.",
+      "proactive_key_zh_Hant": "環境回饋促使 agent 修正並重試同一任務，直到成功或達到次數上限。"
     },
     {
       "diagram_id": "flow-cx-0",
@@ -240,7 +298,9 @@
       "zh_Hant": "你在 App 排好每個上班日 09:00 查看本機專案。任務啟動後，同事用檔案工具讀專案資料，整理進度摘要；這類本機工作需要 App 開著、電腦醒著，排程不會替你開機。",
       "example_setup": "App schedule + local project files / App 排程＋本機專案檔案",
       "framework": "cx",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "The app schedule starts the saved task when its execution environment is available, without a new message.",
+      "proactive_key_zh_Hant": "執行環境可用時，App 排程自行啟動既定工作，不必你再開口。"
     },
     {
       "diagram_id": "flow-cx-1",
@@ -248,7 +308,9 @@
       "zh_Hant": "你給同事的目標是「讓測試通過」。他用編輯工具改檔、用命令列跑測試；回合結束但目標仍有效時，runtime 可在控制條件內再開下一輪，繼續這份修復工作。",
       "example_setup": "Goal controls + file editor + test command / 目標控制＋檔案編輯＋測試命令",
       "framework": "cx",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "An active goal can trigger another eligible turn after the thread becomes idle, continuing the same objective.",
+      "proactive_key_zh_Hant": "Thread 閒置後，有效目標可啟動下一個符合條件的回合，繼續同一目標。"
     },
     {
       "diagram_id": "flow-cx-2",
@@ -256,7 +318,9 @@
       "zh_Hant": "建置系統回報部署失敗，你自己接的監聽程式收到事件，再透過 exec 或 App Server 啟動 Codex。同事才用命令列與檔案工具讀紀錄、準備修正；建置事件的監聽要由整合程式負責。",
       "example_setup": "Custom build listener + exec/App Server + shell / 自訂建置監聽＋exec/App Server＋命令列工具",
       "framework": "cx",
-      "mechanism_index": 2
+      "mechanism_index": 2,
+      "proactive_key_en": "Your integration detects the event and starts Codex; exec / App Server provide execution, not the event sensor.",
+      "proactive_key_zh_Hant": "你的整合程式偵測事件並啟動 Codex；exec／App Server 提供執行介面，不負責感測事件。"
     },
     {
       "diagram_id": "flow-cx-3",
@@ -264,7 +328,9 @@
       "zh_Hant": "同事完成建置檢查後，回合結束通知會呼叫你設定的腳本。腳本跳出桌面提醒：「結果好了，可以查看。」這是在送通知，不是再啟動同事查一次。",
       "example_setup": "Configured notify script + desktop notification / 已設定的 notify 腳本＋桌面通知",
       "framework": "cx",
-      "mechanism_index": 3
+      "mechanism_index": 3,
+      "proactive_key_en": "Turn completion invokes a configured notification script; it reports the result rather than starting new work.",
+      "proactive_key_zh_Hant": "回合結束呼叫已設定的通知 script，主動告知結果，不會另開工作。"
     },
     {
       "diagram_id": "flow-cc-0",
@@ -272,7 +338,9 @@
       "zh_Hant": "部署還在跑，你用 /loop 交代每五分鐘看一次。每次啟動，同事就用部署狀態命令查進度，完成後回報；這是對話內排程，對話結束後不會自己在外面繼續盯。",
       "example_setup": "/loop + deployment-status command / /loop＋部署狀態命令",
       "framework": "cc",
-      "mechanism_index": 0
+      "mechanism_index": 0,
+      "proactive_key_en": "The schedule revisits the deployment check without repeated prompts; this example repeats an assigned task.",
+      "proactive_key_zh_Hant": "排程自行回來查部署，不必你反覆追問；此情境是在重複既定任務。"
     },
     {
       "diagram_id": "flow-cc-1",
@@ -280,7 +348,9 @@
       "zh_Hant": "同事透過 Monitor 啟動一支持續看紀錄的程式。程式輸出新錯誤時，消息回到對話，才促使他查原因；接著他可用命令列工具讀錯誤前後的紀錄。",
       "example_setup": "Monitor + log-watching process + shell / Monitor＋紀錄監看程式＋命令列工具",
       "framework": "cc",
-      "mechanism_index": 1
+      "mechanism_index": 1,
+      "proactive_key_en": "Monitor output enters the session as events, prompting follow-up without another message from you.",
+      "proactive_key_zh_Hant": "Monitor 輸出以事件進入對話，促成後續處理，不必你再傳訊息。"
     },
     {
       "diagram_id": "flow-cc-2",
@@ -288,7 +358,9 @@
       "zh_Hant": "同事在已連接的 Telegram bot 留言：「最新建置失敗了。」Channel 把訊息送進數位同事的對話；若已提供程式庫與命令列工具，他就查問題，並可透過 Telegram 回覆。",
       "example_setup": "Telegram channel + repository/shell tools / Telegram 頻道＋程式庫與命令列工具",
       "framework": "cc",
-      "mechanism_index": 2
+      "mechanism_index": 2,
+      "proactive_key_en": "A connected channel brings the external message into the working session without manual forwarding.",
+      "proactive_key_zh_Hant": "已連接的 channel 把外部訊息帶入工作對話，不必手動轉貼。"
     },
     {
       "diagram_id": "flow-cc-3",
@@ -296,7 +368,9 @@
       "zh_Hant": "你在 Desktop 排好每天早上整理專案資料夾。時間到了，同事就讀本機檔案，列出最新變更與未解問題；這份本機工作需要桌面 App 與電腦可用。",
       "example_setup": "Desktop scheduled task + local file tools / Desktop 排程工作＋本機檔案工具",
       "framework": "cc",
-      "mechanism_index": 3
+      "mechanism_index": 3,
+      "proactive_key_en": "The desktop schedule starts the local project check when the app and machine are available.",
+      "proactive_key_zh_Hant": "App 與電腦可用時，桌面排程自行啟動本機專案檢查。"
     },
     {
       "diagram_id": "flow-cc-4",
@@ -304,7 +378,9 @@
       "zh_Hant": "你先設定「有新 PR 就審查」的雲端 routine。關了筆電之後有人開 PR，已接好的觸發就啟動雲端工作，讀取程式庫變更並留下審查結果；工作在事先設定的雲端環境執行。",
       "example_setup": "Configured PR trigger + cloud repository access / 已設定的 PR 觸發＋雲端程式庫存取",
       "framework": "cc",
-      "mechanism_index": 4
+      "mechanism_index": 4,
+      "proactive_key_en": "The configured cloud trigger starts the saved PR review even when your laptop is off.",
+      "proactive_key_zh_Hant": "已設定的雲端觸發自行啟動 PR 審查，筆電關閉也不影響這份雲端工作。"
     },
     {
       "diagram_id": "flow-cc-5",
@@ -312,7 +388,9 @@
       "zh_Hant": "同事改完檔案，編輯後的 hook 就跑你指定的檢查。若他準備結束時，Stop hook 查到還有未完成事項，就可要求接著處理，再用編輯與測試工具補完；判斷條件由你的檢查腳本提供。",
       "example_setup": "Edit/Stop hooks + check script + editor / 編輯與 Stop hooks＋檢查腳本＋編輯工具",
       "framework": "cc",
-      "mechanism_index": 5
+      "mechanism_index": 5,
+      "proactive_key_en": "Lifecycle hooks run configured checks; a Stop hook can require follow-up when its script finds unfinished work.",
+      "proactive_key_zh_Hant": "生命週期 hook 自行跑設定的檢查；Stop hook 的 script 發現未完成事項時，可要求接續處理。"
     }
   ]
 }
