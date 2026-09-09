@@ -1,0 +1,92 @@
+[
+  {
+    "file": "voyager/voyager.py",
+    "start": 313,
+    "end": 321,
+    "repo": "MineDojo/Voyager",
+    "pin": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+    "code": "        self.last_events = self.env.step(\"\")\n\n        while True:\n            if self.recorder.iteration > self.max_iterations:\n                print(\"Iteration limit reached\")\n                break\n            task, context = self.curriculum_agent.propose_next_task(\n                events=self.last_events,\n                chest_observation=self.action_agent.render_chest_observation(),",
+    "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L313-L321"
+  },
+  {
+    "file": "voyager/env/bridge.py",
+    "start": 114,
+    "end": 125,
+    "repo": "MineDojo/Voyager",
+    "pin": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+    "code": "        data = {\n            \"code\": code,\n            \"programs\": programs,\n        }\n        res = requests.post(\n            f\"{self.server}/step\", json=data, timeout=self.request_timeout\n        )\n        if res.status_code != 200:\n            raise RuntimeError(\"Failed to step Minecraft server\")\n        returned_data = res.json()\n        self.pause()\n        return json.loads(returned_data)",
+    "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/env/bridge.py#L114-L125"
+  },
+  {
+    "file": "voyager/env/mineflayer/lib/observation/base.js",
+    "start": 37,
+    "end": 42,
+    "repo": "MineDojo/Voyager",
+    "pin": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+    "code": "    bot.observe = function () {\n        bot.event(\"observe\");\n        const result = bot.cumulativeObs;\n        bot.cumulativeObs = [];\n        return JSON.stringify(result);\n    };",
+    "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/env/mineflayer/lib/observation/base.js#L37-L42"
+  },
+  {
+    "file": "voyager/env/mineflayer/lib/observation/voxels.js",
+    "start": 21,
+    "end": 29,
+    "repo": "MineDojo/Voyager",
+    "pin": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+    "code": "        bot.on(\"physicsTick\", () => {\n            this.tick++;\n            if (this.tick >= 100) {\n                const items = getInventoryItems(this.bot);\n                getSurroundingBlocks(this.bot, 8, 2, 8).forEach((block) => {\n                    if (!items.has(block)) this.records.add(block);\n                });\n                this.tick = 0;\n            }",
+    "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/env/mineflayer/lib/observation/voxels.js#L21-L29"
+  },
+  {
+    "file": "src/gateway/cron-stream-job-owner.ts",
+    "start": 391,
+    "end": 404,
+    "repo": "openclaw/openclaw",
+    "pin": "91ea838947d30a65f1299b05fa42071917f2a293",
+    "code": "    let run: ManagedRun;\n    try {\n      run = await this.params.getProcessSupervisor().spawn({\n        scopeKey: scopeKey(this.job.id),\n        replaceExistingScope: true,\n        mode: \"child\",\n        argv: this.job.schedule.command,\n        ...(this.job.schedule.cwd ? { cwd: this.job.schedule.cwd } : {}),\n        env: markOpenClawExecEnv({ ...process.env }),\n        stdinMode: \"pipe-closed\",\n        captureOutput: false,\n        onStdout: (chunk) => this.output.enqueueChunk(\"stdout\", chunk, generation),\n        onStderr: (chunk) => this.output.enqueueChunk(\"stderr\", chunk, generation),\n      });",
+    "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/gateway/cron-stream-job-owner.ts#L391-L404"
+  },
+  {
+    "file": "src/cron/schedule.ts",
+    "start": 247,
+    "end": 250,
+    "repo": "openclaw/openclaw",
+    "pin": "91ea838947d30a65f1299b05fa42071917f2a293",
+    "code": "  if (schedule.kind === \"on-exit\" || schedule.kind === \"stream\") {\n    // Event-driven trigger: never time-due. The gateway watcher calls\n    // enqueueRun when the watched command exits or a stream batch closes.\n    return undefined;",
+    "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/schedule.ts#L247-L250"
+  },
+  {
+    "file": "src/gateway/server-cron.ts",
+    "start": 1245,
+    "end": 1256,
+    "repo": "openclaw/openclaw",
+    "pin": "91ea838947d30a65f1299b05fa42071917f2a293",
+    "code": "    fireBatch: (job, batch, streamScheduleKey, streamSourceIdentity) =>\n      runWithGatewayIndependentRootWorkAdmission(\n        async () =>\n          fireStreamJob(job, {\n            run: async (jobId, onDisposition) => {\n              const result = await cron.run(jobId, \"force\", {\n                evaluateTrigger: true,\n                streamBatch: batch,\n                streamScheduleKey,\n                streamSourceIdentity,\n                onTriggerDisposition: onDisposition,\n              });",
+    "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/gateway/server-cron.ts#L1245-L1256"
+  },
+  {
+    "file": "src/cron/service/timer-execution.ts",
+    "start": 135,
+    "end": 145,
+    "repo": "openclaw/openclaw",
+    "pin": "91ea838947d30a65f1299b05fa42071917f2a293",
+    "code": "    }\n    const stateChanged = Object.hasOwn(evaluation, \"state\");\n    triggerEval = {\n      fired: evaluation.fire,\n      stateChanged,\n      ...(stateChanged ? { state: evaluation.state } : {}),\n    };\n    if (!evaluation.fire) {\n      return { status: \"ok\", triggerEval };\n    }\n    if (evaluation.message !== undefined) {",
+    "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L135-L145"
+  },
+  {
+    "file": "cron/monitor.py",
+    "start": 88,
+    "end": 118,
+    "repo": "NousResearch/hermes-agent",
+    "pin": "fef0e16fe19b79ded929209f87c7434270b03825",
+    "code": "def _fetch_monitor_url(url: str) -> tuple[bool, str]:\n    \"\"\"Bounded GET of a monitor URL. Returns (ok, body-or-error).\"\"\"\n    import urllib.request\n\n    if not str(url).lower().startswith((\"http://\", \"https://\")):\n        return False, f\"monitor_url must be http(s): {url!r}\"\n    try:\n        req = urllib.request.Request(url, headers={\"User-Agent\": \"hermes-cron-monitor\"})\n        with urllib.request.urlopen(req, timeout=URL_TIMEOUT_SECONDS) as resp:  # nosec B310 — scheme checked above\n            body = resp.read(MAX_URL_BYTES + 1)\n        return True, body[:MAX_URL_BYTES].decode(\"utf-8\", errors=\"replace\")\n    except Exception as exc:\n        return False, f\"monitor_url fetch failed: {exc}\"\n\n\ndef _field(job: dict, key: str) -> str:\n    return (job.get(key) or \"\").strip()\n\n\ndef _run_monitor_source(job: dict) -> tuple[bool, str]:\n    \"\"\"Run the job's monitor source (script or URL). Returns (ok, output).\"\"\"\n    monitor_script = _field(job, \"monitor_script\")\n    if monitor_script:\n        # Same containment + interpreter rules as the existing `script` field.\n        from cron.scheduler_script import _run_job_script\n\n        return _run_job_script(monitor_script, workdir=_field(job, \"workdir\") or None)\n    monitor_url = _field(job, \"monitor_url\")\n    if monitor_url:\n        return _fetch_monitor_url(monitor_url)\n    return False, \"monitor job has neither monitor_script nor monitor_url\"",
+    "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py#L88-L118"
+  },
+  {
+    "file": "cron/monitor.py",
+    "start": 125,
+    "end": 167,
+    "repo": "NousResearch/hermes-agent",
+    "pin": "fef0e16fe19b79ded929209f87c7434270b03825",
+    "code": "def check_monitor(job: dict) -> MonitorOutcome:\n    \"\"\"Run the monitor source and decide whether the agent should run.\n\n    On change (or first run) the new hash + snapshot are persisted BEFORE the agent runs — detection\n    time is the state boundary, so a failed agent run doesn't re-alert on the same content forever.\n    On failure nothing is persisted.\n    \"\"\"\n    job_id = str(job.get(\"id\") or \"\")\n    ok, output = _run_monitor_source(job)\n    if not ok:\n        return MonitorOutcome(ok=False, error=output)\n\n    new_hash = hash_monitor_output(output)\n    raw_state = job.get(\"monitor_state\")\n    last_hash = raw_state.get(\"last_output_hash\") if isinstance(raw_state, dict) else None\n\n    if last_hash is not None and new_hash == last_hash:\n        return MonitorOutcome(ok=True, changed=False)\n\n    first_run = last_hash is None\n    old_output = \"\" if first_run else _read_last_output(job_id)\n\n    shown_output = output\n    if len(shown_output) > MAX_OUTPUT_CHARS:\n        shown_output = shown_output[:MAX_OUTPUT_CHARS] + \"\\n... [output truncated]\"\n\n    current = f\"### Current output\\n\\n```\\n{shown_output}\\n```\"\n    if first_run:\n        context_block = (\n            \"## Monitor Baseline (first run)\\n\\n\"\n            \"This is the first observation of the monitored source — there is \"\n            \"no previous output to diff against.\\n\\n\" + current\n        )\n    else:\n        diff = build_monitor_diff(old_output, output)\n        context_block = (\n            \"## MONITOR CHANGE DETECTED\\n\\n\"\n            \"The monitored source's output changed since the last run.\\n\\n\"\n            f\"### Diff (previous → current)\\n\\n```diff\\n{diff}\\n```\\n\\n\" + current\n        )\n\n    _persist_monitor_state(job_id, new_hash, output)\n    return MonitorOutcome(ok=True, changed=True, first_run=first_run, context_block=context_block)",
+    "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py#L125-L167"
+  }
+]

@@ -62,3 +62,7 @@ Replaced the technical opening with an Outlook workday and four practical questi
 ## Adoption conclusion — 2026-09-09
 
 Added OpenClaw-first recommendation with five build priorities, component ownership, trade-offs, acceptance gates and targeted reinforcement criteria. Clearly labeled as proposed integration, separate from existing phases. Browser checks at 1440/768/390 pixels: no page overflow or JavaScript errors; five priority rows and all internal evidence targets present. Static verification: 42 preserved code excerpts, 153 source ranges, zero failures.
+
+## Environment observation implementation audit — 2026-09-09
+
+Added seven observation paths with five expandable details, three compact sequences and ten exact code excerpts. Distinguishes source acquisition, model wake and task selection; covers Voyager physicsTick sampling and OpenClaw upstream-polling caveat. Claude Monitor is explicitly official-documentation evidence. OpenClaw and Hermes source reviewers passed; renamed Hermes diagram lane to the executing gate rather than passive baseline. Three viewport checks and five detail toggles passed. Source verification: 42 prior excerpts preserved, 10 new excerpts matched pinned files, 166 reference ranges valid. Four isolated Voyager observation-module checks passed with mocked game state; no Minecraft or connector E2E.

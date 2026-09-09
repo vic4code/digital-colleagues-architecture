@@ -1,0 +1,28 @@
+{
+  "scope": "Pinned source reading, isolated modules with mock game state, and report UI; not live framework E2E",
+  "original_excerpts_preserved": 42,
+  "new_excerpts_verified": 10,
+  "source_ranges_checked": 166,
+  "source_range_failures": 0,
+  "browser_widths": [
+    1440,
+    768,
+    390
+  ],
+  "document_overflow": false,
+  "page_errors": [],
+  "details_opened": 5,
+  "reviews": {
+    "OpenClaw": "pass",
+    "Hermes": "pass; renamed passive-state lane to Monitor gate + state"
+  },
+  "voyager_probe": {
+    "passed": 4,
+    "checks": [
+      "inventory aggregation",
+      "voxel snapshot",
+      "100-physicsTick block-record sampling",
+      "observation serialization and buffer drain"
+    ]
+  }
+}

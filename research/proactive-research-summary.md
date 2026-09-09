@@ -84,3 +84,9 @@ Integration proposal, not deployed functionality. P0–P4 are build priorities, 
 [Full recommendation, targeted reinforcements and implementation links](show-me-proactive-lifecycle.html#adoption-conclusion).
 
 保留既有元件邊界：Scheduler／Ingress 喚醒、Runtime Controller 管執行、Skills 定義責任、Tools 接系統、Colleague State 保存進度。以實際問題決定補強：重看資料成本高才加前置比對；長任務卡住才加續跑；例行責任穩定後再試行私人任務提案。
+
+## How observation starts / 觀察怎麼觸發
+
+[Observation acquisition study](show-me-proactive-lifecycle.html#observation-mechanics): compares Voyager game-state reads, OpenClaw Heartbeat/streams/condition scripts, Hermes script/URL monitors and Claude Code Monitor/loop. Separates source sampling, model wake and task selection. Voyager also samples block records on physics ticks; a streamed background command may still poll its source.
+
+[Detailed source audit](source-notes/environment-observation.md) includes caller chains, exact source excerpts, compact sequence diagrams and a bounded original-module probe.

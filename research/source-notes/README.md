@@ -17,6 +17,8 @@ The report follows one story: an Outlook responsibility → four practical quest
 
 ## Cross-framework findings
 
+- [Environment observation](environment-observation.md): who starts acquisition, how source data arrives, when the model runs; includes game ticks, streams, condition scripts and Monitor.
+
 - [Implementation synthesis](../proactive-research-summary.md): problem → approach → technology → representative implementation.
 - [Design choices](design-philosophy.md): source-based interpretation, not quoted author intent or exclusive categories.
 - [Autonomous task selection](autonomous-task-selection.json): who chooses the next task, separately from what wakes execution.

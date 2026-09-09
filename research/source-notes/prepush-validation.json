@@ -2,7 +2,8 @@
   "scope": "Static local link, excerpt preservation and pinned-source file/line validation; no live connector tests",
   "local_link_failures": [],
   "exact_source_excerpts": 42,
-  "source_ranges_checked": 153,
+  "new_observation_excerpts": 10,
+  "source_ranges_checked": 166,
   "source_range_failures": [],
   "unmapped_repositories": []
 }
