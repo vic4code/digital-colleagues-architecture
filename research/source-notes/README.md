@@ -1,86 +1,50 @@
-# Framework implementation research
+# Proactive agent research — source and evidence index
 
-[Read the rewritten bilingual report](../show-me-proactive-lifecycle.html).
+Start with the [integrated visual report](../show-me-proactive-lifecycle.html#research-summary) or the [compact research summary](../proactive-research-summary.md).
 
-The report is organized by actual codebase. It does not impose three proactivity types, a universal lifecycle or our own capability phases on the frameworks. Each panel traces a concrete execution path, native function calls, conditions, persisted state, and the producer of subsequent work. Additional scheduling or background review paths are explained separately.
+The report connects implementation problems and techniques to each framework's native mechanisms, comparison, design choices, existing project phases, original architecture integration, and verification. These are comparison questions, not exclusive framework categories or invented maturity phases.
 
-## Pinned implementation audits
+## Framework implementation evidence
 
-- [OpenClaw](openclaw.md): timer → cron heartbeat dispatch → runtime admission → inbound agent turn. Supported cron pacing, Workshop experience review, dreaming and goal storage are separate reviewed paths.
-- [Hermes](hermes.md): post-turn goal evaluation and FIFO continuation; separate recurring loops and guarded background review.
-- [OpenBot](openbot.md): CopilotKit/OpenBot scheduled routines, durable offers, leases, current access and lock-renewal heartbeat.
-- [Grok Bot reconstruction](grok-reconstructed.md): unofficial reconstructed completion/event wakeups, automation consumption and goal-action handling. The automatic goal-action producer remains unestablished.
-- [Voyager](voyager.md): exploration reference with a concrete learn/curriculum/action/critic loop.
+- [OpenClaw](openclaw.md): scheduled and event-driven execution, Heartbeat, Automations, runtime admission and separate review paths.
+- [Hermes](hermes.md): recurring work, monitor checks and assigned-goal continuation.
+- [OpenBot](openbot.md): routines, persisted work ownership, Bot handoffs and result delivery.
+- [Grok Bot reconstruction](grok-reconstructed.md): background events and completion-driven conversation continuation; an unofficial reconstruction.
+- [Voyager](voyager.md): environment observations, automatic curriculum, execution and critic feedback.
+- [Codex and Claude Code](official-coding-agents.json): public implementation evidence and documented product behavior are labeled separately.
+- [Official concepts and claims](official-claims.md): native names and their supporting implementation evidence.
+- [Multi-mechanism inventory](mechanism-inventory.md): scheduling, external events, handoffs and completion paths within each framework.
 
-Sources were inspected September 8–9, 2026. These low-level audits retain their factual corrections and test boundaries; they are not marketing descriptions or proof of deployed behavior.
+## Cross-framework findings
 
-## Evidence
+- [Implementation synthesis](../proactive-research-summary.md): problem → approach → technology → representative implementation.
+- [Design choices](design-philosophy.md): source-based interpretation, not quoted author intent or exclusive categories.
+- [Autonomous task selection](autonomous-task-selection.json): who chooses the next task, separately from what wakes execution.
+- [Observation to action](observation-to-action.json): source checks, change detection, agent judgment and delivery.
+- [Loop and graph](loop-graph-implementation.md): repetition, continuation and workflow dependencies; graph state alone is not an external event subscription.
+- [Comparison map](proactive-comparison-map.json) and [terminology](terminology.json).
 
-- [Report source ledger](report-source-ledger.json): pinned code links used by the current report.
-- [Broader research ledger](source-ledger.json): earlier collected references, not all used in the current report.
-- [Link validation](source-link-validation.json): file existence and line bounds only.
-- [Hermes isolated probes](source-probe-results.json): narrow function behavior, not runtime E2E.
-- [Colleague notes/prototype](colleague-prototype.md): supporting research and validation code, not a peer framework or authority for native framework phases.
+## Diagrams, source excerpts and scenarios
 
-Prior bounded checks and their scope are documented in the audits. Full upstream suites and live product E2E were not run. Negative findings apply only to inspected paths. Source code in an unofficial reconstruction does not prove original shipped-product equivalence.
+- [Source excerpt index](code-excerpt-index.json), [flow index](flow-diagram-index.json), and [sequence index](sequence-diagram-index.json) retain their original audited scope; the HTML also contains later additions.
+- [Sequence node guide](sequence-node-guide.json): bilingual participant responsibilities; the HTML also explains Hermes monitor flowchart blocks.
+- [Mechanism scenarios](mechanism-scenarios.json): concrete work examples, not executed connector tests. Outlook access and event delivery require configuration.
+- Standalone diagrams: [flows](../mechanism-flows/) and [sequences](../sequence-diagrams/).
 
-## Existing phases and proposed embedding
+## Existing phases and proposed architecture integration
 
-The report now follows four sections: native framework implementations, general comparison, existing scenario phases, and architecture integration. The phase definitions are cited from the supplied scenario/wake-cycle records, not invented as framework categories.
+- [Phase and component mapping](phase-0.5-mapping.md): connects implementation proposals to existing project requirements.
+- The report shows the [complete original architecture](../../phases/0.5/reference-architecture.svg) first, then [proactive functions on the same layout](../proactive-functions-on-original.svg), with [11 component/function mappings](proactive-functions-on-original.json).
+- Original source SVGs remain unchanged. Earlier simplified exports and annotation coordinates are retained as historical research assets; the report's current architecture section uses the original-first presentation.
+- [Colleague research notes/prototype](colleague-prototype.md): supporting research, not a peer framework or the authority for native framework phases.
 
-[Component mapping and local source evidence](phase-0.5-mapping.md) · [Final SVG](../proactive-phase-0.5-components.svg).
+## Validation and evidence boundaries
 
-Upstream code facts, phase requirements and integration proposals are explicitly different evidence levels. The local adapter was read at a clean pinned snapshot; no deployment or new runtime feature was executed.
-## Existing phases and proposed embedding
+- [Verification plan](proactive-verification-plan.json): proposed acceptance cases, illustrative traces and component ownership; not executed runtime or connector E2E.
+- [Pinned source ledger](report-source-ledger.json) and [broader collection](source-ledger.json).
+- [Consolidation validation](consolidation-validation.json): overview layout, links and source-preservation checks.
+- [Latest static validation](prepush-validation.json): local links, preservation of 42 source excerpts, and 153 pinned file/line references in the main report.
+- [Presentation interaction checks](presentation-interaction-validation.json), [layout checks](taste-redesign-validation.json), and [presentation audit](taste-redesign-audit.md) record their respective tested revisions and scopes.
+- [Isolated Hermes probes](source-probe-results.json) and [observation probes](observation-probes.json): bounded function behavior only.
 
-The report now follows four sections: native framework implementations, general comparison, existing scenario phases, and architecture integration. The phase definitions are cited from the supplied scenario/wake-cycle records, not invented as framework categories.
-
-[Component mapping and local source evidence](phase-0.5-mapping.md) · [Final SVG](../proactive-phase-0.5-components.svg).
-
-Upstream code facts, phase requirements and integration proposals are explicitly different evidence levels. The local adapter was read at a clean pinned snapshot; no deployment or new runtime feature was executed.
-
-## Official descriptions and research
-
-[Official claim-to-code review](official-claims.md) preserves project feature names, documentation, declared research and the implementation evidence. The report now presents official concepts before low-level calls.
-
-- [Multi-mechanism inventory](mechanism-inventory.md): expanded 2026-09-09 audit, including HTTP ingress, handoffs, result relays, Kanban readiness and transport versus trigger distinctions. Supersedes earlier representative-flow-only coverage.
-
-
-- [Per-mechanism diagram index](flow-diagram-index.json): 28 source-grounded diagrams, five framework highlights, separate branch/evidence-limit labels, and responsive mobile flows. SVG exports are in `research/mechanism-flows/`.
-
-- [Design philosophy](design-philosophy.md): implementation-grounded differences and adoption implications; research synthesis, not exclusive categories or quoted author intent.
-- [Terminology](terminology.json) and [presentation audit](design-audit.md): plain-language titles retain native names and evidence links.
-
-- [Key source excerpts](code-excerpt-index.json): 37 verbatim excerpts for 28 mechanisms. Each records exact commit, source range and the diagram steps it supports. Click the bold orange diagram nodes to open the corresponding code panel.
-
-- [Sequence diagram index](sequence-diagram-index.json): 28 diagrams with logical participants, ordered calls/results, explicit alternative branches and links to existing source excerpts. Sequence view is the default; Flowchart remains available. SVG exports are in `research/sequence-diagrams/`.
-
-- [Colleague scenarios](mechanism-scenarios.json): 39 concrete bilingual work scenarios with required example tools, with technical implementation explained separately below each story. Illustrations, not executed tests; Outlook examples assume configured access and instructions.
-- [Proactive comparison map](proactive-comparison-map.json): native mechanisms compared by proactive trigger and continuation questions; visual in `research/proactive-framework-comparison.svg`.
-
-## Official coding agents and loop / graph audit — 2026-09-09
-
-- [Codex and Claude Code](official-coding-agents.json): 10 additional paths; each labels public code, documented product behavior, and custom event wiring. The original source-traced mechanisms remain available.
-- [Loop and graph](loop-graph-implementation.md): OpenClaw Task Flow / optional Lobster, Hermes loop / goal and Kanban dependencies. Workflow state does not itself subscribe to external events.
-- Codex Automations documentation redirects to shared Scheduled tasks documentation. Supported ChatGPT web/mobile app events are not attributed to Codex CLI or desktop.
-- New sequence exports are `../sequence-diagrams/cx-0.svg` through `cx-3.svg`, and `cc-0.svg` through `cc-5.svg`. These logical sequences explicitly label documentation-only internals. Existing code-excerpt and sequence indexes retain their original source-audited scope.
-
-## Observation to action — 2026-09-09
-
-[Observation audit](observation-to-action.json) adds Hermes Cron monitor mode, a four-product comparison of the same inbox responsibility, and examples mapped to the existing phases/components. [Original-function probe](observation-probes.json) verifies exact-hash sensitivity to timestamps and whitespace. Total visible mechanism paths: 39 (29 original-family paths + 10 official coding-agent paths). No live mailbox access or outbound messages were performed.
-
-## Reading and verification design
-
-- [Scenario copy](mechanism-scenarios.json): each explains the situation, trigger, configured tool and result. Named connectors are illustrative setup requirements, not new built-in capability claims.
-- [Sequence node guide](sequence-node-guide.json): 140 bilingual role explanations for 38 sequence diagrams; the report separately explains Hermes monitor flowchart blocks. Click lane headers or open the role guide.
-- [Architecture overview](../proactive-architecture-overview.svg): existing architecture first, with links to seven proposed integration responsibilities in the report. Full original source mapping remains in an expandable section.
-- [Verification plan](proactive-verification-plan.json): nine proposed acceptance cases, four illustrative outcome traces and phase/component ownership. These are test designs, not executed connector or runtime tests. The report distinguishes them from the existing isolated source-function probes.
-- [Presentation audit](taste-redesign-audit.md): layout and browser-interaction checks.
-
-## Current architecture presentation
-The report uses the original Phase 0.5 diagram with a toggleable proactive annotation layer. [Annotation positions and responsibilities](original-architecture-proactive-points.json). This supersedes the separate simplified overview for presentation; all original architecture source SVGs are unchanged.
-
-Current presentation: original architecture first, followed by [proactive functions on the original layout](../proactive-functions-on-original.svg). The second diagram has 11 explicit function/component mappings; it replaces the toggle-only presentation.
-
-## Autonomous work selection
-[Mode-by-mode comparison](autonomous-task-selection.json) distinguishes Voyager model-generated curriculum, Claude Code built-in maintenance, configured heartbeat/loop responsibilities and existing-goal continuation. Wake-up timing is a separate design question.
+Sources were inspected September 8–9, 2026. Code facts, documented product behavior, integration proposals and illustrative scenarios are distinct evidence levels. Full upstream suites and live product E2E were not run. Earlier validation files are historical checks, not proof that a newer report revision was tested.

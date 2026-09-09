@@ -18,5 +18,7 @@ Planned topics:
 
 ## Proactive agent implementation study
 
+- [Compact research summary](./proactive-research-summary.md) — problem → approach → technology → implementation evidence.
+
 - [Interactive lifecycle report](./show-me-proactive-lifecycle.html) — framework mechanisms, autonomous task selection, source excerpts, phase planning, original architecture integration, and verification. English with Traditional Chinese explanations; open the HTML locally after cloning.
 - [Source audit and evidence](./source-notes/README.md) — pinned implementations and validation records.

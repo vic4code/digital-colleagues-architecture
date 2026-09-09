@@ -50,3 +50,7 @@ Original diagrams now appear first, without overlay controls. A second SVG reuse
 ## Autonomous task selection update — 2026-09-09
 
 Added a seven-framework comparison separating who selects the next task from what wakes execution. Voyager uses its curriculum; Claude Code documents a built-in maintenance prompt for bare `/loop`; remaining rows describe their configured responsibilities or assigned work. Preserved the original architecture followed by its annotated integration view. New section verified at 1440, 768, and 390 pixels: no page overflow or JavaScript errors. Corrected two source-link end lines to actual file boundaries; final source and excerpt checks are recorded in prepush-validation.json.
+
+## Consolidated research overview — 2026-09-09
+
+Added an English-first bilingual problem → approach → technology overview with 14 direct mechanism links, plus a shareable Markdown summary. Existing framework, comparison, philosophy, phase, architecture and verification sections are preserved. Replaced the accumulated source index with a current, deduplicated guide. Two independent agents reviewed source fidelity and clarity; corrected Hermes first-observation behavior and added short terminology explanations. Browser checks at 1440/768/390 pixels found no document overflow or page errors; verified direct Grok link selects the framework and opens its flow. Static checks preserved all 42 source excerpts and validated 153 source ranges. See consolidation-validation.json.
