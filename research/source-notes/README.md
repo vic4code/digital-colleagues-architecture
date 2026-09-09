@@ -44,6 +44,8 @@ The report follows one story: an Outlook responsibility → four practical quest
 
 ## Adoption recommendation
 
+[Commitment follow-up design](commitment-followup-design.md): source-backed primitives, proposed missing business state and six acceptance scenarios.
+
 [OpenClaw-first priorities and trade-offs](adoption-priorities.json) · [Report conclusion](../show-me-proactive-lifecycle.html#adoption-conclusion). P0–P4 describe proposed build order and acceptance gates within the existing architecture, not new phase definitions or deployed capabilities.
 
 ## Validation and evidence boundaries

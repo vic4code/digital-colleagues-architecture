@@ -74,3 +74,9 @@ Added 39 bilingual key callouts, one per mechanism scenario, explaining the spec
 ## Context-driven initiative and outreach — 2026-09-09
 
 Seven-framework audit for remembered promises → model-decided follow-up → recipient selection → contact. OpenClaw, Hermes and Grok independently traced by agents; OpenBot, Voyager and Codex pinned paths checked locally, Claude maintenance refreshed from official docs. Explicitly distinguishes inferred composition from a shipped commitment tracker. Added Grok Initiative/inferred routines and Hermes default send_message registration restriction. No messages sent or live promise-tracking E2E run. Seven comparison rows, 1440/768/390 widths and zero page errors verified; 178 source ranges valid and 52 excerpts preserved.
+
+## Commitment follow-up integration detail — 2026-09-09
+
+Added six-step source-backed integration proposal: recall, latest evidence, model decision, identity resolution, draft/authorized delivery and persisted follow-up state. Documented existing Standing Intent reminders and their user-trigger matching versus heartbeat/cron maintenance. Memory corpus availability is explicit. Proposed business records and six acceptance cases are labeled design, not implemented runtime. Browser detail opens by hash, six rows render, 1440/768/390 widths show no overflow/errors; 182 source ranges validate. No messages or live follow-up test were run.
+
+Source review correction: memory_get reads memory-file excerpts; session/message originals require their permitted source reader. Updated the proposed recall step accordingly.
