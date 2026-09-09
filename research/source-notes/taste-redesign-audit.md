@@ -70,3 +70,7 @@ Added seven observation paths with five expandable details, three compact sequen
 ## Per-scenario proactive key — 2026-09-09
 
 Added 39 bilingual key callouts, one per mechanism scenario, explaining the specific automatic step or supporting-control boundary. Goal storage, lease renewal and progress guards are explicitly not new-work generators. Updated scenario JSON with corresponding English/Traditional Chinese key fields and clarified first-observation handling in the Hermes monitor story. Browser: all seven framework tabs have correct callout counts (10/9/4/4/2/4/6), 1440/768/390 widths have no document overflow, and no page errors. Existing 42 excerpts plus 10 observation excerpts remain source-verified; 166 source ranges valid.
+
+## Context-driven initiative and outreach — 2026-09-09
+
+Seven-framework audit for remembered promises → model-decided follow-up → recipient selection → contact. OpenClaw, Hermes and Grok independently traced by agents; OpenBot, Voyager and Codex pinned paths checked locally, Claude maintenance refreshed from official docs. Explicitly distinguishes inferred composition from a shipped commitment tracker. Added Grok Initiative/inferred routines and Hermes default send_message registration restriction. No messages sent or live promise-tracking E2E run. Seven comparison rows, 1440/768/390 widths and zero page errors verified; 178 source ranges valid and 52 excerpts preserved.

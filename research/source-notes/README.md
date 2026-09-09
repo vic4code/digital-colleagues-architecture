@@ -17,6 +17,8 @@ The report follows one story: an Outlook responsibility → four practical quest
 
 ## Cross-framework findings
 
+- [Remembered commitments and proactive outreach](initiative-outreach.md): seven frameworks checked for context-driven initiative, recipient selection and actual outbound paths.
+
 - [Environment observation](environment-observation.md): who starts acquisition, how source data arrives, when the model runs; includes game ticks, streams, condition scripts and Monitor.
 
 - [Implementation synthesis](../proactive-research-summary.md): problem → approach → technology → representative implementation.
