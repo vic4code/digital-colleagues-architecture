@@ -1,0 +1,408 @@
+{
+  "scope": "Visualizations of previously traced paths. Alternatives and unverified boundaries are explicit; diagrams are not new runtime tests.",
+  "count": 28,
+  "frameworks": {
+    "claw": [
+      {
+        "feature": "Heartbeat",
+        "file": "mechanism-flows/claw-01.svg",
+        "stages": [
+          "Scheduled monitor OR /hooks/wake",
+          "Resolve session; enqueue event context",
+          "Heartbeat admission: busy / cadence guards",
+          "Normal agent turn → notify or stay silent"
+        ],
+        "branch": [
+          "next-heartbeat",
+          "Queue context; await a later wake"
+        ]
+      },
+      {
+        "feature": "Automations / cron",
+        "file": "mechanism-flows/claw-02.svg",
+        "stages": [
+          "at / every / cron occurrence becomes due",
+          "Scheduler claims job; selects payload",
+          "Heartbeat / system event / agent turn / script",
+          "Run selected path; record outcome and schedule"
+        ],
+        "branch": [
+          "script payload",
+          "Script work; model not required"
+        ]
+      },
+      {
+        "feature": "Inbound webhooks · /hooks/agent",
+        "file": "mechanism-flows/claw-03.svg",
+        "stages": [
+          "External service POSTs /hooks/agent",
+          "Authenticate and validate requested target",
+          "Session queue → execution admission",
+          "Run isolated agent turn → delivery outcome"
+        ],
+        "branch": [
+          "Invalid request",
+          "Reject; no agent turn"
+        ]
+      },
+      {
+        "feature": "Automations · on-exit",
+        "file": "mechanism-flows/claw-04.svg",
+        "stages": [
+          "Supervised watched command exits",
+          "Exit watcher validates current job identity",
+          "fireOnExit → cron.run(force) → admission",
+          "Execute one-shot payload; record completion"
+        ],
+        "branch": [
+          "Stale / unknown exit",
+          "Do not fire this occurrence"
+        ]
+      },
+      {
+        "feature": "Automations · stream",
+        "file": "mechanism-flows/claw-05.svg",
+        "stages": [
+          "Supervised command emits stdout / stderr",
+          "Line matching → bounded batch / coalescing",
+          "fireBatch → cron.run with stream context",
+          "Optional trigger gate → payload → await events"
+        ],
+        "branch": [
+          "No matching line",
+          "No payload fire"
+        ]
+      },
+      {
+        "feature": "Automations · condition watchers",
+        "file": "mechanism-flows/claw-06.svg",
+        "stages": [
+          "Scheduled check OR stream batch arrives",
+          "Run trigger.script with saved state / input",
+          "Evaluate returned fire flag and optional message",
+          "fire:true → normal payload execution"
+        ],
+        "branch": [
+          "fire:false",
+          "Skip payload; retain returned state"
+        ]
+      },
+      {
+        "feature": "next_check · adaptive pacing",
+        "file": "mechanism-flows/claw-07.svg",
+        "stages": [
+          "Supported job proposes next_check delay",
+          "Associate proposal with current job / run",
+          "Completion succeeds and pacing bounds pass",
+          "Persist next due time → scheduler waits"
+        ],
+        "branch": [
+          "Invalid / failed / skipped",
+          "Discard proposal; normal policy"
+        ]
+      },
+      {
+        "feature": "Skill Workshop · experience review",
+        "file": "mechanism-flows/claw-08.svg",
+        "stages": [
+          "Agent work ends",
+          "Check experience-review eligibility",
+          "Wait for idle window; admit background review",
+          "Review experience → permitted workshop edits"
+        ],
+        "branch": [
+          "Ineligible",
+          "No background review"
+        ]
+      },
+      {
+        "feature": "Dreaming · memory maintenance",
+        "file": "mechanism-flows/claw-09.svg",
+        "stages": [
+          "Managed Dreaming cron job becomes due",
+          "Run configured memory-maintenance work",
+          "Process eligible memory / promotion data",
+          "Record memory / diary effects; await next run"
+        ],
+        "branch": [
+          "Scope boundary",
+          "No proven new external-goal loop"
+        ]
+      },
+      {
+        "feature": "Goals · evidence boundary",
+        "file": "mechanism-flows/claw-10.svg",
+        "stages": [
+          "Human / tool explicitly sets a goal",
+          "Persist goal state, status and budget fields",
+          "Runtime reads / updates goal context",
+          "Further automatic wake producer: not established"
+        ],
+        "branch": [
+          "Evidence boundary",
+          "Storage does not establish a wake"
+        ]
+      }
+    ],
+    "hermes": [
+      {
+        "feature": "Cron / cronjob",
+        "file": "mechanism-flows/hermes-01.svg",
+        "stages": [
+          "Cron tick finds due saved job",
+          "Claim occurrence → run_one_job",
+          "Prepare job: no_agent or fresh AIAgent",
+          "Execute → deliver / silence → next schedule"
+        ],
+        "branch": [
+          "no_agent:true",
+          "Run script; skip AIAgent creation"
+        ]
+      },
+      {
+        "feature": "Webhooks",
+        "file": "mechanism-flows/hermes-02.svg",
+        "stages": [
+          "External POST /webhooks/{route}",
+          "Authenticate → event / payload / script filters",
+          "Render prompt; deduplicate delivery identifier",
+          "MessageEvent → handle_message → response route"
+        ],
+        "branch": [
+          "deliver_only:true",
+          "Deliver rendered text; no model"
+        ]
+      },
+      {
+        "feature": "Session heartbeat · /heartbeat",
+        "file": "mechanism-flows/hermes-03.svg",
+        "stages": [
+          "Recurring session instruction becomes due",
+          "Heartbeat watcher resolves current session",
+          "Check user queue and session admission",
+          "Submit instruction as normal conversation turn"
+        ],
+        "branch": [
+          "Not admissible",
+          "Defer / skip this opportunity"
+        ]
+      },
+      {
+        "feature": "Loop · /loop, /proactive",
+        "file": "mechanism-flows/hermes-04.svg",
+        "stages": [
+          "Loop timer reaches its next tick",
+          "fire_tick → run repeated instruction",
+          "Inspect stop marker, optional judge and caps",
+          "Continue → fixed / self-paced next tick"
+        ],
+        "branch": [
+          "Stop condition",
+          "End loop; no further tick work"
+        ]
+      },
+      {
+        "feature": "Persistent Goals · /goal",
+        "file": "mechanism-flows/hermes-05.svg",
+        "stages": [
+          "Eligible conversation turn finishes",
+          "Read active goal; evaluate gates and judge",
+          "Check continuation decision and remaining budget",
+          "Continue → synthetic prompt → session queue"
+        ],
+        "branch": [
+          "Not continue",
+          "Wait / pause / done"
+        ]
+      },
+      {
+        "feature": "Kanban dispatcher",
+        "file": "mechanism-flows/hermes-06.svg",
+        "stages": [
+          "Task ready OR dependencies become complete",
+          "Periodic dispatcher scans durable board",
+          "Promote eligible tasks; atomically claim within caps",
+          "Spawn assigned profile worker → update board"
+        ],
+        "branch": [
+          "No ready slot / claim",
+          "Leave task for later dispatch"
+        ]
+      },
+      {
+        "feature": "Background review",
+        "file": "mechanism-flows/hermes-07.svg",
+        "stages": [
+          "Eligible turn finalizes",
+          "Schedule background review",
+          "Review experience under restricted write rules",
+          "Persist permitted improvements; finish review"
+        ],
+        "branch": [
+          "Protected / disallowed write",
+          "Refuse that write"
+        ]
+      },
+      {
+        "feature": "Cron provider · Chronos",
+        "file": "mechanism-flows/hermes-08.svg",
+        "stages": [
+          "Remote scheduler reaches saved fire time",
+          "POST /api/cron/fire → verify signed request",
+          "Provider claims occurrence for shared execution",
+          "run_one_job → same cron execution / delivery"
+        ],
+        "branch": [
+          "Already claimed / invalid",
+          "No duplicate accepted execution"
+        ]
+      }
+    ],
+    "ob": [
+      {
+        "feature": "Routines",
+        "file": "mechanism-flows/ob-01.svg",
+        "stages": [
+          "Saved routine nextRunAt becomes due",
+          "Worker sweep offers durable occurrence key",
+          "Queue lease → current owner / access checks",
+          "Run channel turn → outcome / failure policy"
+        ],
+        "branch": [
+          "Access revoked",
+          "Refuse run; record failure"
+        ]
+      },
+      {
+        "feature": "Bot handoff · message_bot",
+        "file": "mechanism-flows/ob-02.svg",
+        "stages": [
+          "Agent calls message_bot with typed task",
+          "Resolve trusted identity, recipient grants and caps",
+          "Offer durable handoff → lease / claim",
+          "Deliver recipient Bot turn in its conversation"
+        ],
+        "branch": [
+          "Not authorized / capped",
+          "Refuse handoff"
+        ]
+      },
+      {
+        "feature": "Handoff result relay",
+        "file": "mechanism-flows/ob-03.svg",
+        "stages": [
+          "Delegated forward turn finishes with answer",
+          "Check forward hop and non-empty answer",
+          "Queue durable relay back to requesting Bot",
+          "Deliver follow-up; do not relay the relay"
+        ],
+        "branch": [
+          "Already a relay / empty",
+          "No new result relay"
+        ]
+      },
+      {
+        "feature": "Lease heartbeat · not an agent wake",
+        "file": "mechanism-flows/ob-04.svg",
+        "stages": [
+          "Handoff work remains in progress",
+          "Lease renewal interval becomes due",
+          "Refresh ownership for claimed work",
+          "Existing delivery continues; renew while needed"
+        ],
+        "branch": [
+          "Ownership lost",
+          "Do not start another delivery"
+        ]
+      }
+    ],
+    "gr": [
+      {
+        "feature": "Automation fire consumer",
+        "file": "mechanism-flows/gr-01.svg",
+        "stages": [
+          "Cloud automation fire is available",
+          "Consumer polls; validates / reuses fire record",
+          "Guarded automation path → background queue",
+          "Transcript run; fire handling acknowledgement"
+        ],
+        "branch": [
+          "Evidence boundary",
+          "Upstream schedule cause unknown"
+        ]
+      },
+      {
+        "feature": "Background event wakes",
+        "file": "mechanism-flows/gr-02.svg",
+        "stages": [
+          "Subscribed / routed event is received",
+          "Collect event as transcript background context",
+          "Enqueue background wake; scheduler arbitrates",
+          "Run event follow-up in transcript"
+        ],
+        "branch": [
+          "Queued behind other work",
+          "Wait for scheduling opportunity"
+        ]
+      },
+      {
+        "feature": "Completion revivals",
+        "file": "mechanism-flows/gr-03.svg",
+        "stages": [
+          "Background subagent completion arrives",
+          "Check ownership and duplicate completion",
+          "Revive / drain waiting transcript context",
+          "Run follow-up using completion results"
+        ],
+        "branch": [
+          "Duplicate / wrong owner",
+          "Do not issue another revival"
+        ]
+      },
+      {
+        "feature": "Goal continuation handler · partial evidence",
+        "file": "mechanism-flows/gr-04.svg",
+        "stages": [
+          "A goal-continuation action is supplied",
+          "Validate action against current goal identity",
+          "Apply anti-spin / idle continuation guard",
+          "Inject simulated user continuation turn"
+        ],
+        "branch": [
+          "Guard rejects",
+          "No continuation turn"
+        ]
+      }
+    ],
+    "v": [
+      {
+        "feature": "Automatic curriculum",
+        "file": "mechanism-flows/v-01.svg",
+        "stages": [
+          "Active learn loop finishes a rollout",
+          "Update completed / failed task progress",
+          "Curriculum proposes next task from state/history",
+          "Run next rollout → return to progress update"
+        ],
+        "branch": [
+          "Iteration limit reached",
+          "End learning run"
+        ]
+      },
+      {
+        "feature": "Iterative prompting + self-verification",
+        "file": "mechanism-flows/v-02.svg",
+        "stages": [
+          "Current task produces execution feedback",
+          "Critic checks success using environment evidence",
+          "On failure, revise generated code / prompt",
+          "Retry within rollout limit → new feedback"
+        ],
+        "branch": [
+          "Success / attempts exhausted",
+          "Return rollout outcome to curriculum"
+        ]
+      }
+    ]
+  }
+}

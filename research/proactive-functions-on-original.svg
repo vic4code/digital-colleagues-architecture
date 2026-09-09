@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 786" role="img" aria-labelledby="proactive-inplace-title proactive-inplace-desc"><title id="proactive-inplace-title">Proactive functions mapped onto the original architecture</title><desc id="proactive-inplace-desc">Left: the unchanged original layout with numbered component highlights. Right: functions to configure or implement in each numbered component. Select a component or function to expand the implementation details.</desc><svg x="0" y="0" width="840" height="786" viewBox="0 0 840 786" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 — digital colleague reference architecture (one colleague)</title>
+  <desc>A layered reference architecture for one digital colleague. A person reaches it through one interaction surface. OpenClaw-style workspace files define identity, persona, operating rules, user context, skills, and memory. The Runtime Controller invokes a dedicated Request Triage and Priority component to apply authored policy before Codex app-server work proceeds. Each external-service integration adds an inbound trigger through a webhook or bounded polling, plus outbound capabilities through an MCP tool server and the vendor API. Access, permission, and audit are cross-cutting concerns beneath all layers.</desc>
+
+  <defs>
+    <marker id="pfbase-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="pfbase-arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <style>
+    .pfbase-h1 { font-size: 15px; font-weight: 700; fill: #111827; }
+    .pfbase-label { font-size: 12px; font-weight: 600; fill: #111827; }
+    .pfbase-labelS { font-size: 11px; font-weight: 600; fill: #111827; }
+    .pfbase-sub { font-size: 10.5px; fill: #6b7280; }
+    .pfbase-port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .pfbase-tier { font-size: 10.5px; font-weight: 700; fill: #4b5563; letter-spacing: 0.4px; }
+    .pfbase-own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .pfbase-sec { font-size: 9px; font-weight: 700; fill: #1d4ed8; font-family: ui-monospace, monospace; }
+    .pfbase-flowIn { font-size: 8.5px; font-weight: 700; fill: #2563eb; font-family: ui-monospace, monospace; }
+    .pfbase-flowOut { font-size: 8.5px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .pfbase-edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .pfbase-edgeB { stroke: #2563eb; stroke-width: 1.3; fill: none; }
+    .pfbase-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .pfbase-container { fill: #fafafa; stroke: #d1d5db; stroke-width: 1.2; }
+    .pfbase-own1 { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.3; }
+    .pfbase-human { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.4; }
+    .pfbase-secband { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
+    .pfbase-chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.9; }
+    .pfbase-chipB { fill: #dbeafe; stroke: #93c5fd; stroke-width: 0.9; }
+  </style>
+
+  <rect width="840" height="786" fill="#ffffff"/>
+
+  <text x="24" y="26" class="pfbase-h1">Digital colleague — reference architecture (one colleague)</text>
+  <text x="24" y="44" class="pfbase-sub">Layered components. Orange = we author. Blue = human surface &amp; the security boundary. Grey = off-the-shelf runtime, engine, and services.</text>
+
+  <!-- Tier 1: human + interaction surface -->
+  <text x="24" y="72" class="pfbase-tier">HUMAN · ONE INTERACTION SURFACE</text>
+  <rect x="24" y="82" width="170" height="54" rx="8" class="pfbase-box"/>
+  <text x="109" y="104" text-anchor="middle" class="pfbase-label">Person / teammate</text>
+  <text x="109" y="120" text-anchor="middle" class="pfbase-sub">one person, one intent</text>
+  <line x1="194" y1="109" x2="228" y2="109" class="pfbase-edgeB" marker-end="url(#pfbase-arrB)"/>
+  <rect x="230" y="82" width="586" height="54" rx="8" class="pfbase-human"/>
+  <text x="523" y="104" text-anchor="middle" class="pfbase-label">Interaction surface — one approved binding</text>
+  <text x="523" y="120" text-anchor="middle" class="pfbase-sub">web / desktop / embodied UI · the only human-facing channel (ADR-019)</text>
+
+  <line x1="523" y1="136" x2="523" y2="166" class="pfbase-edgeB" marker-end="url(#pfbase-arrB)"/>
+
+  <!-- Tier 2: the colleague -->
+  <text x="24" y="184" class="pfbase-tier">DIGITAL COLLEAGUE · AUTHORED WORKSPACE + TRIAGE POLICY; OFF-THE-SHELF RUNTIME &amp; ENGINE</text>
+  <rect x="24" y="194" width="792" height="220" rx="10" class="pfbase-container"/>
+  <rect x="38" y="206" width="66" height="14" rx="7" class="pfbase-chip"/>
+  <text x="46" y="216" class="pfbase-own">WE AUTHOR</text>
+
+  <rect x="40" y="226" width="120" height="44" rx="6" class="pfbase-own1"/>
+  <text x="100" y="245" text-anchor="middle" class="pfbase-labelS">IDENTITY.md</text>
+  <text x="100" y="260" text-anchor="middle" class="pfbase-sub">name · vibe · emoji</text>
+  <rect x="168" y="226" width="120" height="44" rx="6" class="pfbase-own1"/>
+  <text x="228" y="245" text-anchor="middle" class="pfbase-labelS">SOUL.md</text>
+  <text x="228" y="260" text-anchor="middle" class="pfbase-sub">persona · tone</text>
+  <rect x="296" y="226" width="120" height="44" rx="6" class="pfbase-own1"/>
+  <text x="356" y="245" text-anchor="middle" class="pfbase-labelS">AGENTS.md</text>
+  <text x="356" y="260" text-anchor="middle" class="pfbase-sub">operating rules</text>
+  <rect x="424" y="226" width="120" height="44" rx="6" class="pfbase-own1"/>
+  <text x="484" y="245" text-anchor="middle" class="pfbase-labelS">USER.md</text>
+  <text x="484" y="260" text-anchor="middle" class="pfbase-sub">teammate context</text>
+  <rect x="552" y="226" width="120" height="44" rx="6" class="pfbase-own1"/>
+  <text x="612" y="245" text-anchor="middle" class="pfbase-labelS">skills/</text>
+  <text x="612" y="260" text-anchor="middle" class="pfbase-sub">domain workflows</text>
+  <rect x="680" y="226" width="120" height="44" rx="6" class="pfbase-own1"/>
+  <text x="740" y="245" text-anchor="middle" class="pfbase-labelS">Memory files</text>
+  <text x="740" y="260" text-anchor="middle" class="pfbase-sub">daily · curated</text>
+
+  <rect x="40" y="278" width="760" height="38" rx="6" class="pfbase-box"/>
+  <text x="52" y="295" class="pfbase-labelS">Runtime Controller</text>
+  <text x="52" y="309" class="pfbase-sub">sessions · approvals · workspace loading · dispatch · app-server client</text>
+  <rect x="40" y="322" width="760" height="38" rx="6" class="pfbase-own1"/>
+  <text x="52" y="339" class="pfbase-labelS">Request Triage &amp; Priority</text>
+  <text x="52" y="353" class="pfbase-sub">apply AGENTS.md + skills/ policy · classify · urgency · impact · approval need · route / order</text>
+  <rect x="40" y="366" width="760" height="38" rx="6" class="pfbase-box"/>
+  <text x="52" y="383" class="pfbase-labelS">Codex app-server</text>
+  <text x="52" y="397" class="pfbase-sub">agent loop · thread/turn lifecycle · MCP client · approvals · streamed events</text>
+
+  <!-- bidirectional colleague <-> integration -->
+  <line x1="411" y1="414" x2="411" y2="442" class="pfbase-edge" marker-end="url(#pfbase-arr)"/>
+  <line x1="435" y1="442" x2="435" y2="414" class="pfbase-edge" marker-end="url(#pfbase-arr)"/>
+  <text x="449" y="433" class="pfbase-port">events in · actions out</text>
+
+  <!-- Tier 3: service integration -->
+  <text x="24" y="460" class="pfbase-tier">SERVICE INTEGRATION · EACH SERVICE ADDS TWO BINDINGS: INBOUND TRIGGER + OUTBOUND TOOL</text>
+  <rect x="24" y="470" width="792" height="74" rx="10" class="pfbase-container"/>
+  <rect x="40" y="484" width="184" height="48" rx="6" class="pfbase-box"/>
+  <text x="132" y="503" text-anchor="middle" class="pfbase-labelS">Event Ingress</text>
+  <text x="132" y="518" text-anchor="middle" class="pfbase-sub">webhook · verify · dedup · buffer</text>
+  <rect x="232" y="484" width="184" height="48" rx="6" class="pfbase-box"/>
+  <text x="324" y="503" text-anchor="middle" class="pfbase-labelS">Polling Scheduler</text>
+  <text x="324" y="518" text-anchor="middle" class="pfbase-sub">cron · heartbeat (no-push)</text>
+  <rect x="424" y="484" width="184" height="48" rx="6" class="pfbase-box"/>
+  <text x="516" y="503" text-anchor="middle" class="pfbase-labelS">Subscription renewal</text>
+  <text x="516" y="518" text-anchor="middle" class="pfbase-sub">renew push TTL · else events stop</text>
+  <rect x="616" y="484" width="184" height="48" rx="6" class="pfbase-box"/>
+  <text x="708" y="503" text-anchor="middle" class="pfbase-labelS">MCP Tool Servers</text>
+  <text x="708" y="518" text-anchor="middle" class="pfbase-sub">vendor APIs · outbound actions</text>
+
+  <!-- explicit per-service integration paths -->
+  <line x1="132" y1="610" x2="132" y2="544" class="pfbase-edgeB" marker-end="url(#pfbase-arrB)"/>
+  <text x="142" y="560" class="pfbase-flowIn">INBOUND A · native webhook / push</text>
+  <line x1="324" y1="544" x2="324" y2="610" class="pfbase-edgeB" marker-end="url(#pfbase-arrB)"/>
+  <text x="334" y="588" class="pfbase-flowIn">INBOUND B · bounded polling when no push</text>
+  <line x1="708" y1="544" x2="708" y2="610" class="pfbase-edge" marker-end="url(#pfbase-arr)"/>
+  <text x="698" y="560" text-anchor="end" class="pfbase-flowOut">OUTBOUND · MCP tool → vendor API</text>
+
+  <!-- Tier 4: external services -->
+  <text x="24" y="620" class="pfbase-tier">EXTERNAL SERVICES · EXPAND BY INTEGRATING, WITHOUT CHANGING THE COLLEAGUE RUNTIME</text>
+  <rect x="40" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="85" y="654" text-anchor="middle" class="pfbase-sub">Gmail</text>
+  <rect x="136" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="181" y="654" text-anchor="middle" class="pfbase-sub">Outlook</text>
+  <rect x="232" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="277" y="654" text-anchor="middle" class="pfbase-sub">Calendar</text>
+  <rect x="328" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="373" y="654" text-anchor="middle" class="pfbase-sub">Slack</text>
+  <rect x="424" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="469" y="654" text-anchor="middle" class="pfbase-sub">Teams</text>
+  <rect x="520" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="565" y="654" text-anchor="middle" class="pfbase-sub">Notion</text>
+  <rect x="616" y="630" width="90" height="40" rx="6" class="pfbase-box"/>
+  <text x="661" y="654" text-anchor="middle" class="pfbase-sub">Database</text>
+  <rect x="712" y="630" width="88" height="40" rx="6" class="pfbase-box"/>
+  <text x="756" y="654" text-anchor="middle" class="pfbase-sub">APIs · …</text>
+
+  <!-- cross-cutting: access & permissions & audit -->
+  <text x="24" y="700" class="pfbase-tier">ACCESS · PERMISSIONS · AUDIT · cross-cutting — bounds every layer above</text>
+  <rect x="24" y="710" width="792" height="60" rx="10" class="pfbase-secband"/>
+  <rect x="38" y="722" width="150" height="14" rx="7" class="pfbase-chipB"/>
+  <text x="46" y="732" class="pfbase-sec">WE DESIGN · REVIEWED</text>
+  <rect x="200" y="720" width="146" height="40" rx="6" class="pfbase-box"/>
+  <text x="273" y="737" text-anchor="middle" class="pfbase-sub">credential custody</text>
+  <text x="273" y="751" text-anchor="middle" class="pfbase-sub">least privilege</text>
+  <rect x="354" y="720" width="146" height="40" rx="6" class="pfbase-box"/>
+  <text x="427" y="737" text-anchor="middle" class="pfbase-sub">approval bounds</text>
+  <text x="427" y="751" text-anchor="middle" class="pfbase-sub">on side effects</text>
+  <rect x="508" y="720" width="146" height="40" rx="6" class="pfbase-box"/>
+  <text x="581" y="737" text-anchor="middle" class="pfbase-sub">inbound content</text>
+  <text x="581" y="751" text-anchor="middle" class="pfbase-sub">is untrusted</text>
+  <rect x="662" y="720" width="146" height="40" rx="6" class="pfbase-box"/>
+  <text x="735" y="737" text-anchor="middle" class="pfbase-sub">audit + provenance</text>
+  <text x="735" y="751" text-anchor="middle" class="pfbase-sub">event → task → action</text>
+</svg>
+<g font-family="system-ui,sans-serif"><a href="show-me-proactive-lifecycle.html#proactive-component-delivery" aria-label="Interaction surface: Private reminders · read / reject feedback"><title>Interaction surface: Private reminders · read / reject feedback / 私人提醒、已讀與退回回饋</title><rect x="230" y="82" width="586" height="54" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="810" cy="85" r="8" fill="#c2410c"/><text x="810" y="88" text-anchor="middle" fill="white" font-size="9">1</text><rect x="860" y="8" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="25" font-size="13" font-weight="600" fill="#9a3412">1 · Interaction surface</text><text x="874" y="43" font-size="12" fill="#292524">Private reminders · read / reject feedback</text><text x="874" y="60" font-size="12" fill="#57534e">私人提醒、已讀與退回回饋</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-skills" aria-label="AGENTS.md: Standing duties · check and stop rules"><title>AGENTS.md: Standing duties · check and stop rules / 常設責任、檢查條件與停止規則</title><rect x="296" y="226" width="120" height="44" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="410" cy="229" r="8" fill="#c2410c"/><text x="410" y="232" text-anchor="middle" fill="white" font-size="9">2</text><rect x="860" y="78" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="95" font-size="13" font-weight="600" fill="#9a3412">2 · AGENTS.md</text><text x="874" y="113" font-size="12" fill="#292524">Standing duties · check and stop rules</text><text x="874" y="130" font-size="12" fill="#57534e">常設責任、檢查條件與停止規則</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-skills" aria-label="skills/: Read evidence · assess urgency · draft result"><title>skills/: Read evidence · assess urgency · draft result / 讀取證據、判斷急迫性、準備產物</title><rect x="552" y="226" width="120" height="44" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="666" cy="229" r="8" fill="#c2410c"/><text x="666" y="232" text-anchor="middle" fill="white" font-size="9">3</text><rect x="860" y="148" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="165" font-size="13" font-weight="600" fill="#9a3412">3 · skills/</text><text x="874" y="183" font-size="12" fill="#292524">Read evidence · assess urgency · draft result</text><text x="874" y="200" font-size="12" fill="#57534e">讀取證據、判斷急迫性、準備產物</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-runtime" aria-label="Runtime Controller: Queue events · resume goals · bound turns"><title>Runtime Controller: Queue events · resume goals · bound turns / 事件排隊、目標續跑、回合限制</title><rect x="40" y="278" width="760" height="38" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="794" cy="281" r="8" fill="#c2410c"/><text x="794" y="284" text-anchor="middle" fill="white" font-size="9">4</text><rect x="860" y="218" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="235" font-size="13" font-weight="600" fill="#9a3412">4 · Runtime Controller</text><text x="874" y="253" font-size="12" fill="#292524">Queue events · resume goals · bound turns</text><text x="874" y="270" font-size="12" fill="#57534e">事件排隊、目標續跑、回合限制</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-runtime" aria-label="Request Triage &amp; Priority: Ignore · deliver directly · start reasoning"><title>Request Triage &amp; Priority: Ignore · deliver directly · start reasoning / 略過、直接通知、啟動推理</title><rect x="40" y="322" width="760" height="38" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="794" cy="325" r="8" fill="#c2410c"/><text x="794" y="328" text-anchor="middle" fill="white" font-size="9">5</text><rect x="860" y="288" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="305" font-size="13" font-weight="600" fill="#9a3412">5 · Request Triage &amp; Priority</text><text x="874" y="323" font-size="12" fill="#292524">Ignore · deliver directly · start reasoning</text><text x="874" y="340" font-size="12" fill="#57534e">略過、直接通知、啟動推理</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-engine" aria-label="Codex app-server: Run tools · stream outcomes · signal completion"><title>Codex app-server: Run tools · stream outcomes · signal completion / 執行工具、回傳結果、發出完成事件</title><rect x="40" y="366" width="760" height="38" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="794" cy="369" r="8" fill="#c2410c"/><text x="794" y="372" text-anchor="middle" fill="white" font-size="9">6</text><rect x="860" y="358" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="375" font-size="13" font-weight="600" fill="#9a3412">6 · Codex app-server</text><text x="874" y="393" font-size="12" fill="#292524">Run tools · stream outcomes · signal completion</text><text x="874" y="410" font-size="12" fill="#57534e">執行工具、回傳結果、發出完成事件</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-ingress" aria-label="Event Ingress: Verify source · deduplicate · buffer events"><title>Event Ingress: Verify source · deduplicate · buffer events / 驗證來源、事件去重、緩衝待辦</title><rect x="40" y="484" width="184" height="48" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="218" cy="487" r="8" fill="#c2410c"/><text x="218" y="490" text-anchor="middle" fill="white" font-size="9">7</text><rect x="860" y="428" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="445" font-size="13" font-weight="600" fill="#9a3412">7 · Event Ingress</text><text x="874" y="463" font-size="12" fill="#292524">Verify source · deduplicate · buffer events</text><text x="874" y="480" font-size="12" fill="#57534e">驗證來源、事件去重、緩衝待辦</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-ingress" aria-label="Polling Scheduler: Schedule checks · maintain next check time"><title>Polling Scheduler: Schedule checks · maintain next check time / 排定觀察、維護下次檢查時間</title><rect x="232" y="484" width="184" height="48" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="410" cy="487" r="8" fill="#c2410c"/><text x="410" y="490" text-anchor="middle" fill="white" font-size="9">8</text><rect x="860" y="498" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="515" font-size="13" font-weight="600" fill="#9a3412">8 · Polling Scheduler</text><text x="874" y="533" font-size="12" fill="#292524">Schedule checks · maintain next check time</text><text x="874" y="550" font-size="12" fill="#57534e">排定觀察、維護下次檢查時間</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-subscriptions" aria-label="Subscription renewal: Renew subscriptions · recover failed renewal"><title>Subscription renewal: Renew subscriptions · recover failed renewal / 到期前續訂、續訂失敗恢復</title><rect x="424" y="484" width="184" height="48" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="602" cy="487" r="8" fill="#c2410c"/><text x="602" y="490" text-anchor="middle" fill="white" font-size="9">9</text><rect x="860" y="568" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="585" font-size="13" font-weight="600" fill="#9a3412">9 · Subscription renewal</text><text x="874" y="603" font-size="12" fill="#292524">Renew subscriptions · recover failed renewal</text><text x="874" y="620" font-size="12" fill="#57534e">到期前續訂、續訂失敗恢復</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-tools" aria-label="MCP Tool Servers: Query Outlook / APIs · perform allowed actions"><title>MCP Tool Servers: Query Outlook / APIs · perform allowed actions / 查 Outlook／API、執行允許操作</title><rect x="616" y="484" width="184" height="48" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="794" cy="487" r="8" fill="#c2410c"/><text x="794" y="490" text-anchor="middle" fill="white" font-size="9">10</text><rect x="860" y="638" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="655" font-size="13" font-weight="600" fill="#9a3412">10 · MCP Tool Servers</text><text x="874" y="673" font-size="12" fill="#292524">Query Outlook / APIs · perform allowed actions</text><text x="874" y="690" font-size="12" fill="#57534e">查 Outlook／API、執行允許操作</text></a><a href="show-me-proactive-lifecycle.html#proactive-component-delivery" aria-label="Access · Permissions · Audit: Approve actions · enforce policy · audit outcomes"><title>Access · Permissions · Audit: Approve actions · enforce policy · audit outcomes / 操作核准、政策檢查、成果稽核</title><rect x="24" y="714" width="792" height="54" rx="6" fill="transparent" stroke="#c2410c" stroke-width="2"/><circle cx="810" cy="717" r="8" fill="#c2410c"/><text x="810" y="720" text-anchor="middle" fill="white" font-size="9">11</text><rect x="860" y="708" width="405" height="62" rx="4" fill="#fff7ed" stroke="#fdba74"/><text x="874" y="725" font-size="13" font-weight="600" fill="#9a3412">11 · Access · Permissions · Audit</text><text x="874" y="743" font-size="12" fill="#292524">Approve actions · enforce policy · audit outcomes</text><text x="874" y="760" font-size="12" fill="#57534e">操作核准、政策檢查、成果稽核</text></a></g></svg>

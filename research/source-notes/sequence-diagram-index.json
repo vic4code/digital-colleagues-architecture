@@ -1,0 +1,1313 @@
+{
+  "scope": "Logical code responsibilities, not deployment topology. Alternatives and audit limits are stated beside each diagram. Orange arrows map only to available verbatim excerpts.",
+  "count": 28,
+  "entries": [
+    {
+      "framework": "claw",
+      "feature": "Heartbeat",
+      "file": "sequence-diagrams/claw-01.svg",
+      "actors": [
+        "Trigger source",
+        "Dispatch code",
+        "Session events",
+        "Heartbeat runner"
+      ],
+      "messages": [
+        {
+          "from": "Trigger source",
+          "to": "Dispatch code",
+          "label": "HTTP /hooks/wake",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Dispatch code",
+          "to": "Session events",
+          "label": "enqueueSystemEvent(text)",
+          "code_excerpt": "code-claw-0",
+          "return": false
+        },
+        {
+          "from": "Dispatch code",
+          "to": "Heartbeat runner",
+          "label": "mode=now: requestHeartbeat",
+          "code_excerpt": "code-claw-0",
+          "return": false
+        },
+        {
+          "from": "Trigger source",
+          "to": "Heartbeat runner",
+          "label": "Due monitor: request wake",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Heartbeat runner",
+          "to": "Heartbeat runner",
+          "label": "Admission → agent turn",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "Alternative entries: hook wake OR scheduled monitor. next-heartbeat queues context without requesting an immediate turn."
+    },
+    {
+      "framework": "claw",
+      "feature": "Automations / cron",
+      "file": "sequence-diagrams/claw-02.svg",
+      "actors": [
+        "Scheduler",
+        "Payload dispatch",
+        "Script runner",
+        "Heartbeat runner"
+      ],
+      "messages": [
+        {
+          "from": "Scheduler",
+          "to": "Payload dispatch",
+          "label": "Execute due job",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Payload dispatch",
+          "to": "Script runner",
+          "label": "If script: execute script",
+          "code_excerpt": "code-claw-1",
+          "return": false
+        },
+        {
+          "from": "Script runner",
+          "to": "Payload dispatch",
+          "label": "Script result",
+          "code_excerpt": "code-claw-1",
+          "return": true
+        },
+        {
+          "from": "Payload dispatch",
+          "to": "Heartbeat runner",
+          "label": "If heartbeat: request wake",
+          "code_excerpt": "code-claw-1",
+          "return": false
+        },
+        {
+          "from": "Heartbeat runner",
+          "to": "Payload dispatch",
+          "label": "Heartbeat run result",
+          "code_excerpt": null,
+          "return": true
+        }
+      ],
+      "boundary": "Payload branches are alternatives. System-event and isolated-agent payload paths also exist; see the flowchart and native evidence."
+    },
+    {
+      "framework": "claw",
+      "feature": "Inbound webhooks · /hooks/agent",
+      "file": "sequence-diagrams/claw-03.svg",
+      "actors": [
+        "External service",
+        "HTTP hook handler",
+        "Session admission",
+        "Agent runner"
+      ],
+      "messages": [
+        {
+          "from": "External service",
+          "to": "HTTP hook handler",
+          "label": "POST /hooks/agent",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "HTTP hook handler",
+          "to": "Session admission",
+          "label": "Validate and request placement",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Session admission",
+          "to": "HTTP hook handler",
+          "label": "Admitted / rejected",
+          "code_excerpt": null,
+          "return": true
+        },
+        {
+          "from": "HTTP hook handler",
+          "to": "Agent runner",
+          "label": "runCronIsolatedAgentTurn",
+          "code_excerpt": "code-claw-2",
+          "return": false
+        },
+        {
+          "from": "Agent runner",
+          "to": "HTTP hook handler",
+          "label": "Execution / delivery outcome",
+          "code_excerpt": null,
+          "return": true
+        }
+      ],
+      "boundary": "The runner call occurs only after admission. HTTP acceptance alone is not proof of completed execution."
+    },
+    {
+      "framework": "claw",
+      "feature": "Automations · on-exit",
+      "file": "sequence-diagrams/claw-04.svg",
+      "actors": [
+        "Watched process",
+        "Exit watcher",
+        "Admission wrapper",
+        "Cron service"
+      ],
+      "messages": [
+        {
+          "from": "Watched process",
+          "to": "Exit watcher",
+          "label": "Process exit observed",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Exit watcher",
+          "to": "Admission wrapper",
+          "label": "fireOnExit(job, exit)",
+          "code_excerpt": "code-claw-3",
+          "return": false
+        },
+        {
+          "from": "Admission wrapper",
+          "to": "Cron service",
+          "label": "cron.run(jobId, force)",
+          "code_excerpt": "code-claw-3",
+          "return": false
+        },
+        {
+          "from": "Cron service",
+          "to": "Admission wrapper",
+          "label": "Run outcome",
+          "code_excerpt": null,
+          "return": true
+        },
+        {
+          "from": "Exit watcher",
+          "to": "Exit watcher",
+          "label": "Record one-shot completion",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "A stale or unknown exit must not trigger an occurrence. The watched command is the event source."
+    },
+    {
+      "framework": "claw",
+      "feature": "Automations · stream",
+      "file": "sequence-diagrams/claw-05.svg",
+      "actors": [
+        "Stream process",
+        "Batch collector",
+        "Admission wrapper",
+        "Cron service"
+      ],
+      "messages": [
+        {
+          "from": "Stream process",
+          "to": "Batch collector",
+          "label": "stdout / stderr lines",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Batch collector",
+          "to": "Batch collector",
+          "label": "Match and coalesce lines",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Batch collector",
+          "to": "Admission wrapper",
+          "label": "fireBatch(job, batch)",
+          "code_excerpt": "code-claw-4",
+          "return": false
+        },
+        {
+          "from": "Admission wrapper",
+          "to": "Cron service",
+          "label": "cron.run + streamBatch",
+          "code_excerpt": "code-claw-4",
+          "return": false
+        },
+        {
+          "from": "Cron service",
+          "to": "Admission wrapper",
+          "label": "Disposition and enabled state",
+          "code_excerpt": "code-claw-4",
+          "return": true
+        }
+      ],
+      "boundary": "Only accepted batches dispatch. Batch timing combines incoming events; it does not invent new events."
+    },
+    {
+      "framework": "claw",
+      "feature": "Automations · condition watchers",
+      "file": "sequence-diagrams/claw-06.svg",
+      "actors": [
+        "Timer / stream",
+        "Payload dispatch",
+        "Trigger evaluator",
+        "Payload runner"
+      ],
+      "messages": [
+        {
+          "from": "Timer / stream",
+          "to": "Payload dispatch",
+          "label": "Check due / batch ready",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Payload dispatch",
+          "to": "Trigger evaluator",
+          "label": "evaluateCronTrigger(script)",
+          "code_excerpt": "code-claw-5",
+          "return": false
+        },
+        {
+          "from": "Trigger evaluator",
+          "to": "Payload dispatch",
+          "label": "fire + optional state/message",
+          "code_excerpt": "code-claw-5",
+          "return": true
+        },
+        {
+          "from": "Payload dispatch",
+          "to": "Payload dispatch",
+          "label": "fire=false: return early",
+          "code_excerpt": "code-claw-5",
+          "return": false
+        },
+        {
+          "from": "Payload dispatch",
+          "to": "Payload runner",
+          "label": "fire=true: execute payload",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "The last two messages are alternative branches. The condition script can filter work before a model is needed."
+    },
+    {
+      "framework": "claw",
+      "feature": "next_check · adaptive pacing",
+      "file": "sequence-diagrams/claw-07.svg",
+      "actors": [
+        "Current run",
+        "Outcome handler",
+        "Pacing calculator",
+        "Job schedule"
+      ],
+      "messages": [
+        {
+          "from": "Current run",
+          "to": "Outcome handler",
+          "label": "Success + nextCheck proposal",
+          "code_excerpt": "code-claw-6",
+          "return": false
+        },
+        {
+          "from": "Outcome handler",
+          "to": "Outcome handler",
+          "label": "Check enabled / pacing / result",
+          "code_excerpt": "code-claw-6",
+          "return": false
+        },
+        {
+          "from": "Outcome handler",
+          "to": "Pacing calculator",
+          "label": "resolvePacedNextRunAtMs",
+          "code_excerpt": "code-claw-6",
+          "return": false
+        },
+        {
+          "from": "Pacing calculator",
+          "to": "Outcome handler",
+          "label": "Bounded candidate time",
+          "code_excerpt": "code-claw-6",
+          "return": true
+        },
+        {
+          "from": "Outcome handler",
+          "to": "Job schedule",
+          "label": "assignNextRunAtMs",
+          "code_excerpt": "code-claw-6",
+          "return": false
+        }
+      ],
+      "boundary": "Failed, skipped or invalid proposals do not take this success path. This adjusts an existing schedule."
+    },
+    {
+      "framework": "claw",
+      "feature": "Skill Workshop · experience review",
+      "file": "sequence-diagrams/claw-08.svg",
+      "actors": [
+        "Completed turn",
+        "Review scheduler",
+        "Eligibility checks",
+        "Review runner"
+      ],
+      "messages": [
+        {
+          "from": "Completed turn",
+          "to": "Review scheduler",
+          "label": "Agent-end review context",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Review scheduler",
+          "to": "Eligibility checks",
+          "label": "isEligibleContext(ctx)",
+          "code_excerpt": "code-claw-7",
+          "return": false
+        },
+        {
+          "from": "Eligibility checks",
+          "to": "Review scheduler",
+          "label": "Eligible / false",
+          "code_excerpt": "code-claw-7",
+          "return": true
+        },
+        {
+          "from": "Review scheduler",
+          "to": "Review scheduler",
+          "label": "Eligible: wait for idle",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Review scheduler",
+          "to": "Review runner",
+          "label": "Admit background review",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "Ineligible contexts stop here. Review eligibility is separate from external-work monitoring."
+    },
+    {
+      "framework": "claw",
+      "feature": "Dreaming · memory maintenance",
+      "file": "sequence-diagrams/claw-09.svg",
+      "actors": [
+        "Memory plugin",
+        "Reconciler",
+        "Cron service",
+        "Memory workflow"
+      ],
+      "messages": [
+        {
+          "from": "Memory plugin",
+          "to": "Reconciler",
+          "label": "Startup: reconcile managed job",
+          "code_excerpt": "code-claw-8",
+          "return": false
+        },
+        {
+          "from": "Reconciler",
+          "to": "Cron service",
+          "label": "Maintain desired cron job",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Cron service",
+          "to": "Memory workflow",
+          "label": "Later scheduled memory work",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Memory workflow",
+          "to": "Memory workflow",
+          "label": "Consolidation / diary effects",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "The linked excerpt proves schedule reconciliation. Memory effects and their limits are documented separately in the research."
+    },
+    {
+      "framework": "claw",
+      "feature": "Goals · evidence boundary",
+      "file": "sequence-diagrams/claw-10.svg",
+      "actors": [
+        "Goal caller",
+        "Goal function",
+        "Session store"
+      ],
+      "messages": [
+        {
+          "from": "Goal caller",
+          "to": "Goal function",
+          "label": "createSessionGoal(options)",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Goal function",
+          "to": "Session store",
+          "label": "patchSessionEntryCore",
+          "code_excerpt": "code-claw-9",
+          "return": false
+        },
+        {
+          "from": "Session store",
+          "to": "Session store",
+          "label": "Store goal objective / budget",
+          "code_excerpt": "code-claw-9",
+          "return": false
+        },
+        {
+          "from": "Session store",
+          "to": "Goal function",
+          "label": "Patched session entry",
+          "code_excerpt": "code-claw-9",
+          "return": true
+        }
+      ],
+      "boundary": "Evidence ends at goal state storage; a universal automatic next-turn producer was not established."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Cron / cronjob",
+      "file": "sequence-diagrams/hermes-01.svg",
+      "actors": [
+        "Cron tick",
+        "Job executor",
+        "Script runner",
+        "AIAgent"
+      ],
+      "messages": [
+        {
+          "from": "Cron tick",
+          "to": "Job executor",
+          "label": "Claim due job → run_one_job",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Job executor",
+          "to": "Script runner",
+          "label": "no_agent: run script job",
+          "code_excerpt": "code-hermes-0",
+          "return": false
+        },
+        {
+          "from": "Job executor",
+          "to": "AIAgent",
+          "label": "Agent mode: construct agent",
+          "code_excerpt": "code-hermes-0",
+          "return": false
+        },
+        {
+          "from": "Job executor",
+          "to": "AIAgent",
+          "label": "Run under watchdog",
+          "code_excerpt": "code-hermes-0",
+          "return": false
+        },
+        {
+          "from": "AIAgent",
+          "to": "Job executor",
+          "label": "Final response / outcome",
+          "code_excerpt": "code-hermes-0",
+          "return": true
+        }
+      ],
+      "boundary": "Script-only and agent execution are alternatives. Delivery and next-occurrence tracking follow execution."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Webhooks",
+      "file": "sequence-diagrams/hermes-02.svg",
+      "actors": [
+        "External service",
+        "Webhook adapter",
+        "Message handler",
+        "Delivery adapter"
+      ],
+      "messages": [
+        {
+          "from": "External service",
+          "to": "Webhook adapter",
+          "label": "POST /webhooks/route",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Webhook adapter",
+          "to": "Webhook adapter",
+          "label": "Deduplicate delivery record",
+          "code_excerpt": "code-hermes-1",
+          "return": false
+        },
+        {
+          "from": "Webhook adapter",
+          "to": "Message handler",
+          "label": "Agent mode: handle_message",
+          "code_excerpt": "code-hermes-1",
+          "return": false
+        },
+        {
+          "from": "Message handler",
+          "to": "Delivery adapter",
+          "label": "Agent response delivery",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Webhook adapter",
+          "to": "Delivery adapter",
+          "label": "deliver_only: direct delivery",
+          "code_excerpt": "code-hermes-1",
+          "return": false
+        }
+      ],
+      "boundary": "Agent mode and deliver_only are alternatives. Ignored or duplicate events return before dispatch."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Session heartbeat · /heartbeat",
+      "file": "sequence-diagrams/hermes-03.svg",
+      "actors": [
+        "Heartbeat watcher",
+        "Session / queue",
+        "HeartbeatManager",
+        "Message adapter"
+      ],
+      "messages": [
+        {
+          "from": "Heartbeat watcher",
+          "to": "Session / queue",
+          "label": "Check busy / user queue",
+          "code_excerpt": "code-hermes-2",
+          "return": false
+        },
+        {
+          "from": "Heartbeat watcher",
+          "to": "HeartbeatManager",
+          "label": "due_prompt()",
+          "code_excerpt": "code-hermes-2",
+          "return": false
+        },
+        {
+          "from": "HeartbeatManager",
+          "to": "Heartbeat watcher",
+          "label": "Instruction or no due prompt",
+          "code_excerpt": "code-hermes-2",
+          "return": true
+        },
+        {
+          "from": "Heartbeat watcher",
+          "to": "Message adapter",
+          "label": "handle_message(synthetic event)",
+          "code_excerpt": "code-hermes-2",
+          "return": false
+        }
+      ],
+      "boundary": "Busy user work defers the heartbeat. A due instruction becomes a normal session turn."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Loop · /loop, /proactive",
+      "file": "sequence-diagrams/hermes-04.svg",
+      "actors": [
+        "Loop driver",
+        "LoopManager",
+        "Persisted loop",
+        "Turn runner"
+      ],
+      "messages": [
+        {
+          "from": "Loop driver",
+          "to": "LoopManager",
+          "label": "is_due / fire_tick",
+          "code_excerpt": "code-hermes-3",
+          "return": false
+        },
+        {
+          "from": "LoopManager",
+          "to": "Persisted loop",
+          "label": "Set awaiting_response; next time",
+          "code_excerpt": "code-hermes-3",
+          "return": false
+        },
+        {
+          "from": "LoopManager",
+          "to": "Loop driver",
+          "label": "Return framed instruction",
+          "code_excerpt": null,
+          "return": true
+        },
+        {
+          "from": "Loop driver",
+          "to": "Turn runner",
+          "label": "Execute repeated instruction",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Loop driver",
+          "to": "LoopManager",
+          "label": "After turn: complete_tick",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "The completion step checks stop conditions and determines the next cadence. Another tick is blocked while awaiting a response."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Persistent Goals · /goal",
+      "file": "sequence-diagrams/hermes-05.svg",
+      "actors": [
+        "Finished turn",
+        "Post-turn hook",
+        "GoalManager",
+        "Session FIFO"
+      ],
+      "messages": [
+        {
+          "from": "Finished turn",
+          "to": "Post-turn hook",
+          "label": "Delivered final response",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Post-turn hook",
+          "to": "GoalManager",
+          "label": "evaluate_after_turn",
+          "code_excerpt": "code-hermes-4",
+          "return": false
+        },
+        {
+          "from": "GoalManager",
+          "to": "Post-turn hook",
+          "label": "Continuation decision + prompt",
+          "code_excerpt": "code-hermes-4",
+          "return": true
+        },
+        {
+          "from": "Post-turn hook",
+          "to": "Post-turn hook",
+          "label": "Check should_continue / prompt",
+          "code_excerpt": "code-hermes-4",
+          "return": false
+        },
+        {
+          "from": "Post-turn hook",
+          "to": "Session FIFO",
+          "label": "Enqueue synthetic prompt",
+          "code_excerpt": "code-hermes-4",
+          "return": false
+        }
+      ],
+      "boundary": "Only a continue decision queues work. Wait, pause and done do not enter this continuation path."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Kanban dispatcher",
+      "file": "sequence-diagrams/hermes-06.svg",
+      "actors": [
+        "Board dispatcher",
+        "Ready task rows",
+        "Lane dispatcher",
+        "Worker process"
+      ],
+      "messages": [
+        {
+          "from": "Board dispatcher",
+          "to": "Ready task rows",
+          "label": "Read ready work and capacity",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Ready task rows",
+          "to": "Board dispatcher",
+          "label": "Rows and assignments",
+          "code_excerpt": null,
+          "return": true
+        },
+        {
+          "from": "Board dispatcher",
+          "to": "Board dispatcher",
+          "label": "Check budget / resolve assignee",
+          "code_excerpt": "code-hermes-5",
+          "return": false
+        },
+        {
+          "from": "Board dispatcher",
+          "to": "Lane dispatcher",
+          "label": "_dispatch_lane_task",
+          "code_excerpt": "code-hermes-5",
+          "return": false
+        },
+        {
+          "from": "Lane dispatcher",
+          "to": "Worker process",
+          "label": "Claim and spawn assigned worker",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "No available budget or assignee means no dispatch. Polling discovers readiness; it does not create the assignment."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Background review",
+      "file": "sequence-diagrams/hermes-07.svg",
+      "actors": [
+        "Turn finalizer",
+        "Agent instance",
+        "Background review"
+      ],
+      "messages": [
+        {
+          "from": "Turn finalizer",
+          "to": "Turn finalizer",
+          "label": "Check final response / flags",
+          "code_excerpt": "code-hermes-6",
+          "return": false
+        },
+        {
+          "from": "Turn finalizer",
+          "to": "Agent instance",
+          "label": "_spawn_background_review",
+          "code_excerpt": "code-hermes-6",
+          "return": false
+        },
+        {
+          "from": "Agent instance",
+          "to": "Background review",
+          "label": "Review captured experience",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Background review",
+          "to": "Background review",
+          "label": "Restricted improvement writes",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "Interrupted, suppressed or ineligible turns do not spawn a review. Write restrictions are separate from this spawn excerpt."
+    },
+    {
+      "framework": "hermes",
+      "feature": "Cron provider · Chronos",
+      "file": "sequence-diagrams/hermes-08.svg",
+      "actors": [
+        "Remote scheduler",
+        "HTTP fire endpoint",
+        "Cron provider",
+        "Job executor"
+      ],
+      "messages": [
+        {
+          "from": "Remote scheduler",
+          "to": "HTTP fire endpoint",
+          "label": "POST /api/cron/fire",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "HTTP fire endpoint",
+          "to": "HTTP fire endpoint",
+          "label": "Verify signed request",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "HTTP fire endpoint",
+          "to": "Cron provider",
+          "label": "Claim scheduled occurrence",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Cron provider",
+          "to": "Cron provider",
+          "label": "Require accepted claim snapshot",
+          "code_excerpt": "code-hermes-7",
+          "return": false
+        },
+        {
+          "from": "Cron provider",
+          "to": "Job executor",
+          "label": "run_one_job(claimed_job)",
+          "code_excerpt": "code-hermes-7",
+          "return": false
+        }
+      ],
+      "boundary": "This is a schedule delivered over HTTP, not necessarily an external business event. A missing claim stops execution."
+    },
+    {
+      "framework": "ob",
+      "feature": "Routines",
+      "file": "sequence-diagrams/ob-01.svg",
+      "actors": [
+        "Routine sweep",
+        "Routine store",
+        "Durable queue",
+        "Routine runner"
+      ],
+      "messages": [
+        {
+          "from": "Routine sweep",
+          "to": "Routine store",
+          "label": "Read due routines",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Routine store",
+          "to": "Routine sweep",
+          "label": "Due occurrence records",
+          "code_excerpt": null,
+          "return": true
+        },
+        {
+          "from": "Routine sweep",
+          "to": "Durable queue",
+          "label": "offer occurrence key + payload",
+          "code_excerpt": "code-ob-0",
+          "return": false
+        },
+        {
+          "from": "Routine sweep",
+          "to": "Routine store",
+          "label": "advanceNextRun",
+          "code_excerpt": "code-ob-0",
+          "return": false
+        },
+        {
+          "from": "Durable queue",
+          "to": "Routine runner",
+          "label": "Later lease / claim / execute",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "The occurrence is offered before schedule advancement. Queue ownership and current access checks are later runtime steps."
+    },
+    {
+      "framework": "ob",
+      "feature": "Bot handoff · message_bot",
+      "file": "sequence-diagrams/ob-02.svg",
+      "actors": [
+        "Calling Bot",
+        "message_bot tool",
+        "Handoff desk",
+        "Recipient runner"
+      ],
+      "messages": [
+        {
+          "from": "Calling Bot",
+          "to": "message_bot tool",
+          "label": "Typed task request",
+          "code_excerpt": "code-ob-1",
+          "return": false
+        },
+        {
+          "from": "message_bot tool",
+          "to": "message_bot tool",
+          "label": "Validate arguments",
+          "code_excerpt": "code-ob-1",
+          "return": false
+        },
+        {
+          "from": "message_bot tool",
+          "to": "Handoff desk",
+          "label": "desk.send(task envelope)",
+          "code_excerpt": "code-ob-1",
+          "return": false
+        },
+        {
+          "from": "Handoff desk",
+          "to": "Handoff desk",
+          "label": "Resolve grants / offer durable hop",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Handoff desk",
+          "to": "Recipient runner",
+          "label": "Later claimed delivery",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "The receiving Bot acts on a delegated task. The tool excerpt proves validation and handoff entry, not all grant checks."
+    },
+    {
+      "framework": "ob",
+      "feature": "Handoff result relay",
+      "file": "sequence-diagrams/ob-03.svg",
+      "actors": [
+        "Recipient turn",
+        "Handoff runner",
+        "Relay queue",
+        "Requesting Bot"
+      ],
+      "messages": [
+        {
+          "from": "Recipient turn",
+          "to": "Handoff runner",
+          "label": "Forward hop returns answer",
+          "code_excerpt": null,
+          "return": true
+        },
+        {
+          "from": "Handoff runner",
+          "to": "Handoff runner",
+          "label": "Check !answerIn && answer",
+          "code_excerpt": "code-ob-2",
+          "return": false
+        },
+        {
+          "from": "Handoff runner",
+          "to": "Relay queue",
+          "label": "relay(work, key, answer)",
+          "code_excerpt": "code-ob-2",
+          "return": false
+        },
+        {
+          "from": "Relay queue",
+          "to": "Requesting Bot",
+          "label": "Later follow-up delivery",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "Relays of relays and empty answers do not create another relay."
+    },
+    {
+      "framework": "ob",
+      "feature": "Lease heartbeat · not an agent wake",
+      "file": "sequence-diagrams/ob-04.svg",
+      "actors": [
+        "Renewal timer",
+        "Owned-key set",
+        "Work queue",
+        "Delivery loop"
+      ],
+      "messages": [
+        {
+          "from": "Renewal timer",
+          "to": "Owned-key set",
+          "label": "Iterate currently owned keys",
+          "code_excerpt": "code-ob-3",
+          "return": false
+        },
+        {
+          "from": "Renewal timer",
+          "to": "Work queue",
+          "label": "renew(kind, key, owner, lease)",
+          "code_excerpt": "code-ob-3",
+          "return": false
+        },
+        {
+          "from": "Work queue",
+          "to": "Renewal timer",
+          "label": "kept = true / false",
+          "code_excerpt": "code-ob-3",
+          "return": true
+        },
+        {
+          "from": "Renewal timer",
+          "to": "Owned-key set",
+          "label": "If lost: remove owned key",
+          "code_excerpt": "code-ob-3",
+          "return": false
+        },
+        {
+          "from": "Owned-key set",
+          "to": "Delivery loop",
+          "label": "Ownership governs later delivery",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "This heartbeat maintains ownership. It does not ask the model to think again."
+    },
+    {
+      "framework": "gr",
+      "feature": "Automation fire consumer",
+      "file": "sequence-diagrams/gr-01.svg",
+      "actors": [
+        "Local consumer",
+        "Cloud backend",
+        "Local event state",
+        "Automation handler"
+      ],
+      "messages": [
+        {
+          "from": "Local consumer",
+          "to": "Cloud backend",
+          "label": "Poll automation-events + ack IDs",
+          "code_excerpt": "code-gr-0",
+          "return": false
+        },
+        {
+          "from": "Cloud backend",
+          "to": "Local consumer",
+          "label": "events + nextPollAfterMs",
+          "code_excerpt": "code-gr-0",
+          "return": true
+        },
+        {
+          "from": "Local consumer",
+          "to": "Local event state",
+          "label": "Ignore IDs already tracked",
+          "code_excerpt": "code-gr-0",
+          "return": false
+        },
+        {
+          "from": "Local consumer",
+          "to": "Automation handler",
+          "label": "deliver(unseen event)",
+          "code_excerpt": "code-gr-0",
+          "return": false
+        }
+      ],
+      "boundary": "Only the reconstructed consumer is shown. Cloud-side trigger generation remains outside this evidence."
+    },
+    {
+      "framework": "gr",
+      "feature": "Background event wakes",
+      "file": "sequence-diagrams/gr-02.svg",
+      "actors": [
+        "Incoming event",
+        "Background wakes",
+        "Session / transcript",
+        "Wake queue"
+      ],
+      "messages": [
+        {
+          "from": "Incoming event",
+          "to": "Background wakes",
+          "label": "recordTimelineEvent",
+          "code_excerpt": "code-gr-1",
+          "return": false
+        },
+        {
+          "from": "Background wakes",
+          "to": "Session / transcript",
+          "label": "resolveBackgroundSession",
+          "code_excerpt": "code-gr-1",
+          "return": false
+        },
+        {
+          "from": "Background wakes",
+          "to": "Session / transcript",
+          "label": "appendTimelineEventEntry",
+          "code_excerpt": "code-gr-1",
+          "return": false
+        },
+        {
+          "from": "Background wakes",
+          "to": "Wake queue",
+          "label": "If not running: queueEventWake",
+          "code_excerpt": "code-gr-1",
+          "return": false
+        }
+      ],
+      "boundary": "Group sessions and failed session resolution return early. A running agent does not receive this extra queued wake."
+    },
+    {
+      "framework": "gr",
+      "feature": "Completion revivals",
+      "file": "sequence-diagrams/gr-03.svg",
+      "actors": [
+        "Subagent result",
+        "Completion handler",
+        "Pending results",
+        "Revival handler"
+      ],
+      "messages": [
+        {
+          "from": "Subagent result",
+          "to": "Completion handler",
+          "label": "Completion arrives",
+          "code_excerpt": null,
+          "return": false
+        },
+        {
+          "from": "Completion handler",
+          "to": "Pending results",
+          "label": "Check duplicate subagent ID",
+          "code_excerpt": "code-gr-2",
+          "return": false
+        },
+        {
+          "from": "Completion handler",
+          "to": "Pending results",
+          "label": "Store new completion",
+          "code_excerpt": "code-gr-2",
+          "return": false
+        },
+        {
+          "from": "Completion handler",
+          "to": "Revival handler",
+          "label": "reviveForSubagentCompletions",
+          "code_excerpt": "code-gr-2",
+          "return": false
+        }
+      ],
+      "boundary": "Duplicate completions return early. Additional revival admission is outside this excerpt."
+    },
+    {
+      "framework": "gr",
+      "feature": "Goal continuation handler · partial evidence",
+      "file": "sequence-diagrams/gr-04.svg",
+      "actors": [
+        "Action caller",
+        "Continuation handler",
+        "Goal state",
+        "Conversation"
+      ],
+      "messages": [
+        {
+          "from": "Action caller",
+          "to": "Continuation handler",
+          "label": "adaptAction",
+          "code_excerpt": "code-gr-3",
+          "return": false
+        },
+        {
+          "from": "Continuation handler",
+          "to": "Goal state",
+          "label": "Validate goal identity",
+          "code_excerpt": "code-gr-3",
+          "return": false
+        },
+        {
+          "from": "Continuation handler",
+          "to": "Goal state",
+          "label": "If idle cap reached: pause",
+          "code_excerpt": "code-gr-3",
+          "return": false
+        },
+        {
+          "from": "Continuation handler",
+          "to": "Conversation",
+          "label": "Otherwise: continuation turn",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "Pause and continuation are alternatives. The automatic producer of this action remains unverified."
+    },
+    {
+      "framework": "v",
+      "feature": "Automatic curriculum",
+      "file": "sequence-diagrams/v-01.svg",
+      "actors": [
+        "Learning loop",
+        "Curriculum agent",
+        "Rollout",
+        "Progress state"
+      ],
+      "messages": [
+        {
+          "from": "Learning loop",
+          "to": "Learning loop",
+          "label": "Check max_iterations",
+          "code_excerpt": "code-v-0",
+          "return": false
+        },
+        {
+          "from": "Learning loop",
+          "to": "Curriculum agent",
+          "label": "propose_next_task",
+          "code_excerpt": "code-v-0",
+          "return": false
+        },
+        {
+          "from": "Curriculum agent",
+          "to": "Learning loop",
+          "label": "task + context",
+          "code_excerpt": "code-v-0",
+          "return": true
+        },
+        {
+          "from": "Learning loop",
+          "to": "Rollout",
+          "label": "rollout(task, context)",
+          "code_excerpt": "code-v-0",
+          "return": false
+        },
+        {
+          "from": "Rollout",
+          "to": "Progress state",
+          "label": "Outcome updates progress",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "The loop repeats within the exploration domain until its limit. This is next-task selection, not a clock wake."
+    },
+    {
+      "framework": "v",
+      "feature": "Iterative prompting + self-verification",
+      "file": "sequence-diagrams/v-02.svg",
+      "actors": [
+        "Action step",
+        "Environment",
+        "Critic agent",
+        "Prompt context"
+      ],
+      "messages": [
+        {
+          "from": "Action step",
+          "to": "Environment",
+          "label": "Execute generated program",
+          "code_excerpt": "code-v-1",
+          "return": false
+        },
+        {
+          "from": "Environment",
+          "to": "Action step",
+          "label": "Environment events",
+          "code_excerpt": "code-v-1",
+          "return": true
+        },
+        {
+          "from": "Action step",
+          "to": "Critic agent",
+          "label": "check_task_success",
+          "code_excerpt": "code-v-1",
+          "return": false
+        },
+        {
+          "from": "Critic agent",
+          "to": "Action step",
+          "label": "success + critique",
+          "code_excerpt": "code-v-1",
+          "return": true
+        },
+        {
+          "from": "Action step",
+          "to": "Prompt context",
+          "label": "Use feedback for later attempt",
+          "code_excerpt": null,
+          "return": false
+        }
+      ],
+      "boundary": "Success or attempt limits end the rollout. Feedback can revise the current task before the curriculum selects a new one."
+    }
+  ]
+}

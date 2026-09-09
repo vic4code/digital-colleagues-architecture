@@ -15,3 +15,8 @@ Planned topics:
   alternatives that informed, and were superseded by, ADR-019's single-interface model
 - Stateful vs stateless colleagues — when to use which
 - `/goal` as autonomy boundary for long-running agents
+
+## Proactive agent implementation study
+
+- [Interactive lifecycle report](./show-me-proactive-lifecycle.html) — framework mechanisms, autonomous task selection, source excerpts, phase planning, original architecture integration, and verification. English with Traditional Chinese explanations; open the HTML locally after cloning.
+- [Source audit and evidence](./source-notes/README.md) — pinned implementations and validation records.

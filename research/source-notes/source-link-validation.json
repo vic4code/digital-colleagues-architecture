@@ -1,0 +1,1127 @@
+{
+  "scope": "File existence and line bounds only; this is not semantic or runtime verification.",
+  "checked": 140,
+  "failures": [],
+  "results": [
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "README.md",
+      "line": 31,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "docs/architecture.md",
+      "line": 146,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "docs/routines.md",
+      "line": 1,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "docs/routines.md",
+      "line": 51,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/agents/handoff-runner.ts",
+      "line": 251,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/agents/handoff-runner.ts",
+      "line": 262,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/agents/handoff-runner.ts",
+      "line": 391,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/agents/handoff-runner.ts",
+      "line": 398,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/agents/handoff-tool.ts",
+      "line": 85,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/agents/handoff-tool.ts",
+      "line": 95,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/run-turn.ts",
+      "line": 437,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/run-turn.ts",
+      "line": 522,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/runner.ts",
+      "line": 137,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/runner.ts",
+      "line": 72,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/store.ts",
+      "line": 512,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/sweep.ts",
+      "line": 135,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/routines/sweep.ts",
+      "line": 176,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "server/src/work/queue.ts",
+      "line": 268,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "CopilotKit/OpenBot",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "path": "worker/src/index.ts",
+      "line": 110,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/agents/critic.py",
+      "line": 91,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/agents/curriculum.py",
+      "line": 240,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/voyager.py",
+      "line": 203,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/voyager.py",
+      "line": 214,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/voyager.py",
+      "line": 295,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/voyager.py",
+      "line": 315,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/voyager.py",
+      "line": 327,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "MineDojo/Voyager",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "path": "voyager/voyager.py",
+      "line": 350,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "README.md",
+      "line": 20,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "agent/background_review.py",
+      "line": 937,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "agent/turn_finalizer.py",
+      "line": 591,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "agent/turn_finalizer.py",
+      "line": 611,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/monitor.py",
+      "line": 1,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/monitor.py",
+      "line": 125,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/monitor.py",
+      "line": 137,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler.py",
+      "line": 1307,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler.py",
+      "line": 2033,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler.py",
+      "line": 2043,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler.py",
+      "line": 2301,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler.py",
+      "line": 2353,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler.py",
+      "line": 2745,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler_provider.py",
+      "line": 168,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "cron/scheduler_provider.py",
+      "line": 180,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/platforms/webhook.py",
+      "line": 511,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/platforms/webhook.py",
+      "line": 552,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/platforms/webhook.py",
+      "line": 578,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/run_goals.py",
+      "line": 116,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/run_goals.py",
+      "line": 138,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/run_goals.py",
+      "line": 159,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/run_goals.py",
+      "line": 262,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/run_goals.py",
+      "line": 287,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "gateway/run_goals.py",
+      "line": 297,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/goals.py",
+      "line": 1272,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/goals.py",
+      "line": 1437,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/goals.py",
+      "line": 1473,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/goals.py",
+      "line": 370,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/goals.py",
+      "line": 870,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/kanban_db.py",
+      "line": 2002,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/kanban_db_dispatch.py",
+      "line": 1812,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/kanban_db_dispatch.py",
+      "line": 1815,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/loops.py",
+      "line": 486,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "hermes_cli/loops.py",
+      "line": 538,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/developer-guide/cron-internals.md",
+      "line": 93,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/user-guide/features/cron.md",
+      "line": 7,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/user-guide/features/goals.md",
+      "line": 7,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/user-guide/features/heartbeat.md",
+      "line": 7,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/user-guide/features/kanban.md",
+      "line": 122,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/user-guide/features/loops.md",
+      "line": 7,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "path": "website/docs/user-guide/messaging/webhooks.md",
+      "line": 9,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "anthropics/claude-plugins-official",
+      "commit": "517b2fcd1b60fa2181ac52dcf8492361ba341180",
+      "path": "external_plugins/telegram/server.ts",
+      "line": 970,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "PROVENANCE.md",
+      "line": 1,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/automations/sand-automation-fire-consumer.ts",
+      "line": 72,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/automations/sand-automation-fire-consumer.ts",
+      "line": 83,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/background-wakes.ts",
+      "line": 359,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/completion-revivals.ts",
+      "line": 111,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/completion-revivals.ts",
+      "line": 123,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/completion-revivals.ts",
+      "line": 156,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/completion-revivals.ts",
+      "line": 99,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/pending-wake-rearm.ts",
+      "line": 99,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/host/extensions/transcript/run-scheduler.ts",
+      "line": 199,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "b-nnett/grok-bot-0.18-reconstructed",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "path": "source/packages/agent/actions/goal-continuation-action-handler.ts",
+      "line": 84,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openai/codex",
+      "commit": "634ebc1865c6ac840ed3ba118f040d527bf4b55d",
+      "path": "codex-rs/exec/src/lib.rs",
+      "line": 1137,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openai/codex",
+      "commit": "634ebc1865c6ac840ed3ba118f040d527bf4b55d",
+      "path": "codex-rs/ext/goal/src/runtime.rs",
+      "line": 453,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openai/codex",
+      "commit": "634ebc1865c6ac840ed3ba118f040d527bf4b55d",
+      "path": "codex-rs/hooks/src/legacy_notify.rs",
+      "line": 66,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/automation/cron-jobs.md",
+      "line": 12,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/automation/cron-jobs/schedules.md",
+      "line": 14,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/automation/cron-jobs/schedules.md",
+      "line": 38,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/automation/cron-jobs/schedules.md",
+      "line": 83,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/automation/cron-jobs/webhooks.md",
+      "line": 12,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/automation/taskflow.md",
+      "line": 22,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/concepts/dreaming.md",
+      "line": 1,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/gateway/heartbeat.md",
+      "line": 10,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "docs/tools/skill-workshop.md",
+      "line": 12,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "extensions/lobster/src/lobster-tool.ts",
+      "line": 14,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "extensions/memory-core/src/dreaming.ts",
+      "line": 583,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "extensions/memory-core/src/dreaming.ts",
+      "line": 914,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "extensions/memory-core/src/dreaming.ts",
+      "line": 917,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/agents/tools/cron-tool.ts",
+      "line": 649,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/agents/tools/heartbeat-response-tool.ts",
+      "line": 22,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/config/sessions/goals.ts",
+      "line": 147,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/config/sessions/goals.ts",
+      "line": 154,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/heartbeat-monitor.ts",
+      "line": 71,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/isolated-agent/run.ts",
+      "line": 297,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-execution.ts",
+      "line": 108,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-execution.ts",
+      "line": 135,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-execution.ts",
+      "line": 150,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-execution.ts",
+      "line": 161,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-execution.ts",
+      "line": 197,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-execution.ts",
+      "line": 98,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-outcomes.ts",
+      "line": 481,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-outcomes.ts",
+      "line": 496,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-scheduler.ts",
+      "line": 115,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-scheduler.ts",
+      "line": 170,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/cron/service/timer-scheduler.ts",
+      "line": 55,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/gateway/server-cron.ts",
+      "line": 1195,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/gateway/server-cron.ts",
+      "line": 1196,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/gateway/server-cron.ts",
+      "line": 1245,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/gateway/server/hooks.ts",
+      "line": 261,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/gateway/server/hooks.ts",
+      "line": 274,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/gateway/server/hooks.ts",
+      "line": 521,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/infra/agent-run-registry.ts",
+      "line": 332,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/infra/heartbeat-dispatch.ts",
+      "line": 532,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/infra/heartbeat-runner-execution.ts",
+      "line": 124,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/infra/heartbeat-runner-run.ts",
+      "line": 29,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/infra/heartbeat-runner-run.ts",
+      "line": 73,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/infra/heartbeat-runner-scheduler.ts",
+      "line": 232,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/plugins/runtime/runtime-taskflow.ts",
+      "line": 157,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/skills/workshop/experience-review-scheduler.ts",
+      "line": 14,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/skills/workshop/experience-review-scheduler.ts",
+      "line": 85,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/skills/workshop/experience-review.ts",
+      "line": 122,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "openclaw/openclaw",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "path": "src/skills/workshop/experience-review.ts",
+      "line": 184,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/proactive_agent/cli.py",
+      "line": 363,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/proactive_agent/run_round.py",
+      "line": 117,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/proactive_agent/run_round.py",
+      "line": 74,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/proactive_agent/scorer.py",
+      "line": 104,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/scenerios/scenario-pm.md",
+      "line": 107,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/scenerios/scenario-pm.md",
+      "line": 158,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/scenerios/scenario-pm.md",
+      "line": 206,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_08/scenerios/scenario-pm.md",
+      "line": 95,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_09/wake-cycle-brief.html",
+      "line": 600,
+      "exists": true,
+      "line_in_range": true
+    },
+    {
+      "repository": "shane01526/agent_initiate",
+      "commit": "919aae63c20504610443adf3ac47666173b056fb",
+      "path": "2026_09/wake-cycle-design.html",
+      "line": 334,
+      "exists": true,
+      "line_in_range": true
+    }
+  ]
+}

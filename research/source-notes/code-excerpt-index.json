@@ -1,0 +1,611 @@
+{
+  "scope": "Verbatim local pinned-source extraction. Each excerpt proves only its labelled steps, not the whole runtime.",
+  "entries": [
+    {
+      "id": "code-claw-0",
+      "framework": "claw",
+      "feature": "Heartbeat",
+      "path": "src/gateway/server/hooks.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        2
+      ],
+      "explanation": "Queue event context; request an immediate heartbeat only for mode=now.",
+      "excerpts": [
+        {
+          "start": 274,
+          "end": 287,
+          "text": "    const queued = enqueueSystemEvent(\n      value.text,\n      isUnscopedSessionKeySentinel(sessionKey)\n        ? withSystemEventOwner(eventOptions, agentId)\n        : eventOptions,\n    );\n    if (value.mode === \"now\") {\n      requestHeartbeat({\n        source: \"hook\",\n        intent: \"immediate\",\n        reason: \"hook:wake\",\n        ...target.heartbeatTarget,\n      });\n    }",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/gateway/server/hooks.ts#L274-L287"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-1",
+      "framework": "claw",
+      "feature": "Automations / cron",
+      "path": "src/cron/service/timer-execution.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        3
+      ],
+      "explanation": "Payload selection chooses script execution or the heartbeat wake path. These excerpts do not show every payload branch.",
+      "excerpts": [
+        {
+          "start": 150,
+          "end": 154,
+          "text": "  options?.onPayloadExecutionStarted?.();\n  if (effectiveJob.payload.kind === \"script\") {\n    const result = await executeScriptCronJob(state, effectiveJob, abortSignal, options);\n    return triggerEval ? { ...result, triggerEval } : result;\n  }",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L150-L154"
+        },
+        {
+          "start": 161,
+          "end": 168,
+          "text": "  const heartbeatTask = isHeartbeatTaskCronJob(effectiveJob) ? effectiveJob : undefined;\n  if (effectiveJob.payload.kind === \"heartbeat\" || heartbeatTask) {\n    // Monitors and migrated tasks share the wake bus, keeping coalescing,\n    // quiet hours, cooldown, flood, and busy guards in the heartbeat runner.\n    const agentId = resolveCronJobEffectiveAgentId(\n      effectiveJob,\n      state.deps.resolveDefaultAgentId?.() ?? state.deps.defaultAgentId,\n    );",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L161-L168"
+        },
+        {
+          "start": 197,
+          "end": 202,
+          "text": "    try {\n      heartbeatResult = await (state.deps.requestHeartbeatAndWait?.(\n        heartbeatWake,\n        abortSignal ? { abortSignal } : {},\n      ) ?? { status: \"failed\", reason: \"heartbeat wake settlement unavailable\" });\n    } finally {",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L197-L202"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-2",
+      "framework": "claw",
+      "feature": "Inbound webhooks · /hooks/agent",
+      "path": "src/gateway/server/hooks.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        4
+      ],
+      "explanation": "An admitted hook invokes the isolated agent runner with its message and target session.",
+      "excerpts": [
+        {
+          "start": 521,
+          "end": 539,
+          "text": "            const { runCronIsolatedAgentTurn } = await loadIsolatedAgentModule();\n            // Lazy module loading is the last Gateway-owned async boundary before\n            // cron preparation, so recheck the deadline after it settles.\n            if (startupAbortController.signal.aborted) {\n              return;\n            }\n            const runHookIsolatedTurn = async () =>\n              await runCronIsolatedAgentTurn({\n                cfg,\n                deps,\n                job,\n                message: acceptedValue.message,\n                sessionKey,\n                // Isolated runs derive their lifecycle key from random jobId (or an\n                // already-stable cron: key), so accepted agentId closes reload drift.\n                agentId,\n                // Only HTTP hooks own the opt-in reserved lane. Trusted plugin\n                // triggers share cron capacity even when the HTTP surface is off.\n                lane: pluginId ? CommandLane.CronNested : CommandLane.HookDispatch,",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/gateway/server/hooks.ts#L521-L539"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-3",
+      "framework": "claw",
+      "feature": "Automations · on-exit",
+      "path": "src/gateway/server-cron.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        3
+      ],
+      "explanation": "Command completion enters shared admission and forces this job occurrence.",
+      "excerpts": [
+        {
+          "start": 1196,
+          "end": 1204,
+          "text": "    fireOnExit: async (job, exit) => {\n      await runWithGatewayIndependentRootWorkAdmission(\n        async () =>\n          fireOnExitJob(job, exit, {\n            run: (jobId, payload) => cron.run(jobId, \"force\", payload ? { payload } : undefined),\n          }),\n        \"cron:exit-hook\",\n      );\n    },",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/gateway/server-cron.ts#L1196-L1204"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-4",
+      "framework": "claw",
+      "feature": "Automations · stream",
+      "path": "src/gateway/server-cron.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        3
+      ],
+      "explanation": "The event batch and source identity are passed to cron.run; this is event-triggered execution.",
+      "excerpts": [
+        {
+          "start": 1245,
+          "end": 1261,
+          "text": "    fireBatch: (job, batch, streamScheduleKey, streamSourceIdentity) =>\n      runWithGatewayIndependentRootWorkAdmission(\n        async () =>\n          fireStreamJob(job, {\n            run: async (jobId, onDisposition) => {\n              const result = await cron.run(jobId, \"force\", {\n                evaluateTrigger: true,\n                streamBatch: batch,\n                streamScheduleKey,\n                streamSourceIdentity,\n                onTriggerDisposition: onDisposition,\n              });\n              return { ...result, enabled: cron.getJob(jobId)?.enabled };\n            },\n          }),\n        \"cron:stream-batch\",\n      ),",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/gateway/server-cron.ts#L1245-L1261"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-5",
+      "framework": "claw",
+      "feature": "Automations · condition watchers",
+      "path": "src/cron/service/timer-execution.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        2,
+        3
+      ],
+      "explanation": "Evaluate the condition script; fire=false returns before the normal payload starts.",
+      "excerpts": [
+        {
+          "start": 108,
+          "end": 115,
+          "text": "    const evaluation = await evaluator({\n      job,\n      script: job.trigger.script,\n      state: job.state.triggerState,\n      streamBatch: options?.streamBatch,\n      abortSignal,\n      executionIdentity: options?.executionIdentity,\n    });",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L108-L115"
+        },
+        {
+          "start": 135,
+          "end": 145,
+          "text": "    }\n    const stateChanged = Object.hasOwn(evaluation, \"state\");\n    triggerEval = {\n      fired: evaluation.fire,\n      stateChanged,\n      ...(stateChanged ? { state: evaluation.state } : {}),\n    };\n    if (!evaluation.fire) {\n      return { status: \"ok\", triggerEval };\n    }\n    if (evaluation.message !== undefined) {",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L135-L145"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-6",
+      "framework": "claw",
+      "feature": "next_check · adaptive pacing",
+      "path": "src/cron/service/timer-outcomes.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "Only enabled, successful paced runs with a proposal calculate and assign the next due time.",
+      "excerpts": [
+        {
+          "start": 481,
+          "end": 493,
+          "text": "    } else if (\n      isJobEnabled(job) &&\n      result.status === \"ok\" &&\n      job.pacing !== undefined &&\n      result.nextCheck !== undefined\n    ) {\n      // Pacing bounds are the explicit per-job cadence contract. Do not apply\n      // normal schedule floors here; that would change the promised clamp.\n      const pacedNextRunAtMs = resolvePacedNextRunAtMs({\n        nowMs: result.endedAt,\n        delayMs: result.nextCheck.delayMs,\n        pacing: job.pacing,\n      });",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-outcomes.ts#L481-L493"
+        },
+        {
+          "start": 496,
+          "end": 505,
+          "text": "      const nextRunAtMs = assignNextRunAtMs({\n        state,\n        job,\n        candidate: job.trigger\n          ? Math.max(\n              pacedNextRunAtMs ?? Number.NaN,\n              result.endedAt + Math.max(MIN_REFIRE_GAP_MS, resolveCronTriggerMinIntervalMs()),\n            )\n          : pacedNextRunAtMs,\n        deferredNotifications: opts?.deferredNotifications,",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-outcomes.ts#L496-L505"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-7",
+      "framework": "claw",
+      "feature": "Skill Workshop · experience review",
+      "path": "src/skills/workshop/experience-review-scheduler.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        2
+      ],
+      "explanation": "Eligibility checks model/workshop availability and rejects excluded triggers or sessions.",
+      "excerpts": [
+        {
+          "start": 85,
+          "end": 106,
+          "text": "function isEligibleContext(ctx: ExperienceReviewAgentContext): boolean {\n  // Only harnesses that report both the resolved model and actual host-side\n  // Workshop availability may schedule. Other runtimes fail closed here.\n  if (\n    ctx.compacted === true ||\n    ctx.skillWorkshopAvailable !== true ||\n    !ctx.modelProviderId?.trim() ||\n    !ctx.modelId?.trim()\n  ) {\n    return false;\n  }\n  const trigger = ctx.foregroundPromptContext.trigger?.trim().toLowerCase();\n  if (trigger && EXPERIENCE_REVIEW_BLOCKED_TRIGGERS.has(trigger)) {\n    return false;\n  }\n  const sessionKey = ctx.sessionKey?.trim().toLowerCase();\n  if (!sessionKey || sessionKey.includes(\"active-memory\")) {\n    return false;\n  }\n  return !sessionKey\n    .split(\":\")\n    .some((segment) => EXPERIENCE_REVIEW_BLOCKED_SESSION_SEGMENTS.has(segment));",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review-scheduler.ts#L85-L106"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-8",
+      "framework": "claw",
+      "feature": "Dreaming · memory maintenance",
+      "path": "extensions/memory-core/src/dreaming.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        1
+      ],
+      "explanation": "Startup reconciles managed Dreaming cron configuration; this establishes the scheduling connection, not the full memory algorithm.",
+      "excerpts": [
+        {
+          "start": 917,
+          "end": 930,
+          "text": "      resolveServiceCron = () => resolveCronServiceFromGatewayContext(ctx);\n      try {\n        await trackDreamingTask(\n          reconcileManagedDreamingCron({\n            reason: \"startup\",\n            startupConfig: ctx.config,\n          }),\n        );\n      } catch (err) {\n        api.logger.error(\n          `memory-core: dreaming startup reconciliation failed: ${formatErrorMessage(err)}`,\n        );\n      } finally {\n        startRuntimeCronReconcileTimer();",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts#L917-L930"
+        }
+      ]
+    },
+    {
+      "id": "code-claw-9",
+      "framework": "claw",
+      "feature": "Goals · evidence boundary",
+      "path": "src/config/sessions/goals.ts",
+      "commit": "91ea838947d30a65f1299b05fa42071917f2a293",
+      "steps": [
+        2
+      ],
+      "explanation": "The session entry stores goal state. This excerpt does not establish an automatic next-turn producer.",
+      "excerpts": [
+        {
+          "start": 154,
+          "end": 165,
+          "text": "  const result = await patchSessionEntryCore(\n    { sessionKey: options.sessionKey, storePath: options.storePath },\n    (entry) => {\n      created = buildCreatedSessionGoal(\n        entry,\n        { objective, tokenBudget: options.tokenBudget },\n        now,\n      );\n      return { goal: created };\n    },\n    { fallbackEntry: options.fallbackEntry },\n  );",
+          "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/config/sessions/goals.ts#L154-L165"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-0",
+      "framework": "hermes",
+      "feature": "Cron / cronjob",
+      "path": "cron/scheduler.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "no_agent exits through a script-only branch; the agent path constructs an agent and invokes its runner.",
+      "excerpts": [
+        {
+          "start": 2033,
+          "end": 2035,
+          "text": "    # no_agent short-circuits BEFORE importing run_agent / opening SessionDB.\n    if job.get(\"no_agent\"):\n        return _run_no_agent_job(job, job_id, job_name, cancel_event), None",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/scheduler.py#L2033-L2035"
+        },
+        {
+          "start": 2353,
+          "end": 2362,
+          "text": "        _session_db = _open_cron_session_db(job)\n        agent = _construct_cron_agent(\n            AIAgent, job, _cfg, setup, workdir=scope.workdir, session_id=_cron_session_id,\n            session_db=_session_db)\n        _audit = _FireAudit(job, job_id, model)\n\n        result = _run_agent_with_watchdog(\n            agent, prompt, job, job_id, job_name, scope.task_id, cancel_event,\n            worker_state=_worker_state)\n        final_response = _final_response_from_result(result, job_id, job_name, AIAgent)",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/scheduler.py#L2353-L2362"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-1",
+      "framework": "hermes",
+      "feature": "Webhooks",
+      "path": "gateway/platforms/webhook.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "Duplicate records return early; deliver_only bypasses the agent; agent-mode creates and handles a MessageEvent.",
+      "excerpts": [
+        {
+          "start": 552,
+          "end": 561,
+          "text": "        delivery_id = headers.get(\"X-GitHub-Delivery\", headers.get(\"svix-id\", headers.get(\n            \"webhook-id\", headers.get(\"X-Request-ID\", str(int(time.time() * 1000))))))\n        now = time.time()  # idempotency: skip duplicate deliveries (webhook retries)\n        if not self._record_delivery_id(delivery_id, now):\n            logger.info(\"[webhook] Skipping duplicate delivery %s\", delivery_id)\n            return web.json_response({\"status\": \"duplicate\", \"delivery_id\": delivery_id}, status=200)\n        if route_config.get(\"deliver_only\"):\n            return await self._handle_deliver_only(prompt, payload, route_config, route_name, event_type, delivery_id)\n        return self._dispatch_agent_run(request, route_config, route_name, profile, payload, prompt, event_type,\n                                        delivery_id, now)",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/platforms/webhook.py#L552-L561"
+        },
+        {
+          "start": 578,
+          "end": 587,
+          "text": "        event = MessageEvent(text=prompt, message_type=MessageType.TEXT, source=source, raw_message=payload,\n                             message_id=delivery_id)\n        logger.info(\"[webhook] %s event=%s route=%s prompt_len=%d delivery=%s\", request.method, event_type, route_name,\n                    len(prompt), delivery_id)\n        # The per-delivery session is closed by ``on_processing_complete`` once the run finishes\n        # (``handle_message`` is fire-and-forget, so nothing can be closed here).\n        task = asyncio.create_task(self.handle_message(event))\n        self._background_tasks.add(task)\n        task.add_done_callback(self._background_tasks.discard)\n        return web.json_response({\"status\": \"accepted\", \"route\": route_name, \"event\": event_type,",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/platforms/webhook.py#L578-L587"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-2",
+      "framework": "hermes",
+      "feature": "Session heartbeat · /heartbeat",
+      "path": "gateway/run_goals.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "Busy or queued user work defers the heartbeat; a due prompt becomes a message handled by the adapter.",
+      "excerpts": [
+        {
+          "start": 138,
+          "end": 153,
+          "text": "        if (\n            self._is_session_running(quick_key)\n            or quick_key in adapter._active_sessions\n            or self._queue_depth(quick_key, adapter=adapter) > 0\n        ):\n            return  # keep missed intervals due until user work has drained\n        from hermes_cli.heartbeat import HeartbeatManager\n\n        mgr = HeartbeatManager(session_id=session_id)\n        if not mgr.has_heartbeat():\n            watch.pop(quick_key, None)\n            return\n        prompt = mgr.due_prompt()\n        if not prompt:\n            return\n        event = self._synthetic_prompt_event(source, prompt)",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L138-L153"
+        },
+        {
+          "start": 159,
+          "end": 160,
+          "text": "        try:\n            await adapter.handle_message(event)",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L159-L160"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-3",
+      "framework": "hermes",
+      "feature": "Loop · /loop, /proactive",
+      "path": "hermes_cli/loops.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        1,
+        2
+      ],
+      "explanation": "A tick must be due and not awaiting a response; claiming it marks awaiting_response to prevent another simultaneous tick.",
+      "excerpts": [
+        {
+          "start": 486,
+          "end": 509,
+          "text": "    def is_due(self, now: Optional[float] = None) -> bool:\n        \"\"\"Cheap check: active, not mid-wakeup, and the clock has passed.\"\"\"\n        s = self._state\n        return (\n            s is not None and s.status == \"active\" and not s.awaiting_response\n            and (now if now is not None else time.time()) >= s.next_due_at\n        )\n\n    def fire_tick(self) -> Optional[str]:\n        \"\"\"Claim a due tick; returns the message to inject, or None.\n\n        The message is the wakeup-framed prompt, or the raw command when the loop's prompt is\n        itself a slash command (``/loop 10m /recap``). Marks ``awaiting_response`` so the tick\n        can't double-fire; drivers MUST follow up with ``complete_tick`` (or ``abandon_tick``).\n        \"\"\"\n        s = self._state\n        if s is None or not self.is_due():\n            return None\n        s.ticks_fired += 1\n        s.last_fired_at = time.time()\n        s.awaiting_response = True\n        # Provisional schedule from NOW: complete_tick reschedules from turn end, but if the\n        # process dies mid-turn this keeps the persisted loop from being 'due' in a tight loop.\n        s.next_due_at = s.last_fired_at + (s.current_delay or s.interval_seconds or self_paced_floor_seconds())",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L486-L509"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-4",
+      "framework": "hermes",
+      "feature": "Persistent Goals · /goal",
+      "path": "gateway/run_goals.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        2,
+        4
+      ],
+      "explanation": "Evaluate the completed turn; only should_continue with a prompt enters the session FIFO.",
+      "excerpts": [
+        {
+          "start": 287,
+          "end": 292,
+          "text": "        decision = await self._run_in_executor_with_context(\n            lambda: mgr.evaluate_after_turn(\n                final_response or \"\", user_initiated=True, background_processes=_bg_procs,\n                active_delegations=_active_deleg,\n            ),\n        )",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L287-L292"
+        },
+        {
+          "start": 297,
+          "end": 305,
+          "text": "        prompt = decision.get(\"continuation_prompt\") or \"\"\n        if not decision.get(\"should_continue\") or not prompt or source is None:\n            return\n        # Enqueue via the adapter's FIFO so a user message already in flight preempts naturally.\n        try:\n            adapter = self._adapter_for_source(source)\n            _quick_key = self._session_key_for_source(source)\n            if adapter and _quick_key:\n                self._enqueue_fifo(_quick_key, self._synthetic_prompt_event(source, prompt), adapter)",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L297-L305"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-5",
+      "framework": "hermes",
+      "feature": "Kanban dispatcher",
+      "path": "hermes_cli/kanban_db_dispatch.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "Ready tasks are dispatched within the remaining spawn budget; missing assignees can be skipped.",
+      "excerpts": [
+        {
+          "start": 1815,
+          "end": 1832,
+          "text": "    default_assignee = _resolve_default_assignee(default_assignee)\n    spawned = 0\n    for row in ready_rows:\n        if ready_budget is not None and spawned >= ready_budget:\n            break\n        row_assignee = row[\"assignee\"]\n        if not row_assignee:\n            # Honour kanban.default_assignee so an unassigned task doesn't\n            # park in 'ready' forever.\n            if not default_assignee or not _apply_default_assignee(\n                conn, row[\"id\"], default_assignee, dry_run=dry_run,\n            ):\n                result.skipped_unassigned.append(row[\"id\"])\n                continue\n            row_assignee = default_assignee\n            result.auto_assigned_default.append(row[\"id\"])\n        if _dispatch_lane_task(conn, row, row_assignee, result, lane=\"ready\", **lane_kwargs):\n            spawned += 1",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/kanban_db_dispatch.py#L1815-L1832"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-6",
+      "framework": "hermes",
+      "feature": "Background review",
+      "path": "agent/turn_finalizer.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        1,
+        2
+      ],
+      "explanation": "A non-interrupted final response and eligible review flags gate the background review spawn.",
+      "excerpts": [
+        {
+          "start": 611,
+          "end": 621,
+          "text": "    if (\n        final_response\n        and not interrupted\n        and not getattr(agent, \"skip_background_review\", False)\n        and (_should_review_memory or _should_review_skills)\n    ):\n        with suppress(Exception):\n            agent._spawn_background_review(\n                messages_snapshot=list(messages), review_memory=_should_review_memory,\n                review_skills=_should_review_skills,\n            )",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/turn_finalizer.py#L611-L621"
+        }
+      ]
+    },
+    {
+      "id": "code-hermes-7",
+      "framework": "hermes",
+      "feature": "Cron provider · Chronos",
+      "path": "cron/scheduler_provider.py",
+      "commit": "fef0e16fe19b79ded929209f87c7434270b03825",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "A missing claim returns early; an accepted snapshot uses the shared run_one_job implementation.",
+      "excerpts": [
+        {
+          "start": 168,
+          "end": 183,
+          "text": "        if not isinstance(claimed_job, dict):\n            finish_execution(execution[\"id\"], success=False, error=\"Fire claim was not acquired\")\n            return None\n        claimed_job[\"execution_id\"] = execution[\"id\"]\n        return claimed_job\n\n    def fire_claimed(\n        self, claimed_job: dict, *, adapters: Any = None, loop: Any = None,\n        cancel_event: Any = None,\n    ) -> bool:\n        \"\"\"Run an exact ``claim_fire`` snapshot; ``cancel_event`` lets the transport stop it\n        cooperatively (e.g. dashboard lifespan drain).\"\"\"\n        from cron.scheduler import run_one_job\n\n        run_one_job(claimed_job, adapters=adapters, loop=loop, cancel_event=cancel_event)\n        return True",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/scheduler_provider.py#L168-L183"
+        }
+      ]
+    },
+    {
+      "id": "code-ob-0",
+      "framework": "ob",
+      "feature": "Routines",
+      "path": "server/src/routines/sweep.ts",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "steps": [
+        2
+      ],
+      "explanation": "Offer a durable occurrence key before advancing the schedule. Queue ownership is implemented elsewhere.",
+      "excerpts": [
+        {
+          "start": 176,
+          "end": 190,
+          "text": "        await options.queue.offer({\n          kind: ROUTINE_FIRE_KIND,\n          key: `${routine.id}:${minuteKey(routine.nextRunAt)}`,\n          payload: {\n            routineId: routine.id,\n            scheduledFor: routine.nextRunAt.toISOString(),\n          },\n        });\n        offered.push(routine.id);\n        // False means another sweep advanced it first, which is fine either way: the firing was\n        // offered under the same key by both, so it still happens once.\n        await options.routineStore.advanceNextRun(\n          routine.id,\n          routine.nextRunAt,\n        );",
+          "url": "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts#L176-L190"
+        }
+      ]
+    },
+    {
+      "id": "code-ob-1",
+      "framework": "ob",
+      "feature": "Bot handoff · message_bot",
+      "path": "server/src/agents/handoff-tool.ts",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "steps": [
+        1,
+        2
+      ],
+      "explanation": "Validate the typed request and pass its task envelope to the handoff desk.",
+      "excerpts": [
+        {
+          "start": 95,
+          "end": 112,
+          "text": "    execute: async (args: unknown) => {\n      const parsed = parameters.safeParse(args);\n      if (!parsed.success) {\n        return \"That handoff was not sent: name the Bot and say what you are asking it to do.\";\n      }\n      const outcome = await desk.send({\n        from,\n        target: parsed.data.bot,\n        envelope: {\n          task: parsed.data.task,\n          ...(parsed.data.constraints\n            ? { constraints: parsed.data.constraints }\n            : {}),\n          ...(parsed.data.expecting\n            ? { expecting: parsed.data.expecting }\n            : {}),\n        },\n      });",
+          "url": "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff-tool.ts#L95-L112"
+        }
+      ]
+    },
+    {
+      "id": "code-ob-2",
+      "framework": "ob",
+      "feature": "Handoff result relay",
+      "path": "server/src/agents/handoff-runner.ts",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "steps": [
+        2,
+        3
+      ],
+      "explanation": "Only a forward hop with an answer queues a relay, preventing a relay from relaying itself.",
+      "excerpts": [
+        {
+          "start": 398,
+          "end": 407,
+          "text": "            if (!work.answerIn && answer) {\n              await relay(work, item.key, answer).catch((failure) => {\n                // The turn happened and is on record; a relay that cannot be queued must not undo\n                // that by failing the hop into a retry and a second turn.\n                console.warn(\n                  \"Could not queue the relay for a delivered hop.\",\n                  failure,\n                );\n              });\n            }",
+          "url": "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff-runner.ts#L398-L407"
+        }
+      ]
+    },
+    {
+      "id": "code-ob-3",
+      "framework": "ob",
+      "feature": "Lease heartbeat · not an agent wake",
+      "path": "server/src/agents/handoff-runner.ts",
+      "commit": "7b94a0b802732e6491634160cf9ed3fcfb813424",
+      "steps": [
+        2,
+        3
+      ],
+      "explanation": "The interval renews queue ownership; losing the lease removes the key from the owned set.",
+      "excerpts": [
+        {
+          "start": 262,
+          "end": 274,
+          "text": "      const ours = new Set(claimed.map((item) => item.key));\n      const heartbeat = setInterval(() => {\n        for (const key of ours) {\n          void queue\n            .renew({ kind: HANDOFF_KIND, key, owner, leaseMs })\n            .then((kept) => {\n              // False means it went to somebody else. Dropped rather than renewed again, so the\n              // loop below knows not to spend a model call on work it no longer holds.\n              if (!kept) ours.delete(key);\n            })\n            .catch(() => {});\n        }\n      }, renewEveryMs);",
+          "url": "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff-runner.ts#L262-L274"
+        }
+      ]
+    },
+    {
+      "id": "code-gr-0",
+      "framework": "gr",
+      "feature": "Automation fire consumer",
+      "path": "source/host/extensions/automations/sand-automation-fire-consumer.ts",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "steps": [
+        2,
+        3
+      ],
+      "explanation": "Poll the backend for execution records, then deliver previously unseen events. This is the consumer side only.",
+      "excerpts": [
+        {
+          "start": 83,
+          "end": 90,
+          "text": "      const ackRunUuids = [...this.states].filter(([, state]) => state.phase === \"reported\").map(([id]) => id);\n      const result = await this.callBackend(\"/sand/automation-events/poll\", { ackRunUuids }) as { events?: FireWire[]; nextPollAfterMs?: number };\n      const events = result.events ?? [];\n      this.notifyGate.recordPoll();\n      if (observedServerSchedulable !== undefined) this.drainedWhileUnschedulable = !observedServerSchedulable;\n      const returned = new Set(events.map(({ id }) => id));\n      for (const [id, state] of this.states) if (state.phase === \"reported\" && !returned.has(id)) this.states.delete(id);\n      for (const event of events) if (!this.states.has(event.id)) { this.states.set(event.id, { phase: \"running\" }); void this.deliver(event); }",
+          "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/automations/sand-automation-fire-consumer.ts#L83-L90"
+        }
+      ]
+    },
+    {
+      "id": "code-gr-1",
+      "framework": "gr",
+      "feature": "Background event wakes",
+      "path": "source/host/extensions/transcript/background-wakes.ts",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "steps": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Resolve the background conversation, append the event, and queue a wake if the agent is not already running.",
+      "excerpts": [
+        {
+          "start": 359,
+          "end": 370,
+          "text": "  async recordTimelineEvent(agentId: string, event: unknown): Promise<void> {\n    let session: any;\n    try {\n      session = await this.tm.sessions.resolveBackgroundSession(agentId);\n    } catch {\n      return;\n    }\n    if (this.tm.groupChat.isGroupSession(session)) return;\n    this.appendTimelineEventEntry(session, event);\n    if (!this.tm.runLifecycle.runningAgentIds().has(agentId))\n      this.queueEventWake(agentId, event);\n  }",
+          "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/background-wakes.ts#L359-L370"
+        }
+      ]
+    },
+    {
+      "id": "code-gr-2",
+      "framework": "gr",
+      "feature": "Completion revivals",
+      "path": "source/host/extensions/transcript/completion-revivals.ts",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "steps": [
+        2,
+        3
+      ],
+      "explanation": "Deduplicate by subagent identity, store the completion and request conversation revival.",
+      "excerpts": [
+        {
+          "start": 111,
+          "end": 120,
+          "text": "    const queue =\n      this.pendingSubagentCompletions.get(completion.parentAgentId) ?? [];\n    if (\n      queue.some((item) => item.subagentAgentId === completion.subagentAgentId)\n    )\n      return;\n    queue.push(completion);\n    this.pendingSubagentCompletions.set(completion.parentAgentId, queue);\n    void this.reviveForSubagentCompletions(completion.parentAgentId);\n  }",
+          "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L111-L120"
+        }
+      ]
+    },
+    {
+      "id": "code-gr-3",
+      "framework": "gr",
+      "feature": "Goal continuation handler · partial evidence",
+      "path": "source/packages/agent/actions/goal-continuation-action-handler.ts",
+      "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+      "steps": [
+        2,
+        3
+      ],
+      "explanation": "Invalid goal identity returns early; repeated idle continuations pause the goal. The producer of the action is outside this excerpt.",
+      "excerpts": [
+        {
+          "start": 84,
+          "end": 105,
+          "text": "  async adaptAction(ctx: Any, stateHandler: Any, mcpTools: Any, onStateUpdate: Any): Promise<Any> {\n    const conversationId = getConversationId(ctx);\n    const goalState = stateHandler.goalState;\n    if (conversationId === undefined || !isGoalStateShapeValid(goalState, {\n      conversationId,\n      agentSessionId: this.agentSessionId,\n    })) {\n      return undefined;\n    }\n    if (goalState.idleContinuationsWithoutToolCalls >= MAX_IDLE_CONTINUATIONS_WITHOUT_TOOL_CALLS) {\n      const stalled = goalState.clone();\n      stalled.status = GoalStatus.PAUSED;\n      Object.assign(stalled, goalClockOnDeactivation(stalled, Date.now()));\n      stateHandler.setGoalState(stalled);\n      recordGoalTerminalTransition(ctx, {\n        status: \"paused\",\n        reason: \"anti_spin\",\n        continuationCount: goalState.continuationCount,\n      });\n      await onStateUpdate(ctx, await stateHandler.computeNewStructure(ctx));\n      return undefined;\n    }",
+          "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent/actions/goal-continuation-action-handler.ts#L84-L105"
+        }
+      ]
+    },
+    {
+      "id": "code-v-0",
+      "framework": "v",
+      "feature": "Automatic curriculum",
+      "path": "voyager/voyager.py",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "steps": [
+        3,
+        4
+      ],
+      "explanation": "The learning loop checks its iteration limit, asks the curriculum for another task, then starts a rollout.",
+      "excerpts": [
+        {
+          "start": 315,
+          "end": 323,
+          "text": "        while True:\n            if self.recorder.iteration > self.max_iterations:\n                print(\"Iteration limit reached\")\n                break\n            task, context = self.curriculum_agent.propose_next_task(\n                events=self.last_events,\n                chest_observation=self.action_agent.render_chest_observation(),\n                max_retries=5,\n            )",
+          "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L315-L323"
+        },
+        {
+          "start": 327,
+          "end": 332,
+          "text": "            try:\n                messages, reward, done, info = self.rollout(\n                    task=task,\n                    context=context,\n                    reset_env=reset_env,\n                )",
+          "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L327-L332"
+        }
+      ]
+    },
+    {
+      "id": "code-v-1",
+      "framework": "v",
+      "feature": "Iterative prompting + self-verification",
+      "path": "voyager/voyager.py",
+      "commit": "55e45a880755d0c8c66ca7fb5fe7962ac8974f89",
+      "steps": [
+        1,
+        2
+      ],
+      "explanation": "Execute the generated program in the environment, then ask the critic to evaluate task success.",
+      "excerpts": [
+        {
+          "start": 214,
+          "end": 227,
+          "text": "            code = parsed_result[\"program_code\"] + \"\\n\" + parsed_result[\"exec_code\"]\n            events = self.env.step(\n                code,\n                programs=self.skill_manager.programs,\n            )\n            self.recorder.record(events, self.task)\n            self.action_agent.update_chest_memory(events[-1][1][\"nearbyChests\"])\n            success, critique = self.critic_agent.check_task_success(\n                events=events,\n                task=self.task,\n                context=self.context,\n                chest_observation=self.action_agent.render_chest_observation(),\n                max_retries=5,\n            )",
+          "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L214-L227"
+        }
+      ]
+    }
+  ]
+}

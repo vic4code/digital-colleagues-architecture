@@ -1,0 +1,234 @@
+{
+  "reviewed": "2026-09-09",
+  "pins": [
+    {
+      "repo": "openai/codex",
+      "sha": "634ebc1865c6ac840ed3ba118f040d527bf4b55d"
+    },
+    {
+      "repo": "anthropics/claude-plugins-official",
+      "sha": "517b2fcd1b60fa2181ac52dcf8492361ba341180"
+    }
+  ],
+  "features": {
+    "cx": [
+      {
+        "name": "Scheduled tasks / Automations",
+        "purpose": "Revisit assigned work on a saved schedule",
+        "cn": "按照已設定的時間回來做事",
+        "story": "You schedule a weekday 09:00 review of a local project. When the app starts the task, your colleague reads project files and prepares a short progress brief. For local-project tasks, the app must be running and the computer awake; the schedule does not turn on your laptop.",
+        "storycn": "你在 App 排好每個上班日 09:00 查看本機專案。任務啟動後，同事用檔案工具讀專案資料，整理進度摘要；這類本機工作需要 App 開著、電腦醒著，排程不會替你開機。",
+        "trigger": "Saved schedule",
+        "steps": [
+          "Saved time arrives",
+          "App starts or revisits chat",
+          "Agent reads connected sources",
+          "Findings appear in Scheduled"
+        ],
+        "detail": "Standalone tasks start fresh chats; in-chat schedules reuse context. Local projects require the app running and the machine awake.",
+        "bound": "Product documentation only for the scheduler. CLI has no Scheduled management interface. The former Codex documentation URL now redirects to shared ChatGPT documentation.",
+        "doc": "https://learn.chatgpt.com/docs/automations?surface=app",
+        "code": null,
+        "example_setup": "App schedule + local project files / App 排程＋本機專案檔案"
+      },
+      {
+        "name": "/goal",
+        "purpose": "Continue an assigned objective after a turn ends",
+        "cn": "一輪做完但目標未完成，就接著做",
+        "story": "You give your colleague the goal of making the tests pass. They edit files and run tests; when the turn ends and the goal remains active, the runtime can start another turn within its controls. They continue the assigned repair rather than waiting for another “continue” message.",
+        "storycn": "你給同事的目標是「讓測試通過」。他用編輯工具改檔、用命令列跑測試；回合結束但目標仍有效時，runtime 可在控制條件內再開下一輪，繼續這份修復工作。",
+        "trigger": "Thread becomes idle",
+        "steps": [
+          "Thread becomes idle",
+          "Check enabled / deferred / active goal",
+          "Build continuation input",
+          "Start next turn if still idle"
+        ],
+        "detail": "on_thread_idle calls continue_if_idle. Runtime checks live thread, deferral and active status before start_turn_if_idle; accounting and stop handling are separate code paths.",
+        "bound": "Goal continuation is code-traced. It continues an existing objective; it does not independently select an external monitoring mission.",
+        "doc": "https://learn.chatgpt.com/docs/long-running-work",
+        "code": {
+          "key": "codex",
+          "path": "codex-rs/ext/goal/src/runtime.rs",
+          "start": 453,
+          "end": 459,
+          "url": "https://github.com/openai/codex/blob/634ebc1865c6ac840ed3ba118f040d527bf4b55d/codex-rs/ext/goal/src/runtime.rs#L453-L459"
+        },
+        "example_setup": "Goal controls + file editor + test command / 目標控制＋檔案編輯＋測試命令"
+      },
+      {
+        "name": "codex exec / App Server",
+        "purpose": "Let your event handler start agent work",
+        "cn": "由你接好的事件處理程式啟動工作",
+        "story": "Your build system reports a failed deployment. A listener you built receives the event and starts Codex through exec or App Server. The colleague then uses shell and file tools to inspect the logs and prepare a fix; Codex itself is not the build-event listener.",
+        "storycn": "建置系統回報部署失敗，你自己接的監聽程式收到事件，再透過 exec 或 App Server 啟動 Codex。同事才用命令列與檔案工具讀紀錄、準備修正；建置事件的監聽要由整合程式負責。",
+        "trigger": "Caller supplies work",
+        "steps": [
+          "Your event listener receives alert",
+          "Caller sends prompt / turn/start",
+          "Codex runs tools and reasoning",
+          "Caller handles result"
+        ],
+        "detail": "The noninteractive entry constructs TurnStartParams and submits ClientRequest::TurnStart. Event subscription, deduplication and downstream event publication belong to the caller.",
+        "bound": "Native execution interface plus custom event wiring. Do not label it a built-in general webhook watcher.",
+        "doc": "https://learn.chatgpt.com/docs/non-interactive-mode",
+        "code": {
+          "key": "codex",
+          "path": "codex-rs/exec/src/lib.rs",
+          "start": 1137,
+          "end": 1143,
+          "url": "https://github.com/openai/codex/blob/634ebc1865c6ac840ed3ba118f040d527bf4b55d/codex-rs/exec/src/lib.rs#L1137-L1143"
+        },
+        "example_setup": "Custom build listener + exec/App Server + shell / 自訂建置監聽＋exec/App Server＋命令列工具"
+      },
+      {
+        "name": "notify · legacy AfterAgent hook",
+        "purpose": "Run a configured command when a turn finishes",
+        "cn": "工作回合結束後，呼叫已設定的通知程式",
+        "story": "Your colleague finishes checking a build. The turn-completion notification calls your configured script, which displays a desktop notice saying the result is ready. The script delivers the notice; it does not start another investigation.",
+        "storycn": "同事完成建置檢查後，回合結束通知會呼叫你設定的腳本。腳本跳出桌面提醒：「結果好了，可以查看。」這是在送通知，不是再啟動同事查一次。",
+        "trigger": "AfterAgent lifecycle event",
+        "steps": [
+          "Agent turn finishes",
+          "Build completion JSON",
+          "Spawn configured notify command",
+          "Your command notifies / emits event"
+        ],
+        "detail": "Legacy notify serializes agent-turn-complete data and starts the configured command. It does not wait for confirmed downstream delivery.",
+        "bound": "Completion notification is not environment observation or a model judgment of importance. The source marks this interface legacy.",
+        "doc": "https://learn.chatgpt.com/docs/app-server",
+        "code": {
+          "key": "codex",
+          "path": "codex-rs/hooks/src/legacy_notify.rs",
+          "start": 66,
+          "end": 69,
+          "url": "https://github.com/openai/codex/blob/634ebc1865c6ac840ed3ba118f040d527bf4b55d/codex-rs/hooks/src/legacy_notify.rs#L66-L69"
+        },
+        "example_setup": "Configured notify script + desktop notification / 已設定的 notify 腳本＋桌面通知"
+      }
+    ],
+    "cc": [
+      {
+        "name": "/loop / CronCreate",
+        "purpose": "Check again during an open session",
+        "cn": "在開著的工作對話中，過一陣子再查看",
+        "story": "While a deployment runs, you ask /loop to check every five minutes. Each check uses the deployment-status command and reports when the deployment is ready. This is a session schedule: the colleague is not independently watching after the session is gone.",
+        "storycn": "部署還在跑，你用 /loop 交代每五分鐘看一次。每次啟動，同事就用部署狀態命令查進度，完成後回報；這是對話內排程，對話結束後不會自己在外面繼續盯。",
+        "trigger": "Session schedule becomes due",
+        "steps": [
+          "Session schedule becomes due",
+          "Queue prompt between turns",
+          "Agent checks current status",
+          "Stop or schedule another check"
+        ],
+        "detail": "Fixed schedules enqueue prompts between turns. Dynamic loops can choose pacing; recurring session tasks expire after seven days. Unexpired schedules can be restored on resume.",
+        "bound": "Scheduler internals are documented, not source-audited here. Bare /loop has a bounded maintenance prompt, not unrestricted goal invention.",
+        "doc": "https://code.claude.com/docs/en/scheduled-tasks",
+        "code": null,
+        "example_setup": "/loop + deployment-status command / /loop＋部署狀態命令"
+      },
+      {
+        "name": "Monitor",
+        "purpose": "Receive changes from a background script",
+        "cn": "讓背景程式把新狀況帶回來",
+        "story": "Your colleague starts a long-running log watcher through Monitor. When the watcher outputs a new error, that output returns to the session and prompts investigation. The colleague can then use shell tools to inspect the surrounding logs.",
+        "storycn": "同事透過 Monitor 啟動一支持續看紀錄的程式。程式輸出新錯誤時，消息回到對話，才促使他查原因；接著他可用命令列工具讀錯誤前後的紀錄。",
+        "trigger": "Background script produces output",
+        "steps": [
+          "Agent starts monitoring script",
+          "Script observes external state",
+          "Output lines reach the session",
+          "Agent handles the new information"
+        ],
+        "detail": "Where available, Monitor can back a dynamic loop by streaming script output. The monitoring script defines what is observed.",
+        "bound": "Availability is session-dependent. Background monitor processes are not restored on resume. Internal implementation not inspected.",
+        "doc": "https://code.claude.com/docs/en/scheduled-tasks",
+        "code": null,
+        "example_setup": "Monitor + log-watching process + shell / Monitor＋紀錄監看程式＋命令列工具"
+      },
+      {
+        "name": "Channels",
+        "purpose": "Push outside events into a running session",
+        "cn": "讓外部新消息進入正在執行的對話",
+        "story": "A teammate sends a message to the connected Telegram bot: “The latest build failed.” The channel delivers it into your colleague’s session. With repository and shell tools available, the colleague checks the problem and can reply through the Telegram channel.",
+        "storycn": "同事在已連接的 Telegram bot 留言：「最新建置失敗了。」Channel 把訊息送進數位同事的對話；若已提供程式庫與命令列工具，他就查問題，並可透過 Telegram 回覆。",
+        "trigger": "Channel event",
+        "steps": [
+          "Plugin receives allowed message",
+          "Emit notifications/claude/channel",
+          "Running session handles content",
+          "Agent calls channel reply tool"
+        ],
+        "detail": "Official Telegram plugin emits a channel notification with content and routing metadata. Its reply tool calls Telegram sendMessage.",
+        "bound": "Plugin sender and reply code are public; Claude Code host ingestion remains documentation evidence. A custom CI or Outlook watcher still needs its own event adapter.",
+        "doc": "https://code.claude.com/docs/en/channels",
+        "code": {
+          "key": "claude-plugins",
+          "path": "external_plugins/telegram/server.ts",
+          "start": 970,
+          "end": 978,
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/517b2fcd1b60fa2181ac52dcf8492361ba341180/external_plugins/telegram/server.ts#L970-L978"
+        },
+        "example_setup": "Telegram channel + repository/shell tools / Telegram 頻道＋程式庫與命令列工具"
+      },
+      {
+        "name": "Desktop scheduled tasks",
+        "purpose": "Start a local work session on schedule",
+        "cn": "到時間就開一個本機工作回合",
+        "story": "You schedule a morning review of your project folder in Desktop. At the scheduled time, your colleague reads the local files and prepares a brief of changes and open issues. The desktop app and computer must be available for this local work.",
+        "storycn": "你在 Desktop 排好每天早上整理專案資料夾。時間到了，同事就讀本機檔案，列出最新變更與未解問題；這份本機工作需要桌面 App 與電腦可用。",
+        "trigger": "Desktop schedule becomes due",
+        "steps": [
+          "Desktop detects due task",
+          "Start fresh local session",
+          "Agent reads files / connected tools",
+          "Desktop shows notification and result"
+        ],
+        "detail": "Local recurring tasks require an awake computer and open app. A running task can update its schedule through update_scheduled_task.",
+        "bound": "Official product contract; desktop scheduler source not inspected. It is independent of an open CLI conversation.",
+        "doc": "https://code.claude.com/docs/en/desktop-scheduled-tasks",
+        "code": null,
+        "example_setup": "Desktop scheduled task + local file tools / Desktop 排程工作＋本機檔案工具"
+      },
+      {
+        "name": "Routines",
+        "purpose": "Start cloud work on time or an incoming trigger",
+        "cn": "時間到了或收到指定事件，就在雲端開始做事",
+        "story": "You configure a cloud routine to review new pull requests. A PR is opened after you close your laptop; the configured trigger starts the cloud run, which reads the repository changes and records review findings. The work runs in the cloud environment you set up.",
+        "storycn": "你先設定「有新 PR 就審查」的雲端 routine。關了筆電之後有人開 PR，已接好的觸發就啟動雲端工作，讀取程式庫變更並留下審查結果；工作在事先設定的雲端環境執行。",
+        "trigger": "Schedule / API call / GitHub event",
+        "steps": [
+          "Matching routine trigger arrives",
+          "Cloud starts fresh session",
+          "Agent reads configured context",
+          "Write result / permitted connector action"
+        ],
+        "detail": "Routines accept schedules, API triggers and supported GitHub events. Each event starts an independent session with configured repositories and connectors.",
+        "bound": "Official product contract; cloud scheduler source unavailable in this audit. Review-preview limits and account configuration apply.",
+        "doc": "https://code.claude.com/docs/en/routines",
+        "code": null,
+        "example_setup": "Configured PR trigger + cloud repository access / 已設定的 PR 觸發＋雲端程式庫存取"
+      },
+      {
+        "name": "Hooks",
+        "purpose": "React to an agent lifecycle event",
+        "cn": "在工具執行或工作結束時，執行既定處理",
+        "story": "Your colleague edits a file, and an edit hook runs your configured check. If your Stop hook finds unfinished work when the colleague tries to finish, it can require follow-up. The check script supplies the condition; the colleague then uses editing and test tools to address it.",
+        "storycn": "同事改完檔案，編輯後的 hook 就跑你指定的檢查。若他準備結束時，Stop hook 查到還有未完成事項，就可要求接著處理，再用編輯與測試工具補完；判斷條件由你的檢查腳本提供。",
+        "trigger": "Tool / turn lifecycle event",
+        "steps": [
+          "Agent reaches lifecycle event",
+          "Configured hook runs",
+          "Hook returns control decision",
+          "Continue work or allow stop"
+        ],
+        "detail": "Hooks support deterministic handlers and selected prompt/agent checks. Stop hooks can block stopping; HTTP hooks call an endpoint.",
+        "bound": "Lifecycle hooks are not an incoming environment webhook subscription. Core implementation is not source-audited here.",
+        "doc": "https://code.claude.com/docs/en/hooks",
+        "code": null,
+        "example_setup": "Edit/Stop hooks + check script + editor / 編輯與 Stop hooks＋檢查腳本＋編輯工具"
+      }
+    ]
+  },
+  "limits": "Static source review and current official documentation, not deployed runtime tests."
+}

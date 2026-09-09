@@ -1,0 +1,179 @@
+{
+  "reader_titles": {
+    "claw": [
+      [
+        "Periodic or event-driven check-in",
+        "週期或事件喚醒"
+      ],
+      [
+        "Run a saved schedule",
+        "執行既定排程"
+      ],
+      [
+        "Start work from an HTTP event",
+        "由 HTTP 事件啟動工作"
+      ],
+      [
+        "Run when a command finishes",
+        "命令結束後執行"
+      ],
+      [
+        "React to an incoming event stream",
+        "回應持續到來的事件"
+      ],
+      [
+        "Check a condition before running",
+        "條件成立才執行"
+      ],
+      [
+        "Adjust the next check time",
+        "調整下次檢查時間"
+      ],
+      [
+        "Review completed work",
+        "回顧已完成工作"
+      ],
+      [
+        "Maintain and consolidate memory",
+        "整理與維護記憶"
+      ],
+      [
+        "Store and track an assigned goal",
+        "保存與追蹤交付目標"
+      ]
+    ],
+    "hermes": [
+      [
+        "Run a saved schedule",
+        "執行既定排程"
+      ],
+      [
+        "Start work from an HTTP event",
+        "由 HTTP 事件啟動工作"
+      ],
+      [
+        "Repeat an instruction in a session",
+        "在對話中週期執行指令"
+      ],
+      [
+        "Repeat work until a stop condition",
+        "重複執行直到停止條件"
+      ],
+      [
+        "Continue toward an assigned goal",
+        "延續已交付目標"
+      ],
+      [
+        "Dispatch tasks that are ready",
+        "派送已就緒任務"
+      ],
+      [
+        "Review completed work",
+        "回顧已完成工作"
+      ],
+      [
+        "Receive a remote scheduled run",
+        "接收遠端排程觸發"
+      ]
+    ],
+    "ob": [
+      [
+        "Run a standing instruction on schedule",
+        "定時執行常設指令"
+      ],
+      [
+        "Hand work to another Bot",
+        "將工作交給另一個 Bot"
+      ],
+      [
+        "Return a delegated result",
+        "回送委派工作成果"
+      ],
+      [
+        "Keep ownership while work runs",
+        "執行期間維持工作租約"
+      ]
+    ],
+    "gr": [
+      [
+        "Receive cloud automation runs",
+        "接收雲端自動化執行通知"
+      ],
+      [
+        "Follow up on a background event",
+        "跟進背景事件"
+      ],
+      [
+        "Resume after background work finishes",
+        "背景工作完成後接續對話"
+      ],
+      [
+        "Handle a goal-continuation request",
+        "處理目標續跑要求"
+      ]
+    ],
+    "v": [
+      [
+        "Choose the next exploration task",
+        "選擇下一個探索任務"
+      ],
+      [
+        "Improve an attempt using feedback",
+        "根據回饋修正當前嘗試"
+      ]
+    ]
+  },
+  "glossary": [
+    [
+      "Trigger / 觸發條件",
+      "The occurrence that makes work eligible: a deadline, incoming event or completed task.",
+      "讓工作具備執行條件的事情，例如到期、事件到來或前項工作完成。"
+    ],
+    [
+      "Payload / 工作資料",
+      "The data attached to a trigger, such as an instruction, event text or script. It tells the receiver what to process.",
+      "觸發時附帶的指令、事件內容或 script；它不是 timer。"
+    ],
+    [
+      "Fire / 一次觸發紀錄",
+      "One occurrence of an automation. A consumer is the code that receives and handles that occurrence.",
+      "某個自動化被觸發的一次紀錄；consumer 就是接收並處理紀錄的程式。"
+    ],
+    [
+      "Polling / 定期查詢",
+      "Repeatedly ask whether new work exists. The checked work may originate from time or events.",
+      "定期問有沒有新工作；被查到的工作本身可能來自時間或事件。"
+    ],
+    [
+      "Webhook / HTTP 事件通知",
+      "Another service sends an HTTP request when something happens. The receiver may filter it before starting an agent.",
+      "外部服務主動送 HTTP 通知；接收端可先過濾，再決定是否啟動 agent。"
+    ],
+    [
+      "Admission / 執行准入",
+      "Runtime checks whether a run may start now, including capacity, busy state and target-session rules.",
+      "Runtime 根據容量、忙碌狀態與目標對話規則，判斷現在能否開始。"
+    ],
+    [
+      "Lease / 有期限的工作租約",
+      "A temporary claim on queued work. Renewing it keeps ownership; it does not create another reasoning turn.",
+      "暫時取得某筆工作的執行權；續租維持權利，不會自動新增思考回合。"
+    ],
+    [
+      "Revival / 接續等待中的對話",
+      "Resume a conversation after a result or event becomes available.",
+      "結果或事件到來後，喚回等待中的對話繼續處理。"
+    ],
+    [
+      "Cadence / 執行節奏",
+      "How often a recurring check runs. Adaptive pacing changes the next due time.",
+      "週期檢查多久執行一次；自適應節奏會調整下一次時間。"
+    ],
+    [
+      "Goal continuation / 目標續跑",
+      "After a turn, decide whether the assigned goal needs another turn within its limits.",
+      "回合結束後，判斷交付目標是否仍需要在限制內繼續。"
+    ]
+  ],
+  "native_identifiers_preserved": true
+}

@@ -1,0 +1,845 @@
+{
+  "scope": "Plain-language descriptions of existing diagram responsibilities; not new services or new runtime evidence",
+  "nodes": [
+    {
+      "flow": "flow-claw-0",
+      "node": "Trigger source",
+      "english": "Provides a due check or an HTTP wake request.",
+      "zh_Hant": "時間到了，或外部送來喚醒要求；這是工作開始的原因。"
+    },
+    {
+      "flow": "flow-claw-0",
+      "node": "Dispatch code",
+      "english": "Accepts the wake request, queues its context and requests an immediate heartbeat only when asked.",
+      "zh_Hant": "收下喚醒要求，把內容排進對話；要求立即處理時，才請 heartbeat 現在執行。"
+    },
+    {
+      "flow": "flow-claw-0",
+      "node": "Session events",
+      "english": "Keeps event context for the target session to consume on a turn.",
+      "zh_Hant": "替指定對話保存事件內容，讓同事開始工作時有資料可讀。"
+    },
+    {
+      "flow": "flow-claw-0",
+      "node": "Heartbeat runner",
+      "english": "Checks whether the heartbeat may run, then starts the agent check.",
+      "zh_Hant": "先確認現在可不可以執行，再叫同事開始這次檢查。"
+    },
+    {
+      "flow": "flow-claw-1",
+      "node": "Scheduler",
+      "english": "Finds a saved job whose scheduled time has arrived.",
+      "zh_Hant": "查看已存的排程，找出現在該開始的工作。"
+    },
+    {
+      "flow": "flow-claw-1",
+      "node": "Payload dispatch",
+      "english": "Reads the job configuration and selects the requested execution path.",
+      "zh_Hant": "讀工作設定，判斷要叫 agent、跑腳本，還是走 heartbeat 等入口。"
+    },
+    {
+      "flow": "flow-claw-1",
+      "node": "Script runner",
+      "english": "Executes the configured program; this branch need not call a model.",
+      "zh_Hant": "執行設定好的小程式；這條路徑不一定要叫模型。"
+    },
+    {
+      "flow": "flow-claw-1",
+      "node": "Heartbeat runner",
+      "english": "Checks whether the heartbeat may run, then starts the agent check.",
+      "zh_Hant": "先確認現在可不可以執行，再叫同事開始這次檢查。"
+    },
+    {
+      "flow": "flow-claw-2",
+      "node": "External service",
+      "english": "Sends a work event from a connected business system.",
+      "zh_Hant": "外部業務系統送來消息，例如新客服單或待審文件。"
+    },
+    {
+      "flow": "flow-claw-2",
+      "node": "HTTP hook handler",
+      "english": "Checks the inbound HTTP request and resolves its requested agent/session target.",
+      "zh_Hant": "檢查外部 HTTP 通知，確認這份工作要交給哪個 agent／對話。"
+    },
+    {
+      "flow": "flow-claw-2",
+      "node": "Session admission",
+      "english": "Checks whether the requested work can enter the target session.",
+      "zh_Hant": "檢查這份工作能不能進入指定對話執行。"
+    },
+    {
+      "flow": "flow-claw-2",
+      "node": "Agent runner",
+      "english": "Starts the agent work with the accepted event as context.",
+      "zh_Hant": "把通過檢查的事件交給 agent，開始讀資料與處理工作。"
+    },
+    {
+      "flow": "flow-claw-3",
+      "node": "Watched process",
+      "english": "Runs the long command whose completion the automation is waiting for.",
+      "zh_Hant": "正在執行的長時間命令，例如那批資料檢查。"
+    },
+    {
+      "flow": "flow-claw-3",
+      "node": "Exit watcher",
+      "english": "Detects that the watched command has exited and emits the completion trigger.",
+      "zh_Hant": "發現命令已結束，就發出完成訊號，不必靠猜時間。"
+    },
+    {
+      "flow": "flow-claw-3",
+      "node": "Admission wrapper",
+      "english": "Routes an accepted watcher trigger through the shared execution admission path.",
+      "zh_Hant": "把監看器發出的觸發交到共用入口，確認可執行後再派送。"
+    },
+    {
+      "flow": "flow-claw-3",
+      "node": "Cron service",
+      "english": "Executes the selected automation through the common job service, including event-triggered jobs.",
+      "zh_Hant": "共用的工作執行服務；不只處理定時工作，也接事件觸發的自動化。"
+    },
+    {
+      "flow": "flow-claw-4",
+      "node": "Stream process",
+      "english": "Produces live output lines that the configured watcher can inspect.",
+      "zh_Hant": "持續輸出新紀錄的程式，例如系統錯誤監看命令。"
+    },
+    {
+      "flow": "flow-claw-4",
+      "node": "Batch collector",
+      "english": "Matches output lines and collects a bounded batch before triggering work.",
+      "zh_Hant": "挑出符合設定的紀錄，短暫收成一批，再交給同事一起看。"
+    },
+    {
+      "flow": "flow-claw-4",
+      "node": "Admission wrapper",
+      "english": "Routes an accepted watcher trigger through the shared execution admission path.",
+      "zh_Hant": "把監看器發出的觸發交到共用入口，確認可執行後再派送。"
+    },
+    {
+      "flow": "flow-claw-4",
+      "node": "Cron service",
+      "english": "Executes the selected automation through the common job service, including event-triggered jobs.",
+      "zh_Hant": "共用的工作執行服務；不只處理定時工作，也接事件觸發的自動化。"
+    },
+    {
+      "flow": "flow-claw-5",
+      "node": "Timer / stream",
+      "english": "Supplies a scheduled check or new process output to the condition watcher.",
+      "zh_Hant": "定時到點，或程式有新輸出，讓條件檢查開始。"
+    },
+    {
+      "flow": "flow-claw-5",
+      "node": "Payload dispatch",
+      "english": "Reads the job configuration and selects the requested execution path.",
+      "zh_Hant": "讀工作設定，判斷要叫 agent、跑腳本，還是走 heartbeat 等入口。"
+    },
+    {
+      "flow": "flow-claw-5",
+      "node": "Trigger evaluator",
+      "english": "Runs the configured condition script; false skips work and true allows dispatch.",
+      "zh_Hant": "先跑條件腳本；不符合就略過，符合才放行後續工作。"
+    },
+    {
+      "flow": "flow-claw-5",
+      "node": "Payload runner",
+      "english": "Runs the job action selected after the condition passes.",
+      "zh_Hant": "條件通過後，才真正執行設定的工作內容。"
+    },
+    {
+      "flow": "flow-claw-6",
+      "node": "Current run",
+      "english": "The current job may request a delay for its next check.",
+      "zh_Hant": "這次正在工作的 agent，可提出下次隔多久再查。"
+    },
+    {
+      "flow": "flow-claw-6",
+      "node": "Outcome handler",
+      "english": "Checks the completed run and processes its next-check request.",
+      "zh_Hant": "收下本次結果，確認成功等條件後，處理下次檢查要求。"
+    },
+    {
+      "flow": "flow-claw-6",
+      "node": "Pacing calculator",
+      "english": "Applies the allowed timing bounds to the requested next check.",
+      "zh_Hant": "把建議的檢查間隔限制在設定範圍內，避免太密或太晚。"
+    },
+    {
+      "flow": "flow-claw-6",
+      "node": "Job schedule",
+      "english": "Stores the accepted next due time for the scheduler.",
+      "zh_Hant": "保存核准後的下次時間，讓排程器之後照時間啟動。"
+    },
+    {
+      "flow": "flow-claw-7",
+      "node": "Completed turn",
+      "english": "Provides the completed work that may qualify for review.",
+      "zh_Hant": "剛結束的工作回合，提供可供回顧的經過與成果。"
+    },
+    {
+      "flow": "flow-claw-7",
+      "node": "Review scheduler",
+      "english": "Arranges delayed review instead of interrupting the just-finished work.",
+      "zh_Hant": "安排稍後回顧，不把改善指引的工作擠進剛完成的回合。"
+    },
+    {
+      "flow": "flow-claw-7",
+      "node": "Eligibility checks",
+      "english": "Determines whether this completed work meets the review conditions.",
+      "zh_Hant": "判斷這次工作是否符合回顧條件，不是每件事都重看。"
+    },
+    {
+      "flow": "flow-claw-7",
+      "node": "Review runner",
+      "english": "Performs the review and applies only permitted Workshop changes.",
+      "zh_Hant": "執行回顧，把有用經驗改進到允許修改的 Workshop 內容。"
+    },
+    {
+      "flow": "flow-claw-8",
+      "node": "Memory plugin",
+      "english": "Supplies the configured memory-maintenance behavior and jobs.",
+      "zh_Hant": "提供記憶整理功能及其排程設定。"
+    },
+    {
+      "flow": "flow-claw-8",
+      "node": "Reconciler",
+      "english": "Aligns managed maintenance jobs with the current configuration.",
+      "zh_Hant": "對照目前設定，補齊或調整應存在的記憶整理工作。"
+    },
+    {
+      "flow": "flow-claw-8",
+      "node": "Cron service",
+      "english": "Executes the selected automation through the common job service, including event-triggered jobs.",
+      "zh_Hant": "共用的工作執行服務；不只處理定時工作，也接事件觸發的自動化。"
+    },
+    {
+      "flow": "flow-claw-8",
+      "node": "Memory workflow",
+      "english": "Organizes stored experience and promotes useful memory.",
+      "zh_Hant": "整理已保存的經驗，把有用資訊留下供以後工作使用。"
+    },
+    {
+      "flow": "flow-claw-9",
+      "node": "Goal caller",
+      "english": "Requests that a goal be created or updated.",
+      "zh_Hant": "要求建立或更新一個交辦目標的呼叫者。"
+    },
+    {
+      "flow": "flow-claw-9",
+      "node": "Goal function",
+      "english": "Validates and applies the requested goal-state operation.",
+      "zh_Hant": "檢查要求，執行目標新增或狀態修改；本身不證明會自動續跑。"
+    },
+    {
+      "flow": "flow-claw-9",
+      "node": "Session store",
+      "english": "Persists the goal and session data for later reads.",
+      "zh_Hant": "保存目標與對話資料，讓之後能讀回交辦事項。"
+    },
+    {
+      "flow": "flow-hermes-0",
+      "node": "Cron tick",
+      "english": "Periodically checks whether saved jobs are due.",
+      "zh_Hant": "定期看已存工作是否到時間；到期才交下去。"
+    },
+    {
+      "flow": "flow-hermes-0",
+      "node": "Job executor",
+      "english": "Claims and runs the due job using the configured script or agent path.",
+      "zh_Hant": "取得這次工作的執行權，再依設定跑腳本或叫 agent。"
+    },
+    {
+      "flow": "flow-hermes-0",
+      "node": "Script runner",
+      "english": "Executes the configured program; this branch need not call a model.",
+      "zh_Hant": "執行設定好的小程式；這條路徑不一定要叫模型。"
+    },
+    {
+      "flow": "flow-hermes-0",
+      "node": "AIAgent",
+      "english": "Reads the assigned prompt and performs the work with available tools.",
+      "zh_Hant": "讀交辦內容，用可用工具完成這次工作並產生結果。"
+    },
+    {
+      "flow": "flow-hermes-1",
+      "node": "External service",
+      "english": "Sends a work event from a connected business system.",
+      "zh_Hant": "外部業務系統送來消息，例如新客服單或待審文件。"
+    },
+    {
+      "flow": "flow-hermes-1",
+      "node": "Webhook adapter",
+      "english": "Checks the external notice and turns accepted content into a message or direct delivery.",
+      "zh_Hant": "檢查外部通知，將可接受內容轉成工作訊息，或按設定直接送達。"
+    },
+    {
+      "flow": "flow-hermes-1",
+      "node": "Message handler",
+      "english": "Receives the normalized event and dispatches the conversation work.",
+      "zh_Hant": "接到整理好的事件訊息，把它送入對話工作流程。"
+    },
+    {
+      "flow": "flow-hermes-1",
+      "node": "Delivery adapter",
+      "english": "Sends the configured output through the chosen destination.",
+      "zh_Hant": "把結果送到設定好的目的地，例如私人聊天室。"
+    },
+    {
+      "flow": "flow-hermes-2",
+      "node": "Heartbeat watcher",
+      "english": "Checks when a session should be revisited and whether user work is waiting.",
+      "zh_Hant": "看看對話是否該回訪、使用者是否正有工作等著處理。"
+    },
+    {
+      "flow": "flow-hermes-2",
+      "node": "Session / queue",
+      "english": "Holds session status and queued work that affect whether a check can start.",
+      "zh_Hant": "保存對話狀態與待處理工作，決定現在是否方便做定期檢查。"
+    },
+    {
+      "flow": "flow-hermes-2",
+      "node": "HeartbeatManager",
+      "english": "Manages the configured session heartbeat and its pending checks.",
+      "zh_Hant": "管理這段對話的 heartbeat 設定與待執行檢查。"
+    },
+    {
+      "flow": "flow-hermes-2",
+      "node": "Message adapter",
+      "english": "Submits the heartbeat work through the normal conversation interface.",
+      "zh_Hant": "把 heartbeat 的檢查要求轉成一般對話能處理的工作。"
+    },
+    {
+      "flow": "flow-hermes-3",
+      "node": "Loop driver",
+      "english": "Initiates a loop tick when the next repetition is due.",
+      "zh_Hant": "到了再做一次的時間，就發出本輪執行要求。"
+    },
+    {
+      "flow": "flow-hermes-3",
+      "node": "LoopManager",
+      "english": "Manages loop settings, stop checks and the next repetition.",
+      "zh_Hant": "管理重複工作的設定，檢查該停了沒，以及是否還有下一輪。"
+    },
+    {
+      "flow": "flow-hermes-3",
+      "node": "Persisted loop",
+      "english": "Stores loop state so the configured repetition can be tracked.",
+      "zh_Hant": "保存 loop 的設定與狀態，讓系統知道這項重複工作進行到哪。"
+    },
+    {
+      "flow": "flow-hermes-3",
+      "node": "Turn runner",
+      "english": "Executes one iteration of the assigned loop work.",
+      "zh_Hant": "叫 agent 執行這一次檢查或工作；是否還要再做由 loop 控制決定。"
+    },
+    {
+      "flow": "flow-hermes-4",
+      "node": "Finished turn",
+      "english": "Provides the latest result of work on an assigned goal.",
+      "zh_Hant": "剛結束的一輪工作，提供本次交辦目標的處理結果。"
+    },
+    {
+      "flow": "flow-hermes-4",
+      "node": "Post-turn hook",
+      "english": "Runs goal-continuation checks after the turn ends.",
+      "zh_Hant": "回合結束時接手，開始檢查目標是否還要繼續。"
+    },
+    {
+      "flow": "flow-hermes-4",
+      "node": "GoalManager",
+      "english": "Evaluates goal progress and limits, then chooses continue, wait, pause or done.",
+      "zh_Hant": "看目標進度與限制，決定繼續、等待、暫停或完成。"
+    },
+    {
+      "flow": "flow-hermes-4",
+      "node": "Session FIFO",
+      "english": "Queues an eligible continuation in order for the same session.",
+      "zh_Hant": "把允許的續跑要求放進同一對話的順序佇列，等候執行。"
+    },
+    {
+      "flow": "flow-hermes-5",
+      "node": "Board dispatcher",
+      "english": "Scans the task board for work whose dependencies allow it to start.",
+      "zh_Hant": "掃描工作板，看看哪些任務的前置工作已經備妥。"
+    },
+    {
+      "flow": "flow-hermes-5",
+      "node": "Ready task rows",
+      "english": "Stores tasks that are eligible for dispatch after dependency checks.",
+      "zh_Hant": "保存前置條件已滿足、可以派工的任務資料。"
+    },
+    {
+      "flow": "flow-hermes-5",
+      "node": "Lane dispatcher",
+      "english": "Claims ready work for an available execution lane.",
+      "zh_Hant": "有執行空間時取得任務，安排到可用的執行路徑。"
+    },
+    {
+      "flow": "flow-hermes-5",
+      "node": "Worker process",
+      "english": "Runs the assigned task using the worker agent and its tools.",
+      "zh_Hant": "真正執行被派來的工作，用工具讀資料並產生成果。"
+    },
+    {
+      "flow": "flow-hermes-6",
+      "node": "Turn finalizer",
+      "english": "Finishes the current turn and invokes eligible follow-up maintenance.",
+      "zh_Hant": "收尾目前回合，再啟動符合條件的後續維護。"
+    },
+    {
+      "flow": "flow-hermes-6",
+      "node": "Agent instance",
+      "english": "The agent object supplies the completed work and review context.",
+      "zh_Hant": "提供這次 agent 工作的內容，供背景回顧使用。"
+    },
+    {
+      "flow": "flow-hermes-6",
+      "node": "Background review",
+      "english": "Reviews completed work and records improvements within restricted write rules.",
+      "zh_Hant": "重看已完成工作，在限制範圍內保存改善方式。"
+    },
+    {
+      "flow": "flow-hermes-7",
+      "node": "Remote scheduler",
+      "english": "Sends a due-job request from the external scheduling service.",
+      "zh_Hant": "外部排程服務到了時間，送出這次工作的啟動要求。"
+    },
+    {
+      "flow": "flow-hermes-7",
+      "node": "HTTP fire endpoint",
+      "english": "Accepts and authenticates the remote scheduled-run request.",
+      "zh_Hant": "收下外部排程通知，檢查是否來自允許的來源。"
+    },
+    {
+      "flow": "flow-hermes-7",
+      "node": "Cron provider",
+      "english": "Claims the scheduled occurrence before passing it to execution.",
+      "zh_Hant": "先取得這次排程的執行權，再交給工作執行器。"
+    },
+    {
+      "flow": "flow-hermes-7",
+      "node": "Job executor",
+      "english": "Claims and runs the due job using the configured script or agent path.",
+      "zh_Hant": "取得這次工作的執行權，再依設定跑腳本或叫 agent。"
+    },
+    {
+      "flow": "flow-ob-0",
+      "node": "Routine sweep",
+      "english": "Checks which saved routines have reached their next scheduled time.",
+      "zh_Hant": "掃描已存的例行工作，找出到時間該執行的項目。"
+    },
+    {
+      "flow": "flow-ob-0",
+      "node": "Routine store",
+      "english": "Keeps routine definitions and their scheduling state.",
+      "zh_Hant": "保存例行工作的交辦內容與排程狀態。"
+    },
+    {
+      "flow": "flow-ob-0",
+      "node": "Durable queue",
+      "english": "Keeps assigned work pending until a worker claims it.",
+      "zh_Hant": "把工作持久保存進佇列，等執行者來接，不只留在記憶體。"
+    },
+    {
+      "flow": "flow-ob-0",
+      "node": "Routine runner",
+      "english": "Checks current ownership and access, then runs the routine in its channel.",
+      "zh_Hant": "確認目前負責人與權限，再在設定的頻道執行例行工作。"
+    },
+    {
+      "flow": "flow-ob-1",
+      "node": "Calling Bot",
+      "english": "The colleague that needs another specialist to perform a task.",
+      "zh_Hant": "原本工作的同事；他需要專家幫忙，所以發起派工。"
+    },
+    {
+      "flow": "flow-ob-1",
+      "node": "message_bot tool",
+      "english": "Packages the specialist request with its task and identity information.",
+      "zh_Hant": "把要專家做的事、期待成果與身分資訊包成派工要求。"
+    },
+    {
+      "flow": "flow-ob-1",
+      "node": "Handoff desk",
+      "english": "Checks handoff authority and records the durable delivery to the recipient.",
+      "zh_Hant": "檢查能否派給對方，再保存這份要送出的任務。"
+    },
+    {
+      "flow": "flow-ob-1",
+      "node": "Recipient runner",
+      "english": "Starts the specialist task under the recipient’s own tools and permissions.",
+      "zh_Hant": "叫接任務的專家開工，沿用專家自己的工具與權限。"
+    },
+    {
+      "flow": "flow-ob-2",
+      "node": "Recipient turn",
+      "english": "The specialist completes the assigned work and produces an answer.",
+      "zh_Hant": "接任務的專家完成工作，交出答案。"
+    },
+    {
+      "flow": "flow-ob-2",
+      "node": "Handoff runner",
+      "english": "Processes the completed handoff and prepares an answer relay.",
+      "zh_Hant": "處理已完成的派工，準備把答案送回原本求助方。"
+    },
+    {
+      "flow": "flow-ob-2",
+      "node": "Relay queue",
+      "english": "Stores the result delivery waiting to reach the original requester.",
+      "zh_Hant": "保存待回傳的成果，等候送回原本提問的同事。"
+    },
+    {
+      "flow": "flow-ob-2",
+      "node": "Requesting Bot",
+      "english": "Receives the answer to its earlier specialist request.",
+      "zh_Hant": "原本求助的同事，現在收到專家的回答。"
+    },
+    {
+      "flow": "flow-ob-3",
+      "node": "Renewal timer",
+      "english": "Periodically initiates ownership renewal while a task is still running.",
+      "zh_Hant": "工作還在跑時，定期發起執行權續租。"
+    },
+    {
+      "flow": "flow-ob-3",
+      "node": "Owned-key set",
+      "english": "Lists the task and thread ownership keys held by this worker.",
+      "zh_Hant": "記住這個執行者目前持有哪些工作與對話的執行權。"
+    },
+    {
+      "flow": "flow-ob-3",
+      "node": "Work queue",
+      "english": "Refreshes the lease for work that the worker still owns.",
+      "zh_Hant": "替仍由這位執行者負責的工作更新租期。"
+    },
+    {
+      "flow": "flow-ob-3",
+      "node": "Delivery loop",
+      "english": "Continues the existing work while ownership is maintained.",
+      "zh_Hant": "在執行權維持有效時繼續原本工作；續租本身不會多開思考回合。"
+    },
+    {
+      "flow": "flow-gr-0",
+      "node": "Local consumer",
+      "english": "Polls for cloud automation records to handle locally.",
+      "zh_Hant": "本機接收程式定期查看雲端，有沒有尚未處理的自動化通知。"
+    },
+    {
+      "flow": "flow-gr-0",
+      "node": "Cloud backend",
+      "english": "Provides cloud-side automation records; its scheduling decision is outside this evidence.",
+      "zh_Hant": "提供雲端自動化紀錄；這裡的證據沒有涵蓋雲端如何決定排程。"
+    },
+    {
+      "flow": "flow-gr-0",
+      "node": "Local event state",
+      "english": "Tracks which automation events have been observed or handled locally.",
+      "zh_Hant": "記下本機看過或處理過哪些事件，供重複與執行檢查使用。"
+    },
+    {
+      "flow": "flow-gr-0",
+      "node": "Automation handler",
+      "english": "Validates and handles an accepted automation-run request.",
+      "zh_Hant": "檢查並處理已接收的自動化執行要求。"
+    },
+    {
+      "flow": "flow-gr-1",
+      "node": "Incoming event",
+      "english": "Supplies new background information for an existing conversation.",
+      "zh_Hant": "帶來要交進既有對話的新背景消息。"
+    },
+    {
+      "flow": "flow-gr-1",
+      "node": "Background wakes",
+      "english": "Collects background events and determines the wake-up path.",
+      "zh_Hant": "收集背景事件，安排如何喚醒對話繼續處理。"
+    },
+    {
+      "flow": "flow-gr-1",
+      "node": "Session / transcript",
+      "english": "Keeps the existing conversation and its running or idle state.",
+      "zh_Hant": "保存原本對話內容，以及目前忙碌或閒置的狀態。"
+    },
+    {
+      "flow": "flow-gr-1",
+      "node": "Wake queue",
+      "english": "Queues the accepted follow-up until the conversation can handle it.",
+      "zh_Hant": "把可處理的後續要求排隊，等對話能執行時接手。"
+    },
+    {
+      "flow": "flow-gr-2",
+      "node": "Subagent result",
+      "english": "Provides completion output from a delegated agent.",
+      "zh_Hant": "被委派出去的 agent 做完了，交回成果。"
+    },
+    {
+      "flow": "flow-gr-2",
+      "node": "Completion handler",
+      "english": "Checks completion ownership and duplicates before accepting the result.",
+      "zh_Hant": "先確認成果屬於誰、是否重複，再接受完成通知。"
+    },
+    {
+      "flow": "flow-gr-2",
+      "node": "Pending results",
+      "english": "Holds returned results until the waiting conversation can consume them.",
+      "zh_Hant": "先保存返回的成果，等原本等待中的對話讀取。"
+    },
+    {
+      "flow": "flow-gr-2",
+      "node": "Revival handler",
+      "english": "Requests a follow-up in the waiting conversation using accepted results.",
+      "zh_Hant": "用已接受的成果，要求原本等待的對話接著處理。"
+    },
+    {
+      "flow": "flow-gr-3",
+      "node": "Action caller",
+      "english": "Submits a goal-continuation action; its automatic producer is unverified.",
+      "zh_Hant": "送出目標續跑要求；目前未證實誰會自動發起它。"
+    },
+    {
+      "flow": "flow-gr-3",
+      "node": "Continuation handler",
+      "english": "Checks the requested continuation and stops repeated no-progress turns.",
+      "zh_Hant": "檢查續跑要求，遇到連續沒有進展的回合可暫停。"
+    },
+    {
+      "flow": "flow-gr-3",
+      "node": "Goal state",
+      "english": "Stores the goal identity and progress used to validate continuation.",
+      "zh_Hant": "保存目標身分與進度，供續跑要求檢查使用。"
+    },
+    {
+      "flow": "flow-gr-3",
+      "node": "Conversation",
+      "english": "Receives an accepted continuation as new conversation input.",
+      "zh_Hant": "把通過檢查的續跑要求，接成對話裡的新輸入。"
+    },
+    {
+      "flow": "flow-v-0",
+      "node": "Learning loop",
+      "english": "Repeats task selection and execution within the exploration budget.",
+      "zh_Hant": "在探索限制內，反覆選任務、執行任務、更新進度。"
+    },
+    {
+      "flow": "flow-v-0",
+      "node": "Curriculum agent",
+      "english": "Chooses the next Minecraft task using world state and task history.",
+      "zh_Hant": "看 Minecraft 環境與做過的事，選出下一個值得做的任務。"
+    },
+    {
+      "flow": "flow-v-0",
+      "node": "Rollout",
+      "english": "Attempts the selected task by generating and executing game actions.",
+      "zh_Hant": "為選定任務產生並執行遊戲操作，嘗試把任務完成。"
+    },
+    {
+      "flow": "flow-v-0",
+      "node": "Progress state",
+      "english": "Records task outcomes for the next curriculum decision.",
+      "zh_Hant": "記下任務成果，讓下次選任務時知道已經會什麼。"
+    },
+    {
+      "flow": "flow-v-1",
+      "node": "Action step",
+      "english": "Generates and executes the next code attempt for the current task.",
+      "zh_Hant": "為目前任務產生並執行下一次操作程式。"
+    },
+    {
+      "flow": "flow-v-1",
+      "node": "Environment",
+      "english": "Returns observed state or errors from the game or watched system.",
+      "zh_Hant": "回傳外界實際狀態或錯誤；遊戲圖是 Minecraft，Monitor 圖是被監看的系統。"
+    },
+    {
+      "flow": "flow-v-1",
+      "node": "Critic agent",
+      "english": "Checks whether the task succeeded and supplies feedback if it did not.",
+      "zh_Hant": "判斷任務到底完成沒，沒完成就提供回饋。"
+    },
+    {
+      "flow": "flow-v-1",
+      "node": "Prompt context",
+      "english": "Carries observed errors and feedback into the next code attempt.",
+      "zh_Hant": "把錯誤與回饋放進下一次輸入，讓 agent 修正操作程式。"
+    },
+    {
+      "flow": "flow-cx-0",
+      "node": "App scheduler",
+      "english": "Starts or revisits the scheduled app chat when its saved time arrives.",
+      "zh_Hant": "到了已存時間，啟動或回訪 App 裡的排程對話。"
+    },
+    {
+      "flow": "flow-cx-0",
+      "node": "Agent chat",
+      "english": "Runs the saved assignment and reads available sources.",
+      "zh_Hant": "執行原本交辦的工作，讀取可用資料來源。"
+    },
+    {
+      "flow": "flow-cx-0",
+      "node": "Scheduled results",
+      "english": "Shows the findings in the app’s scheduled-task result surface.",
+      "zh_Hant": "在 App 的排程結果介面呈現這次發現。"
+    },
+    {
+      "flow": "flow-cx-1",
+      "node": "Thread lifecycle",
+      "english": "Signals that the thread has become idle after a turn.",
+      "zh_Hant": "告知回合已結束，這段 thread 目前閒置。"
+    },
+    {
+      "flow": "flow-cx-1",
+      "node": "Goal runtime",
+      "english": "Checks active-goal eligibility and prepares continuation input.",
+      "zh_Hant": "檢查目標是否仍可續跑，準備下一輪工作輸入。"
+    },
+    {
+      "flow": "flow-cx-1",
+      "node": "Thread / next turn",
+      "english": "Starts the eligible continuation only if the thread remains idle.",
+      "zh_Hant": "thread 仍閒置且符合條件，才真正開始下一輪。"
+    },
+    {
+      "flow": "flow-cx-2",
+      "node": "Your event adapter",
+      "english": "Your integration listens to the external system and receives its event.",
+      "zh_Hant": "你接的整合程式，負責監聽外部系統與接收事件。"
+    },
+    {
+      "flow": "flow-cx-2",
+      "node": "Your caller",
+      "english": "Your code converts the event into a prompt or engine turn request.",
+      "zh_Hant": "你的程式把事件轉成 prompt 或啟動回合的要求。"
+    },
+    {
+      "flow": "flow-cx-2",
+      "node": "Codex runtime",
+      "english": "Runs the requested reasoning and tool work and returns its outcome.",
+      "zh_Hant": "Codex 執行被要求的推理與工具工作，回傳成果。"
+    },
+    {
+      "flow": "flow-cx-3",
+      "node": "Agent runtime",
+      "english": "Emits the completion event when agent work finishes.",
+      "zh_Hant": "agent 工作完成時，發出回合結束事件。"
+    },
+    {
+      "flow": "flow-cx-3",
+      "node": "AfterAgent hook",
+      "english": "Builds the completion payload and invokes the configured notification path.",
+      "zh_Hant": "整理回合完成資料，再啟動設定的通知路徑。"
+    },
+    {
+      "flow": "flow-cx-3",
+      "node": "Your notify command",
+      "english": "Your script sends the actual notification or downstream event.",
+      "zh_Hant": "你設定的腳本，才是真正送通知或往下發事件的地方。"
+    },
+    {
+      "flow": "flow-cc-0",
+      "node": "Session scheduler",
+      "english": "Keeps the in-session schedule and queues work when it is due.",
+      "zh_Hant": "保存對話內排程，時間到了就把工作排進對話。"
+    },
+    {
+      "flow": "flow-cc-0",
+      "node": "Claude session",
+      "english": "Receives the work or new information and uses available tools to handle it.",
+      "zh_Hant": "收到工作或新消息，再使用可用工具處理。"
+    },
+    {
+      "flow": "flow-cc-0",
+      "node": "Tools / work source",
+      "english": "Supplies the current status or data the scheduled task needs to inspect.",
+      "zh_Hant": "提供這次定期檢查要看的最新資料或工作狀態。"
+    },
+    {
+      "flow": "flow-cc-1",
+      "node": "Claude session",
+      "english": "Receives the work or new information and uses available tools to handle it.",
+      "zh_Hant": "收到工作或新消息，再使用可用工具處理。"
+    },
+    {
+      "flow": "flow-cc-1",
+      "node": "Monitor script",
+      "english": "Keeps observing the configured source and reports output to the session.",
+      "zh_Hant": "持續看設定的資料來源，有輸出就把消息帶回對話。"
+    },
+    {
+      "flow": "flow-cc-1",
+      "node": "Environment",
+      "english": "Returns observed state or errors from the game or watched system.",
+      "zh_Hant": "回傳外界實際狀態或錯誤；遊戲圖是 Minecraft，Monitor 圖是被監看的系統。"
+    },
+    {
+      "flow": "flow-cc-2",
+      "node": "Channel plugin",
+      "english": "Accepts allowed platform messages and forwards them into the running session.",
+      "zh_Hant": "接收平台上允許的訊息，再轉進正在執行的對話。"
+    },
+    {
+      "flow": "flow-cc-2",
+      "node": "Claude session",
+      "english": "Receives the work or new information and uses available tools to handle it.",
+      "zh_Hant": "收到工作或新消息，再使用可用工具處理。"
+    },
+    {
+      "flow": "flow-cc-2",
+      "node": "Reply tool / platform",
+      "english": "Sends an agent-selected reply back through the connected platform.",
+      "zh_Hant": "agent 決定回覆時，用這個工具送回已連接的平台。"
+    },
+    {
+      "flow": "flow-cc-3",
+      "node": "Desktop scheduler",
+      "english": "Finds a due desktop task and starts its local session.",
+      "zh_Hant": "找出到期的 Desktop 工作，啟動本機對話。"
+    },
+    {
+      "flow": "flow-cc-3",
+      "node": "Claude session",
+      "english": "Receives the work or new information and uses available tools to handle it.",
+      "zh_Hant": "收到工作或新消息，再使用可用工具處理。"
+    },
+    {
+      "flow": "flow-cc-3",
+      "node": "Desktop result UI",
+      "english": "Displays the desktop task’s notification and result.",
+      "zh_Hant": "在桌面介面顯示這次工作的通知與成果。"
+    },
+    {
+      "flow": "flow-cc-4",
+      "node": "Routine trigger",
+      "english": "Accepts the configured cloud routine’s matching time or event trigger.",
+      "zh_Hant": "接收符合設定的時間或事件，作為雲端 routine 的啟動原因。"
+    },
+    {
+      "flow": "flow-cc-4",
+      "node": "Cloud session",
+      "english": "Runs the routine assignment in its configured cloud environment.",
+      "zh_Hant": "在設定好的雲端環境執行這份 routine 工作。"
+    },
+    {
+      "flow": "flow-cc-4",
+      "node": "Connected tools",
+      "english": "Reads configured sources or performs permitted connector actions.",
+      "zh_Hant": "讀已接好的資料來源，或執行允許的 connector 操作。"
+    },
+    {
+      "flow": "flow-cc-5",
+      "node": "Claude runtime",
+      "english": "Detects the lifecycle event and invokes the configured hook.",
+      "zh_Hant": "工作到達指定時點，例如改檔後或準備結束，就呼叫 hook。"
+    },
+    {
+      "flow": "flow-cc-5",
+      "node": "Configured hook",
+      "english": "Runs your check and returns the applicable control decision.",
+      "zh_Hant": "執行你設定的檢查，回傳應採取的控制結果。"
+    },
+    {
+      "flow": "flow-cc-5",
+      "node": "Next agent work",
+      "english": "Continues work when required or allows the current task to stop.",
+      "zh_Hant": "需要補做就繼續處理，否則允許本次工作結束。"
+    }
+  ]
+}

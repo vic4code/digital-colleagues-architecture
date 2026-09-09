@@ -1,0 +1,185 @@
+{
+  "status": "Proposed acceptance and observability design; no new runtime integration tests executed",
+  "basis": [
+    "../../phases/0.5/README.md",
+    "phase-0.5-mapping.md",
+    "observation-to-action.json",
+    "observation-probes.json",
+    "mechanism-inventory.json"
+  ],
+  "tests": [
+    {
+      "case": "Fixed schedule / 固定排程",
+      "inject": "Trigger one due occurrence twice. / 同一次到期通知送兩次。",
+      "expected": "One accepted occurrence and one report; duplicate is recorded. / 只接受一次、送一份，重複有紀錄。",
+      "owner": "Scheduler / state"
+    },
+    {
+      "case": "No source change / 資料没變",
+      "inject": "Return the same monitor output twice. / 監看程式連續回傳相同內容。",
+      "expected": "For a configured pre-agent gate: second check starts no model turn and sends nothing. / 前置檢查模式下，第二次不啟動模型、不通知。",
+      "owner": "Watcher / Triage Policy"
+    },
+    {
+      "case": "Useful new mail / 需要提醒的新信",
+      "inject": "Provide a test mail with a deadline today. / 放入一封今天到期的測試郵件。",
+      "expected": "Read the actual message; show one reminder with its source link. / 讀實際郵件，提醒一次並附來源。",
+      "owner": "Tools / skill / inbox"
+    },
+    {
+      "case": "Duplicate event / 事件重送",
+      "inject": "Send the same source event concurrently. / 同一來源事件同時重送。",
+      "expected": "One admitted task; no duplicate output. / 只接受一份工作，不重複產物。",
+      "owner": "Ingress / state"
+    },
+    {
+      "case": "Read failure / 讀取失敗",
+      "inject": "Make the source adapter return an error. / 讓讀取工具回報錯誤。",
+      "expected": "Record an error, not “nothing new”; follow the retry policy. / 記錄讀取失敗，不能當作沒新信。",
+      "owner": "Adapter / runtime"
+    },
+    {
+      "case": "Delivery failure / 通知失敗",
+      "inject": "Fail the inbox write after successful analysis. / 分析成功後，讓收件匣寫入失敗。",
+      "expected": "Keep output pending; retry delivery without discarding it as already observed. / 保留待送成果，不因看過資料就丟掉。",
+      "owner": "Delivery / state"
+    },
+    {
+      "case": "Goal completion / 目標完成",
+      "inject": "Fail the first test run, pass the next. Also exhaust a budget. / 先失敗再通過；另測額度耗盡。",
+      "expected": "Continue only while eligible; stop on verified completion or enforced limit. / 可續跑才續跑，證明完成或超限即停。",
+      "owner": "Runtime / engine"
+    },
+    {
+      "case": "Proposal quality / 提案品質",
+      "inject": "Supply a real event plus a previously rejected similar proposal. / 提供真實事件及已退回的相似提案。",
+      "expected": "Check source, relevance, diversity and rejection separately; present only an eligible private proposal. / 來源、相關性、多樣性與退回條件各自檢查。",
+      "owner": "Skills / policy / state"
+    },
+    {
+      "case": "Restart / 重啟",
+      "inject": "Stop after observation, after analysis and during delivery; restart each case. / 分別在觀察後、分析後、送達中重啟。",
+      "expected": "Recover the correct pending stage with stable IDs; no lost result or duplicate delivery. / 接回正確待辦階段，不漏結果、不重複送。",
+      "owner": "Runtime / state / delivery"
+    }
+  ],
+  "trace_scenarios": [
+    {
+      "id": "quiet",
+      "label": "No new mail / 沒新信",
+      "steps": [
+        "09:00 check is due / 09:00 到檢查時間",
+        "Outlook list unchanged / 郵件清單沒變",
+        "Pre-agent gate skips work / 前置檢查略過",
+        "No model turn / 不啟動模型",
+        "No notification / 不通知"
+      ],
+      "interpretation": "A pre-agent watcher can stop here. A model-based heartbeat may still run a turn and choose silence; count these separately.",
+      "zh": "前置 watcher 可直接略過；靠模型判斷的 heartbeat 可能仍跑一輪才決定安靜，兩者要分開計算。"
+    },
+    {
+      "id": "urgent",
+      "label": "Urgent mail / 有急件",
+      "steps": [
+        "Check or source event / 定時檢查或來源事件",
+        "New message ID / 新郵件 ID",
+        "Admit one task / 接受一份工作",
+        "Read mail and assess deadline / 讀信、判斷期限",
+        "Private reminder acknowledged / 私人提醒已送達"
+      ],
+      "interpretation": "A successful run is not enough: the reminder must reference the message and have a delivery acknowledgement.",
+      "zh": "工作成功還不夠：提醒要附上郵件來源，而且有送達確認。"
+    },
+    {
+      "id": "duplicate",
+      "label": "Repeated event / 事件重送",
+      "steps": [
+        "Same event arrives again / 同一事件又送來",
+        "Find existing occurrence / 找到既有事件紀錄",
+        "Mark duplicate / 記為重複",
+        "No new turn / 不多開回合",
+        "No repeated reminder / 不再提醒一次"
+      ],
+      "interpretation": "Deduplicate by a stable event identity before work begins. Changed content is a separate question.",
+      "zh": "工作開始前，用穩定事件 ID 去重；內容是否變更是另一個判斷。"
+    },
+    {
+      "id": "failure",
+      "label": "Delivery failed / 通知失敗",
+      "steps": [
+        "A new mail was accepted / 新郵件已接收",
+        "Agent produced the reminder / 同事已產生提醒",
+        "Inbox write failed / 收件匣寫入失敗",
+        "Keep delivery pending / 保留待送狀態",
+        "Retry and confirm / 重試並確認送達"
+      ],
+      "interpretation": "The observation checkpoint must not erase an undelivered result. Retry state belongs to delivery, not just source change detection.",
+      "zh": "不能因為已記住這封信，就丟掉尚未送達的結果。通知需要自己的重試狀態。"
+    }
+  ],
+  "component_integration": [
+    {
+      "id": "ingress",
+      "component": "Scheduler + Event Ingress",
+      "change": "Configure a supported schedule or connect the source webhook/polling adapter. Preserve event identity; validate, deduplicate and buffer before hand-off.",
+      "change_zh": "沿用支援的排程，或接來源 webhook／輪詢程式。入口保存事件 ID，先驗證、去重、緩衝，再交給 runtime。",
+      "verification": "P1: receive a 09:00 occurrence once. P3: keep the original mail or ticket ID with the event.",
+      "verification_zh": "P1：09:00 那次工作只接一次。P3：保留原始郵件或案件 ID。",
+      "framework_example": "flow-claw-2"
+    },
+    {
+      "id": "runtime",
+      "component": "Runtime Controller",
+      "change": "Put Event Normalizer and Triage Policy here: ignore, deliver-only or start reasoning. Keep business triage out of Event Ingress. Attach goal continuation to the supported completion hook.",
+      "change_zh": "Event Normalizer 與 Triage Policy 放這裡：略過、直接顯示通知，或啟動推理。目標續跑接 runtime 支援的完成 hook；不要把業務判斷塞進事件入口。",
+      "verification": "P1: quiet and duplicate cases do not start unnecessary work. P2: only owned, unfinished goals within limits may continue.",
+      "verification_zh": "P1：沒事或重複事件不多叫一次。P2：只續跑自己負責、未完成且未超限的目標。",
+      "framework_example": "flow-hermes-4"
+    },
+    {
+      "id": "skills",
+      "component": "Persona + Skill Loader",
+      "change": "Author the responsibility, available tools and expected output in our skills. For inbox triage: read the actual mail, identify a deadline and prepare a private reminder. Code and runtime controls enforce permissions and budgets.",
+      "change_zh": "在我們的 skill 寫清責任、可用工具與產物。例如讀取實際郵件、辨認期限、準備私人提醒；權限與預算由程式及 runtime 強制執行。",
+      "verification": "P1: use the agreed report format. P2: supply the completion test. P3: every proposed task cites accepted source evidence.",
+      "verification_zh": "P1：產物格式正確。P2：有明確完成測試。P3：每個建議任務都能回到真實來源。",
+      "framework_example": "flow-claw-0"
+    },
+    {
+      "id": "engine",
+      "component": "Session Mapper + App-server Client",
+      "change": "Use the existing runtime adapter to bind the event or goal to a task and thread. Start the turn through the engine contract; consume completion and tool outcomes. Verify the chosen deployment exposes the continuation controls we need.",
+      "change_zh": "沿用 runtime adapter，把事件或目標綁到 task 與 thread，再啟動工作、接收工具與完成結果。要查清所選部署是否真的提供需要的續跑控制。",
+      "verification": "P2: tests still fail → another allowed turn. Tests pass or budget is exhausted → no extra turn.",
+      "verification_zh": "P2：測試仍失敗且可續跑，才開下一輪；測試通過或額度用完就停止。",
+      "framework_example": "flow-cx-1"
+    },
+    {
+      "id": "state",
+      "component": "Colleague State",
+      "change": "Keep observation checkpoints, task outcomes and delivery status as separate records. Use stable identities for retries. A saved observation hash is not proof that the agent succeeded or the person received a result.",
+      "change_zh": "觀察進度、工作成果、通知狀態要分開存，重試沿用穩定 ID。記住「這封信看過了」，不等於工作成功，更不等於人已收到通知。",
+      "verification": "P1: restart safely without duplicate reports. P2: preserve goal progress. P3: retain source anchors and rejection feedback.",
+      "verification_zh": "P1：重啟後不重複報告。P2：保留目標進度。P3：保留來源與退回意見。",
+      "framework_example": "flow-hermes-8"
+    },
+    {
+      "id": "tools",
+      "component": "MCP / Tool Adapters",
+      "change": "Connect the actual Outlook, SharePoint or ticket-reading tool and define its output contract. Keep unsolicited source events on the separate ingress path. Record tool success or failure, not just that a call was attempted.",
+      "change_zh": "接好真正的 Outlook、SharePoint 或案件查詢工具，定義回傳資料。外部主動事件走另外的入口；工具紀錄要能分清有呼叫、成功與失敗。",
+      "verification": "P1: verify account access and source IDs. P3: proposal generation uses retrieved evidence. External actions follow the existing approval contract.",
+      "verification_zh": "P1：驗證帳號能讀到資料與來源 ID。P3：用讀到的證據產生提案；對外操作依既有核准契約。",
+      "framework_example": "flow-cx-2"
+    },
+    {
+      "id": "delivery",
+      "component": "Interaction Client + Approval Policy",
+      "change": "Show findings in the existing private inbox. Apply delivery and action policy before writes; record delivery acknowledgement separately from read or rejection feedback. Failed delivery needs an explicit recovery path.",
+      "change_zh": "把發現放進既有私人收件匣，寫入前套用回報與操作政策。送達確認、已讀、退回分開記；送達失敗要有明確補送方式。",
+      "verification": "P1: one delivered report per occurrence. P3: proposals stay private and rejection affects subsequent suggestions.",
+      "verification_zh": "P1：同一次工作只送一份報告。P3：提案留在私人介面，退回意見能影響下次建議。",
+      "framework_example": "flow-cx-3"
+    }
+  ]
+}

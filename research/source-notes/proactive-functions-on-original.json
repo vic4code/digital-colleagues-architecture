@@ -1,0 +1,149 @@
+{
+  "base": "../../phases/0.5/reference-architecture.svg",
+  "presentation": "Original diagram first; separate annotated copy preserves all original coordinates and adds a numbered function key",
+  "functions": [
+    {
+      "component": "Interaction surface",
+      "target": "proactive-component-delivery",
+      "rect": [
+        230,
+        82,
+        586,
+        54
+      ],
+      "purpose": "Show reminders and capture feedback / 顯示提醒與接收回饋",
+      "functions_en": "Private reminders · read / reject feedback",
+      "functions_zh": "私人提醒、已讀與退回回饋"
+    },
+    {
+      "component": "AGENTS.md",
+      "target": "proactive-component-skills",
+      "rect": [
+        296,
+        226,
+        120,
+        44
+      ],
+      "purpose": "Define standing responsibilities / 定義常設責任",
+      "functions_en": "Standing duties · check and stop rules",
+      "functions_zh": "常設責任、檢查條件與停止規則"
+    },
+    {
+      "component": "skills/",
+      "target": "proactive-component-skills",
+      "rect": [
+        552,
+        226,
+        120,
+        44
+      ],
+      "purpose": "Read evidence and prepare results / 查證據與準備成果",
+      "functions_en": "Read evidence · assess urgency · draft result",
+      "functions_zh": "讀取證據、判斷急迫性、準備產物"
+    },
+    {
+      "component": "Runtime Controller",
+      "target": "proactive-component-runtime",
+      "rect": [
+        40,
+        278,
+        760,
+        38
+      ],
+      "purpose": "Route work and control continuation / 派工與控制續跑",
+      "functions_en": "Queue events · resume goals · bound turns",
+      "functions_zh": "事件排隊、目標續跑、回合限制"
+    },
+    {
+      "component": "Request Triage & Priority",
+      "target": "proactive-component-runtime",
+      "rect": [
+        40,
+        322,
+        760,
+        38
+      ],
+      "purpose": "Decide whether this event needs work / 判斷這次事件是否要處理",
+      "functions_en": "Ignore · deliver directly · start reasoning",
+      "functions_zh": "略過、直接通知、啟動推理"
+    },
+    {
+      "component": "Codex app-server",
+      "target": "proactive-component-engine",
+      "rect": [
+        40,
+        366,
+        760,
+        38
+      ],
+      "purpose": "Run tools and report completion / 執行工具與回報完成",
+      "functions_en": "Run tools · stream outcomes · signal completion",
+      "functions_zh": "執行工具、回傳結果、發出完成事件"
+    },
+    {
+      "component": "Event Ingress",
+      "target": "proactive-component-ingress",
+      "rect": [
+        40,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Verify, deduplicate and buffer events / 驗證、去重與緩衝事件",
+      "functions_en": "Verify source · deduplicate · buffer events",
+      "functions_zh": "驗證來源、事件去重、緩衝待辦"
+    },
+    {
+      "component": "Polling Scheduler",
+      "target": "proactive-component-ingress",
+      "rect": [
+        232,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Schedule recurring observation / 排定週期觀察",
+      "functions_en": "Schedule checks · maintain next check time",
+      "functions_zh": "排定觀察、維護下次檢查時間"
+    },
+    {
+      "component": "Subscription renewal",
+      "target": "proactive-component-subscriptions",
+      "rect": [
+        424,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Renew subscriptions so events keep arriving / 續訂以維持事件接收",
+      "functions_en": "Renew subscriptions · recover failed renewal",
+      "functions_zh": "到期前續訂、續訂失敗恢復"
+    },
+    {
+      "component": "MCP Tool Servers",
+      "target": "proactive-component-tools",
+      "rect": [
+        616,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Read source data and execute permitted actions / 讀來源與執行允許操作",
+      "functions_en": "Query Outlook / APIs · perform allowed actions",
+      "functions_zh": "查 Outlook／API、執行允許操作"
+    },
+    {
+      "component": "Access · Permissions · Audit",
+      "target": "proactive-component-delivery",
+      "rect": [
+        24,
+        714,
+        792,
+        54
+      ],
+      "purpose": "Enforce action policy and record outcomes / 執行操作政策與記錄結果",
+      "functions_en": "Approve actions · enforce policy · audit outcomes",
+      "functions_zh": "操作核准、政策檢查、成果稽核"
+    }
+  ]
+}
