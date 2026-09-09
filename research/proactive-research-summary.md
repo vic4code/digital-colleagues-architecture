@@ -1,6 +1,38 @@
-# Proactive implementation synthesis / 主動性實作總覽
+# Proactive research storyline / 主動性研究主線
 
 [Read the integrated visual report](show-me-proactive-lifecycle.html#research-summary).
+
+## 1. Start with a workday / 先從日常情境開始
+
+“Keep an eye on Outlook during working hours. Tell me when a customer email needs my attention.”
+「上班時間幫我留意 Outlook。客戶來信有需要我處理的事情，再提醒我。」
+
+At the next check, the colleague reads a customer email asking for a reply today, checks related information, and prepares a private reminder with the source link. Nothing needs attention? No notification.
+下一次查看時，同事讀到要求今天回覆的客戶郵件，就查資料、整理附原信連結的私人提醒。沒事就不打擾。
+
+This scenario requires configured Outlook access, checking instructions and notification delivery; it is not a native connector claim for every framework.
+
+## 2. Ask four questions / 拆成四個問題
+
+1. **What starts the check? / 他怎麼知道該去看？** A scheduled check or a configured event.
+2. **What deserves attention? / 他怎麼知道要不要管？** Read the actual message and judge against the assigned responsibility.
+3. **What happens next? / 需要處理時怎麼做？** Use tools to gather context and prepare the output.
+4. **Is it finished? / 做一半或做完之後呢？** Continue, wait, or finish and deliver as appropriate.
+
+These explain the example, not a universal runtime lifecycle or project phases.
+
+## 3–8. Follow the evidence back to our design / 從實作回到我們的設計
+
+| Chapter / 段落 | Question / 要回答的問題 |
+|---|---|
+| [3. Frameworks / 各框架實作](show-me-proactive-lifecycle.html#frameworks) | Which native mechanisms implement the behavior? / 官方機制如何做到？ |
+| [4. Comparison / 比較](show-me-proactive-lifecycle.html#comparison) | Which problems does each technique solve? / 技術分別解決什麼問題？ |
+| [5. Task selection / 自己選工作](show-me-proactive-lifecycle.html#self-directed-work) | Can it choose tasks beyond an itemized assignment? / 沒逐件交辦，能自己選什麼工作？ |
+| [6. Existing phases / 既有階段](show-me-proactive-lifecycle.html#project-phases) | What behavior must each phase deliver? / 各階段要交付什麼行為？ |
+| [7. Architecture / 原架構接合](show-me-proactive-lifecycle.html#embedding) | Which existing component owns each function? / 功能放在哪個既有元件？ |
+| [8. Verification / 驗證](show-me-proactive-lifecycle.html#verification) | Did the right work happen, and was the reminder useful? / 有沒有做對、提醒有沒有用？ |
+
+## Technical reference / 技術對照
 
 An agent can start, assess and advance work without a new instruction at every step.
 讓 agent 不必每一步都等人下指令，也能開始工作、判斷狀況並推進任務。

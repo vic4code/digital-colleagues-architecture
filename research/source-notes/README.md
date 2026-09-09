@@ -2,7 +2,7 @@
 
 Start with the [integrated visual report](../show-me-proactive-lifecycle.html#research-summary) or the [compact research summary](../proactive-research-summary.md).
 
-The report connects implementation problems and techniques to each framework's native mechanisms, comparison, design choices, existing project phases, original architecture integration, and verification. These are comparison questions, not exclusive framework categories or invented maturity phases.
+The report follows one story: an Outlook responsibility → four practical questions → native framework mechanisms → comparison → autonomous task choice → existing phases → original architecture integration → verification. Technical synthesis and design choices are expandable references within the comparison chapter. These are comparison questions, not exclusive framework categories or invented maturity phases.
 
 ## Framework implementation evidence
 
