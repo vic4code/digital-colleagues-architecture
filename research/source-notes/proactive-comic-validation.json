@@ -1,0 +1,24 @@
+{
+  "scope": "Interactive illustrative comic; no connectors or messages executed",
+  "scenes": 7,
+  "manual_frames_checked": 28,
+  "viewports": [
+    1440,
+    768,
+    390
+  ],
+  "document_overflow": false,
+  "page_errors": [],
+  "play_advances": true,
+  "pause_holds_frame": true,
+  "auto_stops_on_frame_4": true,
+  "replay_resets": true,
+  "scene_change_pauses": true,
+  "evidence_link_opens_target": true,
+  "keyboard_frame_focus_preserved": true,
+  "reduced_motion_animation": "none",
+  "review_fixes": [
+    "restore manual-frame focus",
+    "clarify changed monitor data occurs on next check"
+  ]
+}

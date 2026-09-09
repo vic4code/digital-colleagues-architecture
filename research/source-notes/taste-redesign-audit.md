@@ -80,3 +80,7 @@ Seven-framework audit for remembered promises → model-decided follow-up → re
 Added six-step source-backed integration proposal: recall, latest evidence, model decision, identity resolution, draft/authorized delivery and persisted follow-up state. Documented existing Standing Intent reminders and their user-trigger matching versus heartbeat/cron maintenance. Memory corpus availability is explicit. Proposed business records and six acceptance cases are labeled design, not implemented runtime. Browser detail opens by hash, six rows render, 1440/768/390 widths show no overflow/errors; 182 source ranges validate. No messages or live follow-up test were run.
 
 Source review correction: memory_get reads memory-file excerpts; session/message originals require their permitted source reader. Updated the proposed recall step accordingly.
+
+## Animated colleague comic — 2026-09-09
+
+Added seven illustrative four-frame scenes with lightweight CSS motion, play/pause/restart, manual frames and source links. No autoplay or live actions; reduced-motion disables animation. Browser verified 28 manual frames, timed progression/pause/end, restart, scene change, evidence navigation, keyboard focus, and three responsive widths. Review fixes preserve manual-frame focus and separate unchanged from next-check changed monitor data. See proactive-comic-validation.json.
