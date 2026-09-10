@@ -4,20 +4,20 @@ const scenes = {
   "flow-claw-0": {
     "frames": [
       [
-        "Office hours: watch customer mail.",
-        "上班時間，交代好的責任是留意客戶來信。"
+        "You ask your colleague to keep an eye on customer mail during office hours.",
+        "你交代同事：「上班時間幫我留意客戶來信。」"
       ],
       [
-        "The scheduled heartbeat starts my check.",
-        "Heartbeat 排程到了，啟動這次查看。"
+        "It is time for the next check, so they open Outlook without waiting for you to ask.",
+        "到了約好的檢查時間，他就打開 Outlook，不用你再催。"
       ],
       [
-        "I read Outlook: a customer needs an answer today.",
-        "我讀 Outlook，發現客戶要求今天答覆。"
+        "A customer says they need your answer today. Your colleague reads the request.",
+        "有位客戶說今天就要答覆，他先看清楚對方需要什麼。"
       ],
       [
-        "I send a private reminder with the mail; no urgent item means silence.",
-        "有急事才送私人提醒與原信，沒事就不打擾。"
+        "They send you a private reminder with the original mail. If nothing needs attention, they stay quiet.",
+        "他私下提醒你，附上原信；沒有需要注意的事，就不打擾你。"
       ]
     ],
     "setup": "Outlook reader + private inbox / Outlook 讀信工具＋私人收件匣",
@@ -31,20 +31,20 @@ const scenes = {
   "flow-claw-1": {
     "frames": [
       [
-        "The weekday inbox brief is saved for 09:00.",
-        "已設定每個上班日 09:00 整理信箱摘要。"
+        "You ask for an Outlook summary at 09:00 every weekday.",
+        "你交代：「每個上班日早上九點，幫我整理 Outlook 新信。」"
       ],
       [
-        "The automation becomes due and dispatches its saved work.",
-        "排程到期，派送已存的工作。"
+        "At nine, your colleague starts the morning brief without another message from you.",
+        "九點一到，同事就開始整理，不必每天重新交辦。"
       ],
       [
-        "I read new mail and list senders, requests and replies owed.",
-        "我讀新信，整理來信者、要求與待回覆事項。"
+        "They read the new mail and list who wrote, what they need and which messages need your reply.",
+        "他讀完新信，列出誰找你、要什麼、哪些等你回覆。"
       ],
       [
-        "The brief goes to the configured destination.",
-        "摘要送到事先指定的位置。"
+        "The summary arrives where you asked to receive it, ready for your morning review.",
+        "摘要送到你指定的地方，你早上就能直接看重點。"
       ]
     ],
     "setup": "Outlook reader + report delivery / Outlook 讀信工具＋報告送達管道",
@@ -58,20 +58,20 @@ const scenes = {
   "flow-claw-2": {
     "frames": [
       [
-        "A contract is marked ready for review.",
-        "合約被標成待審查。"
+        "Someone marks a contract in SharePoint as ready for review.",
+        "有人把 SharePoint 裡的合約標成「待審查」。"
       ],
       [
-        "The document integration calls /hooks/agent.",
-        "文件系統的整合程式呼叫 /hooks/agent。"
+        "The document system is connected to your colleague, so it tells them the contract is ready.",
+        "文件系統已接好通知，合約一準備好，就通知同事。"
       ],
       [
-        "I open the contract with the SharePoint reader.",
-        "我用 SharePoint 工具讀取合約。"
+        "Your colleague opens the contract in SharePoint and reads through it.",
+        "同事到 SharePoint 打開這份合約，逐項閱讀。"
       ],
       [
-        "I prepare review comments in your private inbox.",
-        "我把審查意見整理到你的私人收件匣。"
+        "They put their review comments in your private inbox for you to check.",
+        "他把審查意見送到你的私人收件匣，讓你查看。"
       ]
     ],
     "setup": "Document-system webhook + SharePoint reader / 文件系統事件接線＋SharePoint 讀取工具",
@@ -85,20 +85,20 @@ const scenes = {
   "flow-claw-3": {
     "frames": [
       [
-        "I start a long data check with a command.",
-        "我用命令列啟動一批耗時資料檢查。"
+        "Your colleague starts a large data check that may take half an hour.",
+        "同事開始檢查一大批資料，可能要等半小時。"
       ],
       [
-        "The command exits; on-exit starts the follow-up.",
-        "命令結束，on-exit 啟動後續處理。"
+        "The checking program finishes and tells them the results are ready.",
+        "檢查程式一跑完，就通知他結果好了。"
       ],
       [
-        "I read its result file.",
-        "我讀取檢查結果檔。"
+        "They open the results file and see which records failed the checks.",
+        "他打開結果檔，查看哪些資料沒有通過。"
       ],
       [
-        "I list the failed records without another prompt.",
-        "不用再催，我就列出沒有通過的資料。"
+        "They list the problem records for you, without waiting for “Is it done yet?”",
+        "他直接整理有問題的資料給你，不用等你問「跑完了嗎？」"
       ]
     ],
     "setup": "Supervised command + result-file reader / 受管理的命令＋結果檔讀取工具",
@@ -112,20 +112,20 @@ const scenes = {
   "flow-claw-4": {
     "frames": [
       [
-        "A command keeps watching system logs.",
-        "一支程式持續讀取系統紀錄。"
+        "Your colleague has a connected program watching the shop’s system messages.",
+        "同事讓接好的監看程式持續留意商店系統的消息。"
       ],
       [
-        "It outputs checkout failed, payment timeout, then checkout recovered.",
-        "它陸續輸出結帳失敗、付款逾時、結帳恢復。"
+        "In a few seconds, it reports checkout failure, payment timeout and then checkout recovery.",
+        "幾秒內先傳來「結帳失敗」「付款逾時」，接著又說「結帳恢復」。"
       ],
       [
-        "Stream collects a batch and passes it to me.",
-        "Stream 先收成一批，再把訊息交給我。"
+        "The messages are collected together, so your colleague reads the whole sequence.",
+        "系統把這幾則消息一起交給同事，讓他看完整個經過。"
       ],
       [
-        "Checkout recovered; payment still needs investigation.",
-        "結帳已恢復，但付款仍需要調查。"
+        "They tell you: “Checkout is back, but the payment problem still needs checking.”",
+        "他告訴你：「結帳恢復了，但付款的問題還需要查。」"
       ]
     ],
     "setup": "Log watcher stdout/stderr + configured notification / 紀錄監看程式輸出＋指定通知管道",
@@ -139,20 +139,20 @@ const scenes = {
   "flow-claw-5": {
     "frames": [
       [
-        "A script checks the nightly import status API.",
-        "小程式查夜間匯入的狀態 API。"
+        "You want your colleague to investigate if the nightly data import fails.",
+        "你交代：「夜間資料匯入如果失敗，幫我查原因。」"
       ],
       [
-        "Running: do not start me. Failed: allow the work.",
-        "執行中就不叫我，失敗才允許啟動。"
+        "An automatic check watches the import: still running means wait; failure means call the colleague.",
+        "自動檢查先看匯入狀況：還在跑就等，真的失敗才通知同事。"
       ],
       [
-        "After failure, I read logs to locate the failed step.",
-        "這次失敗了，我讀紀錄找出卡住的步驟。"
+        "This time it fails. Your colleague reads the records to find where it stopped.",
+        "這次真的失敗了，同事就讀取紀錄，找出卡在哪一步。"
       ],
       [
-        "I prepare an explanation from the logs.",
-        "我依紀錄整理失敗原因。"
+        "They explain what went wrong using the records they found.",
+        "他根據查到的紀錄，整理發生什麼問題給你。"
       ]
     ],
     "setup": "Custom status-check script + log reader / 自訂狀態檢查程式＋紀錄查詢工具",
@@ -166,20 +166,20 @@ const scenes = {
   "flow-claw-6": {
     "frames": [
       [
-        "I check a payment incident through the monitoring API.",
-        "我用監控 API 查看付款異常。"
+        "Your colleague checks the payment system and finds it still has a problem.",
+        "同事查看付款系統，發現問題還沒解決。"
       ],
       [
-        "The incident is unresolved; I request a check in five minutes.",
-        "還沒恢復，我要求五分鐘後再查。"
+        "They decide: “I should check again in five minutes, rather than wait half an hour.”",
+        "他判斷：「這件事要盯緊一點，五分鐘後再看，不要等半小時。」"
       ],
       [
-        "Runtime checks the proposal and whether this run succeeded.",
-        "Runtime 檢查提案是否合法、這次執行是否成功。"
+        "The system checks that this visit finished successfully and the shorter wait is allowed.",
+        "系統確認這次查看順利完成，而且設定允許五分鐘後再查。"
       ],
       [
-        "If accepted, it saves the earlier next-check time.",
-        "通過才保存較早的下次檢查時間。"
+        "If those checks pass, the next visit is moved forward to five minutes from now.",
+        "確認符合設定後，就把下次查看提前到五分鐘後。"
       ]
     ],
     "setup": "Monitoring API + next_check / 監控 API＋下次檢查時間設定",
@@ -193,20 +193,20 @@ const scenes = {
   "flow-claw-7": {
     "frames": [
       [
-        "I finish a difficult weekly report.",
-        "我完成一份很難整理的週報。"
+        "Your colleague finishes a difficult weekly report and finds a useful way to clean the spreadsheet.",
+        "同事做完一份很難整理的週報，找到好用的試算表清理方法。"
       ],
       [
-        "The completed work qualifies for Workshop review.",
-        "這次已完成工作符合 Workshop 回顧條件。"
+        "The system selects this finished task for a review under its review settings.",
+        "這份已完成工作符合設定的回顧條件，系統就安排回顧。"
       ],
       [
-        "The review extracts a useful spreadsheet-cleaning method.",
-        "回顧整理出有用的試算表清理方法。"
+        "The review looks back at the work and picks out the useful cleaning steps.",
+        "回顧時重新看這次怎麼做，整理出有用的清理步驟。"
       ],
       [
-        "Permitted reporting instructions improve for next time.",
-        "更新允許修改的指引，供下次使用。"
+        "Those steps are added to the instructions they may update, ready for the next report.",
+        "把步驟補進允許更新的工作指引，下次做週報就用得上。"
       ]
     ],
     "setup": "Completed work + permitted skill files / 已完成工作紀錄＋允許修改的技能檔",
@@ -220,20 +220,20 @@ const scenes = {
   "flow-claw-8": {
     "frames": [
       [
-        "Useful project facts are scattered in stored notes.",
-        "專案資訊散落在已保存的筆記。"
+        "After working on a project, your colleague has useful information scattered across saved notes.",
+        "專案做了一陣子，同事的筆記裡累積了不少零散資訊。"
       ],
       [
-        "The configured Dreaming maintenance starts.",
-        "設定好的 Dreaming 記憶整理啟動。"
+        "The scheduled time to tidy those notes arrives.",
+        "到了事先排好的筆記整理時間。"
       ],
       [
-        "Stored memory is reviewed and organized.",
-        "讀取並整理已有的記憶內容。"
+        "The system reviews and organizes what was already saved.",
+        "系統重新閱讀已存下的筆記，把內容整理好。"
       ],
       [
-        "Useful information remains for later work; no inbox search starts.",
-        "留下後續有用的資訊，不是去信箱找新任務。"
+        "Useful facts are kept for later work. This tidy-up does not send the colleague out to find new jobs.",
+        "留下以後用得到的資訊；這次是在整理筆記，不是出去找新工作。"
       ]
     ],
     "setup": "Stored memory + maintenance tools / 已保存記憶＋整理工具",
@@ -247,20 +247,20 @@ const scenes = {
   "flow-claw-9": {
     "frames": [
       [
-        "You assign the quarterly report with a budget.",
-        "你交辦季報，並設定預算。"
+        "You ask for a quarterly report and set a limit on how much the colleague may spend on it.",
+        "你交辦一份季報，也設定這份工作能花多少額度。"
       ],
       [
-        "The goal tool records the assignment.",
-        "目標工具記錄這份交辦。"
+        "Your colleague records what you asked them to deliver.",
+        "同事先記下你要的成果是什麼。"
       ],
       [
-        "The objective and budget are stored in conversation state.",
-        "目標與預算存入對話狀態。"
+        "The assignment and spending limit are saved with the conversation.",
+        "交辦內容和額度一起保存在這段對話裡。"
       ],
       [
-        "Storage alone starts no additional agent turn.",
-        "單純保存，不會自己啟動下一輪工作。"
+        "The assignment is now recorded. Saving it alone does not make the colleague start another round of work.",
+        "這樣只是把交辦記好；光是存下來，不會讓同事自己再開工。"
       ]
     ],
     "setup": "Goal storage; automatic restart unverified / 目標儲存；自動再啟動未證實",
@@ -274,20 +274,20 @@ const scenes = {
   "flow-hermes-0": {
     "frames": [
       [
-        "A daily 09:00 Outlook review is saved.",
-        "存下一項每天 09:00 查看 Outlook 的工作。"
+        "You ask: “Every morning at nine, list the Outlook messages I still need to answer.”",
+        "你交代：「每天早上九點，列出 Outlook 裡還等我回覆的信。」"
       ],
       [
-        "Cron starts a new work conversation when it is due.",
-        "Cron 到期後開啟新的工作對話。"
+        "At nine, the system gives your colleague a fresh conversation for that morning’s work.",
+        "九點到了，系統開一段新的工作對話，請同事整理今天的信。"
       ],
       [
-        "I read mail with the connected tool and list replies owed.",
-        "我用接好的工具讀信，列出待回覆事項。"
+        "They open the connected Outlook account and find the messages waiting for you.",
+        "他打開已連接的 Outlook，找出還等你處理的信。"
       ],
       [
-        "Runtime delivers the summary to the configured chat.",
-        "Runtime 把摘要送到指定聊天室。"
+        "The system sends the summary to your chosen chat, without you first asking for it.",
+        "系統把摘要送到你指定的聊天室，不用你先問。"
       ]
     ],
     "setup": "Configured Outlook reader + chat delivery / 已接好的 Outlook 讀信工具＋聊天室送達",
@@ -301,20 +301,20 @@ const scenes = {
   "flow-hermes-1": {
     "frames": [
       [
-        "A customer submits a support ticket.",
-        "客戶送出一張客服單。"
+        "A customer submits a new support ticket.",
+        "客戶送出一張新的客服單。"
       ],
       [
-        "The support system sends its ID through a checked webhook.",
-        "客服系統傳來單號，webhook 通過接收檢查。"
+        "The connected support system notifies your colleague; the notice must pass the receiving checks first.",
+        "接好的客服系統通知同事，通知通過接收檢查後才開始處理。"
       ],
       [
-        "I retrieve the actual ticket through the ticket tool.",
-        "我用客服單工具讀取真正的問題。"
+        "Your colleague opens that ticket and reads what the customer needs.",
+        "同事打開這張客服單，看清楚客戶遇到什麼問題。"
       ],
       [
-        "I prepare a reply draft for you to review.",
-        "我準備回覆草稿，交給你確認。"
+        "They prepare a reply draft for you to review before it is sent.",
+        "他先寫好回覆草稿，交給你確認。"
       ]
     ],
     "setup": "Support webhook + ticket reader / 客服系統 webhook＋案件查詢工具",
@@ -328,20 +328,20 @@ const scenes = {
   "flow-hermes-2": {
     "frames": [
       [
-        "You assign periodic supplier follow-up in this session.",
-        "你在這段對話交代定期追供應商回覆。"
+        "During a project conversation, you ask your colleague to keep checking for a supplier’s reply.",
+        "討論專案時，你交代同事：「幫我定期看供應商回信了沒。」"
       ],
       [
-        "Heartbeat becomes eligible; your active requests take priority.",
-        "Heartbeat 到可執行時機，仍優先處理你的新要求。"
+        "When a check is due and can run, they return to it. Your new requests take priority.",
+        "到了可以檢查的時間，他就回來追這件事；你有新要求時，先處理你的要求。"
       ],
       [
-        "I search Outlook for the supplier reply.",
-        "我搜尋 Outlook，查看供應商是否回覆。"
+        "They search Outlook for a reply from that supplier.",
+        "他到 Outlook 搜尋這位供應商的回信。"
       ],
       [
-        "I remind you if the follow-up needs attention.",
-        "需要注意時，我再提醒你。"
+        "If the follow-up needs your attention, they remind you.",
+        "這件事需要你注意時，他再提醒你。"
       ]
     ],
     "setup": "Session instructions + Outlook search / 對話內交辦＋Outlook 搜尋工具",
@@ -355,20 +355,20 @@ const scenes = {
   "flow-hermes-3": {
     "frames": [
       [
-        "You ask me to recheck a large upload every few minutes.",
-        "你交代每隔幾分鐘查看大檔案上傳。"
+        "You ask your colleague to check every few minutes until a large file finishes uploading.",
+        "你交代同事：「每隔幾分鐘看一下，這個大檔案上傳好了沒。」"
       ],
       [
-        "A /loop tick starts the assigned check.",
-        "/loop 啟動一輪既定檢查。"
+        "The next check comes around without you asking again.",
+        "到了下一次檢查時間，不用你再叫他。"
       ],
       [
-        "I query the upload status API; unfinished work waits for another tick.",
-        "我查上傳狀態，沒好就等下一次。"
+        "They check the upload progress. If it is still running, they wait for the next check.",
+        "他查看上傳進度；還沒好，就等下一次再看。"
       ],
       [
-        "Stop when complete or when the configured limit is reached.",
-        "上傳完成或達到設定上限，就停止。"
+        "They stop checking when the upload finishes or the limit you set is reached.",
+        "上傳完成，或檢查到你設定的上限，就停止。"
       ]
     ],
     "setup": "Upload-status API + stop condition / 上傳狀態 API＋停止條件",
@@ -382,20 +382,20 @@ const scenes = {
   "flow-hermes-4": {
     "frames": [
       [
-        "The assigned goal is to make the tests pass.",
-        "交辦目標是把測試修到通過。"
+        "You ask your colleague to fix the program until its tests pass.",
+        "你交代同事：「把程式修好，讓測試通過。」"
       ],
       [
-        "After a turn, /goal evaluates progress and remaining limits.",
-        "回合結束，/goal 檢查進度與剩餘限制。"
+        "After each round of work, the system checks what remains and whether there is room to continue.",
+        "每做完一輪，系統就看還差什麼、剩下的額度能不能繼續。"
       ],
       [
-        "If continuation is allowed, I inspect failures and try a repair.",
-        "允許續跑時，我查失敗原因並嘗試修正。"
+        "If another attempt is allowed, your colleague examines the failed tests and tries a fix.",
+        "還能繼續時，同事就查看哪些測試沒過，再試著修正。"
       ],
       [
-        "Tests and goal controls decide whether to continue, wait or finish.",
-        "依測試與目標控制，決定繼續、等待或完成。"
+        "Depending on the results and limits, they keep working, wait for help or finish.",
+        "依照結果和限制，接著做、等人協助，或結束這份工作。"
       ]
     ],
     "setup": "File editor + test command / 檔案編輯工具＋測試命令",
@@ -409,20 +409,20 @@ const scenes = {
   "flow-hermes-5": {
     "frames": [
       [
-        "My sales analysis depends on another colleague preparing a CSV.",
-        "我的銷售分析要等另一位同事備好 CSV。"
+        "The analyst cannot start the sales summary until another colleague prepares the sales file.",
+        "分析同事要做銷售摘要，得先等另一位同事把銷售檔準備好。"
       ],
       [
-        "The prerequisite is marked complete.",
-        "前置任務被標成完成。"
+        "That colleague finishes the file and marks their task complete on the board.",
+        "對方把檔案備好，在工作看板上標成完成。"
       ],
       [
-        "The next Kanban scan dispatches ready work if capacity permits.",
-        "下次 Kanban 掃描，有空間才派送已就緒工作。"
+        "The next time the system checks the board, it assigns the analysis if there is room to run it.",
+        "系統下次查看看板時，若還能安排工作，就把分析交出去。"
       ],
       [
-        "I read the CSV with analysis tools and prepare the summary.",
-        "我用分析工具讀 CSV，整理銷售摘要。"
+        "The analyst reads the sales file and prepares the summary, without you passing the task along.",
+        "分析同事讀取銷售檔、整理摘要，不必你再轉交一次。"
       ]
     ],
     "setup": "Kanban task dependencies + CSV analysis / Kanban 任務依賴＋CSV 分析工具",
@@ -436,20 +436,20 @@ const scenes = {
   "flow-hermes-6": {
     "frames": [
       [
-        "I finish investigating a report-generation failure.",
-        "我查完一件報表產生失敗的問題。"
+        "Your colleague finishes finding out why a report failed to generate.",
+        "同事已查清楚，這次報表為什麼產生失敗。"
       ],
       [
-        "Enabled review logic checks whether the work qualifies.",
-        "已啟用的回顧邏輯檢查這次工作是否符合條件。"
+        "Reviews are enabled, and this finished task meets the review rules.",
+        "你已開啟工作回顧，這份工作也符合回顧條件。"
       ],
       [
-        "The background review revisits logs and troubleshooting steps.",
-        "背景回顧重看紀錄與排查步驟。"
+        "The system looks back at how the problem was investigated.",
+        "系統回頭看這次如何一步步找到問題。"
       ],
       [
-        "Useful steps go into files it is permitted to update.",
-        "有用的步驟寫進允許更新的檔案。"
+        "It saves useful troubleshooting steps in files it may update, for the next similar problem.",
+        "把有用的排查步驟記進允許更新的檔案，下次遇到類似問題可參考。"
       ]
     ],
     "setup": "Completed run + restricted file writes / 已完成執行紀錄＋受限制的檔案寫入",
@@ -463,20 +463,20 @@ const scenes = {
   "flow-hermes-7": {
     "frames": [
       [
-        "Chronos holds the daily 09:00 inbox schedule.",
-        "Chronos 管理每天 09:00 的信箱摘要排程。"
+        "Your company uses Chronos to arrange the daily nine o’clock inbox summary.",
+        "公司用 Chronos 安排每天早上九點的信箱摘要。"
       ],
       [
-        "Chronos notifies Hermes of this due occurrence.",
-        "到期後，Chronos 通知 Hermes 這次工作。"
+        "At nine, Chronos tells Hermes that today’s summary is due.",
+        "九點一到，Chronos 就通知 Hermes：「該做今天的摘要了。」"
       ],
       [
-        "Hermes claims execution before I read Outlook.",
-        "Hermes 先取得執行權，我才讀 Outlook。"
+        "Hermes first secures this run’s assignment, then starts the colleague on it.",
+        "Hermes 先確認這次工作由自己接手，再讓同事開始做。"
       ],
       [
-        "The assigned summary is delivered through the configured route.",
-        "交辦的摘要經設定好的管道送達。"
+        "Your colleague reads Outlook and the summary is delivered through the connection you set up.",
+        "同事讀完 Outlook，摘要就透過你接好的管道送達。"
       ]
     ],
     "setup": "Chronos + configured Outlook reader / Chronos 排程＋已接好的 Outlook 讀信工具",
@@ -490,20 +490,20 @@ const scenes = {
   "flow-hermes-8": {
     "frames": [
       [
-        "A scheduled script reads a stable list of Outlook message IDs.",
-        "排程程式讀取固定格式的 Outlook 郵件 ID 清單。"
+        "An automatic check looks at the Outlook message list every few minutes.",
+        "自動檢查每隔幾分鐘看一次 Outlook 的郵件清單。"
       ],
       [
-        "Same as the saved list: skip the agent on this check.",
-        "和上次清單相同，這次就不啟動 agent。"
+        "If the list is exactly the same as last time, it leaves your colleague alone.",
+        "清單跟上次完全一樣，就不叫同事重新讀一遍。"
       ],
       [
-        "A later check changes the list; first observation also qualifies.",
-        "後來一次查看清單變了；首次觀察也會進處理。"
+        "At a later check, the list has changed. That calls the colleague; the very first check also does.",
+        "下一次查看時，清單有變了，才叫同事來看；第一次查看也會請他處理。"
       ],
       [
-        "I read the mail and decide whether a reminder is useful.",
-        "這時我才讀信，判斷是否值得提醒。"
+        "They read the mail and decide whether anything needs your attention.",
+        "同事讀完信，再判斷有沒有需要提醒你的事。"
       ]
     ],
     "setup": "Custom Outlook polling script + mail reader / 自訂 Outlook 輪詢程式＋讀信工具",
@@ -517,20 +517,20 @@ const scenes = {
   "flow-ob-0": {
     "frames": [
       [
-        "You save a Friday team-progress routine.",
-        "你設定週五整理團隊進度的 routine。"
+        "You ask your colleague to prepare the team update every Friday.",
+        "你交代同事：「每週五幫我整理團隊進度。」"
       ],
       [
-        "The schedule offers the work to a Bot.",
-        "排程到時，把工作交給 Bot。"
+        "When Friday’s update is due, the system puts it on the colleague’s work list.",
+        "到了安排好的時間，系統就把這份工作交給同事。"
       ],
       [
-        "I use current permissions to read connected project channels.",
-        "我用目前權限讀已連接的專案頻道。"
+        "They read the connected project channel, using only the access they have.",
+        "他到已連接的專案頻道，閱讀自己有權限查看的內容。"
       ],
       [
-        "The progress summary returns to the chosen channel.",
-        "進度摘要回傳到指定頻道。"
+        "They summarize the week’s progress and send it to the channel you chose.",
+        "他整理這週的進度，送到你指定的頻道。"
       ]
     ],
     "setup": "Connected project channel + channel delivery / 已連接的專案頻道＋頻道送達",
@@ -544,20 +544,20 @@ const scenes = {
   "flow-ob-1": {
     "frames": [
       [
-        "A number in my report needs a specialist explanation.",
-        "報告裡有個數字，需要專家幫忙解釋。"
+        "While writing a report, your project colleague finds a sales number they cannot explain.",
+        "專案同事寫報告時，發現一個銷售數字解釋不清楚。"
       ],
       [
-        "I use message_bot to ask a permitted data specialist.",
-        "我用 message_bot 請獲准協作的資料專家。"
+        "They ask a data specialist they are allowed to work with to investigate.",
+        "他直接請獲准合作的資料專家幫忙查。"
       ],
       [
-        "The specialist uses its own tools and permissions to investigate.",
-        "專家用自己的工具與權限查來源。"
+        "The specialist checks the database using their own access rights.",
+        "資料專家用自己的權限查資料庫，找出數字來源。"
       ],
       [
-        "The specialist returns its explanation through the handoff flow.",
-        "專家透過派工流程交回說明。"
+        "The specialist returns an explanation, without you carrying messages between them.",
+        "專家查完就回覆原因，不必你在兩人之間傳話。"
       ]
     ],
     "setup": "message_bot + specialist database tool / message_bot 派工＋專家的資料庫工具",
@@ -571,20 +571,20 @@ const scenes = {
   "flow-ob-2": {
     "frames": [
       [
-        "A data specialist is investigating a sales figure for me.",
-        "資料專家正在幫我查一個銷售數字。"
+        "A data specialist has been checking a sales number for your project colleague.",
+        "資料專家正在幫專案同事查一個有疑問的銷售數字。"
       ],
       [
-        "The specialist completes the investigation.",
-        "專家完成調查。"
+        "The specialist finishes and hands back the answer.",
+        "專家查完了，交出答案。"
       ],
       [
-        "The result relay carries the answer back to the requesting Bot.",
-        "Result relay 把答案送回原本提問的 Bot。"
+        "The system sends that answer back to the conversation where help was requested.",
+        "系統把答案送回原本提出求助的那段對話。"
       ],
       [
-        "The requester receives the findings without manual copying.",
-        "派工者收到成果，不必由人複製貼上。"
+        "The project colleague receives the findings without you copying them across chats.",
+        "專案同事直接收到結果，不必你在聊天室之間複製貼上。"
       ]
     ],
     "setup": "message_bot result + requesting conversation / message_bot 成果＋原始求助對話",
@@ -598,20 +598,20 @@ const scenes = {
   "flow-ob-3": {
     "frames": [
       [
-        "A Bot owns a long-running database analysis.",
-        "一位 Bot 正負責耗時的資料庫分析。"
+        "Your colleague is working on a database analysis that takes a long time.",
+        "同事正在做一份很耗時的資料庫分析。"
       ],
       [
-        "The lease heartbeat becomes due.",
-        "工作租約的 heartbeat 到期。"
+        "While it runs, the system regularly confirms that this colleague still holds the assignment.",
+        "分析還在跑時，系統定期確認這份工作仍由這位同事負責。"
       ],
       [
-        "It renews ownership of the same work.",
-        "它替同一份工作續租執行權。"
+        "It keeps that assignment valid while the work continues.",
+        "系統持續維持這份工作的負責紀錄。"
       ],
       [
-        "No new task or model turn is created by renewal.",
-        "續租不會新增任務，也不會叫模型另想一輪。"
+        "The analysis continues. This check does not ask the colleague to start a new task.",
+        "同事繼續原本的分析；這個確認不會叫他另做新工作。"
       ]
     ],
     "setup": "Queue lease renewal during existing work / 既有工作執行中的佇列續租",
@@ -625,20 +625,20 @@ const scenes = {
   "flow-gr-0": {
     "frames": [
       [
-        "A cloud automation occurrence record becomes available.",
-        "雲端出現一筆自動化執行紀錄。"
+        "A new automation request appears in the cloud for your colleague to carry out.",
+        "雲端出現一項要交給同事執行的自動化工作。"
       ],
       [
-        "The local polling consumer discovers the record.",
-        "本機輪詢程式讀到這筆紀錄。"
+        "The program on your computer checks for requests and finds this new one.",
+        "你電腦上的程式查看有沒有新工作，讀到這一筆。"
       ],
       [
-        "It validates the request and dispatches the corresponding work.",
-        "它檢查要求，派送對應工作。"
+        "It checks the request before starting the corresponding work.",
+        "它先檢查要求，再啟動對應的工作。"
       ],
       [
-        "This trace starts the work; it does not explain cloud scheduling.",
-        "這條路徑啟動工作，不代表已查明雲端如何排程。"
+        "The colleague starts the requested work. This example begins with a request already in the cloud.",
+        "同事開始做收到的工作；這個例子從「雲端已經有工作」開始。"
       ]
     ],
     "setup": "Reconstructed cloud receiver + configured repository reader / 重建版雲端接收器＋需配置的程式庫讀取工具",
@@ -652,20 +652,20 @@ const scenes = {
   "flow-gr-1": {
     "frames": [
       [
-        "A connected integration receives a failed-build notice.",
-        "已接好的整合程式收到建置失敗通知。"
+        "The connected build system reports that a new version failed to build.",
+        "接好的建置系統通知：「這次的新版本製作失敗了。」"
       ],
       [
-        "It queues the event for the existing conversation.",
-        "它把事件放進原有對話的佇列。"
+        "The connection adds the notice to your colleague’s existing conversation.",
+        "接好的通知管道把消息送進同事原本的對話。"
       ],
       [
-        "When the conversation is idle, a follow-up may begin.",
-        "對話閒置時，可開始後續處理。"
+        "When that conversation is idle, the system can ask the colleague to follow up.",
+        "那段對話沒有正在處理的工作時，系統就可以請他接著查。"
       ],
       [
-        "With configured log tools, I investigate and report findings.",
-        "若已接好紀錄工具，我就查原因、整理發現。"
+        "With access to the failure records, the colleague reads them and prepares findings.",
+        "同事有權限讀取失敗紀錄時，就查看紀錄，整理發現。"
       ]
     ],
     "setup": "Custom event integration + log reader / 自訂事件接線＋紀錄查詢工具",
@@ -679,20 +679,20 @@ const scenes = {
   "flow-gr-2": {
     "frames": [
       [
-        "I delegate a repository investigation and wait for the result.",
-        "我委派程式庫調查，等待對方成果。"
+        "Your colleague asks another agent to investigate the project’s code and waits for an answer.",
+        "同事請另一位 agent 調查專案程式，先等對方回覆。"
       ],
       [
-        "The delegated agent completes and returns its findings.",
-        "對方完成，交回調查發現。"
+        "The other agent finishes and returns its findings.",
+        "對方查完，把結果交回來。"
       ],
       [
-        "The host checks duplicate completion and requests continuation.",
-        "Host 檢查重複完成通知，再要求接續對話。"
+        "The system checks whether this completion notice was already handled before asking for follow-up.",
+        "系統先確認這份完成通知有沒有處理過，再請同事接著做。"
       ],
       [
-        "I can continue the original work using the returned context.",
-        "我取得回傳脈絡，繼續原本的工作。"
+        "Your colleague can continue the original conversation with the findings now available.",
+        "同事拿到調查結果，就能接續原本的對話。"
       ]
     ],
     "setup": "Delegated agent result + original conversation / 委派 agent 成果＋原始對話",
@@ -706,20 +706,20 @@ const scenes = {
   "flow-gr-3": {
     "frames": [
       [
-        "Several continuation turns have used no counted tools.",
-        "連續幾次續跑沒有使用計入的工具。"
+        "Your colleague has replied several times without using any tools to do the work.",
+        "同事連續回了好幾輪話，卻沒有用工具實際處理工作。"
       ],
       [
-        "Another goal-continuation request arrives.",
-        "又收到一次目標續跑要求。"
+        "Another request asks them to keep going.",
+        "這時，又來了一次「繼續做」的要求。"
       ],
       [
-        "The handler checks the goal and no-tool threshold.",
-        "處理器檢查目標與無工具進展門檻。"
+        "The system checks whether the limit for rounds without tool use has been reached.",
+        "系統檢查：「只回話、沒用工具」的次數，是不是已經到上限。"
       ],
       [
-        "At the threshold it pauses; this guard does not invent work.",
-        "達門檻就暫停；這個保護不會自己產生工作。"
+        "If it has, the system pauses the work instead of allowing more empty rounds.",
+        "到上限就先暫停，避免同事一直說，卻沒有繼續做事。"
       ]
     ],
     "setup": "Continuation request + progress guard / 續跑要求＋進度檢查",
@@ -733,20 +733,20 @@ const scenes = {
   "flow-v-0": {
     "frames": [
       [
-        "You start exploration in the Minecraft environment.",
-        "你啟動 Minecraft 環境中的探索。"
+        "You start Voyager in Minecraft and ask it to explore, without listing each task.",
+        "你啟動 Voyager，請它探索 Minecraft，沒有逐項交代要做什麼。"
       ],
       [
-        "World state, inventory and task history reach the curriculum.",
-        "環境、背包與任務歷史交給 curriculum。"
+        "It looks at the surroundings, its backpack and what it has already tried.",
+        "它先看周遭有什麼、背包有什麼，以及之前做過哪些事。"
       ],
       [
-        "The curriculum model selects the next exploration task.",
-        "Curriculum 模型選下一個探索任務。"
+        "From that information, it chooses what to try next.",
+        "它根據這些資訊，自己挑下一件要嘗試的事。"
       ],
       [
-        "After acting and checking results, the loop chooses again.",
-        "執行並檢查成果後，迴圈再選下一件事。"
+        "It acts, checks what happened, then chooses the next task from the updated situation.",
+        "它動手做、查看結果，再依新的狀況選下一件事。"
       ]
     ],
     "setup": "Minecraft state + game-action code / Minecraft 狀態＋遊戲操作程式",
@@ -760,20 +760,20 @@ const scenes = {
   "flow-v-1": {
     "frames": [
       [
-        "An attempted crafting program fails: materials are missing.",
-        "合成程式失敗，遊戲回報材料不足。"
+        "Voyager tries to make an item in Minecraft, but the game says materials are missing.",
+        "Voyager 想在 Minecraft 製作物品，遊戲卻告訴它材料不夠。"
       ],
       [
-        "The action agent receives environment feedback.",
-        "Action agent 收到環境回饋。"
+        "It reads what went wrong and what is now around it.",
+        "它看剛才哪裡出問題，也查看現在的環境。"
       ],
       [
-        "It revises the action program and retries the same task.",
-        "它修正操作程式，重試同一任務。"
+        "It changes its instructions and tries the same task again.",
+        "它調整操作方式，再試一次同樣的任務。"
       ],
       [
-        "Stop after verified success or the attempt limit.",
-        "驗證成功或嘗試次數用完就停止。"
+        "It stops when the task succeeds or it has used up the allowed attempts.",
+        "成功了就結束；如果試到設定的次數上限，也會停止。"
       ]
     ],
     "setup": "Game feedback + code execution + verification / 遊戲回饋＋程式執行＋成果驗證",
@@ -787,20 +787,20 @@ const scenes = {
   "flow-cx-0": {
     "frames": [
       [
-        "You schedule a weekday 09:00 local project review in the app.",
-        "你在 App 設定上班日 09:00 查看本機專案。"
+        "You schedule a review of your project files for nine every weekday morning.",
+        "你排好每個上班日早上九點，請同事查看專案檔案。"
       ],
       [
-        "The app starts the task while the machine and app are available.",
-        "電腦與 App 可用時，排程啟動工作。"
+        "At the scheduled time, the app starts the work if it is running and the computer is awake.",
+        "時間到了，App 開著、電腦也醒著，才會開始這份工作。"
       ],
       [
-        "I read project files and inspect recent changes.",
-        "我讀專案檔案，查看近期變更。"
+        "Your colleague reads the files on your computer and checks the project’s progress.",
+        "同事閱讀你電腦上的專案檔案，查看進度。"
       ],
       [
-        "I prepare a progress brief; the schedule does not power on the laptop.",
-        "我整理進度摘要；排程不會替筆電開機。"
+        "They prepare a brief you can read before starting your day.",
+        "他整理一份摘要，讓你開始工作前先看重點。"
       ]
     ],
     "setup": "App schedule + local project files / App 排程＋本機專案檔案",
@@ -814,20 +814,20 @@ const scenes = {
   "flow-cx-1": {
     "frames": [
       [
-        "You assign the goal: make the tests pass.",
-        "你交辦目標：把測試修到通過。"
+        "You give your colleague a goal: fix the program until the tests pass.",
+        "你給同事一個目標：「修好程式，讓測試通過。」"
       ],
       [
-        "The thread becomes idle with an active goal.",
-        "Thread 閒置，且仍有有效目標。"
+        "A round of work ends, but the goal is still active and the conversation is now idle.",
+        "做完一輪後，目標仍然有效，對話目前也沒有正在執行的工作。"
       ],
       [
-        "Runtime may start another eligible turn to continue the repair.",
-        "Runtime 可啟動符合條件的下一輪修復。"
+        "If the rules allow more work, the system starts another round on the same repair.",
+        "符合繼續執行的條件時，系統就再開一輪，接著修同一個問題。"
       ],
       [
-        "Work continues toward that same goal within its controls.",
-        "在控制條件內，繼續推進同一個目標。"
+        "Your colleague keeps working toward that goal without another “continue” from you.",
+        "同事繼續朝原本的目標做，不用你每次都說「繼續」。"
       ]
     ],
     "setup": "Goal controls + file editor + test command / 目標控制＋檔案編輯＋測試命令",
@@ -841,20 +841,20 @@ const scenes = {
   "flow-cx-2": {
     "frames": [
       [
-        "The build system reports a deployment failure.",
-        "建置系統回報部署失敗。"
+        "The build system reports that a new release failed to deploy.",
+        "建置系統回報：「這次的新版本沒有成功上線。」"
       ],
       [
-        "Your custom listener receives the event.",
-        "你自行接的監聽程式收到事件。"
+        "A connection your team built receives that failure notice.",
+        "你們另外接好的通知程式收到這則失敗消息。"
       ],
       [
-        "It starts Codex through exec or App Server.",
-        "它透過 exec 或 App Server 啟動 Codex。"
+        "That program asks Codex to investigate the failed release.",
+        "通知程式把這件事交給 Codex，請它調查。"
       ],
       [
-        "I read logs and prepare a fix; sensing belongs to the integration.",
-        "我讀紀錄、準備修正；事件感測由整合程式負責。"
+        "Your colleague reads the records and prepares a fix; your team’s connection is what brought the news.",
+        "同事查看紀錄、準備修正；消息是由你們接的通知程式帶進來的。"
       ]
     ],
     "setup": "Custom build listener + exec/App Server + shell / 自訂建置監聽＋exec/App Server＋命令列工具",
@@ -868,20 +868,20 @@ const scenes = {
   "flow-cx-3": {
     "frames": [
       [
-        "I finish the assigned build check.",
-        "我完成交辦的建置檢查。"
+        "Your colleague finishes checking whether the new version built correctly.",
+        "同事完成檢查，確認這次新版本的製作結果。"
       ],
       [
-        "The turn-completion notification invokes your configured script.",
-        "回合完成通知呼叫你設定的 script。"
+        "The system calls the notification program you configured when the work ends.",
+        "工作結束時，系統叫用你事先設定的通知程式。"
       ],
       [
-        "The script displays a desktop reminder.",
-        "Script 顯示桌面提醒。"
+        "A desktop notice tells you: “The results are ready.”",
+        "桌面跳出提醒：「結果好了，可以查看。」"
       ],
       [
-        "You learn the result is ready; no new investigation starts.",
-        "你知道結果好了；這不會另啟動調查。"
+        "You know it is time to read the result. The notice does not start another investigation.",
+        "你知道可以看結果了；這則提醒不會另開一份調查。"
       ]
     ],
     "setup": "Configured notify script + desktop notification / 已設定的 notify 腳本＋桌面通知",
@@ -895,20 +895,20 @@ const scenes = {
   "flow-cc-0": {
     "frames": [
       [
-        "You ask /loop to check a running deployment every five minutes.",
-        "你用 /loop 交代每五分鐘查一次部署。"
+        "A new version is being deployed. You ask your colleague to check every five minutes.",
+        "新版本正在上線，你請同事每五分鐘看看進度。"
       ],
       [
-        "The session schedule starts the next check.",
-        "對話內排程啟動下一次查看。"
+        "With Claude Code still open, the next check starts when it is due and can run.",
+        "Claude Code 還開著，到了時間、可以執行時，就開始下一次查看。"
       ],
       [
-        "I run the deployment-status command.",
-        "我執行部署狀態命令。"
+        "Your colleague checks whether the release has finished deploying.",
+        "同事查看新版本上線好了沒。"
       ],
       [
-        "I report completion when observed; session controls bound the loop.",
-        "看到完成就回報；loop 受 session 執行條件限制。"
+        "They report when it is done. These repeated checks run while Claude Code remains open.",
+        "看到完成就回報；這些定期查看在 Claude Code 開著時執行。"
       ]
     ],
     "setup": "/loop + deployment-status command / /loop＋部署狀態命令",
@@ -922,20 +922,20 @@ const scenes = {
   "flow-cc-1": {
     "frames": [
       [
-        "I start a log-watching command through Monitor.",
-        "我透過 Monitor 啟動紀錄監看程式。"
+        "Your colleague starts a program that keeps watching the system’s records.",
+        "同事啟動一支程式，持續留意系統紀錄。"
       ],
       [
-        "The command prints a new error line.",
-        "程式輸出一行新錯誤。"
+        "The watching program finds and reports a new error.",
+        "監看程式發現一筆新錯誤，把消息送出來。"
       ],
       [
-        "Monitor feeds the line into the conversation as an event.",
-        "Monitor 把輸出以事件帶回對話。"
+        "The system brings that message back into the colleague’s conversation.",
+        "系統把這則消息帶回同事的對話。"
       ],
       [
-        "I can read surrounding logs and investigate the error.",
-        "我接著讀前後紀錄，調查錯誤。"
+        "Your colleague can read the records around the error and investigate what happened.",
+        "同事接著讀錯誤前後的紀錄，調查發生什麼事。"
       ]
     ],
     "setup": "Monitor + log-watching process + shell / Monitor＋紀錄監看程式＋命令列工具",
@@ -949,20 +949,20 @@ const scenes = {
   "flow-cc-2": {
     "frames": [
       [
-        "A colleague posts that the build failed in a connected Telegram bot.",
-        "同事在已連接的 Telegram bot 說建置失敗。"
+        "A teammate tells the connected Telegram bot: “The latest build failed.”",
+        "同事在已連接的 Telegram bot 留言：「最新版本製作失敗了。」"
       ],
       [
-        "The Channel delivers that message into my session.",
-        "Channel 把訊息送進我的 session。"
+        "That message reaches your digital colleague’s working conversation.",
+        "這則留言直接進入數位同事正在使用的工作對話。"
       ],
       [
-        "With available repository tools, I inspect the failure.",
-        "有提供程式庫工具時，我就查失敗原因。"
+        "With access to the project, they check the code and failure details.",
+        "已提供專案存取權時，他就查看程式和失敗細節。"
       ],
       [
-        "I can respond through the connected Telegram tools.",
-        "我可以透過已連接的 Telegram 工具回覆。"
+        "They can reply through the connected Telegram account, without you forwarding the answer.",
+        "他可以透過已連接的 Telegram 回覆，不必你再轉傳答案。"
       ]
     ],
     "setup": "Telegram channel + repository/shell tools / Telegram 頻道＋程式庫與命令列工具",
@@ -976,20 +976,20 @@ const scenes = {
   "flow-cc-3": {
     "frames": [
       [
-        "You schedule a daily local-folder review in Desktop.",
-        "你在 Desktop 排好每天查看本機專案資料夾。"
+        "You schedule a morning check of your project folder in the desktop app.",
+        "你在桌面 App 排好每天早上查看專案資料夾。"
       ],
       [
-        "The schedule starts while the app and computer are available.",
-        "App 與電腦可用時，排程啟動。"
+        "At the scheduled time, the work starts if the app and computer are available.",
+        "時間到了，App 和電腦可用時，就開始這份工作。"
       ],
       [
-        "I read the local files and inspect recent changes.",
-        "我讀本機檔案，查看近期變更。"
+        "Your colleague reads the local files and looks at recent changes.",
+        "同事讀取本機檔案，查看最近改了什麼。"
       ],
       [
-        "I list new changes and unresolved issues.",
-        "我列出最新變更與未解問題。"
+        "They list the changes and issues that still need attention.",
+        "他列出最新變更，以及還需要處理的問題。"
       ]
     ],
     "setup": "Desktop scheduled task + local file tools / Desktop 排程工作＋本機檔案工具",
@@ -1003,20 +1003,20 @@ const scenes = {
   "flow-cc-4": {
     "frames": [
       [
-        "You configure a cloud routine to review new PRs.",
-        "你設定有新 PR 就審查的雲端 routine。"
+        "You arrange for your colleague to review proposed code changes in the cloud.",
+        "你先安排好：有人提出程式修改，就請雲端的同事審查。"
       ],
       [
-        "A new PR activates the configured trigger, even with your laptop off.",
-        "有人開 PR，已接好的觸發啟動；筆電可關閉。"
+        "Someone submits a new change for review. The connected notification starts the work, even with your laptop off.",
+        "有人送出新的程式修改，接好的通知就啟動審查；你的筆電可以關著。"
       ],
       [
-        "The cloud worker reads repository changes in its configured environment.",
-        "雲端 worker 在設定的環境讀程式庫變更。"
+        "The colleague reads the proposed changes in the cloud workspace you set up.",
+        "同事在事先設定好的雲端工作環境，閱讀這次修改。"
       ],
       [
-        "The review result is produced by that cloud work.",
-        "這份雲端工作產生審查結果。"
+        "The cloud work produces review findings for that change.",
+        "這份雲端工作整理出這次修改的審查結果。"
       ]
     ],
     "setup": "Configured PR trigger + cloud repository access / 已設定的 PR 觸發＋雲端程式庫存取",
@@ -1030,20 +1030,20 @@ const scenes = {
   "flow-cc-5": {
     "frames": [
       [
-        "I edit files during the assigned task.",
-        "我在交辦工作中修改檔案。"
+        "Your colleague edits project files as part of the work you assigned.",
+        "同事正在修改專案檔案，處理你交辦的工作。"
       ],
       [
-        "A post-edit hook runs your configured check.",
-        "編輯後的 hook 執行你指定的檢查。"
+        "After an edit, the system runs the checks you specified.",
+        "每次改完，系統就執行你事先指定的檢查。"
       ],
       [
-        "At stopping time, a Stop hook may find unfinished work.",
-        "準備結束時，Stop hook 可能查到未完成事項。"
+        "Before the colleague finishes, a final check may find something still unfinished.",
+        "同事準備交差時，最後一道檢查可能發現還有事情沒做完。"
       ],
       [
-        "It can require follow-up; I continue editing and testing.",
-        "它可要求接續，我再修改與測試。"
+        "If that check requires follow-up, they return to editing and testing.",
+        "檢查要求補做時，同事就回去修改、再測試。"
       ]
     ],
     "setup": "Edit/Stop hooks + check script + editor / 編輯與 Stop hooks＋檢查腳本＋編輯工具",

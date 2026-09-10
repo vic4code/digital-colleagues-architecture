@@ -98,3 +98,8 @@ Validation: all 156 frames traversed in browser; playback, pause, final-frame st
 Design read: an editorial research report for business and engineering readers. Preserve the light theme and orange accent; native CSS, variance 3 / motion 3 / density 5. Replace duplicate full-text frame cards with numbered navigation; show the active bilingual scene beside the existing colleague illustration. Keep all 39 scripts, implementation links and player controls. Remove obsolete standalone-player CSS. Reset inherited header/footer spacing and announce changing speech to assistive technology.
 
 Review found the inherited spacing and counter-only announcement; both were fixed. Browser checks traverse 156 frames, verify visible-player keyboard focus, and check 1440/768/390px layouts. Existing pinned-source validation remains 182 ranges with zero failures.
+
+
+## Plain-language animation steps — 2026-09-10
+
+Rewrote all 156 bilingual frames as workplace situations and actions. Retained named workplace tools, timing, configured connections and limits while moving internal implementation vocabulary out of the story frames. The original technical explanations and source evidence remain unchanged. JSON scene scripts and embedded JavaScript data match. Browser traversal checked all frames; desktop and mobile layouts showed no document overflow, and the mobile adaptive-check scene was visually inspected.
