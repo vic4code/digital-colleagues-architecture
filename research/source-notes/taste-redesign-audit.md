@@ -91,3 +91,10 @@ Added seven illustrative four-frame scenes with lightweight CSS motion, play/pau
 Replaced the standalone seven-scene comic with 39 expandable players inside the existing mechanism scenarios. Each has four separately authored bilingual frames following that mechanism’s situation, trigger, action and outcome. Supporting controls retain their narrower role; they do not imply new work. Players initialize on expansion and pause when closed, offscreen or another player opens.
 
 Validation: all 156 frames traversed in browser; playback, pause, final-frame stop, restart, exclusive playback, close, keyboard focus and reduced motion passed. No document overflow at 1440, 768 or 390 px. Desktop and mobile screenshots inspected. Agent clarity review passed. No connector actions executed.
+
+
+## Scenario player UI refinement — 2026-09-10
+
+Design read: an editorial research report for business and engineering readers. Preserve the light theme and orange accent; native CSS, variance 3 / motion 3 / density 5. Replace duplicate full-text frame cards with numbered navigation; show the active bilingual scene beside the existing colleague illustration. Keep all 39 scripts, implementation links and player controls. Remove obsolete standalone-player CSS. Reset inherited header/footer spacing and announce changing speech to assistive technology.
+
+Review found the inherited spacing and counter-only announcement; both were fixed. Browser checks traverse 156 frames, verify visible-player keyboard focus, and check 1440/768/390px layouts. Existing pinned-source validation remains 182 ranges with zero failures.
