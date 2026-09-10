@@ -30,7 +30,7 @@ The report follows one story: an Outlook responsibility → four practical quest
 
 ## Diagrams, source excerpts and scenarios
 
-- [Comic scene scripts](proactive-comic-scenes.json) and [playback validation](proactive-comic-validation.json): seven illustrative animations near the report opening, with manual frames, pause and implementation links.
+- [Comic scene scripts](proactive-comic-scenes.json) and [playback validation](proactive-comic-validation.json): 39 mechanism-specific animations inside their matching scenarios (156 bilingual frames), with manual steps, pause and implementation links.
 
 - [Source excerpt index](code-excerpt-index.json), [flow index](flow-diagram-index.json), and [sequence index](sequence-diagram-index.json) retain their original audited scope; the HTML also contains later additions.
 - [Sequence node guide](sequence-node-guide.json): bilingual participant responsibilities; the HTML also explains Hermes monitor flowchart blocks.

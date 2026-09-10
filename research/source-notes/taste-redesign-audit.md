@@ -84,3 +84,10 @@ Source review correction: memory_get reads memory-file excerpts; session/message
 ## Animated colleague comic — 2026-09-09
 
 Added seven illustrative four-frame scenes with lightweight CSS motion, play/pause/restart, manual frames and source links. No autoplay or live actions; reduced-motion disables animation. Browser verified 28 manual frames, timed progression/pause/end, restart, scene change, evidence navigation, keyboard focus, and three responsive widths. Review fixes preserve manual-frame focus and separate unchanged from next-check changed monitor data. See proactive-comic-validation.json.
+
+
+## Per-mechanism animation correction — 2026-09-10
+
+Replaced the standalone seven-scene comic with 39 expandable players inside the existing mechanism scenarios. Each has four separately authored bilingual frames following that mechanism’s situation, trigger, action and outcome. Supporting controls retain their narrower role; they do not imply new work. Players initialize on expansion and pause when closed, offscreen or another player opens.
+
+Validation: all 156 frames traversed in browser; playback, pause, final-frame stop, restart, exclusive playback, close, keyboard focus and reduced motion passed. No document overflow at 1440, 768 or 390 px. Desktop and mobile screenshots inspected. Agent clarity review passed. No connector actions executed.
