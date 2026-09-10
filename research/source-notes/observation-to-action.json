@@ -1,0 +1,57 @@
+{
+  "date": "2026-09-09",
+  "scope": "Pinned implementation audit; scenarios are configured illustrations. No deployed inbox or message tests.",
+  "native_path": "Hermes Cron monitor mode",
+  "code": [
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py#L125-L185",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/scheduler.py#L2043-L2067",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/scheduler.py#L2745-L2760"
+  ],
+  "facts": [
+    "Monitor source is explicitly configured as script or URL.",
+    "Exact output hash gates agent startup. Unchanged result skips agent and delivery.",
+    "First observation runs the agent. Source errors are separate from change.",
+    "Baseline persistence is attempted before the agent runs; persistence failures log warnings.",
+    "When saved, the baseline can suppress unchanged content after a failed agent run.",
+    "Successful [SILENT] output independently suppresses delivery.",
+    "Script wakeAgent=false is another pre-agent gate, distinct from monitor hash equality."
+  ],
+  "comparison": [
+    [
+      "OpenClaw · Heartbeat / Automations",
+      "Scheduled agent checks; condition watcher scripts can gate execution.",
+      "Script decides whether to wake; model can decide whether an observation deserves an alert.",
+      "heartbeat_respond notify choice → configured delivery. Further work uses permitted tools.",
+      "flow-claw-0"
+    ],
+    [
+      "Hermes · Cron monitor mode",
+      "A configured script or URL is checked before the model runs.",
+      "Exact hash decides changed / unchanged; agent judges meaning after a change.",
+      "Successful [SILENT] suppresses delivery; otherwise configured Cron delivery.",
+      "flow-hermes-8"
+    ],
+    [
+      "Codex · Scheduled tasks",
+      "App schedule revisits a chat or starts one; agent reads connected sources.",
+      "Saved instructions guide model judgment. CLI event observation requires caller wiring.",
+      "Findings appear in Scheduled / chat. External notification or event publication needs an available integration.",
+      "flow-cx-0"
+    ],
+    [
+      "Claude Code · /loop / Monitor",
+      "/loop revisits the task; available Monitor uses a background script to report updates.",
+      "Script detects its configured condition; Claude interprets the result.",
+      "Session response or configured tool action. Channels / cloud Routines provide separate incoming-event paths.",
+      "flow-cc-1"
+    ],
+    [
+      "Voyager · Automatic curriculum",
+      "Environment events supply surroundings, inventory and action feedback.",
+      "Curriculum selects the next task from observations and task history.",
+      "Execute action code, verify results, update progress and choose the next task.",
+      "flow-v-0"
+    ]
+  ],
+  "probe": "observation-probes.json"
+}

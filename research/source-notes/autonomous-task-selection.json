@@ -1,0 +1,78 @@
+{
+  "reviewed": "2026-09-09",
+  "scope": "Named mechanisms at pinned source revisions; Claude built-in loop behavior refreshed from official documentation. Not a claim about every plugin or every possible prompt.",
+  "rows": [
+    {
+      "name": "Voyager · Automatic curriculum",
+      "selection_en": "Model chooses a new exploration task from world state and task history.",
+      "selection_zh": "模型依環境與歷史，選下一個探索任務。",
+      "setup_en": "An exploration direction and game environment.",
+      "setup_zh": "探索方向與遊戲環境。",
+      "driver_en": "The running learning loop; no cron required.",
+      "driver_zh": "學習迴圈接續執行，不靠 cron。",
+      "source": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L278-L308"
+    },
+    {
+      "name": "Claude Code · /loop (no prompt)",
+      "selection_en": "Selects work within built-in maintenance: unfinished work, current PR, then bug hunts or simplification.",
+      "selection_zh": "按內建範圍自行找工作：未完成事項、目前 PR，再找 bug 或簡化。",
+      "setup_en": "Start /loop; no task prompt is required for its built-in mode.",
+      "setup_zh": "啟動 /loop 即可使用內建模式，不必另寫任務 prompt。",
+      "driver_en": "Dynamic scheduled wakeups; the model chooses the interval.",
+      "driver_zh": "動態排程喚醒；模型選下一次間隔。",
+      "source": "https://code.claude.com/docs/en/scheduled-tasks#run-the-built-in-maintenance-prompt"
+    },
+    {
+      "name": "OpenClaw · Heartbeat",
+      "selection_en": "Model handles the configured monitor responsibility. The default prompt says not to infer old tasks from prior chats.",
+      "selection_zh": "模型處理設定的監看責任；預設 prompt 要求不從舊對話推導任務。",
+      "setup_en": "Monitor scratch or a custom prompt; proactive checks are opt-in.",
+      "setup_zh": "設定 monitor scratch 或自訂 prompt；主動檢查需啟用。",
+      "driver_en": "Automations schedule or event wake.",
+      "driver_zh": "Automations 排程或事件喚醒。",
+      "source": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/gateway/heartbeat.md#L75-L110"
+    },
+    {
+      "name": "Hermes · /loop / /goal",
+      "selection_en": "Repeats the supplied task or selects further steps toward the assigned goal.",
+      "selection_zh": "重複提供的任務，或選擇完成既定目標的下一步。",
+      "setup_en": "/loop requires a prompt; /goal requires an objective.",
+      "setup_zh": "/loop 要提供 prompt；/goal 要指定目標。",
+      "driver_en": "Loop scheduling or post-turn goal continuation.",
+      "driver_zh": "Loop 排程或回合結束後的目標續跑。",
+      "source": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L85-L125"
+    },
+    {
+      "name": "Codex · /goal",
+      "selection_en": "Continues work toward an active assigned goal.",
+      "selection_zh": "繼續完成有效的交辦目標。",
+      "setup_en": "An explicit goal.",
+      "setup_zh": "明確目標。",
+      "driver_en": "Idle-thread continuation.",
+      "driver_zh": "Thread 閒置後接續回合。",
+      "source": "#flow-cx-1"
+    },
+    {
+      "name": "OpenBot · Routines / message_bot",
+      "selection_en": "Executes saved routine work or a peer’s assignment.",
+      "selection_zh": "執行已存的例行工作或其他 Bot 派來的任務。",
+      "setup_en": "A routine or handoff request.",
+      "setup_zh": "例行工作或派工要求。",
+      "driver_en": "Scheduled queue work and handoff delivery.",
+      "driver_zh": "排程佇列與派工送達。",
+      "source": "#flow-ob-0"
+    },
+    {
+      "name": "Grok reconstruction · event / completion wakes",
+      "selection_en": "Resumes work when automation records or delegated results arrive.",
+      "selection_zh": "收到自動化紀錄或委派成果後接續工作。",
+      "setup_en": "An automation request or existing delegated task.",
+      "setup_zh": "自動化要求或既有委派任務。",
+      "driver_en": "Cloud-record polling and completion events.",
+      "driver_zh": "雲端紀錄輪詢與完成事件。",
+      "source": "#flow-gr-0"
+    }
+  ],
+  "core": "Task selection is distinct from wakeup timing.",
+  "voyager_code": "propose_next_task builds observations; auto mode calls propose_next_ai_task, which calls the model and parses next_task. Special startup/inventory rules remain in the implementation."
+}

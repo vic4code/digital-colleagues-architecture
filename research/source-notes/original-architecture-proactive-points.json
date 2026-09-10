@@ -1,0 +1,127 @@
+{
+  "base": "../../phases/0.5/reference-architecture.svg",
+  "method": "Overlay annotations only; original SVG coordinates, labels and edges unchanged",
+  "points": [
+    {
+      "component": "Interaction surface",
+      "target": "proactive-component-delivery",
+      "rect": [
+        230,
+        82,
+        586,
+        54
+      ],
+      "purpose": "Show reminders and capture feedback / 顯示提醒與接收回饋"
+    },
+    {
+      "component": "AGENTS.md",
+      "target": "proactive-component-skills",
+      "rect": [
+        296,
+        226,
+        120,
+        44
+      ],
+      "purpose": "Define standing responsibilities / 定義常設責任"
+    },
+    {
+      "component": "skills/",
+      "target": "proactive-component-skills",
+      "rect": [
+        552,
+        226,
+        120,
+        44
+      ],
+      "purpose": "Read evidence and prepare results / 查證據與準備成果"
+    },
+    {
+      "component": "Runtime Controller",
+      "target": "proactive-component-runtime",
+      "rect": [
+        40,
+        278,
+        760,
+        38
+      ],
+      "purpose": "Route work and control continuation / 派工與控制續跑"
+    },
+    {
+      "component": "Request Triage & Priority",
+      "target": "proactive-component-runtime",
+      "rect": [
+        40,
+        322,
+        760,
+        38
+      ],
+      "purpose": "Decide whether this event needs work / 判斷這次事件是否要處理"
+    },
+    {
+      "component": "Codex app-server",
+      "target": "proactive-component-engine",
+      "rect": [
+        40,
+        366,
+        760,
+        38
+      ],
+      "purpose": "Run tools and report completion / 執行工具與回報完成"
+    },
+    {
+      "component": "Event Ingress",
+      "target": "proactive-component-ingress",
+      "rect": [
+        40,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Verify, deduplicate and buffer events / 驗證、去重與緩衝事件"
+    },
+    {
+      "component": "Polling Scheduler",
+      "target": "proactive-component-ingress",
+      "rect": [
+        232,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Schedule recurring observation / 排定週期觀察"
+    },
+    {
+      "component": "Subscription renewal",
+      "target": "proactive-component-subscriptions",
+      "rect": [
+        424,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Renew subscriptions so events keep arriving / 續訂以維持事件接收"
+    },
+    {
+      "component": "MCP Tool Servers",
+      "target": "proactive-component-tools",
+      "rect": [
+        616,
+        484,
+        184,
+        48
+      ],
+      "purpose": "Read source data and execute permitted actions / 讀來源與執行允許操作"
+    },
+    {
+      "component": "Access · Permissions · Audit",
+      "target": "proactive-component-delivery",
+      "rect": [
+        24,
+        714,
+        792,
+        54
+      ],
+      "purpose": "Enforce action policy and record outcomes / 執行操作政策與記錄結果"
+    }
+  ]
+}

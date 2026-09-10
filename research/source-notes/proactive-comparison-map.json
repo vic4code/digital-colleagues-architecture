@@ -1,0 +1,173 @@
+{
+  "scope": "Native proactive mechanisms at existing pinned versions; columns are analytical questions, not phases. Neutral cells do not assert general absence.",
+  "columns": [
+    [
+      "A saved time arrives",
+      "既定時間到了"
+    ],
+    [
+      "An event or assignment arrives",
+      "事件或交付事項到了"
+    ],
+    [
+      "Current work ends",
+      "目前工作結束了"
+    ]
+  ],
+  "rows": [
+    [
+      "OpenClaw",
+      "Many wake sources",
+      "多種喚醒來源",
+      [
+        [
+          "Heartbeat; Automations",
+          "定期檢查與既定排程",
+          "flow-claw-0"
+        ],
+        [
+          "HTTP hooks; stream; condition watchers",
+          "HTTP、串流與條件事件",
+          "flow-claw-2"
+        ],
+        [
+          "on-exit; Workshop review",
+          "命令完成觸發／工作後回顧",
+          "flow-claw-3"
+        ]
+      ]
+    ],
+    [
+      "Hermes",
+      "Several continuation controls",
+      "不同工作有不同續跑控制",
+      [
+        [
+          "Cron; /heartbeat; /loop",
+          "排程與對話內週期工作",
+          "flow-hermes-0"
+        ],
+        [
+          "Webhooks; Kanban readiness",
+          "外部事件／任務就緒派工",
+          "flow-hermes-1"
+        ],
+        [
+          "/goal continuation; review",
+          "判斷既定目標是否需要續跑",
+          "flow-hermes-4"
+        ]
+      ]
+    ],
+    [
+      "OpenBot",
+      "Durable assignment & handoff",
+      "交付工作與跨 Bot 派工",
+      [
+        [
+          "Routines",
+          "定時執行常設指令",
+          "flow-ob-0"
+        ],
+        [
+          "message_bot handoff",
+          "另一個 Bot 交付工作",
+          "flow-ob-1"
+        ],
+        [
+          "Handoff result relay",
+          "成果回送原請求方",
+          "flow-ob-2"
+        ]
+      ]
+    ],
+    [
+      "Grok reconstruction",
+      "Resume waiting conversations",
+      "接續等待中的對話",
+      [
+        [
+          "—",
+          "",
+          null
+        ],
+        [
+          "Automation / background event wakes",
+          "收到執行紀錄或背景事件",
+          "flow-gr-0"
+        ],
+        [
+          "Completion revivals",
+          "子工作完成後喚回主對話",
+          "flow-gr-2"
+        ]
+      ]
+    ],
+    [
+      "Voyager",
+      "Outcome-driven exploration",
+      "以成果驅動領域內探索",
+      [
+        [
+          "No clock wake needed by learn()",
+          "已查核學習迴圈不需時鐘喚醒",
+          null
+        ],
+        [
+          "Environment feedback inside rollout",
+          "從進行中的任務取得環境回饋",
+          "flow-v-1"
+        ],
+        [
+          "Critic feedback; retry / progress",
+          "評估成果、重試或更新進度",
+          "flow-v-1"
+        ]
+      ]
+    ],
+    [
+      "Codex · official",
+      "App schedule / runtime goal",
+      "App 排程與 runtime 目標續跑",
+      [
+        [
+          "Scheduled tasks (app)",
+          "獨立或原對話排程",
+          "flow-cx-0"
+        ],
+        [
+          "Custom listener → exec / App Server",
+          "外部監聽由整合程式提供",
+          "flow-cx-2"
+        ],
+        [
+          "/goal idle continuation; notify",
+          "目標續跑／回合結束通知",
+          "flow-cx-1"
+        ]
+      ]
+    ],
+    [
+      "Claude Code · official",
+      "Session / desktop / cloud",
+      "依不同執行環境選機制",
+      [
+        [
+          "/loop; Desktop tasks; Routines",
+          "對話、本機或雲端排程",
+          "flow-cc-0"
+        ],
+        [
+          "Channels; Monitor; Routines triggers",
+          "頻道、監看與雲端觸發",
+          "flow-cc-2"
+        ],
+        [
+          "Hooks; loop recurrence",
+          "生命週期回呼與迴圈",
+          "flow-cc-5"
+        ]
+      ]
+    ]
+  ]
+}

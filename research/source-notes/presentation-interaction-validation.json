@@ -1,0 +1,192 @@
+{
+  "layouts": [
+    {
+      "width": 1440,
+      "key": "claw",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "hermes",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "ob",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "gr",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "v",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "cx",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "cc",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "comparison",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "philosophy",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "project-phases",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "embedding",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "verification",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "claw",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "hermes",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "ob",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "gr",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "v",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "cx",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "cc",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "comparison",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "philosophy",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "project-phases",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "embedding",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "verification",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "claw",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "hermes",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "ob",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "gr",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "v",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "cx",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "cc",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "comparison",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "philosophy",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "project-phases",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "embedding",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "verification",
+      "overflow": false
+    }
+  ],
+  "nodeChecks": 140,
+  "modalChecks": 21,
+  "traceChecks": 12,
+  "architectureLinkChecks": 18,
+  "brokenHashes": [],
+  "errors": [],
+  "scope": "Presentation verification only; proposed proactive acceptance tests were not executed",
+  "preserved_source_excerpts": 42
+}

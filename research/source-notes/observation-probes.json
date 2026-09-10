@@ -1,0 +1,6 @@
+{
+  "scope": "Executed the original AST-extracted hash_monitor_output function only; not an integration test.",
+  "same_content_same_hash": true,
+  "trailing_newline_changes_hash": true,
+  "timestamp_changes_hash": true
+}

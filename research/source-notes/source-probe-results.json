@@ -1,0 +1,6 @@
+{
+  "digest_duration_collision": true,
+  "digest_paraphrase_differs": true,
+  "fingerprint_content_change_collision": true,
+  "scope": "Executed unmodified AST-extracted upstream functions; no installed Hermes, model calls, or runtime E2E."
+}

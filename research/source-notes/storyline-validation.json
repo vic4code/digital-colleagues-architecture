@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-09",
+  "main_sections": [
+    "research-summary",
+    "story-questions",
+    "frameworks",
+    "comparison",
+    "self-directed-work",
+    "project-phases",
+    "embedding",
+    "verification"
+  ],
+  "viewports": [
+    1440,
+    768,
+    390
+  ],
+  "page_overflow": false,
+  "page_errors": [],
+  "navigation_targets_passed": 8,
+  "nested_reference_and_framework_links": "passed",
+  "source_excerpts_preserved": 42,
+  "source_ranges_checked": 153,
+  "source_range_failures": 0,
+  "original_architecture_dom": "unchanged",
+  "reviews": {
+    "story_review": "pass; stale phase appendix number removed",
+    "clarity_review": "pass"
+  },
+  "scope": "Report presentation and source preservation; no new runtime or connector tests"
+}

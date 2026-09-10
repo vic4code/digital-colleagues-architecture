@@ -1,0 +1,71 @@
+{
+  "scope": "Integration recommendations, not implemented features or new phase definitions",
+  "approach": "OpenClaw patterns first; targeted reinforcement",
+  "priorities": [
+    {
+      "priority": "P0",
+      "title_en": "Make each run reliable",
+      "title_zh": "先讓一次工作可靠",
+      "build_en": "Stable work IDs, persisted status, deduplication, retry and delivery tracking.",
+      "build_zh": "穩定工作 ID、保存進度、去重、重試與送達紀錄。",
+      "owner": "Runtime Controller · Colleague State · Audit",
+      "tradeoff_en": "More foundation work upfront; every trigger reuses it.",
+      "tradeoff_zh": "前期多做基礎控制，後續排程與事件共用。",
+      "acceptance_en": "One occurrence produces one result; restart recovers pending work.",
+      "acceptance_zh": "同一事件只產生一份結果；重啟能接回未完成工作。",
+      "evidence_anchor": "verification"
+    },
+    {
+      "priority": "P1",
+      "title_en": "Start with scheduled checks",
+      "title_zh": "先做排程與定期查看",
+      "build_en": "Use OpenClaw-style Heartbeat / Automations to run a bounded Outlook responsibility.",
+      "build_zh": "參考 OpenClaw Heartbeat／Automations，在指定時段查看限定範圍的郵件。",
+      "owner": "Polling Scheduler → Runtime Controller → Skills / Tools",
+      "tradeoff_en": "Simple rollout, but polling has latency and query/model cost. Bound scope and frequency.",
+      "tradeoff_zh": "容易落地，但有查看間隔與查詢／模型成本；先限制範圍與頻率。",
+      "acceptance_en": "Useful mail yields a source-linked reminder; ordinary mail stays quiet.",
+      "acceptance_zh": "重要郵件提醒一次並附原信；一般郵件不打擾。",
+      "evidence_anchor": "flow-claw-0"
+    },
+    {
+      "priority": "P2",
+      "title_en": "Add events where latency matters",
+      "title_zh": "需要即時反應，再接事件",
+      "build_en": "Use OpenClaw-style HTTP hooks; share the same execution path. Keep low-frequency reconciliation.",
+      "build_zh": "參考 OpenClaw HTTP hooks，共用執行路徑；保留低頻巡查補漏。",
+      "owner": "Event Ingress · Subscription Renewal · Runtime Controller",
+      "tradeoff_en": "Faster response, but subscriptions, duplicates and missed events need handling.",
+      "tradeoff_zh": "反應更快，但要處理訂閱續期、重送與漏事件。",
+      "acceptance_en": "Duplicate delivery starts one task; reconciliation recovers missed items.",
+      "acceptance_zh": "事件重送只啟動一份工作；巡查能找回漏掉的項目。",
+      "evidence_anchor": "flow-claw-2"
+    },
+    {
+      "priority": "P3",
+      "title_en": "Continue only when work requires it",
+      "title_zh": "長任務需要時，再補續跑",
+      "build_en": "Resume on completion; persist goal state and explicit continue / wait / stop rules.",
+      "build_zh": "完成事件接回工作；保存目標，明訂繼續、等待與停止條件。",
+      "owner": "Runtime Controller · Colleague State · Engine completion events",
+      "tradeoff_en": "Less human prompting, but runaway retries and cost need enforced limits.",
+      "tradeoff_zh": "減少人工催辦，但要限制重試與成本，避免無效續跑。",
+      "acceptance_en": "Stop on verified completion or limit; waiting work resumes from its result.",
+      "acceptance_zh": "完成或到達上限即停；等待工作收到結果才接續。",
+      "evidence_anchor": "flow-hermes-4"
+    },
+    {
+      "priority": "P4",
+      "title_en": "Propose new work within a scope",
+      "title_zh": "最後才讓它在職責內找事做",
+      "build_en": "Start with bounded maintenance priorities and private proposals; evaluate curriculum only for exploration needs.",
+      "build_zh": "先設定職責與優先順序，產生私人提案；確有探索需求，再評估 curriculum。",
+      "owner": "Skills · Request Triage & Priority · Colleague State · Interaction surface",
+      "tradeoff_en": "More initiative, but usefulness is harder to verify; collect accept / reject feedback first.",
+      "tradeoff_zh": "自主程度提高，但價值更難驗證；先收集接受／退回回饋。",
+      "acceptance_en": "Proposals have evidence, fit the role and respect prior rejection.",
+      "acceptance_zh": "提案有來源、符合職責，也會參考先前退回原因。",
+      "evidence_anchor": "self-directed-work"
+    }
+  ]
+}

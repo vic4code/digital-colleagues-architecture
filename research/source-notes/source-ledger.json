@@ -1,0 +1,499 @@
+{
+  "pins": {
+    "claw": [
+      "openclaw/openclaw",
+      "91ea838947d30a65f1299b05fa42071917f2a293"
+    ],
+    "hermes": [
+      "NousResearch/hermes-agent",
+      "fef0e16fe19b79ded929209f87c7434270b03825"
+    ],
+    "ob": [
+      "CopilotKit/OpenBot",
+      "7b94a0b802732e6491634160cf9ed3fcfb813424"
+    ],
+    "v": [
+      "MineDojo/Voyager",
+      "55e45a880755d0c8c66ca7fb5fe7962ac8974f89"
+    ],
+    "gp": [
+      "xai-org/grok-prompts",
+      "a7c186f5ccac95875c0041aed60398f6ecb6d6c7"
+    ],
+    "gb": [
+      "xai-org/grok-build",
+      "72a61251fcffb464bcc687aeb5a998e5a98ec0c9"
+    ],
+    "colleague": [
+      "shane01526/agent_initiate",
+      "919aae63c20504610443adf3ac47666173b056fb"
+    ],
+    "gr": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "a9f633e09d49a85829b8236331b9e21f7e612634"
+    ]
+  },
+  "references": {
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/store.ts#L512": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/store.ts",
+      512
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/prompts/curriculum.txt#L1": [
+      "MineDojo/Voyager",
+      "voyager/prompts/curriculum.txt",
+      1
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-execution.ts#L124": [
+      "openclaw/openclaw",
+      "src/infra/heartbeat-runner-execution.ts",
+      124
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L116": [
+      "NousResearch/hermes-agent",
+      "gateway/run_goals.py",
+      116
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/run-turn.ts#L246": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/run-turn.ts",
+      246
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/index.ts#L661": [
+      "CopilotKit/OpenBot",
+      "server/src/index.ts",
+      661
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff.ts#L191": [
+      "CopilotKit/OpenBot",
+      "server/src/agents/handoff.ts",
+      191
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L203": [
+      "MineDojo/Voyager",
+      "voyager/voyager.py",
+      203
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L1437": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/goals.py",
+      1437
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/run-turn.ts#L522": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/run-turn.ts",
+      522
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L262": [
+      "NousResearch/hermes-agent",
+      "gateway/run_goals.py",
+      262
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L1449": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/goals.py",
+      1449
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts#L135": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/sweep.ts",
+      135
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review-scheduler.ts#L14": [
+      "openclaw/openclaw",
+      "src/skills/workshop/experience-review-scheduler.ts",
+      14
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/agent-run-registry.ts#L332": [
+      "openclaw/openclaw",
+      "src/infra/agent-run-registry.ts",
+      332
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L586": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/loops.py",
+      586
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L161": [
+      "openclaw/openclaw",
+      "src/cron/service/timer-execution.ts",
+      161
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-scheduler.ts#L232": [
+      "openclaw/openclaw",
+      "src/infra/heartbeat-runner-scheduler.ts",
+      232
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-run.ts#L29": [
+      "openclaw/openclaw",
+      "src/infra/heartbeat-runner-run.ts",
+      29
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/cron-tool.ts#L649": [
+      "openclaw/openclaw",
+      "src/agents/tools/cron-tool.ts",
+      649
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/isolated-agent/run.ts#L297": [
+      "openclaw/openclaw",
+      "src/cron/isolated-agent/run.ts",
+      297
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/pacing.ts#L39": [
+      "openclaw/openclaw",
+      "src/cron/pacing.ts",
+      39
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/config/sessions/goals.ts#L147": [
+      "openclaw/openclaw",
+      "src/config/sessions/goals.ts",
+      147
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/auto-reply/reply/commands-goal.ts#L171": [
+      "openclaw/openclaw",
+      "src/auto-reply/reply/commands-goal.ts",
+      171
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/auto-reply/reply/inbound-meta.ts#L25": [
+      "openclaw/openclaw",
+      "src/auto-reply/reply/inbound-meta.ts",
+      25
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/goal-tools.ts#L95": [
+      "openclaw/openclaw",
+      "src/agents/tools/goal-tools.ts",
+      95
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/harness/agent-end-side-effects.ts#L38": [
+      "openclaw/openclaw",
+      "src/agents/harness/agent-end-side-effects.ts",
+      38
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review.ts#L184": [
+      "openclaw/openclaw",
+      "src/skills/workshop/experience-review.ts",
+      184
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts#L583": [
+      "openclaw/openclaw",
+      "extensions/memory-core/src/dreaming.ts",
+      583
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts#L957": [
+      "openclaw/openclaw",
+      "extensions/memory-core/src/dreaming.ts",
+      957
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming-narrative.ts#L245": [
+      "openclaw/openclaw",
+      "extensions/memory-core/src/dreaming-narrative.ts",
+      245
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L309": [
+      "NousResearch/hermes-agent",
+      "gateway/run_goals.py",
+      309
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L870": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/goals.py",
+      870
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L1473": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/goals.py",
+      1473
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L486": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/loops.py",
+      486
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L538": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/loops.py",
+      538
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L364": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/loops.py",
+      364
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/turn_finalizer.py#L591": [
+      "NousResearch/hermes-agent",
+      "agent/turn_finalizer.py",
+      591
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/run_agent.py#L737": [
+      "NousResearch/hermes-agent",
+      "run_agent.py",
+      737
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/background_review.py#L937": [
+      "NousResearch/hermes-agent",
+      "agent/background_review.py",
+      937
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/plugins/builtin-routines.ts#L356": [
+      "CopilotKit/OpenBot",
+      "server/src/plugins/builtin-routines.ts",
+      356
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/worker/src/index.ts#L110": [
+      "CopilotKit/OpenBot",
+      "worker/src/index.ts",
+      110
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/runner.ts#L72": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/runner.ts",
+      72
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/run-turn.ts#L437": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/run-turn.ts",
+      437
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts#L355": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/sweep.ts",
+      355
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L295": [
+      "MineDojo/Voyager",
+      "voyager/voyager.py",
+      295
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L240": [
+      "MineDojo/Voyager",
+      "voyager/agents/curriculum.py",
+      240
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/skill.py#L61": [
+      "MineDojo/Voyager",
+      "voyager/agents/skill.py",
+      61
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/prompts/curriculum.txt#L23": [
+      "MineDojo/Voyager",
+      "voyager/prompts/curriculum.txt",
+      23
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L329": [
+      "MineDojo/Voyager",
+      "voyager/agents/curriculum.py",
+      329
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/critic.py#L27": [
+      "MineDojo/Voyager",
+      "voyager/agents/critic.py",
+      27
+    ],
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/critic.py#L91": [
+      "MineDojo/Voyager",
+      "voyager/agents/critic.py",
+      91
+    ],
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/generator.py#L24": [
+      "shane01526/agent_initiate",
+      "2026_08/proactive_agent/generator.py",
+      24
+    ],
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/scorer.py#L52": [
+      "shane01526/agent_initiate",
+      "2026_08/proactive_agent/scorer.py",
+      52
+    ],
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/run_round.py#L74": [
+      "shane01526/agent_initiate",
+      "2026_08/proactive_agent/run_round.py",
+      74
+    ],
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/run_round.py#L24": [
+      "shane01526/agent_initiate",
+      "2026_08/proactive_agent/run_round.py",
+      24
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/PROVENANCE.md#L1": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "PROVENANCE.md",
+      1
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/README.md#L1": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "README.md",
+      1
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/automations/extension.ts#L73": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/host/extensions/automations/extension.ts",
+      73
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/automation-run-path.ts#L109": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/host/extensions/transcript/automation-run-path.ts",
+      109
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/pending-wake-rearm.ts#L99": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/host/extensions/transcript/pending-wake-rearm.ts",
+      99
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/pending-wake-rearm.ts#L233": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/host/extensions/transcript/pending-wake-rearm.ts",
+      233
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/run-scheduler.ts#L199": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/host/extensions/transcript/run-scheduler.ts",
+      199
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/run-scheduler.ts#L341": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/host/extensions/transcript/run-scheduler.ts",
+      341
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent-exec/wakeup/index.ts#L1": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/packages/agent-exec/wakeup/index.ts",
+      1
+    ],
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent-core/goal-continuation.ts#L1": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "source/packages/agent-core/goal-continuation.ts",
+      1
+    ],
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/goal-tools.ts#L122": [
+      "openclaw/openclaw",
+      "src/agents/tools/goal-tools.ts",
+      122
+    ],
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/runner.ts#L137": [
+      "CopilotKit/OpenBot",
+      "server/src/routines/runner.ts",
+      137
+    ],
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L370": [
+      "NousResearch/hermes-agent",
+      "hermes_cli/goals.py",
+      370
+    ],
+    "https://github.com/xai-org/grok-prompts/blob/a7c186f5ccac95875c0041aed60398f6ecb6d6c7/README.md#L1": [
+      "xai-org/grok-prompts",
+      "README.md",
+      1
+    ],
+    "https://github.com/xai-org/grok-build/blob/72a61251fcffb464bcc687aeb5a998e5a98ec0c9/README.md#L17": [
+      "xai-org/grok-build",
+      "README.md",
+      17
+    ]
+  },
+  "scope": "source inspection + bounded isolated probes; no product E2E",
+  "diagram_source_links": [
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff.ts#L191",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/index.ts#L661",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/plugins/builtin-routines.ts#L356",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/run-turn.ts#L246",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/run-turn.ts#L437",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/run-turn.ts#L522",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/runner.ts#L137",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/runner.ts#L72",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/store.ts#L512",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts#L135",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts#L355",
+    "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/worker/src/index.ts#L110",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/critic.py#L27",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/critic.py#L91",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L240",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L329",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/skill.py#L61",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/prompts/curriculum.txt#L1",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/prompts/curriculum.txt#L23",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L203",
+    "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L295",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/background_review.py#L937",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/turn_finalizer.py#L591",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L116",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L262",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L309",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L368",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L1437",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L1449",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L1473",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L370",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/goals.py#L870",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L364",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L486",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L538",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L586",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/run_agent.py#L737",
+    "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/tools/skill_manager_guards.py#L164",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/PROVENANCE.md#L1",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/README.md#L1",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/automations/extension.ts#L73",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/automations/sand-automation-fire-consumer.ts#L106",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/automations/sand-automation-fire-consumer.ts#L154",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/automations/sand-automation-fire-consumer.ts#L72",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/automation-run-path.ts#L109",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/automation-run-path.ts#L180",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/background-wakes.ts#L382",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L123",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L156",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L99",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/pending-wake-rearm.ts#L233",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/pending-wake-rearm.ts#L99",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/run-scheduler.ts#L199",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/run-scheduler.ts#L341",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent-core/goal-continuation.ts#L1",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent-exec/wakeup/index.ts#L1",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent/actions/goal-continuation-action-handler.ts#L105",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent/actions/goal-continuation-action-handler.ts#L138",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent/actions/goal-continuation-action-handler.ts#L84",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent/actions/goal-continuation-action-handler.ts#L93",
+    "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/packages/agent/index.ts#L72",
+    "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming-narrative.ts#L245",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts#L583",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts#L957",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/harness/agent-end-side-effects.ts#L38",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/cron-tool.ts#L649",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/goal-tools.ts#L122",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/goal-tools.ts#L95",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/auto-reply/reply/commands-goal.ts#L171",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/auto-reply/reply/inbound-meta.ts#L25",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/config/sessions/goals.ts#L147",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/isolated-agent/run.ts#L297",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/pacing.ts#L39",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L161",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-outcomes.ts#L481",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/agent-run-registry.ts#L332",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-execution.ts#L124",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-run.ts#L29",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-run.ts#L73",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/heartbeat-runner-scheduler.ts#L232",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review-scheduler.ts#L114",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review-scheduler.ts#L14",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review-scheduler.ts#L85",
+    "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review.ts#L184",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/run_round.py#L24",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/run_round.py#L74",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/proactive_agent/scheduler.py#L68",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/scenerios/scenario-legal.md#L103",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/scenerios/scenario-legal.md#L144",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/scenerios/scenario-legal.md#L189",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_08/scenerios/scenario-legal.md#L85",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_09/wake-cycle-brief.html#L153",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_09/wake-cycle-brief.html#L600",
+    "https://github.com/shane01526/agent_initiate/blob/919aae63c20504610443adf3ac47666173b056fb/2026_09/wake-cycle-design.html#L334",
+    "https://github.com/xai-org/grok-build/blob/72a61251fcffb464bcc687aeb5a998e5a98ec0c9/README.md#L17",
+    "https://github.com/xai-org/grok-prompts/blob/a7c186f5ccac95875c0041aed60398f6ecb6d6c7/README.md#L1"
+  ],
+  "reconstruction_scope": {
+    "repo": "b-nnett/grok-bot-0.18-reconstructed",
+    "commit": "a9f633e09d49a85829b8236331b9e21f7e612634",
+    "original_product_equivalence": "unverified",
+    "pure_function_checks": 7
+  }
+}

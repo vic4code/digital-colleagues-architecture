@@ -1,0 +1,202 @@
+{
+  "checks": [
+    {
+      "width": 1440,
+      "key": "claw",
+      "items": 10,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "hermes",
+      "items": 9,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "ob",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "gr",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "v",
+      "items": 2,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "cx",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "key": "cc",
+      "items": 6,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "comparison",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "philosophy",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "project-phases",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "section": "embedding",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "claw",
+      "items": 10,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "hermes",
+      "items": 9,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "ob",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "gr",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "v",
+      "items": 2,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "cx",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "key": "cc",
+      "items": 6,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "comparison",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "philosophy",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "project-phases",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "section": "embedding",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "claw",
+      "items": 10,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "hermes",
+      "items": 9,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "ob",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "gr",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "v",
+      "items": 2,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "cx",
+      "items": 4,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "key": "cc",
+      "items": 6,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "comparison",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "philosophy",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "project-phases",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "section": "embedding",
+      "overflow": false
+    }
+  ],
+  "modalChecks": 21,
+  "switchChecks": 28,
+  "codeChecks": 15,
+  "deepLink": true,
+  "errors": [],
+  "overlaps": [],
+  "standalone_comparison_text_overlaps": 0,
+  "source_excerpts_preserved": 42,
+  "original_anchor_ids_retained": true,
+  "original_external_links_retained": true,
+  "additional_expanded_section_viewport_checks": 8,
+  "scope": "Presentation and interaction validation only. No changes to framework capabilities or runtime implementations."
+}

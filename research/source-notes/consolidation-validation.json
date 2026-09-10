@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-09",
+  "scope": "Research consolidation; no runtime or connector E2E",
+  "summary_rows": 7,
+  "direct_mechanism_links": 14,
+  "viewports": [
+    1440,
+    768,
+    390
+  ],
+  "page_overflow": false,
+  "page_errors": [],
+  "grok_link_selects_framework_and_opens_flow": true,
+  "source_ranges_checked": 153,
+  "source_range_failures": 0,
+  "preserved_source_excerpts": 42
+}

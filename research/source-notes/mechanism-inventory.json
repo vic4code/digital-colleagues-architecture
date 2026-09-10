@@ -1,0 +1,327 @@
+{
+  "scope": "Static code trace of identified paths; not exhaustive product certification",
+  "pins": {
+    "claw": [
+      "openclaw/openclaw",
+      "91ea838947d30a65f1299b05fa42071917f2a293"
+    ],
+    "hermes": [
+      "NousResearch/hermes-agent",
+      "fef0e16fe19b79ded929209f87c7434270b03825"
+    ],
+    "ob": [
+      "CopilotKit/OpenBot",
+      "7b94a0b802732e6491634160cf9ed3fcfb813424"
+    ],
+    "gr": [
+      "b-nnett/grok-bot-0.18-reconstructed",
+      "a9f633e09d49a85829b8236331b9e21f7e612634"
+    ],
+    "v": [
+      "MineDojo/Voyager",
+      "55e45a880755d0c8c66ca7fb5fe7962ac8974f89"
+    ]
+  },
+  "mechanisms": {
+    "claw": [
+      [
+        "Heartbeat",
+        "Schedule OR event wake",
+        "Monitor due → heartbeat admission → agent turn. /hooks/wake can enqueue context and request an immediate heartbeat; next-heartbeat queues context only.",
+        "src/gateway/server/hooks.ts",
+        261,
+        "docs/gateway/heartbeat.md",
+        10,
+        "週期或事件皆可喚醒；不是只靠固定 timer。"
+      ],
+      [
+        "Automations / cron",
+        "Saved time / interval / cron",
+        "For at / every / cron schedules: due job → payload dispatch. Payload selects heartbeat, system event, agent turn or script work. Event schedule variants are listed below.",
+        "src/cron/service/timer-execution.ts",
+        161,
+        "docs/automation/cron-jobs.md",
+        12,
+        "排程到期後依 payload 分流；payload 是工作資料，不是 timer。"
+      ],
+      [
+        "Inbound webhooks · /hooks/agent",
+        "External HTTP event",
+        "Validated hook → session admission → isolated agent turn. This route can submit work directly without waiting for a recurring heartbeat.",
+        "src/gateway/server/hooks.ts",
+        521,
+        "docs/automation/cron-jobs/webhooks.md",
+        12,
+        "外部事件可直接提交回合，和 /hooks/wake 路徑不同。"
+      ],
+      [
+        "Automations · on-exit",
+        "A watched command exits",
+        "Supervised command completes → watcher fire → shared cron execution admission → one-shot payload. Completion is the trigger, not a deadline.",
+        "src/gateway/server-cron.ts",
+        1195,
+        "docs/automation/cron-jobs/schedules.md",
+        14,
+        "監看的命令結束後觸發一次，不是固定時間到期。"
+      ],
+      [
+        "Automations · stream",
+        "Lines arrive from a supervised command",
+        "stdout / stderr → match and bounded batch → fireBatch → cron.run with stream context. Batch timing coalesces events; it does not create them.",
+        "src/gateway/server-cron.ts",
+        1245,
+        "docs/automation/cron-jobs/schedules.md",
+        38,
+        "串流事件聚合後執行；batch timer 只是合併事件。"
+      ],
+      [
+        "Automations · condition watchers",
+        "A scheduled check or stream batch passes a condition",
+        "Headless trigger script reads input / saved state → fire:false skips payload; fire:true dispatches it. No model needed to evaluate the script itself.",
+        "src/cron/service/timer-execution.ts",
+        98,
+        "docs/automation/cron-jobs/schedules.md",
+        83,
+        "排程或串流先跑條件 script，符合才進入工作。"
+      ],
+      [
+        "next_check · adaptive pacing",
+        "A supported scheduled run finishes",
+        "Run-scoped delay request → success / bounds checks → persist next due time. This modifies a schedule; it does not create a separate event source.",
+        "src/cron/service/timer-outcomes.ts",
+        481,
+        null,
+        0,
+        "調整下次排程時間，是排程內的控制能力。"
+      ],
+      [
+        "Skill Workshop · experience review",
+        "Eligible work ends + idle delay",
+        "Eligibility → delayed background review → permitted workshop changes. Distinct from checking external work.",
+        "src/skills/workshop/experience-review-scheduler.ts",
+        85,
+        "docs/tools/skill-workshop.md",
+        12,
+        "完成工作後符合門檻才回顧，不是每次 timer 都做。"
+      ],
+      [
+        "Dreaming · memory maintenance",
+        "Managed scheduled job",
+        "Managed cron → memory consolidation / promotion / diary. Memory maintenance is not evidence of new external goal discovery.",
+        "extensions/memory-core/src/dreaming.ts",
+        914,
+        "docs/concepts/dreaming.md",
+        1,
+        "以排程維護記憶；不能直接等同自行發現新工作。"
+      ],
+      [
+        "Goals · evidence boundary",
+        "Explicit goal setup / update",
+        "Goal state and controls exist. A universal post-final automatic continuation producer was not established in this audit.",
+        "src/config/sessions/goals.ts",
+        147,
+        null,
+        0,
+        "有目標狀態不代表已證實所有回合都會自動續跑。"
+      ]
+    ],
+    "hermes": [
+      [
+        "Cron / cronjob",
+        "Saved deadline or recurring schedule",
+        "tick → claim due job → run_one_job → fresh agent session → delivery / next schedule. no_agent takes a script-only branch.",
+        "cron/scheduler.py",
+        2301,
+        "website/docs/user-guide/features/cron.md",
+        7,
+        "獨立排程工作；no_agent 可只跑 script，不呼叫模型。"
+      ],
+      [
+        "Webhooks",
+        "External HTTP event",
+        "Authenticate → event / payload filters → optional script → prompt → MessageEvent → handle_message. deliver_only bypasses the agent.",
+        "gateway/platforms/webhook.py",
+        511,
+        "website/docs/user-guide/messaging/webhooks.md",
+        9,
+        "外部事件經過濾才進 agent；純通知可略過模型。"
+      ],
+      [
+        "Session heartbeat · /heartbeat",
+        "Recurring instruction becomes due",
+        "Watcher checks session / user queue → admitted normal conversation turn. Recurrence does not itself define a new goal.",
+        "gateway/run_goals.py",
+        116,
+        "website/docs/user-guide/features/heartbeat.md",
+        7,
+        "在 session 內週期注入既定指令。"
+      ],
+      [
+        "Loop · /loop, /proactive",
+        "Timer tick; fixed or self-paced",
+        "fire_tick → repeated turn → marker / optional judge / caps → stop or next tick. Separate from persistent-goal continuation.",
+        "hermes_cli/loops.py",
+        486,
+        "website/docs/user-guide/features/loops.md",
+        7,
+        "按時間重跑，可調節節奏；和 goal 續跑分開。"
+      ],
+      [
+        "Persistent Goals · /goal",
+        "Eligible turn finishes; goal remains active",
+        "Post-turn hook → gates + judge + budget → continue / wait / pause / done. Continuation enters the session queue.",
+        "gateway/run_goals.py",
+        262,
+        "website/docs/user-guide/features/goals.md",
+        7,
+        "回合完成後判定是否繼續已交付目標，不必等 cron。"
+      ],
+      [
+        "Kanban dispatcher",
+        "Task becomes ready; dependencies complete",
+        "Periodic board sweep → promote / claim → spawn assigned worker. State makes work eligible; polling discovers that state.",
+        "hermes_cli/kanban_db_dispatch.py",
+        1812,
+        "website/docs/user-guide/features/kanban.md",
+        122,
+        "任務狀態決定可否開工；週期掃描只是偵測方法。"
+      ],
+      [
+        "Background review",
+        "Eligible turn finalization",
+        "Finalizer → background review → restricted improvement writes. This is maintenance after work, not a new external assignment.",
+        "agent/turn_finalizer.py",
+        591,
+        null,
+        0,
+        "工作後回顧是另一條路徑；寫入範圍受限制。"
+      ],
+      [
+        "Cron provider · Chronos",
+        "Remote schedule fires via HTTP",
+        "Authenticated /api/cron/fire → provider claim → shared run_one_job. Logically time-based, although its transport is a webhook.",
+        "cron/scheduler_provider.py",
+        180,
+        "website/docs/developer-guide/cron-internals.md",
+        93,
+        "時間排程可用 webhook 派送；不能因此當成業務事件。"
+      ],
+      [
+        "Cron · monitor mode",
+        "Scheduled source check; changed or first observation",
+        "Configured script / URL → exact-output hash → skip, error or agent context; delivery suppression is a later decision.",
+        "cron/monitor.py",
+        125,
+        null,
+        null,
+        "指定來源的內容有變才喚醒；首次觀察也執行，並非語意重要性分類。"
+      ]
+    ],
+    "ob": [
+      [
+        "Routines",
+        "Saved routine becomes due",
+        "Worker sweep → durable work item → lease → current owner/access checks → channel turn → next occurrence.",
+        "server/src/routines/sweep.ts",
+        135,
+        "docs/routines.md",
+        1,
+        "時間到期的例行工作，使用持久佇列與租約。"
+      ],
+      [
+        "Bot handoff · message_bot",
+        "An agent delegates work",
+        "Typed task + trusted identity / grants → durable hop → claimed delivery → recipient Bot turn. Assigned work, not self-created goals.",
+        "server/src/agents/handoff-tool.ts",
+        85,
+        "docs/architecture.md",
+        146,
+        "另一個 agent 派工即可觸發接收者，不限時間排程。"
+      ],
+      [
+        "Handoff result relay",
+        "A delegated turn produces an answer",
+        "Successful forward hop with answer → queued relay → follow-up delivery. answerIn prevents relay-of-relay recursion.",
+        "server/src/agents/handoff-runner.ts",
+        391,
+        "docs/architecture.md",
+        146,
+        "委派完成後結果回送；這是 handoff 的後續路徑。"
+      ],
+      [
+        "Lease heartbeat · not an agent wake",
+        "A claimed run is still executing",
+        "Renew queue / thread ownership while work runs. No new task or model turn is created by the lease renewal itself.",
+        "server/src/agents/handoff-runner.ts",
+        251,
+        null,
+        0,
+        "heartbeat 在此用於續租，不是主動檢查工作。"
+      ]
+    ],
+    "gr": [
+      [
+        "Automation fire consumer",
+        "Cloud fire arrives; consumer polls",
+        "Poll transport → validate / acknowledge fire → guarded automation run. Upstream scheduling semantics are not proven by this local consumer.",
+        "source/host/extensions/automations/sand-automation-fire-consumer.ts",
+        72,
+        null,
+        0,
+        "polling 是接收方式；不能據此推定上游只有 cron。"
+      ],
+      [
+        "Background event wakes",
+        "Subscribed / routed event",
+        "Event collected → background queue → transcript run. This is event follow-up in reconstructed host code.",
+        "source/host/extensions/transcript/background-wakes.ts",
+        359,
+        null,
+        0,
+        "事件進入背景佇列，再觸發回合。"
+      ],
+      [
+        "Completion revivals",
+        "Background subagent finishes",
+        "Completion → ownership / duplicate checks → revive or drain waiting transcript → follow-up run.",
+        "source/host/extensions/transcript/completion-revivals.ts",
+        99,
+        null,
+        0,
+        "背景工作完成可喚回等待中的對話。"
+      ],
+      [
+        "Goal continuation handler · partial evidence",
+        "Continuation action is supplied",
+        "Validate action / goal identity → anti-spin guard → simulated user continuation. The automatic producer of that action remains unverified.",
+        "source/packages/agent/actions/goal-continuation-action-handler.ts",
+        84,
+        null,
+        0,
+        "看到續跑處理器，但不能宣稱完整自動目標迴圈。"
+      ]
+    ],
+    "v": [
+      [
+        "Automatic curriculum",
+        "A rollout ends inside learn()",
+        "Update progress → propose next task from state / history → next rollout, until iteration limit. This selects tasks within the assigned exploration domain.",
+        "voyager/voyager.py",
+        295,
+        null,
+        0,
+        "在運行中的探索迴圈，依成果選下一項任務。"
+      ],
+      [
+        "Iterative prompting + self-verification",
+        "Execution feedback / failed attempt",
+        "Environment feedback + critic → revise code / retry within rollout bounds. Retry of a task and selection of a new task are different stages.",
+        "voyager/voyager.py",
+        203,
+        null,
+        0,
+        "任務內修正重試，與 curriculum 選新任務分開。"
+      ]
+    ]
+  }
+}
