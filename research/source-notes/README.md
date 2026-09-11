@@ -1,6 +1,6 @@
 # Proactive agent research — source and evidence index
 
-Start with the [integrated visual report](../show-me-proactive-lifecycle.html#research-summary) or the [compact research summary](../proactive-research-summary.md).
+Start with the [integrated visual report](../show-me-proactive-lifecycle.html#research-summary) or the [complete README edition](../README.md).
 
 The report follows one story: an Outlook responsibility → four practical questions → native framework mechanisms → comparison → autonomous task choice → existing phases → original architecture integration → verification. Technical synthesis and design choices are expandable references within the comparison chapter. These are comparison questions, not exclusive framework categories or invented maturity phases.
 
@@ -60,3 +60,15 @@ The report follows one story: an Outlook responsibility → four practical quest
 - [Isolated Hermes probes](source-probe-results.json) and [observation probes](observation-probes.json): bounded function behavior only.
 
 Sources were inspected September 8–9, 2026. Code facts, documented product behavior, integration proposals and illustrative scenarios are distinct evidence levels. Full upstream suites and live product E2E were not run. Earlier validation files are historical checks, not proof that a newer report revision was tested.
+
+## Task prioritization / 工作優先排序
+
+[Mechanisms, evidence and proposed policy](prioritization.md): hard rules versus LLM judgment; ICM, CURIOUS and MAGELLAN; eligibility, ordering, feedback and acceptance checks. Updated 2026-09-10.
+
+## 2026-09-11：同事感與持續跟進
+
+- [同事感實作研究](colleague-experience.md)：官方 Grok Bot 與非官方重建證據分層，整合既有架構、狀態、通知與驗收。
+- [OpenClaw inferred commitments](openclaw-inferred-commitments.md)：確認曾有實作，補正目前 CLI／migration 狀態，避免把推測寫成退役理由。
+- 本次只補查 OpenClaw 與 Grok Bot 相關來源；其他 framework 與先前 validation 保持其原有日期和驗證範圍。
+
+[本次驗證紀錄](colleague-experience-validation.json)：新增來源連結、研究頁展開、桌機／手機溢出與 console 檢查；不是框架功能 E2E。

@@ -30,3 +30,7 @@ Our integration proposal: store commitments as business records (source message,
 Concise phrasing:
 EN: Recall can recover what was said. A commitment tracker must also know whether it is still open, who owns it, and when to follow up.
 ZH: Memory 能找回說過什麼；承諾追蹤還要知道誰負責、是否已完成、什麼時候該再問。
+
+## 2026-09-11 clarification
+
+Memory recall 與 Standing Intent 的原查核不等於 OpenClaw 從未實作 inferred commitments。它曾有獨立抽取／heartbeat check-in 子系統，現已退役，連 maintenance CLI 與舊資料表都進入移除流程。[版本證據](openclaw-inferred-commitments.md) · [同事感整合設計](colleague-experience.md)。

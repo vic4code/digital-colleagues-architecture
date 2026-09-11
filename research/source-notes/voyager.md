@@ -11,3 +11,7 @@ Pinned revision: `55e45a880755d0c8c66ca7fb5fe7962ac8974f89`.
 Novelty and difficulty instructions guide curriculum generation. The inspected path does not implement a scalar information-gain optimizer or demonstrate human-like intrinsic motivation. Interpretation: Voyager delegates selecting the next bounded task, beyond merely continuing the same task.
 
 Six isolated checks exercised original class bodies with mocked collaborators: initial task, inventory branch, valid and invalid task parsing, and success/failure skill-persistence branches. No model calls, Minecraft session, or full upstream test suite were executed.
+
+## Prioritization clarification · 2026-09-10
+
+The normal path directly requests one Task from the LLM. Novelty, feasible difficulty and necessary resource gathering are prompt criteria without explicit weights. Startup/inventory branches take precedence. Updating history is contextual adaptation; the inspected path does not train a priority predictor. See [prioritization audit and research comparison](prioritization.md).

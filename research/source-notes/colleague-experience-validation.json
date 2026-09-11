@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-11",
+  "scope": "Colleague experience synthesis, OpenClaw historical/current commitments, Grok Bot official positioning and pinned reconstruction. Other frameworks retain earlier audit dates.",
+  "evidence": {
+    "openclaw_current_sha": "d36ca99e50d161d117e747ed18482ae715c53b8b",
+    "grok_reconstruction_sha": "a9f633e09d49a85829b8236331b9e21f7e612634",
+    "method": "Static source inspection; no upstream runtime, database migration or live email E2E executed."
+  },
+  "checks": {
+    "markdown_local_file_links": "pass",
+    "main_html_local_file_links": "pass",
+    "new_section_unique_id": "pass",
+    "browser": "Playwright CLI, dedicated colleague-research session, localhost:8766",
+    "grok_details_expansion": "pass",
+    "alex_details_expansion": "pass",
+    "desktop_document_overflow": false,
+    "mobile_width": 390,
+    "mobile_scroll_width": 390,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "external_links": [
+      {
+        "url": "https://docs.openclaw.ai/automation",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/automations/automation.ts",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/automation-run-path.ts",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/runner/system-prompt.ts",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/blob/1a34950d9c517325f61d7e9b2367c839845c64d9/docs/concepts/commitments.md",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/blob/a808b0d96a5b6ba935702917d311ab0c17b973ac/docs/concepts/commitments.md",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/blob/d36ca99e50d161d117e747ed18482ae715c53b8b/docs/automation/index.md",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/blob/d36ca99e50d161d117e747ed18482ae715c53b8b/src/state/openclaw-state-db-schema-repair.ts",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/blob/d36ca99e50d161d117e747ed18482ae715c53b8b/src/state/openclaw-state-db-table-retirements.ts",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/commit/1a34950d9c517325f61d7e9b2367c839845c64d9",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/openclaw/openclaw/commit/4b0151682ef4cbcf5360fd79cc73b44c62a0c911",
+        "status": 200
+      },
+      {
+        "url": "https://x.ai/news/introducing-grok-bot",
+        "status": 200
+      }
+    ]
+  },
+  "content_sha256": {
+    "research/README.md": "b9729b296a80cf88ecfd0f9b5c67c0c967bd8daf2b7bf21943c6e4f2bfe63de3",
+    "research/show-me-proactive-lifecycle.html": "6e5cc4af4884a0cf99249296745d3dcc0973c19d2fd60c7cadd1fb4ac28a943e",
+    "research/source-notes/colleague-experience.md": "56556825e58f8e1f748574f30022c2671f06c79b647bea86a30d5de9e674e7ef",
+    "research/source-notes/openclaw-inferred-commitments.md": "f3a158cc9f0b25995349cf93f6f05f45f0c8d4408eccc02c1a1f18606564ed86"
+  },
+  "limitations": [
+    "Browser checks cover added content and expansion, not every pre-existing framework interaction.",
+    "Existing dirty workspace edits preserved; no commit or publication performed."
+  ]
+}

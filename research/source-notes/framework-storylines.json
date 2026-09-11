@@ -1,0 +1,90 @@
+{
+  "updated": "2026-09-10",
+  "scope": "Editorial synthesis of existing pinned audits; scenarios are illustrative, not end-to-end results.",
+  "frameworks": [
+    {
+      "key": "claw",
+      "name": "OpenClaw",
+      "story": "上班時間留意客戶來信，需要今天回覆時提醒我。",
+      "flow": "Heartbeat / Automations 或事件喚醒 → 讀職責與來源 → LLM 判斷是否需處理 → Tools 查資料／準備提醒 → 保存狀態，等待下次",
+      "observe": "模型在回合中透過已接好的工具取得來源；Heartbeat 本身不是 Outlook 訂閱。",
+      "priority": "依設定職責與 context 判斷要不要處理／通知。Heartbeat 路徑本身未證明具備跨責任候選池或業務分數排序。",
+      "continuation": "排程或事件提供下一次回合；沒事時依靜默規則不通知。多種入口可接到自動化執行。",
+      "boundary": "預設 Heartbeat 不從舊聊天推導任務。若要追承諾，需設定職責、來源與動作授權。",
+      "source": "source-notes/openclaw.md",
+      "detail": "flow-claw-0"
+    },
+    {
+      "key": "hermes",
+      "name": "Hermes",
+      "story": "持續看這份資料；有變化才分析。分析目標未完成時接著做。",
+      "flow": "Cron monitor 讀 script / URL → 比對上次結果 → 首次或有變化才喚醒模型 → 按指令分析 → 交付；另由 /goal 判斷目標續跑",
+      "observe": "Monitor 可先取得來源內容、保存 baseline 並比對，避免每次都呼叫模型。/loop 與 /goal 是不同機制。",
+      "priority": "Monitor 決定是否需要跑；goal judge 決定既定目標是否繼續。這些不等同多目標 ranking。Self-paced loop 依正規化文字 hash 調間隔，也不是學習式注意力。",
+      "continuation": "Cron 到期再查；/goal 可 continue、wait 或 stop，受 gates 與限制約束。",
+      "boundary": "Self-paced 的文字比對可能忽略數值差異；judge 也不必然直接驗證成果。不能把少跑或續跑當成業務排序。",
+      "source": "source-notes/hermes.md",
+      "detail": "flow-hermes-8"
+    },
+    {
+      "key": "ob",
+      "name": "OpenBot",
+      "story": "每天整理進度；需要專家 Bot 時派工，拿到結果後回到原對話。",
+      "flow": "Routine 到期 → 持久 queue → claim / lease → Bot 執行 → 必要時 message_bot 派工 → 成果 relay 回原對話",
+      "observe": "Routine 保存 instruction 與執行脈絡；資料由 Bot 的工具取得。收到派工時帶入 task、constraints、expected result。",
+      "priority": "到期與租約條件控制工作是否可被領取；模型選獲准的協作 Bot。這是 eligibility 與派工，不足以證明依業務價值排名。",
+      "continuation": "排程產生下一次 occurrence；派工成果經 relay 送回。Lease heartbeat 用於維持工作所有權。",
+      "boundary": "Heartbeat 不是好奇心。Queue 接受工作不代表模型完成，更不代表成果正確。",
+      "source": "source-notes/openbot.md",
+      "detail": "flow-ob-0"
+    },
+    {
+      "key": "gr",
+      "name": "Grok Bot · reconstruction",
+      "story": "背景工作完成，或新的 automation 事件到了，就接回原本等待的工作。",
+      "flow": "消費 automation fire / 收到背景 completion → 組合事件與結果 → 加入執行佇列 → 模型接續 → 回報有用成果或保持安靜",
+      "observe": "事件與背景結果成為新回合 context；initiative prompt 允許依脈絡提出下一步。",
+      "priority": "RunScheduler 明確讓 queued user tasks 優先於 agent/background tasks。這是執行通道優先序；回合內值得做什麼仍靠 prompt 與模型，未證明全域業務效用排名。",
+      "continuation": "Completion revival 接回等待對話；goal continuation 有 handler，但既有查核未建立每回合自動產生下一次 action 的完整鏈。",
+      "boundary": "來源是非官方重建；不能直接當成原產品或雲端控制器的完整行為證明。",
+      "source": "source-notes/grok-reconstructed.md",
+      "detail": "flow-gr-2"
+    },
+    {
+      "key": "cx",
+      "name": "Codex",
+      "story": "這個目標還沒完成，不用等我再次說「繼續」。",
+      "flow": "明確設定 /goal → 執行一回合 → thread 閒置時讀取有效目標 → 符合條件則啟動下一回合 → 完成或符合停止條件",
+      "observe": "續跑讀既有 goal 與對話脈絡；外部狀態仍要靠已設定工具查取。App 排程是另外一層入口。",
+      "priority": "已查核 goal 路徑是在同一目標內選下一步，不是跨目標候選排序器。",
+      "continuation": "有效 goal 的 idle continuation 讓工作接續。具體停止與預算條件依已查核版本／執行設定。",
+      "boundary": "/goal 不會單獨建立「讀郵件、發現承諾、選人追問」整套流程。",
+      "source": "source-notes/official-coding-agents.json",
+      "detail": "flow-cx-1"
+    },
+    {
+      "key": "cc",
+      "name": "Claude Code",
+      "story": "目前程式庫還有什麼值得處理？在既有工作範圍內持續維護。",
+      "flow": "啟動 bare /loop → 讀目前工作與 repository → 按維護指引選任務 → 執行 → 選下次間隔，再次喚醒",
+      "observe": "利用目前工作、PR 與 repository 脈絡；Monitor、channels、本機排程與 cloud routines 各有不同路徑。",
+      "priority": "官方 bare /loop 指引依序關注未完成工作、目前 PR，再找 bug／簡化。這是明訂在指引中的順序，由模型具體判斷，不是已證明的數值效用排序器。",
+      "continuation": "模型可決定動態查看間隔，排程再喚起下一回合；各模式存活範圍不同。",
+      "boundary": "維護範圍不等於任意新計畫，也不等於原生 Outlook 工作流程。",
+      "source": "source-notes/autonomous-task-selection.json",
+      "detail": "flow-cc-0"
+    },
+    {
+      "key": "v",
+      "name": "Voyager",
+      "story": "在 Minecraft 裡，根據目前環境與能力，下一件值得探索的事是什麼？",
+      "flow": "Init / learn loop → 讀遊戲狀態與成敗 → 起始／背包硬規則或 LLM 選 Task → 執行與 critic 回饋 → 成功技能存庫 → 再選任務",
+      "observe": "把環境、背包、裝備與完成／失敗任務提供給 curriculum；不是讓 LLM 無來源地猜世界。",
+      "priority": "硬規則先行；一般路徑以新穎、難度可行、資源需求指引 LLM，直接輸出一個 Task。沒有明訂權重、候選排名或學習中的 priority predictor。",
+      "continuation": "執行結果更新歷史，成功程式可進 skill library；outer loop 再提下一個目標。",
+      "boundary": "本質上就是 context + LLM + feedback loop。能力累積不等於更新模型權重，也未證明主觀慾望。",
+      "source": "source-notes/voyager.md",
+      "detail": "flow-v-0"
+    }
+  ]
+}

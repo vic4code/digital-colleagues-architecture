@@ -165,3 +165,7 @@ https://arxiv.org/abs/2305.16291
 ## Source tier
 
 OpenClaw/Hermes/OpenBot: maintainer-authored documentation, not treated as peer-reviewed research. Voyager: authors’ project and paper. Grok Bot 0.18 repository: unofficial reconstruction, not an authenticated vendor specification.
+
+## Grok Bot official product, checked 2026-09-11
+
+[Official product page](https://x.ai/news/introducing-grok-bot) describes following up dropped threads/stalled handoffs, retaining work context, learning routines from demonstrations and coordinating Bots. Status: documented product claims, not live behavior measured by this study. This is separate from the unofficial 0.18 reconstruction; its code is not authenticated by similar product language. See [evidence and design synthesis](colleague-experience.md).

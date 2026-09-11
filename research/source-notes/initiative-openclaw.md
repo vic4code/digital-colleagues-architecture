@@ -25,3 +25,7 @@ Scoped boundary: searched audited heartbeat prompt/preflight, cron mechanisms, s
 Recommended compact conclusion:
 EN: OpenClaw can let the model decide to contact someone during an enabled proactive turn. The built-in pieces are wake + configured context + message tooling; a separate self-generated agenda is not part of the audited default heartbeat path.
 ZH: OpenClaw 可以在主動回合裡，由模型判斷要不要找人、對已知對象提出問題。已實作的是喚醒、責任脈絡與傳訊工具的組合；預設 Heartbeat 不是自己不斷產生新議題的機制。
+
+## Historical inferred follow-ups, checked 2026-09-11
+
+OpenClaw previously implemented hidden inferred-commitment extraction and scoped heartbeat check-ins. It is now removed, including the maintenance CLI; current schema migration discards recognized legacy records. This is distinct from current heartbeat initiative and from a business follow-up tracker. [Versioned evidence](openclaw-inferred-commitments.md).

@@ -96,3 +96,7 @@ Use existing Skills, Colleague State, Request Triage & Priority, Runtime Control
 ## Existing reminder mechanism
 
 OpenClaw also implements Standing Intent: persistent keyword reminders matched on eligible user-trigger turns. Heartbeat/cron hooks sweep maintenance. This is not an automatic extractor/tracker for every promise. [Callable memory and intent audit](commitment-memory.md) records exact source paths and separates session indexing from session-search eligibility.
+
+## 2026-09-11 synthesis
+
+[同事感研究](colleague-experience.md) 將本 schema 接成候選、責任、證據、執行、通知與閉環，補來源類型、授權參照、完成條件、revision 與 timeout 恢復。OpenClaw 曾有 inferred commitments，但目前已移除；[歷史與清理查核](openclaw-inferred-commitments.md)。本設計仍是我們需補的業務狀態，不是重新開啟 upstream 舊功能。

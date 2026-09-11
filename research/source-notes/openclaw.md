@@ -89,3 +89,7 @@ Same-commit `docs/gateway/heartbeat.md:10-23` explicitly defines Heartbeat as a 
 ## Expanded mechanism inventory — 2026-09-09
 
 See [mechanism-inventory.md](mechanism-inventory.md) for additional entry, event, continuation and maintenance paths. Earlier representative flows do not enumerate all mechanisms. New entries are static source traces, not additional live runtime tests.
+
+## 2026-09-11 follow-up: inferred commitments
+
+A separate historical inferred-commitments subsystem existed and was retired. The current main removes the maintenance CLI and migrates recognized old commitment tables away. Earlier pinned runtime analysis remains scoped to its revision; do not infer that the subsystem never existed or that memory/heartbeat restores it. [Historical/current audit](openclaw-inferred-commitments.md) · [Colleague experience synthesis](colleague-experience.md).

@@ -63,3 +63,7 @@ No dependency installation, full test suite, model call, app launch, cloud sched
 ## Expanded mechanism inventory — 2026-09-09
 
 See [mechanism-inventory.md](mechanism-inventory.md) for additional entry, event, continuation and maintenance paths. Earlier representative flows do not enumerate all mechanisms. New entries are static source traces, not additional live runtime tests.
+
+## Official product context, checked 2026-09-11
+
+The [official Grok Bot page](https://x.ai/news/introducing-grok-bot) describes persistent follow-up, learned routines and Bot coordination. This supports product intent independently of the reconstruction, but does not authenticate this repository or establish implementation parity. [Colleague experience synthesis](colleague-experience.md) maps official claims, reconstruction mechanisms and our proposed implementation separately.

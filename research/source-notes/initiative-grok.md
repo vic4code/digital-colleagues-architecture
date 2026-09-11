@@ -45,3 +45,7 @@ source/host/runner/system-prompt.ts#L236-L248:
 Thus model-level grounded initiative is genuinely present as a prompt policy; not just a queue consumer. Do not flatten to 'no goal generation whatsoever'. It does not establish an always-running idle memory-scan or unconstrained human outreach.
 
 User's exact case (remember yesterday Alex promised something and independently ask Alex): runtime can supply context and model can infer such a follow-up during active/woken work, but inspected source does not implement a dedicated commitment-extraction -> due-check -> independently selected human email-recipient -> unapproved send pipeline. SendToAgent is peer Bot not Alex's email. Policy instead supports proposing follow-up and existing authorized work; no new user message is not no runtime wake.
+
+## 2026-09-11 synthesis
+
+Re-read the pinned automation and system prompts. The useful pattern is inferred recurring need → saved routine → background work → selective SendMessage, with required delivery when the user is waiting. Official Grok Bot positioning now has a separate evidence layer; it does not turn reconstructed code into authenticated vendor implementation. [Full colleague experience design](colleague-experience.md).
