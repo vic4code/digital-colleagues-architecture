@@ -16,3 +16,13 @@ Design read: existing Cream research site for a technical/business audience; pre
 Chrome / Playwright: 320, 768, 1024 and 1440 px checked; no page overflow. Before/After toggle, original SVG hover, click-to-expand, proposed component selection, report/risk/quiet fixtures, responsibility toggle, keyboard focus/Enter and legacy anchors passed. No page errors. Visually reviewed desktop hero, original-architecture overlay, scenario fixture and mobile hero screenshots. Static links, SVG parsing and whitespace checks are recorded in initiative-home-validation.json.
 
 Contextual pre-flight: light theme matches the research site; shared cream/blue typography and 8/12/16 px radii; original architecture colors preserve existing semantic ownership. No new external assets, framework, decorative icons, parallax, score bars or animation loop. Numbered chapters remain for the user-requested five-part research order. Table content is secondary disclosure, not the landing layout. Dark-theme styling is not introduced into this existing light-only research site. This is a browser rendering/interaction check, not a backend capability validation.
+
+
+## Human-first visual revision · 2026-09-14
+
+- 用生成的同事插畫、報表與會議物件、思考泡泡取代六個文字流程框。
+- 敘事先從人注意到、聯想到、產生新工作，再映射 Agent；不是以 timer 定義人的認知。
+- 保留 Cream 與 cobalt 配色；圖片等比顯示，技術文字預設收合。
+- 有限播放可暫停；切換頁籤或離開畫面停止；reduced-motion 停用轉場。
+- 移除架構數字徽章，元件選擇依原圖空間順序排列，hover 與點擊保留。
+- Chrome 已驗證 file URL、320/768/1440 寬度、契機切換、三個時刻、播放暫停、架構展開，零 page errors。

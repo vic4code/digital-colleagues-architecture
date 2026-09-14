@@ -13,7 +13,7 @@ regions = [
 ]
 marks=[]
 for key,x,y,w,h,num,label in regions:
- marks.append(f'<a href="../proactivity.html#architecture/after/'+('runtime' if key=='discovery' else 'ingress' if key=='observe' else 'application' if key=='admission' else 'state' if key=='context' else 'runtime')+f'" data-arch-node="{key}" aria-label="{label}"><title>{label}</title><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/><rect x="{x+w-19}" y="{y-9}" width="19" height="18" rx="3" fill="#076fc9"/><text x="{x+w-9.5}" y="{y+4}" text-anchor="middle" font-size="11" fill="white">{num}</text></a>')
+ marks.append(f'<a href="../proactivity.html#architecture/after/'+('runtime' if key=='discovery' else 'ingress' if key=='observe' else 'application' if key=='admission' else 'state' if key=='context' else 'runtime')+f'" data-arch-node="{key}" aria-label="{label}"><title>{label}</title><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/></a>')
 source=source.replace('</svg>','<g class="initiative-overlay">'+''.join(marks)+'</g></svg>')
 source=re.sub(r'<title>.*?</title>','<title>Phase 0.5 reference architecture: initiative integration proposal</title>',source,count=1)
 source=source.replace('Digital colleague — reference architecture (one colleague)','Digital colleague · initiative integration proposal')
