@@ -1,0 +1,82 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADR-010 — Email dispatch addresses the colleague, not a shared inbox｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../index.html">概念導覽</a><a href="../../proactivity.html">研究地圖</a><a href="../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../mechanisms.html">機制圖譜</a><a href="../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="../research/source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="../research/source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="../research/source-notes/design-philosophy.html">Design philosophy differences</a><a href="../research/proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="../research/source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="../research/source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="../research/source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="../research/colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="../research/source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="../research/source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="../research/source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../research/channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="../research/source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="../research/source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="../research/source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="../research/source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="../research/source-notes/openbot.html">OpenBot pinned source review</a><a href="../research/source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="../research/source-notes/voyager.html">Voyager implementation review</a><a href="../research/source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="../research/source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="../research/source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="../research/source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="../research/source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="../research/source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="../research/source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="../research/source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="../research/source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="../research/source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="../research/source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="../research/source-notes/README.html">Proactive agent research — source and evidence index</a><a href="../research/source-notes/design-audit.html">Taste skill audit</a><a href="../research/source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="../research/source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../research/README.html">數位同事研究：主動工作與同事互動感</a><a href="../research/proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../research/storyline.html">數位同事主動性：Story line</a><a href="../research/source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="../research/source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="../research/source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details open><summary>延伸專案文件</summary><a href="../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="ADR-010-email-per-colleague-identity.html" aria-current="page">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../phases/0/README.html">Phase 0 — Prototype</a><a href="ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../overview/README.html">Overview</a><a href="ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../phases/1/README.html">Phase 1 — Legal MVP</a><a href="ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../library.html">延伸專案文件</a><span>研究正文</span></div><article><h1 id="adr-010-email-dispatch-addresses-the-colleague-not-a-shared-inbox">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</h1>
+<ul>
+<li><strong>Status:</strong> Superseded by <a href="ADR-019-single-interaction-surface.html">ADR-019</a></li>
+<li><strong>Date:</strong> 2026-06-23</li>
+<li><strong>Deciders:</strong> (architecture review)</li>
+<li><strong>Scope note:</strong> Email is a <a href="../phases/3/README.html">Phase 3</a> channel (Phase 1 is Claw3D + Linear
+  only). This ADR records the design now because the question came up early; it does not pull
+  email into Phase 1.</li>
+</ul>
+<h2 id="context">Context</h2>
+<p>Email is one of the channels a colleague should be reachable from (<a href="../phases/3/README.html">Phase 3</a>).
+The open question is what address a human sends to in order to dispatch work: a single shared
+official inbox (e.g. <code>legal-ai@company.com</code>), or a distinct address per colleague
+(e.g. <code>claire@colleagues.company.com</code>). This is not a cosmetic choice — it determines how the
+recipient colleague is resolved, whether the experience matches the
+"<a href="../overview/worldview.html">role, not session</a>" worldview, and where the security boundary sits.</p>
+<h2 id="decision">Decision</h2>
+<p><strong>Each digital colleague has its own email identity</strong> on a dedicated subdomain
+(<code>&lt;colleague&gt;@colleagues.company.com</code> or similar). You email a colleague exactly as you'd email a
+human coworker. The <code>To:</code> address <em>is</em> the identity resolution: the email channel adapter maps
+<code>To: claire@…</code> → <code>colleague_id = claire</code>, builds a canonical Turn event (<code>channel = email</code>), and
+dispatches it through the same orchestrator path as every other channel
+(<a href="../../../flows/channel-routing.svg">channel-routing</a>). Replies are sent <strong>from</strong> the colleague's
+address back into the same thread (replies-to-origin). Addresses are data — a column on the
+<code>colleagues</code> table, provisioned via a catch-all subdomain + SES inbound, not individually managed
+mailboxes.</p>
+<p>Three security properties are non-negotiable for inbound email, because email is a trust-weak,
+spoofable, externally-reachable channel:</p>
+<ol>
+<li><strong>Authenticated + allowlisted senders.</strong> Inbound mail must pass SPF/DKIM/DMARC and come from a
+   known/allowlisted sender before it can trigger any privileged action. A stranger emailing a
+   colleague does not get to act as a dispatcher.</li>
+<li><strong>Human-in-the-loop gate still applies</strong> (<a href="ADR-005-human-in-the-loop-gates.html">ADR-005</a>).
+   Email can <em>request</em> work; finalized high-stakes output (a contract review) never auto-sends —
+   it goes through the approval gate. Email is an ingress/egress channel, not an autonomy bypass.</li>
+<li><strong>Email bodies and attachments are untrusted input</strong>, treated as data, never as instructions
+   (prompt-injection boundary). Attachment handling routes through a source connector
+   (<a href="ADR-009-source-connectors-distinct-from-channels.html">ADR-009</a>), not ad-hoc parsing.</li>
+</ol>
+<h2 id="alternatives-considered">Alternatives considered</h2>
+<ul>
+<li><strong>Single shared official inbox + resolve recipient from subject/body:</strong> rejected. Recipient
+  resolution by parsing the subject line is fragile and easily wrong; replies from a shared
+  mailbox make threading and "who am I talking to" incoherent; and it feels like emailing a
+  ticketing system, not a colleague — the opposite of the worldview. Acceptable only as a
+  <em>generic intake</em> address (<code>hello@colleagues…</code>) that routes to a triage colleague, not as the
+  primary dispatch model.</li>
+<li><strong>Reuse the human employee's email for their colleague (a colleague borrows its owner's
+  identity):</strong> rejected. Conflates accountability (who said what), breaks audit
+  (<a href="ADR-006-audit-log-retention.html">ADR-006</a>), and means a colleague can't be addressed
+  independently of one person — directly contradicts "addressable by the organization, not just
+  the current speaker."</li>
+<li><strong>Per-colleague identity on a dedicated subdomain (chosen):</strong> the <code>To:</code> address is a clean,
+  unambiguous identity resolver; matches the coworker mental model; replies thread naturally; and
+  isolates colleague mail from human corporate mail (separate subdomain = easier security policy,
+  SPF/DKIM scoping, and DMARC enforcement).</li>
+</ul>
+<h2 id="consequences">Consequences</h2>
+<ul>
+<li><strong>Easier:</strong> recipient resolution is trivial and robust (it's the <code>To:</code> address); the experience
+  matches the worldview; replies-to-origin falls out for free; a separate subdomain makes the
+  email security policy self-contained.</li>
+<li><strong>Harder:</strong> running an authenticated inbound email pipeline (SES inbound + sender verification +
+  allowlist + spam/abuse handling) is real work; the spoofability of email makes the sender-trust
+  layer load-bearing, not optional; DMARC/DKIM setup on the subdomain is a prerequisite, not a
+  nice-to-have.</li>
+<li><strong>Follow-up:</strong> define the <code>colleagues.email</code> provisioning and the inbound SES → orchestrator
+  path in the Phase 3 channel-adapter design; decide the generic-intake/triage address behavior;
+  decide outbound sending reputation/warmup if colleagues email external counterparties (a much
+  higher-trust action than internal-only, likely gated harder under ADR-005).</li>
+<li><strong>Accepted downside:</strong> email is the weakest-trust channel we support; we accept the ongoing
+  cost of authenticating it rather than the (worse) cost of either a fragile shared-inbox model or
+  an unauthenticated trigger surface.</li>
+</ul></article><footer class="article-footer"><a href="../../library.html">← 回研究目錄</a><a href="ADR-020-event-driven-service-integration.html">下一篇：ADR-020 — Separate webhook ingress from MCP tool execution →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#context">Context</a></li>
+<li><a href="#decision">Decision</a></li>
+<li><a href="#alternatives-considered">Alternatives considered</a></li>
+<li><a href="#consequences">Consequences</a></li>
+</ul>
+</div>
+</aside></div><script src="../../research-library.js?v=9e6a3877b9"></script></body></html>

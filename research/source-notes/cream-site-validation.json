@@ -1,0 +1,106 @@
+{
+  "pages": [
+    {
+      "path": "index.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "visual-story.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "show-me-colleague-interaction.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "mechanisms.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "library.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "reading/research/source-notes/human-to-agent.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "show-me-proactive-lifecycle.html",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "index.html",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "visual-story.html",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "show-me-colleague-interaction.html",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "mechanisms.html",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "library.html",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "reading/research/source-notes/human-to-agent.html",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "show-me-proactive-lifecycle.html",
+      "width": 390,
+      "overflow": false
+    }
+  ],
+  "mechanisms": 39,
+  "implementationFrameworks": [
+    "claw",
+    "hermes",
+    "ob",
+    "gr",
+    "v",
+    "cx",
+    "cc"
+  ],
+  "homeTriggers": 3,
+  "interactionScenarios": 5,
+  "search": "passed",
+  "errors": [],
+  "motion": "pause, resume, reduced motion passed",
+  "offline": "seven implementation documents read from bundle after network disconnected",
+  "date": "2026-09-11",
+  "readingPages": 61,
+  "researchArticles": 34,
+  "workday": {
+    "viewports": [
+      1440,
+      1280,
+      390
+    ],
+    "scenarios": 3,
+    "stages": 6,
+    "waitDoesNotComplete": true,
+    "sourceDialogFocus": "passed",
+    "reducedMotion": "passed"
+  },
+  "scope": "Local frontend validation over HTTP. Offline document bundle tested after disconnecting network; file protocol not tested in this run. No upstream framework execution or real message delivery tested."
+}

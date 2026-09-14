@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-11",
+  "source": "https://github.com/zarazhangrui/frontend-slides",
+  "revision": "9906a34d640d2111f724544cbc50f7f130569ae1",
+  "status": "Three title-slide design previews completed; full-deck styling pending user preference",
+  "candidates": {
+    "a": "Swiss Modern inspired research composition",
+    "b": "Broadside preview card; full design doc intentionally not loaded before selection",
+    "c": "Custom work-note composition"
+  },
+  "constraints": [
+    "1920x1080 stage scales uniformly",
+    "Single HTML with embedded fonts, CSS and JS",
+    "No new scientific or framework claims introduced"
+  ],
+  "checks": [
+    "1440px and375px aspect ratio16:9",
+    "All previews loaded from file URLs",
+    "Seven framework selections load full implementation documents offline",
+    "Document links resolve against their original reading-page location",
+    "No mobile horizontal overflow in mechanism reader"
+  ],
+  "scope": "Frontend preview and local document presentation checks"
+}

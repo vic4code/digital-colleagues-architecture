@@ -1,0 +1,154 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logical architecture — the capability model｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../index.html">概念導覽</a><a href="../../proactivity.html">研究地圖</a><a href="../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../mechanisms.html">機制圖譜</a><a href="../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="../research/source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="../research/source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="../research/source-notes/design-philosophy.html">Design philosophy differences</a><a href="../research/proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="../research/source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="../research/source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="../research/source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="../research/colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="../research/source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="../research/source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="../research/source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../research/channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="../research/source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="../research/source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="../research/source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="../research/source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="../research/source-notes/openbot.html">OpenBot pinned source review</a><a href="../research/source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="../research/source-notes/voyager.html">Voyager implementation review</a><a href="../research/source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="../research/source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="../research/source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="../research/source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="../research/source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="../research/source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="../research/source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="../research/source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="../research/source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="../research/source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="../research/source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="../research/source-notes/README.html">Proactive agent research — source and evidence index</a><a href="../research/source-notes/design-audit.html">Taste skill audit</a><a href="../research/source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="../research/source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../research/README.html">數位同事研究：主動工作與同事互動感</a><a href="../research/proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../research/storyline.html">數位同事主動性：Story line</a><a href="../research/source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="../research/source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="../research/source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details open><summary>延伸專案文件</summary><a href="../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../phases/0/README.html">Phase 0 — Prototype</a><a href="../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="README.html">Overview</a><a href="../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="logical-architecture.html" aria-current="page">Logical architecture — the capability model</a><a href="../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../library.html">延伸專案文件</a><span>研究正文</span></div><article><h1 id="logical-architecture-the-capability-model">Logical architecture — the capability model</h1>
+<p><img alt="Logical architecture" src="../../../overview/logical-architecture.svg" /></p>
+<p>This is the <strong>cloud-agnostic</strong> view of the platform: components named by <em>what they do</em>
+(capabilities), not by <em>which product implements them</em>. It is the canonical model. Each phase and
+each environment is a <strong>binding</strong> of this model onto concrete technology — Phase 1 binds it to
+AWS; an on-prem deployment binds the same model to different products. Read this before any
+phase diagram, because the phase diagrams are concretizations of <em>this</em>.</p>
+<p>Why this exists as a separate view (see <a href="../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013</a>):</p>
+<ul>
+<li><strong>No vendor lock</strong> (<a href="README.html">Non-negotiable #5</a>) only means something if the architecture
+  itself isn't written in AWS nouns. The capability model is the contract; AWS is one supplier.</li>
+<li><strong>On-prem / VDI-bound teams</strong> (<a href="../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008</a>)
+  need the same system on different infrastructure. That's only possible if "the system" is
+  defined by capability, not by managed service.</li>
+<li><strong>Persona, memory, and skill are first-class</strong> here — a <em>Colleague Identity Plane</em> — not an
+  afterthought hidden inside "some Postgres rows."</li>
+</ul>
+<h2 id="the-capability-components">The capability components</h2>
+<p><strong>Experience edge</strong>
+- <strong>Interaction surface</strong> — the single approved human-facing interface for a
+  deployment. It carries the live conversational <em>Turn</em> contract; replacing the
+  presentation does not create another colleague identity.
+- <strong>Gateway</strong> — edge authentication, rate-limiting, TLS, load-balancing. Coarse "can this request
+  pass" — <em>not</em> business authorization.</p>
+<p><strong>Control plane</strong>
+- <strong>Orchestrator</strong> — routing, dispatch, fine-grained (business) authorization, and holding the
+  client connection open. Does no LLM work and stores no authoritative state itself.
+- <strong>Dispatch queue</strong> — one-way hand-off of turns from orchestrator to workers.
+- <strong>Event / stream bus</strong> — carries live turn events back from a worker to the orchestrator task
+  holding the client's connection (the streaming return path).</p>
+<p><strong>Execution · data plane</strong>
+- <strong>Worker pool</strong> — stateless executors; each runs one turn then frees itself. Any worker runs
+  any colleague.
+- <strong>Agent runtime</strong> — the per-turn LLM agent process (Codex / Claude Code / future). Pluggable;
+  this is the replaceable part, not the platform.
+- <strong>Integration/tool layer (MCP ports)</strong> — <code>doc</code> / <code>kanban</code> / <code>message</code> /
+  <code>memory</code> / <code>mail</code> / <code>calendar</code> tools as a storage- and vendor-agnostic
+  interface. Each integration can accept service events and expose actions; the
+  interface is stable across phases while the backing changes.
+  <strong>This is the platform's main extension seam:</strong> adding a tool adds a capability a colleague can
+  use (e.g. <code>calendar</code>, <code>search</code>, <code>email</code>) without touching the orchestrator or worker; swapping a
+  tool's adapter changes where it's backed (e.g. <code>doc</code> → S3 <em>or</em> SharePoint, per
+  <a href="../decisions/ADR-019-single-interaction-surface.html">ADR-019</a>). It runs inside each
+  worker per turn, so it scales with the worker pool — there is no separate service to scale.</p>
+<p><strong>Colleague identity plane</strong> <em>(this is the part that makes a colleague a colleague)</em>
+- <strong>Persona store</strong> — who the colleague is: role, voice, behavior rules. Data, not code.
+- <strong>Memory store</strong> — what it remembers across turns. Scoped: session / colleague / (later) team.
+- <strong>Skill registry</strong> — what it can do: bundled, composable capabilities.
+- <strong>Permission / RBAC</strong> — what it may do, and who may reach or approve it.
+- <strong>Secret store</strong> — per-colleague runtime/LLM credentials, injected at turn start, never in code.</p>
+<blockquote>
+<p><strong>Where does this state physically live?</strong> Deliberately <em>not</em> shown on this diagram — each box
+above is a <em>storage capability</em>, and where it physically lives is the <strong>binding</strong> (the table
+below), not the logical model. That's why the Phase 1 diagram looks more concrete: it <em>is</em> the
+binding. In Phase 1 (AWS): persona files → <strong>S3</strong>; structured memory + skill registry + RBAC →
+<strong>Postgres</strong>; large memory/skill artifacts → <strong>S3</strong>; credentials → <strong>Secrets Manager</strong>. Swap the
+binding column and the same capabilities live on Postgres / MinIO / Vault on-prem.</p>
+</blockquote>
+<p><strong>Shared business state</strong>
+- <strong>Document / artifact store</strong> — the actual business content, reached through
+  permission-scoped integrations/tools (<a href="../decisions/ADR-019-single-interaction-surface.html">ADR-019</a>).
+- <strong>Work state store</strong> — kanban, messages, tickets, sessions.
+- <strong>Audit store</strong> — immutable, append-only, retained (<a href="../decisions/ADR-006-audit-log-retention.html">ADR-006</a>).</p>
+<p><strong>Cross-cutting</strong>
+- <strong>Observability</strong> — tracing, metrics, logs per turn and across the fleet.</p>
+<h2 id="bindings">Bindings</h2>
+<p>Each capability maps to a concrete product per environment. Phase 1 is the AWS binding; the
+on-prem column shows the same model is implementable without AWS.</p>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Phase 1 (AWS)</th>
+<th>On-prem option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gateway</td>
+<td>ALB + WAF + Cognito</td>
+<td>reverse proxy (nginx/Envoy) + OIDC (Keycloak)</td>
+</tr>
+<tr>
+<td>Orchestrator / Worker pool</td>
+<td>ECS Fargate</td>
+<td>Kubernetes or VMs</td>
+</tr>
+<tr>
+<td>Dispatch queue</td>
+<td>SQS</td>
+<td>RabbitMQ / NATS</td>
+</tr>
+<tr>
+<td>Event / stream bus</td>
+<td>ElastiCache Redis Pub/Sub</td>
+<td>Redis / NATS</td>
+</tr>
+<tr>
+<td>Persona store (AGENTS.md / Soul.md)</td>
+<td>S3 (versioned files)</td>
+<td>MinIO</td>
+</tr>
+<tr>
+<td>Memory store</td>
+<td>Postgres (structured) + S3 (artifacts)</td>
+<td>Postgres + MinIO</td>
+</tr>
+<tr>
+<td>Skill registry</td>
+<td>Postgres (registry) + S3 (bundles)</td>
+<td>Postgres + MinIO</td>
+</tr>
+<tr>
+<td>Permission / RBAC</td>
+<td>RDS Postgres</td>
+<td>Postgres</td>
+</tr>
+<tr>
+<td>Secret store</td>
+<td>Secrets Manager + KMS</td>
+<td>Vault</td>
+</tr>
+<tr>
+<td>Document / work state</td>
+<td>S3 + RDS Postgres (+ connectors)</td>
+<td>MinIO + Postgres</td>
+</tr>
+<tr>
+<td>Audit store</td>
+<td>S3 Object Lock + CloudTrail</td>
+<td>WORM storage + append-only Postgres</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>CloudWatch + OpenTelemetry</td>
+<td>Prometheus + Grafana + OpenTelemetry</td>
+</tr>
+<tr>
+<td>Agent runtime</td>
+<td>Codex / Claude Code</td>
+<td>Codex / Claude Code (same)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The only place the binding is non-trivial is the <strong>queue</strong> and <strong>event bus</strong> — SQS and Redis have
+no drop-in on-prem identity, so the orchestrator talks to them through a thin port (an interface),
+and "SQS vs RabbitMQ" becomes a binding detail, not an architecture change. Everything else is a
+near-direct substitution.</p></article><footer class="article-footer"><a href="../../library.html">← 回研究目錄</a><a href="../decisions/ADR-013-capability-oriented-logical-architecture.html">下一篇：ADR-013 — Capability-oriented logical architecture; clouds are bindings →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#the-capability-components">The capability components</a></li>
+<li><a href="#bindings">Bindings</a></li>
+</ul>
+</div>
+</aside></div><script src="../../research-library.js?v=9e6a3877b9"></script></body></html>

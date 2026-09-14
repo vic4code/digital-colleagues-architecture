@@ -1,0 +1,314 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phase 0.5 — One face-to-face interface, many tools｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../../index.html">概念導覽</a><a href="../../../proactivity.html">研究地圖</a><a href="../../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../../mechanisms.html">機制圖譜</a><a href="../../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="../../research/source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="../../research/source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="../../research/source-notes/design-philosophy.html">Design philosophy differences</a><a href="../../research/proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="../../research/source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="../../research/source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="../../research/source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="../../research/colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="../../research/source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="../../research/source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="../../research/source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../../research/channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="../../research/source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="../../research/source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="../../research/source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="../../research/source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="../../research/source-notes/openbot.html">OpenBot pinned source review</a><a href="../../research/source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="../../research/source-notes/voyager.html">Voyager implementation review</a><a href="../../research/source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="../../research/source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="../../research/source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="../../research/source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="../../research/source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="../../research/source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="../../research/source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="../../research/source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="../../research/source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="../../research/source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="../../research/source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="../../research/source-notes/README.html">Proactive agent research — source and evidence index</a><a href="../../research/source-notes/design-audit.html">Taste skill audit</a><a href="../../research/source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="../../research/source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../../research/README.html">數位同事研究：主動工作與同事互動感</a><a href="../../research/proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../../research/storyline.html">數位同事主動性：Story line</a><a href="../../research/source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="../../research/source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="../../research/source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details open><summary>延伸專案文件</summary><a href="README.html" aria-current="page">Phase 0.5 — One face-to-face interface, many tools</a><a href="../../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../0/README.html">Phase 0 — Prototype</a><a href="../../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../../overview/README.html">Overview</a><a href="../../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../2/README.html">Phase 2 — Generalized Platform</a><a href="../3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../1/README.html">Phase 1 — Legal MVP</a><a href="../../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../../library.html">延伸專案文件</a><span>研究正文</span></div><article><h1 id="phase-05-one-face-to-face-interface-many-tools">Phase 0.5 — One face-to-face interface, many tools</h1>
+<p><strong>Status:</strong> 📐 Design note. The <strong>implementation lives in a separate code repo</strong>
+(this repo is architecture only). Parallel track — not on the cloud progression
+(0 → 1 → 2 → 3).</p>
+<p><strong>One line:</strong> a digital colleague is a <strong>layered persona running on the Codex
+engine through an agent runtime</strong>. A person meets it through one consistent
+interaction surface; the colleague itself uses Outlook, Gmail, Slack, calendars,
+Notion, and other services as bidirectional tools to receive and complete work.</p>
+<p>This is deliberately not a multi-channel UX. As with a human colleague, the
+relationship is face-to-face; phone, mail, chat, and work systems are tools the
+colleague uses, not separate versions of the colleague that the user must learn
+to operate. <a href="../../decisions/ADR-019-single-interaction-surface.html">ADR-019</a>
+records that boundary.</p>
+<p>We align the colleague definition with OpenClaw's official
+<a href="https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md">agent workspace</a>:
+<code>IDENTITY.md</code> defines name and presentation, <code>SOUL.md</code> defines persona, tone,
+and boundaries, <code>AGENTS.md</code> defines operating instructions, <code>USER.md</code> records
+teammate context, and <code>skills/</code> plus memory files provide capabilities and
+continuity. <code>Body</code> and <code>Faculty</code> are not OpenClaw workspace components and are
+therefore not part of this architecture. The <em>content</em>, integrations, and whole
+<strong>access-and-permission design are ours</strong>; the framework is a design reference,
+not a black-box dependency that quietly holds our credentials.</p>
+<p><img alt="Phase 0.5 system context" src="../../../../phases/0.5/architecture.svg" /></p>
+<h2 id="c4-diagram-set">C4 diagram set</h2>
+<p>The diagrams deliberately separate structure, runtime behavior, and deployment;
+mixing them is what made the app-server / MCP / webhook boundary ambiguous.</p>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>View</th>
+<th>Question answered</th>
+<th>Diagram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C1 — System Context</strong></td>
+<td>Who and which external systems interact with the digital colleague?</td>
+<td><a href="../../../../phases/0.5/architecture.svg">architecture.svg</a></td>
+</tr>
+<tr>
+<td><strong>C2 — Container</strong></td>
+<td>Which applications/processes exist, and how do app-server, MCP, and webhook ingress connect?</td>
+<td><a href="../../../../phases/0.5/system-architecture.svg">system-architecture.svg</a></td>
+</tr>
+<tr>
+<td><strong>C3 — Component</strong></td>
+<td>What lives inside the colleague runtime/control container?</td>
+<td><a href="../../../../phases/0.5/runtime-components.svg">runtime-components.svg</a></td>
+</tr>
+<tr>
+<td><strong>C4 — Code</strong></td>
+<td>What classes make up one component (the Triage Policy)?</td>
+<td><a href="../../../../phases/0.5/triage-policy-code.svg">triage-policy-code.svg</a></td>
+</tr>
+<tr>
+<td><strong>Dynamic</strong></td>
+<td>How does a SaaS event wake a colleague and lead to an outbound action?</td>
+<td><a href="../../../../phases/0.5/integration-flow.svg">integration-flow.svg</a></td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>What runs on the user device versus the always-on public edge?</td>
+<td><a href="../../../../phases/0.5/deployment.svg">deployment.svg</a></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Where triage lives — one home.</strong> The deterministic triage gate (deliver-only /
+reason / silent) is a <strong>Runtime Controller</strong> concern: it decides what to do with
+an <em>accepted</em> event. Event Ingress only verifies, de-duplicates, and buffers — it
+does <strong>not</strong> triage. So triage appears once, inside the Runtime Controller (C2),
+as the <code>Triage Policy</code> component (C3), whose classes are the C4 code view. The
+service-integration tier holds transport pieces only (ingress, scheduler,
+subscription renewal, MCP tool servers).</p>
+<p>C4 uses “container” to mean an independently running application, service,
+process, or data store — <strong>not necessarily a Docker container</strong>. To avoid that
+common ambiguity, the C2 view keeps the standard C4 title but labels each box
+with its concrete runtime type. Docker, VM, workstation, and clustering details
+remain in the Deployment view. See the <a href="https://c4model.com/abstractions/container">C4 container
+definition</a>.</p>
+<p>C4 recommends System Context and Container diagrams for most teams, while
+Component diagrams are optional and deployment/runtime flows are separate
+supporting views. We include C3 and Dynamic here because they resolve the one
+important Phase 0.5 boundary: webhook ingress versus MCP tool execution.</p>
+<h3 id="supporting-layered-reference-architecture">Supporting layered reference architecture</h3>
+<p>The earlier layered view remains useful because it shows the whole design
+language on one page: human surface, persona, runtime and engine, service
+integration, external services, and the cross-cutting access/permission/audit
+boundary.</p>
+<p><img alt="Phase 0.5 layered reference architecture" src="../../../../phases/0.5/reference-architecture.svg" /></p>
+<p>This is intentionally a <strong>supporting layered reference architecture</strong>, not a
+numbered C4 level. It is closest to a C2/container overview, but it mixes
+containers with persona concepts, internal responsibilities, and a
+cross-cutting security concern. Use it for stakeholder orientation; use the C1,
+C2, C3, Dynamic, and Deployment views above when an implementation boundary or
+runtime sequence must be precise.</p>
+<h2 id="goal">Goal</h2>
+<p>Prove the smallest believable digital-colleague experience:</p>
+<ol>
+<li>A person opens one approved interface and talks to the same colleague every
+   time — no channel selection or routing knowledge required.</li>
+<li>The colleague knows which services it may use and chooses the appropriate
+   tool from the task context.</li>
+<li>Service events can create or resume work, and the colleague can act or reply
+   through that same service.</li>
+<li>Every inbound event and outbound action is permission-bounded and auditable.</li>
+</ol>
+<h2 id="the-stack">The stack</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Provided by</th>
+<th>We do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Interaction surface</strong> — the one face-to-face UI</td>
+<td>approved web/desktop/embodied client</td>
+<td>choose one binding; keep the interaction contract stable</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong> — sessions, approvals, transcript, persona loading</td>
+<td>off-the-shelf agent runtime</td>
+<td>configure it</td>
+</tr>
+<tr>
+<td><strong>Colleague definition</strong> — <code>IDENTITY.md</code>, <code>SOUL.md</code>, <code>AGENTS.md</code>, <code>USER.md</code>, <code>skills/</code>, memory</td>
+<td>OpenClaw workspace model</td>
+<td><strong>author and version it — this is the colleague</strong></td>
+</tr>
+<tr>
+<td><strong>Engine/control API</strong> — thread/turn lifecycle, streamed events, approvals, agent loop</td>
+<td><strong>Codex</strong> <code>app-server</code></td>
+<td>use it through its JSON-RPC client protocol</td>
+</tr>
+<tr>
+<td><strong>Integrations/tools</strong> — Outlook, Gmail, Slack, calendar, Notion, kanban, …</td>
+<td>Codex MCP client + MCP servers/tool adapters + vendor APIs</td>
+<td>configure/build the tool boundary; keep it composable</td>
+</tr>
+<tr>
+<td><strong>Event intake</strong> — SaaS push, webhook verification, de-duplication, buffered hand-off</td>
+<td>vendor webhooks + a small always-on receiver</td>
+<td>send accepted events to runtime triage, then into an app-server turn</td>
+</tr>
+<tr>
+<td><strong>Access &amp; permissions</strong> — credentials, scopes, sandbox, approval, audit</td>
+<td><strong>ours to design</strong></td>
+<td><strong>spell it out; security reviews it</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The colleague <em>is</em> data: a persona, skills, memory policy, and permission set.
+The interface, runtime, engine, and service adapters are replaceable bindings.</p>
+<h2 id="the-interaction-model">The interaction model</h2>
+<p>There is exactly one component called the <strong>channel</strong>: the human-facing
+interaction surface. It may be implemented as a web app, desktop app, or an
+embodied office UI, but a deployment presents one consistent place to meet the
+colleague.</p>
+<p>Outlook, Gmail, Slack, Teams, Linear, Notion, and calendars are <strong>not peer
+channels</strong>. They are bidirectional integrations, but the two directions use
+different runtime paths (<a href="../../decisions/ADR-020-event-driven-service-integration.html">ADR-020</a>):</p>
+<ul>
+<li><strong>Outbound / during a turn:</strong> Codex app-server runs the agent. Its Codex host
+  invokes a configured MCP tool; the MCP server/tool adapter calls the SaaS API.
+  App-server controls the thread/turn and streams tool events, but it is not
+  itself a Gmail/Slack/Outlook API adapter.</li>
+<li><strong>Inbound / outside a turn:</strong> a SaaS webhook cannot be sent to an MCP tool and
+  automatically create a Codex turn. An always-on webhook receiver verifies and
+  de-duplicates the event, then a runtime/app-server client calls
+  <code>thread/start</code> or <code>thread/resume</code>, followed by <code>turn/start</code>.</li>
+</ul>
+<p>So the short answer is: <strong>SaaS actions run under the Codex app-server agent
+lifecycle via MCP; SaaS wake-up events enter through a separate webhook path
+that converges at the app-server control API.</strong> Reuse off-the-shelf pieces
+rather than build a bus:</p>
+<ul>
+<li><strong>Sources.</strong> Where a service pushes natively — Microsoft Graph (Outlook),
+  Google Calendar <code>watch()</code>, Gmail watch — use it. Subscription expiry is
+  <strong>service-specific and must be renewed</strong>, or events silently stop. Where a
+  service has no push (punch-clock, periodic summaries), a <strong>scheduler (cron / heartbeat)</strong>
+  plays the same role, time-driven.</li>
+<li><strong>Ingress.</strong> A small always-on <strong>webhook receiver</strong> (public HTTPS) verifies
+  signature + source and de-duplicates. Its content is untrusted input. The
+  receiver/runtime then acts as an app-server client; app-server does not expose
+  a generic SaaS webhook endpoint.</li>
+<li><strong>Triage gate — a rule, not the LLM.</strong> "Does this need agent reasoning?"
+  <strong>No → deliver-only:</strong> forward the notice with no LLM turn (saves tokens).
+  <strong>Yes →</strong> use app-server JSON-RPC to start/resume the thread and start a
+  bounded turn with the event as context.</li>
+<li><strong>Outcome.</strong> The colleague acts/replies through the <strong>same integration</strong>
+  (outbound: search, create, update, send, reply), or returns <strong><code>[SILENT]</code></strong>
+  when nothing is worth interrupting a human for.</li>
+<li><strong>Continuity:</strong> the resulting task/session is visible from the one interaction
+  surface, even if nobody had it open when the event arrived.</li>
+</ul>
+<p>The old "dispatcher" idea therefore becomes a small <strong>event ingress +
+deterministic triage + app-server client</strong>, not a collection of channel-specific
+conversation services and not an MCP responsibility.
+Event-driven and time-driven coexist and feed the same gate. The full inbound
+pipeline (sources → ingress → triage → outcome) is drawn in
+<a href="../../../../phases/0.5/integration-flow.svg">integration-flow.svg</a>; the main diagram shows the same
+tools as the colleague's ring.</p>
+<h3 id="peer-colleagues-agent-to-agent">Peer colleagues (agent-to-agent)</h3>
+<p>A third relationship, distinct from both the human interface and service tools:
+colleagues coordinate with <strong>each other</strong> directly — delegation, hand-off, "ask
+David the SA to review this" — over an <strong>agent-to-agent protocol, a service
+API, or plain networking</strong>, machine-to-machine, <strong>never through the human
+interaction surface</strong>. Humans meet a colleague one way (face-to-face); colleagues
+reach each other a different way (peer). The single-surface rule is about the
+<em>human</em> relationship — it does not mean a colleague can only ever be reached one
+way.</p>
+<p>A2A rides the <strong>same identity, permission, and audit rules</strong> as any tool: a peer
+call is a bounded, credentialed, logged action, not a backdoor around approval.
+This is a forward-looking dimension — short-term demos need only one colleague,
+so it is recorded to keep the model honest, not to build now. The main diagram
+deliberately shows <strong>one colleague</strong>; peers get drawn side by side once a second
+colleague is real.</p>
+<h2 id="what-this-replaced-and-why">What this replaced (and why)</h2>
+<p>Earlier Phase 0.5 drafts hand-built channel adapters around <code>codex app-server</code>.
+<a href="../../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018</a> retired that bespoke
+runtime layer. The next draft still described Gmail and Slack as parallel
+channels supplied by the runtime; <a href="../../decisions/ADR-019-single-interaction-surface.html">ADR-019</a>
+corrects the product model: runtime capabilities may be reusable internally,
+but the architecture exposes one interaction surface and treats surrounding
+services as tools.</p>
+<h2 id="access-permissions">Access &amp; permissions</h2>
+<p>A colleague that can read mail, post to Slack, schedule meetings, and update work
+systems is a real security surface:</p>
+<ul>
+<li><strong>Credential custody.</strong> OAuth tokens and API keys live in a secrets store (OS
+  keychain locally, a secrets manager in cloud), never in persona files, config,
+  logs, or traces.</li>
+<li><strong>Least privilege.</strong> Each integration gets the minimal read/write scopes the
+  colleague needs, per colleague — never a shared god-token.</li>
+<li><strong>Inbound trust boundary.</strong> Service content is untrusted input even when the
+  sender is known. Adapters preserve provenance; skills enforce sender/resource
+  allow-lists and prompt-injection controls.</li>
+<li><strong>Sandbox + approval bounds.</strong> Sandbox policy limits reach; approval policy
+  decides which writes, sends, and external side effects require a human.</li>
+<li><strong>Audit.</strong> Every service event, tool call, approval, and outbound action records
+  what happened, on whose behalf, with which permission and correlation id.</li>
+<li><strong>Runtime trust boundary.</strong> Any runtime or broker holding real-account tokens
+  is a security-review target; prefer self-hosting or a credential broker we
+  control.</li>
+</ul>
+<h2 id="open-implementation-questions">Open implementation questions</h2>
+<ul>
+<li>Which single interaction surface is the Phase 0.5 binding?</li>
+<li>For each service, is event delivery a webhook/subscription or bounded polling?</li>
+<li>Is each outbound SaaS capability an existing remote MCP server or a small
+  adapter we host, and where are its OAuth tokens brokered?</li>
+<li>Which operations are read-only, auto-approved writes, or human-approved writes?</li>
+<li>Where does the durable event/task queue live while the local device is offline?</li>
+<li>How are service event ids, agent sessions, approvals, and outbound actions
+  correlated in the audit trail?</li>
+</ul>
+<p>These are answered against the runtime and vendor APIs in the implementation
+repo; they do not change the conceptual boundary above.</p>
+<h2 id="short-term-vs-long-term">Short term vs long term</h2>
+<ul>
+<li><strong>Short term — local colleague.</strong> One persona on a user's device, reached
+  through one interface, with a small allow-listed set of integrations. The
+  device supplies compute; integrations can wake work while it is online.</li>
+<li><strong>Long term — centralized colleague.</strong> The same persona and skills run on an
+  always-on runtime. The interaction contract and tool contracts stay the same;
+  only deployment, durability, and scale change as the work rejoins Phase 1+.</li>
+</ul>
+<h2 id="where-the-implementation-goes">Where the implementation goes</h2>
+<p>A separate code repo holds the runtime config, persona files, interaction-surface
+binding, event-to-task skill, service integrations, and account setup. This repo
+keeps the architectural intent, diagram, and decisions
+(<a href="../../decisions/ADR-018-adopt-openclaw-codex.html">018</a>,
+<a href="../../decisions/ADR-019-single-interaction-surface.html">019</a>,
+<a href="../../decisions/ADR-020-event-driven-service-integration.html">020</a>).</p>
+<h2 id="sources-for-the-architecture-boundaries">Sources for the architecture boundaries</h2>
+<ul>
+<li><a href="https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md">OpenClaw agent workspace</a>
+  — defines the responsibilities of <code>AGENTS.md</code>, <code>SOUL.md</code>, <code>USER.md</code>,
+  <code>IDENTITY.md</code>, skills, and memory files.</li>
+<li><a href="https://github.com/openclaw/openclaw/blob/main/docs/concepts/soul.md">OpenClaw <code>SOUL.md</code> personality guide</a>
+  — keeps persona, tone, and boundaries in <code>SOUL.md</code>, separate from operating
+  rules in <code>AGENTS.md</code>.</li>
+<li><a href="https://learn.chatgpt.com/docs/app-server.md">Codex app-server</a> — app-server
+  is the programmatic control interface for clients: initialization,
+  thread/turn lifecycle, approvals, and streamed agent/tool events.</li>
+<li><a href="https://learn.chatgpt.com/docs/extend/mcp.md">Codex MCP</a> — MCP connects the
+  Codex host to tools and context through STDIO or Streamable HTTP servers.</li>
+<li><a href="https://c4model.com/diagrams">C4 diagrams</a> — static zoom levels are separate
+  from Dynamic and Deployment supporting views.</li>
+</ul><details class="article-references"><summary>本文參考來源 · 6</summary><p>以下保留本文實際引用的來源；引用不等於實測，適用範圍以正文說明為準。</p><ol><li><a href="https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md">agent workspace</a></li><li><a href="https://c4model.com/abstractions/container">C4 container
+definition</a></li><li><a href="https://github.com/openclaw/openclaw/blob/main/docs/concepts/soul.md">OpenClaw SOUL.md personality guide</a></li><li><a href="https://learn.chatgpt.com/docs/app-server.md">Codex app-server</a></li><li><a href="https://learn.chatgpt.com/docs/extend/mcp.md">Codex MCP</a></li><li><a href="https://c4model.com/diagrams">C4 diagrams</a></li></ol></details></article><footer class="article-footer"><a href="../../../library.html">← 回研究目錄</a><a href="../../decisions/ADR-019-single-interaction-surface.html">下一篇：ADR-019 — One interaction surface; surrounding services are bidirectional tools →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#c4-diagram-set">C4 diagram set</a><ul>
+<li><a href="#supporting-layered-reference-architecture">Supporting layered reference architecture</a></li>
+</ul>
+</li>
+<li><a href="#goal">Goal</a></li>
+<li><a href="#the-stack">The stack</a></li>
+<li><a href="#the-interaction-model">The interaction model</a><ul>
+<li><a href="#peer-colleagues-agent-to-agent">Peer colleagues (agent-to-agent)</a></li>
+</ul>
+</li>
+<li><a href="#what-this-replaced-and-why">What this replaced (and why)</a></li>
+<li><a href="#access-permissions">Access &amp; permissions</a></li>
+<li><a href="#open-implementation-questions">Open implementation questions</a></li>
+<li><a href="#short-term-vs-long-term">Short term vs long term</a></li>
+<li><a href="#where-the-implementation-goes">Where the implementation goes</a></li>
+<li><a href="#sources-for-the-architecture-boundaries">Sources for the architecture boundaries</a></li>
+</ul>
+</div>
+</aside></div><script src="../../../research-library.js?v=9e6a3877b9"></script></body></html>

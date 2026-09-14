@@ -1,0 +1,32 @@
+{
+  "scope": "Workday illustration/layout/browser regression; no backend execution.",
+  "viewports": [
+    {
+      "width": 1440,
+      "states": 18,
+      "aspectRatio": "800 / 258.032",
+      "cardOverlaps": 0,
+      "bodyPartAnimations": 0,
+      "pageOverflow": false
+    },
+    {
+      "width": 1024,
+      "states": 18,
+      "aspectRatio": "800 / 258.032",
+      "cardOverlaps": 0,
+      "bodyPartAnimations": 0,
+      "pageOverflow": false
+    },
+    {
+      "width": 390,
+      "states": 18,
+      "aspectRatio": "800 / 258.032",
+      "cardOverlaps": 0,
+      "bodyPartAnimations": 0,
+      "pageOverflow": false
+    }
+  ],
+  "storyPlayback": "passed",
+  "reducedMotion": "passed",
+  "consoleErrors": []
+}

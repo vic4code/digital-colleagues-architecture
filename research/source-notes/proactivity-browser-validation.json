@@ -1,0 +1,36 @@
+{
+  "scope": "Browser interaction tests only; no model calls, provider delivery, prototype runtime integration or production measurements.",
+  "viewports": [
+    {
+      "width": 1440,
+      "sections": 6,
+      "beforeAfter": "passed",
+      "drilldown": "passed",
+      "svgKeyboard": "passed",
+      "scenarioFixtures": 5,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "sections": 6,
+      "beforeAfter": "passed",
+      "drilldown": "passed",
+      "svgKeyboard": "passed",
+      "scenarioFixtures": 5,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "sections": 6,
+      "beforeAfter": "passed",
+      "drilldown": "passed",
+      "svgKeyboard": "passed",
+      "scenarioFixtures": 5,
+      "overflow": false
+    }
+  ],
+  "additionalDetailViews": 6,
+  "frameworkFlowSequenceCode": "passed",
+  "markdownReading": "passed",
+  "consoleErrors": []
+}

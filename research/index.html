@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="同畫面對照人與 Agent 的自主性，接著看 time／event 框架實作、架構與 Phase、數位同事情境，以及驗證與穩定性。"><title>自己想到該做什麼｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="story-home.css?v=4006f08c61"></head><body><a class="skip-link" href="#human">跳至主線內容</a><header class="cream-header"><a class="cream-brand" href="index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="index.html" aria-current="page">概念導覽</a><a href="proactivity.html">研究地圖</a><a href="show-me-colleague-interaction.html">互動實驗室</a><a href="mechanisms.html">機制圖譜</a><a href="library.html">研究書架</a></nav></header><main class="story-main"><nav class="story-nav" aria-label="五段主線"><a href="#human"><span>01</span>人 × Agent</a><a href="#frameworks"><span>02</span>框架實作</a><a href="#architecture"><span>03</span>我們的架構</a><a href="#phases"><span>04</span>三個 Phase</a><a href="#verification"><span>05</span>國泰情境與驗證</a></nav><section class="story-section opening" id="human" aria-labelledby="human-title">
+<div class="opening-heading"><div><p class="cream-kicker">01 / WAKE → OBSERVE → DECIDE</p><h1 id="human-title">主動性的入口：<br><span>Time ＋ Event。</span></h1></div><p class="lead">時間到，或有事發生，讓 Agent 開始看。<br><strong>職責與脈絡，讓它想到值得做什麼。</strong></p></div>
+<div class="mind-map" role="group" aria-label="人與 Agent 如何從線索想到新工作">
+<div class="mind-label"><div><b>人的「想到」</b><small>線索，連到心裡在意的事</small></div></div>
+<div class="mind-label"><div><b>Agent 的「想到」</b><small>觀察，連到被賦予的職責</small></div></div>
+<div class="mind-cell"><span class="map-step">01 · 線索</span><p>看到報表更新，<br>想起下午有業務會議。</p><span class="signal-pill">時間經過</span><span class="signal-pill">情境變化</span></div>
+<div class="mind-cell"><span class="map-step">01 · 喚起與觀察</span><p><b>Time</b> 定期看近況 ／ <b>Event</b> 收到資料異動<br>讀到：新報表 v3、會議簡報仍引用 v2。</p><small>入口提供思考機會，尚未指定要做什麼。</small></div>
+<div class="mind-cell idea-cell"><span class="map-step">02 · 聯想與判斷</span><p>「我負責會議品質。<br>新數字會不會影響我們的結論？」</p></div>
+<div class="mind-cell idea-cell"><span class="map-step">02 · 產生工作想法</span><div class="context-formula"><span>職責</span><i>＋</i><span>新證據</span><i>＋</i><span>工作脈絡</span><i>↓</i></div><p><b>推導：值得比對簡報與新報表。</b></p></div>
+<div class="mind-cell"><span class="map-step">03 · 決定做什麼</span><p>先確認差異，再決定要不要修改。<br>也可能判斷這次不用做任何事。</p></div>
+<div class="mind-cell"><span class="map-step">03 · 選擇與授權</span><p>選擇有根據、與職責相關的工作。<br><b>自行查證 ／ 提案待批 ／ 暫不行動</b></p></div>
+</div>
+<div class="takeaway"><b>喚醒：Time／Event</b><span>→</span><b>選題：職責 × 證據 × 推論</b></div><details class="detail-level"><summary>還有第三種嗎？執行中的 loop 怎麼算？</summary><p>外部喚醒可用 time／event 描述；已在執行的程式，也可以直接進入下一輪。把「上一輪完成」抽象成內部 event 可以，但實作可能只是 while 迴圈，沒有 timer 或 event bus。記憶、環境、好奇心是判斷輸入／策略，不是第三種神祕喚醒源。</p></details>
+<details class="detail-level"><summary>往下拆：喚醒、產生想法、選擇與執行，各負責什麼？</summary><div class="nested-explanation"><details><summary>Time／Event：何時開始觀察？</summary><p>排程、來源事件或內部完成事件提供執行機會。只有 timer 與 queue，還不能證明系統會發現新的工作。</p></details><details><summary>Generate／Select：如何想到與選出工作？</summary><p>把可存取的現況、職責與記憶放入 context，讓模型推導「有什麼值得處理」，以證據與政策篩選。可以直接提出一件事，不必實作獨立候選池或數值排名器。</p><a class="source" href="reading/research/source-notes/prioritization.html">查看選題研究與框架邊界 ↗</a></details><details><summary>Execute／Continue：想到之後如何做完？</summary><p>這是後段能力：工具、授權、任務狀態與 loop 讓選定的工作完成。接續既定目標，是與「發現一件值得做的事」不同的能力。</p></details></div></details>
+<details class="scope-detail"><summary>範圍與依據</summary><p>人的部分是行為類比。Agent 在已設定職責與可觀察範圍內推導工作；此圖是本專案設計抽象。</p></details></section>
+<section class="story-section" id="frameworks" aria-labelledby="framework-title"><p class="cream-kicker">02 / MECHANISM → IMPLEMENTATION</p><h2 id="framework-title">名字很多，<br><span>差在什麼時候查、怎麼跑。</span></h2><div class="mechanism-explorer"><div class="mechanism-tabs" role="group" aria-label="選擇觸發或執行機制"><button type="button" data-mechanism="polling" aria-pressed="true">Polling</button><button type="button" data-mechanism="heartbeat" aria-pressed="false">Heartbeat</button><button type="button" data-mechanism="cron" aria-pressed="false">Cron job</button><button type="button" data-mechanism="event" aria-pressed="false">Event trigger</button><button type="button" data-mechanism="loop" aria-pressed="false">Loop／Voyager</button></div><div id="mechanism-result" aria-live="polite"><p>Polling：定期讀來源，再比對變化；不必每次呼叫模型。</p></div></div>
+<details class="detail-level"><summary>框架實作總表：可調用入口 → 內部路徑 → 證據</summary><div class="table-scroll" role="region" tabindex="0" aria-label="框架觸發介面與內部路徑"><table><thead><tr><th scope="col">框架</th><th scope="col">Time 入口</th><th scope="col">Event／接續入口</th><th scope="col">實作路徑</th><th scope="col">追到來源</th></tr></thead><tbody><tr><th scope="row">OpenClaw</th><td><code>agents.defaults.heartbeat.every</code>；<code>openclaw cron</code>／automations</td><td><code>/hooks/wake</code>、<code>/hooks/agent</code>；targeted completion wake</td><td>timer → due job → heartbeat payload → wake admission → 一般 agent turn</td><td><a href="reading/research/source-notes/openclaw.html">固定版本路徑 ↗</a></td></tr><tr><th scope="row">Hermes</th><td><code>cronjob</code>；<code>/loop</code>；monitor_script／monitor_url</td><td>Webhook route 的 <code>cron_job</code>（目前文件）；goal／loop watcher 是內部接續</td><td>cron tick → script／URL → hash 比對 → 變化才進模型</td><td><a href="reading/research/source-notes/hermes.html">固定狀態機 ↗</a> · <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/cron">目前介面 ↗</a></td></tr><tr><th scope="row">Claude Code</th><td><code>/loop</code> → <code>CronCreate</code></td><td><code>--channels</code> 啟用 MCP 事件（目前文件）；<code>/goal</code> 是內部接續</td><td>排程到期且 session 可執行 → prompt；goal evaluator 另行決定接續</td><td><a href="https://code.claude.com/docs/en/scheduled-tasks">排程 ↗</a> · <a href="https://code.claude.com/docs/en/channels">事件 ↗</a></td></tr><tr><th scope="row">Codex</th><td>本次 <code>/goal</code> 路徑不作為 cron 證據</td><td><code>/goal</code>；已查核 app-server <code>thread/goal/set</code>（版本限定）</td><td>thread idle → active-goal 檢查 → start_turn_if_idle</td><td><a href="reading/research/source-notes/proactive-trigger-mechanisms.html">固定路徑 ↗</a></td></tr><tr><th scope="row">Grok Build · 原研究</th><td>依原研究公開介面判準；不由 scheduler 名稱推定 cron</td><td>原研究記載目標續行；需核對使用版本的可調用入口</td><td>鏡像／內部實作與可調用介面分開；不把讀取 API 算建立能力</td><td><a href="https://github.com/shane01526/agent_initiate/blob/main/2026_09/heartbeat-lifecycle.html">9 月原文 ↗</a></td></tr><tr><th scope="row">OpenBot · 補充</th><td><code>create_routine</code>：cron、timezone、instruction</td><td><code>message_bot</code> 與結果 relay</td><td>30 秒 tick → due sweep → occurrence queue → claim／lease → worker</td><td><a href="reading/research/source-notes/openbot.html">固定版本路徑 ↗</a></td></tr><tr><th scope="row">Voyager · 補充</th><td>此 learn 路徑沒有定時選題器</td><td><code>Voyager.learn()</code>：執行中的直接迴圈</td><td>propose_next_task → rollout → 成敗／skill 更新 → 下一輪</td><td><a href="reading/research/source-notes/voyager.html">選題與迴圈 ↗</a></td></tr><tr><th scope="row">Grok Bot 重建 · 補充</th><td>automation fire 消費端不證明上游排程建立介面</td><td>background completion／Bot message handlers</td><td>完成結果 → queue → 恢復等待對話；非官方重建，非 Grok Build 等價證據</td><td><a href="reading/research/source-notes/grok-reconstructed.html">重建查核 ↗</a></td></tr></tbody></table></div><p>準則：有名稱的 config／tool／CLI／RPC 才算可接入；內部函式只能證明路徑。固定原始碼快照與目前文件分開標示；Grok Build 與 Grok Bot 重建是不同證據。</p></details>
+<div class="question-grid"><details><summary>Polling、Heartbeat、Cron 不是三種觸發器？</summary><p>Polling 是取資料的方法；Cron 是排時刻的方法；Agent Heartbeat 是週期喚起「看一看」的回合。可以用 cron 排 heartbeat，再在回合內 polling。它們可以疊在一起。</p></details><details><summary>Event 一定比 polling 好？</summary><p>Push 可降低延遲與無效查詢，但要處理重送、亂序、漏接與訂閱續期。沒有可靠 push 的來源用有界 polling；事件接入也可保留補查。Claude Code 的 Telegram channel 底下也會 polling，所以「模型收到 event」不代表來源端完全沒輪詢。</p></details><details><summary>Voyager 看 environment，不也是時間到讀 context？</summary><p>查到的 learn() 是 while → 選題 → rollout → 更新紀錄 → 下一輪；不是每隔 N 分鐘選題。wait_ticks 讓環境動作穩定，API 重試也可能 sleep；它們不是選題 cron。</p><a class="source" href="https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py#L295">直接看 learn() ↗</a></details><details><summary>所以除了 time／event，還有什麼？</summary><p>若只談喚醒，time／event 足夠描述本架構；若談整個執行系統，還有持續迴圈。若談「做什麼」，還有目標判斷、curriculum、記憶與提案政策。三個層次不能混成同一份觸發清單。</p></details><details><summary>每次 heartbeat 都花模型費嗎？</summary><p>不一定。先用確定性准入與來源差異擋掉無效回合；Hermes monitor 在 hash 未變時跳過模型。「零模型」仍有 I/O、CPU 與服務成本。</p></details><details><summary>為什麼舊研究打勾，新表卻寫「未證」？</summary><p>準則與版本不同。此表要求可用介面，且把目標續跑與自行推斷跟進分開。以來源版本說話；某段 durable goal 資料結構存在，不代表該部署已接上自動續跑。</p></details></div><a class="source" href="mechanisms.html">展開各框架完整機制圖 ↗</a></section>
+<section class="story-section" id="architecture" aria-labelledby="architecture-title"><p class="cream-kicker">03 / BEFORE → AFTER → PHASES</p><h2 id="architecture-title">原架構上，<br><span>自主性加在哪裡？</span></h2><p class="lead">切換 Before／After；點元件，往下展開。</p><div class="original-workbench"><div class="arch-toolbar"><div class="segmented" role="group" aria-label="架構 Before After"><button type="button" data-arch-mode="before" aria-pressed="true">Before · 原架構</button><button type="button" data-arch-mode="after" aria-pressed="false">After · 自主選題</button></div><span id="arch-mode-note">Phase 0.5 reference architecture</span></div><div class="arch-layout"><div class="original-architecture" role="region" aria-label="現有架構與自主性疊圖" tabindex="0"><div id="arch-before"><svg viewBox="0 0 840 786" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 · digital colleague reference architecture (one colleague)</title>
+  <desc>A layered reference architecture for one digital colleague. A person reaches it through one interaction surface. OpenClaw-style workspace files define identity, persona, operating rules, user context, skills, and memory. The Runtime Controller invokes a dedicated Request Triage and Priority component to apply authored policy before Codex app-server work proceeds. Each external-service integration adds an inbound trigger through a webhook or bounded polling, plus outbound capabilities through an MCP tool server and the vendor API. Access, permission, and audit are cross-cutting concerns beneath all layers.</desc>
+
+  <defs>
+    <marker id="initiative-before-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="initiative-before-arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <style>
+    .original-architecture .h1 { font-size: 15px; font-weight: 700; fill: #111827; }
+    .original-architecture .label { font-size: 12px; font-weight: 600; fill: #111827; }
+    .original-architecture .labelS { font-size: 11px; font-weight: 600; fill: #111827; }
+    .original-architecture .sub { font-size: 10.5px; fill: #6b7280; }
+    .original-architecture .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .original-architecture .tier { font-size: 10.5px; font-weight: 700; fill: #4b5563; letter-spacing: 0.4px; }
+    .original-architecture .own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .original-architecture .sec { font-size: 9px; font-weight: 700; fill: #1d4ed8; font-family: ui-monospace, monospace; }
+    .original-architecture .flowIn { font-size: 8.5px; font-weight: 700; fill: #2563eb; font-family: ui-monospace, monospace; }
+    .original-architecture .flowOut { font-size: 8.5px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .original-architecture .edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .original-architecture .edgeB { stroke: #2563eb; stroke-width: 1.3; fill: none; }
+    .original-architecture .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .original-architecture .container { fill: #fafafa; stroke: #d1d5db; stroke-width: 1.2; }
+    .original-architecture .own1 { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.3; }
+    .original-architecture .human { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.4; }
+    .original-architecture .secband { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
+    .original-architecture .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.9; }
+    .original-architecture .chipB { fill: #dbeafe; stroke: #93c5fd; stroke-width: 0.9; }
+  </style>
+
+  <rect width="840" height="786" fill="#ffffff"/>
+
+  <text x="24" y="26" class="h1">Digital colleague · reference architecture (one colleague)</text>
+  <text x="24" y="44" class="sub">Layered components. Orange = we author. Blue = human surface &amp; the security boundary. Grey = off-the-shelf runtime, engine, and services.</text>
+
+  <!-- Tier 1: human + interaction surface -->
+  <text x="24" y="72" class="tier">HUMAN · ONE INTERACTION SURFACE</text>
+  <rect x="24" y="82" width="170" height="54" rx="8" class="box"/>
+  <text x="109" y="104" text-anchor="middle" class="label">Person / teammate</text>
+  <text x="109" y="120" text-anchor="middle" class="sub">one person, one intent</text>
+  <line x1="194" y1="109" x2="228" y2="109" class="edgeB" marker-end="url(#initiative-before-arrB)"/>
+  <rect x="230" y="82" width="586" height="54" rx="8" class="human"/>
+  <text x="523" y="104" text-anchor="middle" class="label">Interaction surface · one approved binding</text>
+  <text x="523" y="120" text-anchor="middle" class="sub">web / desktop / embodied UI · the only human-facing channel (ADR-019)</text>
+
+  <line x1="523" y1="136" x2="523" y2="166" class="edgeB" marker-end="url(#initiative-before-arrB)"/>
+
+  <!-- Tier 2: the colleague -->
+  <text x="24" y="184" class="tier">DIGITAL COLLEAGUE · AUTHORED WORKSPACE + TRIAGE POLICY; OFF-THE-SHELF RUNTIME &amp; ENGINE</text>
+  <rect x="24" y="194" width="792" height="220" rx="10" class="container"/>
+  <rect x="38" y="206" width="66" height="14" rx="7" class="chip"/>
+  <text x="46" y="216" class="own">WE AUTHOR</text>
+
+  <rect x="40" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="100" y="245" text-anchor="middle" class="labelS">IDENTITY.md</text>
+  <text x="100" y="260" text-anchor="middle" class="sub">name · vibe · emoji</text>
+  <rect x="168" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="228" y="245" text-anchor="middle" class="labelS">SOUL.md</text>
+  <text x="228" y="260" text-anchor="middle" class="sub">persona · tone</text>
+  <rect x="296" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="356" y="245" text-anchor="middle" class="labelS">AGENTS.md</text>
+  <text x="356" y="260" text-anchor="middle" class="sub">operating rules</text>
+  <rect x="424" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="484" y="245" text-anchor="middle" class="labelS">USER.md</text>
+  <text x="484" y="260" text-anchor="middle" class="sub">teammate context</text>
+  <rect x="552" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="612" y="245" text-anchor="middle" class="labelS">skills/</text>
+  <text x="612" y="260" text-anchor="middle" class="sub">domain workflows</text>
+  <rect x="680" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="740" y="245" text-anchor="middle" class="labelS">Memory files</text>
+  <text x="740" y="260" text-anchor="middle" class="sub">daily · curated</text>
+
+  <rect x="40" y="278" width="760" height="38" rx="6" class="box"/>
+  <text x="52" y="295" class="labelS">Runtime Controller</text>
+  <text x="52" y="309" class="sub">sessions · approvals · workspace loading · dispatch · app-server client</text>
+  <rect x="40" y="322" width="760" height="38" rx="6" class="own1"/>
+  <text x="52" y="339" class="labelS">Request Triage &amp; Priority</text>
+  <text x="52" y="353" class="sub">apply AGENTS.md + skills/ policy · classify · urgency · impact · approval need · route / order</text>
+  <rect x="40" y="366" width="760" height="38" rx="6" class="box"/>
+  <text x="52" y="383" class="labelS">Codex app-server</text>
+  <text x="52" y="397" class="sub">agent loop · thread/turn lifecycle · MCP client · approvals · streamed events</text>
+
+  <!-- bidirectional colleague <-> integration -->
+  <line x1="411" y1="414" x2="411" y2="442" class="edge" marker-end="url(#initiative-before-arr)"/>
+  <line x1="435" y1="442" x2="435" y2="414" class="edge" marker-end="url(#initiative-before-arr)"/>
+  <text x="449" y="433" class="port">events in · actions out</text>
+
+  <!-- Tier 3: service integration -->
+  <text x="24" y="460" class="tier">SERVICE INTEGRATION · EACH SERVICE ADDS TWO BINDINGS: INBOUND TRIGGER + OUTBOUND TOOL</text>
+  <rect x="24" y="470" width="792" height="74" rx="10" class="container"/>
+  <rect x="40" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="132" y="503" text-anchor="middle" class="labelS">Event Ingress</text>
+  <text x="132" y="518" text-anchor="middle" class="sub">webhook · verify · dedup · buffer</text>
+  <rect x="232" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="324" y="503" text-anchor="middle" class="labelS">Polling Scheduler</text>
+  <text x="324" y="518" text-anchor="middle" class="sub">cron · heartbeat (no-push)</text>
+  <rect x="424" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="516" y="503" text-anchor="middle" class="labelS">Subscription renewal</text>
+  <text x="516" y="518" text-anchor="middle" class="sub">renew push TTL · else events stop</text>
+  <rect x="616" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="708" y="503" text-anchor="middle" class="labelS">MCP Tool Servers</text>
+  <text x="708" y="518" text-anchor="middle" class="sub">vendor APIs · outbound actions</text>
+
+  <!-- explicit per-service integration paths -->
+  <line x1="132" y1="610" x2="132" y2="544" class="edgeB" marker-end="url(#initiative-before-arrB)"/>
+  <text x="142" y="560" class="flowIn">INBOUND A · native webhook / push</text>
+  <line x1="324" y1="544" x2="324" y2="610" class="edgeB" marker-end="url(#initiative-before-arrB)"/>
+  <text x="334" y="588" class="flowIn">INBOUND B · bounded polling when no push</text>
+  <line x1="708" y1="544" x2="708" y2="610" class="edge" marker-end="url(#initiative-before-arr)"/>
+  <text x="698" y="560" text-anchor="end" class="flowOut">OUTBOUND · MCP tool → vendor API</text>
+
+  <!-- Tier 4: external services -->
+  <text x="24" y="620" class="tier">EXTERNAL SERVICES · EXPAND BY INTEGRATING, WITHOUT CHANGING THE COLLEAGUE RUNTIME</text>
+  <rect x="40" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="85" y="654" text-anchor="middle" class="sub">Gmail</text>
+  <rect x="136" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="181" y="654" text-anchor="middle" class="sub">Outlook</text>
+  <rect x="232" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="277" y="654" text-anchor="middle" class="sub">Calendar</text>
+  <rect x="328" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="373" y="654" text-anchor="middle" class="sub">Slack</text>
+  <rect x="424" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="469" y="654" text-anchor="middle" class="sub">Teams</text>
+  <rect x="520" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="565" y="654" text-anchor="middle" class="sub">Notion</text>
+  <rect x="616" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="661" y="654" text-anchor="middle" class="sub">Database</text>
+  <rect x="712" y="630" width="88" height="40" rx="6" class="box"/>
+  <text x="756" y="654" text-anchor="middle" class="sub">APIs · …</text>
+
+  <!-- cross-cutting: access & permissions & audit -->
+  <text x="24" y="700" class="tier">ACCESS · PERMISSIONS · AUDIT · cross-cutting · bounds every layer above</text>
+  <rect x="24" y="710" width="792" height="60" rx="10" class="secband"/>
+  <rect x="38" y="722" width="150" height="14" rx="7" class="chipB"/>
+  <text x="46" y="732" class="sec">WE DESIGN · REVIEWED</text>
+  <rect x="200" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="273" y="737" text-anchor="middle" class="sub">credential custody</text>
+  <text x="273" y="751" text-anchor="middle" class="sub">least privilege</text>
+  <rect x="354" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="427" y="737" text-anchor="middle" class="sub">approval bounds</text>
+  <text x="427" y="751" text-anchor="middle" class="sub">on side effects</text>
+  <rect x="508" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="581" y="737" text-anchor="middle" class="sub">inbound content</text>
+  <text x="581" y="751" text-anchor="middle" class="sub">is untrusted</text>
+  <rect x="662" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="735" y="737" text-anchor="middle" class="sub">audit + provenance</text>
+  <text x="735" y="751" text-anchor="middle" class="sub">event → task → action</text>
+<g class="original-hit-areas"><a href="proactivity.html#architecture/before/system" data-original-node="client" aria-label="Interaction surface：點擊展開" tabindex="0"><title>Interaction surface：滑過說明，點擊展開</title><rect x="230" y="82" width="586" height="54" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="identity" aria-label="Identity and persona：點擊展開" tabindex="0"><title>Identity and persona：滑過說明，點擊展開</title><rect x="40" y="226" width="248" height="44" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="context" aria-label="AGENTS.md, skills and memory：點擊展開" tabindex="0"><title>AGENTS.md, skills and memory：滑過說明，點擊展開</title><rect x="296" y="226" width="504" height="44" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="controller" aria-label="Runtime Controller：點擊展開" tabindex="0"><title>Runtime Controller：滑過說明，點擊展開</title><rect x="40" y="278" width="760" height="38" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="admission" aria-label="Request Triage and Priority：點擊展開" tabindex="0"><title>Request Triage and Priority：滑過說明，點擊展開</title><rect x="40" y="322" width="760" height="38" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="discovery" aria-label="Codex app-server：點擊展開" tabindex="0"><title>Codex app-server：滑過說明，點擊展開</title><rect x="40" y="366" width="760" height="38" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="observe" aria-label="Event Ingress：點擊展開" tabindex="0"><title>Event Ingress：滑過說明，點擊展開</title><rect x="40" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="scheduler" aria-label="Polling Scheduler：點擊展開" tabindex="0"><title>Polling Scheduler：滑過說明，點擊展開</title><rect x="232" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="renewal" aria-label="Subscription renewal：點擊展開" tabindex="0"><title>Subscription renewal：滑過說明，點擊展開</title><rect x="424" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="tools" aria-label="MCP Tool Servers：點擊展開" tabindex="0"><title>MCP Tool Servers：滑過說明，點擊展開</title><rect x="616" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="security" aria-label="Access, Permissions and Audit：點擊展開" tabindex="0"><title>Access, Permissions and Audit：滑過說明，點擊展開</title><rect x="24" y="710" width="792" height="60" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a></g></svg>
+</div><div id="arch-after" hidden><svg viewBox="0 0 840 786" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title>Phase 0.5 reference architecture: initiative integration proposal</title>
+  <desc>A layered reference architecture for one digital colleague. A person reaches it through one interaction surface. OpenClaw-style workspace files define identity, persona, operating rules, user context, skills, and memory. The Runtime Controller invokes a dedicated Request Triage and Priority component to apply authored policy before Codex app-server work proceeds. Each external-service integration adds an inbound trigger through a webhook or bounded polling, plus outbound capabilities through an MCP tool server and the vendor API. Access, permission, and audit are cross-cutting concerns beneath all layers.</desc>
+
+  <defs>
+    <marker id="initiative-after-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="initiative-after-arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <style>
+    .original-architecture .h1 { font-size: 15px; font-weight: 700; fill: #111827; }
+    .original-architecture .label { font-size: 12px; font-weight: 600; fill: #111827; }
+    .original-architecture .labelS { font-size: 11px; font-weight: 600; fill: #111827; }
+    .original-architecture .sub { font-size: 10.5px; fill: #6b7280; }
+    .original-architecture .port { font-size: 10px; fill: #9ca3af; font-family: ui-monospace, monospace; }
+    .original-architecture .tier { font-size: 10.5px; font-weight: 700; fill: #4b5563; letter-spacing: 0.4px; }
+    .original-architecture .own { font-size: 9px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .original-architecture .sec { font-size: 9px; font-weight: 700; fill: #1d4ed8; font-family: ui-monospace, monospace; }
+    .original-architecture .flowIn { font-size: 8.5px; font-weight: 700; fill: #2563eb; font-family: ui-monospace, monospace; }
+    .original-architecture .flowOut { font-size: 8.5px; font-weight: 700; fill: #c2410c; font-family: ui-monospace, monospace; }
+    .original-architecture .edge { stroke: #9ca3af; stroke-width: 1.3; fill: none; }
+    .original-architecture .edgeB { stroke: #2563eb; stroke-width: 1.3; fill: none; }
+    .original-architecture .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+    .original-architecture .container { fill: #fafafa; stroke: #d1d5db; stroke-width: 1.2; }
+    .original-architecture .own1 { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.3; }
+    .original-architecture .human { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.4; }
+    .original-architecture .secband { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
+    .original-architecture .chip { fill: #fff7ed; stroke: #fdba74; stroke-width: 0.9; }
+    .original-architecture .chipB { fill: #dbeafe; stroke: #93c5fd; stroke-width: 0.9; }
+  </style>
+
+  <rect width="840" height="786" fill="#ffffff"/>
+
+  <text x="24" y="26" class="h1">Digital colleague · initiative integration proposal</text>
+  <text x="24" y="44" class="sub">Layered components. Orange = we author. Blue = human surface &amp; the security boundary. Grey = off-the-shelf runtime, engine, and services.</text>
+
+  <!-- Tier 1: human + interaction surface -->
+  <text x="24" y="72" class="tier">HUMAN · ONE INTERACTION SURFACE</text>
+  <rect x="24" y="82" width="170" height="54" rx="8" class="box"/>
+  <text x="109" y="104" text-anchor="middle" class="label">Person / teammate</text>
+  <text x="109" y="120" text-anchor="middle" class="sub">one person, one intent</text>
+  <line x1="194" y1="109" x2="228" y2="109" class="edgeB" marker-end="url(#initiative-after-arrB)"/>
+  <rect x="230" y="82" width="586" height="54" rx="8" class="human"/>
+  <text x="523" y="104" text-anchor="middle" class="label">Interaction surface · one approved binding</text>
+  <text x="523" y="120" text-anchor="middle" class="sub">web / desktop / embodied UI · the only human-facing channel (ADR-019)</text>
+
+  <line x1="523" y1="136" x2="523" y2="166" class="edgeB" marker-end="url(#initiative-after-arrB)"/>
+
+  <!-- Tier 2: the colleague -->
+  <text x="24" y="184" class="tier">DIGITAL COLLEAGUE · AUTHORED WORKSPACE + TRIAGE POLICY; OFF-THE-SHELF RUNTIME &amp; ENGINE</text>
+  <rect x="24" y="194" width="792" height="220" rx="10" class="container"/>
+  <rect x="38" y="206" width="66" height="14" rx="7" class="chip"/>
+  <text x="46" y="216" class="own">WE AUTHOR</text>
+
+  <rect x="40" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="100" y="245" text-anchor="middle" class="labelS">IDENTITY.md</text>
+  <text x="100" y="260" text-anchor="middle" class="sub">name · vibe · emoji</text>
+  <rect x="168" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="228" y="245" text-anchor="middle" class="labelS">SOUL.md</text>
+  <text x="228" y="260" text-anchor="middle" class="sub">persona · tone</text>
+  <rect x="296" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="356" y="245" text-anchor="middle" class="labelS">AGENTS.md</text>
+  <text x="356" y="260" text-anchor="middle" class="sub">operating rules</text>
+  <rect x="424" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="484" y="245" text-anchor="middle" class="labelS">USER.md</text>
+  <text x="484" y="260" text-anchor="middle" class="sub">teammate context</text>
+  <rect x="552" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="612" y="245" text-anchor="middle" class="labelS">skills/</text>
+  <text x="612" y="260" text-anchor="middle" class="sub">domain workflows</text>
+  <rect x="680" y="226" width="120" height="44" rx="6" class="own1"/>
+  <text x="740" y="245" text-anchor="middle" class="labelS">Memory files</text>
+  <text x="740" y="260" text-anchor="middle" class="sub">daily · curated</text>
+
+  <rect x="40" y="278" width="760" height="38" rx="6" class="box"/>
+  <text x="52" y="295" class="labelS">Runtime Controller</text>
+  <text x="52" y="309" class="sub">sessions · approvals · workspace loading · dispatch · app-server client</text>
+  <rect x="40" y="322" width="760" height="38" rx="6" class="own1"/>
+  <text x="52" y="339" class="labelS">Request Triage &amp; Priority</text>
+  <text x="52" y="353" class="sub">apply AGENTS.md + skills/ policy · classify · urgency · impact · approval need · route / order</text>
+  <rect x="40" y="366" width="760" height="38" rx="6" class="box"/>
+  <text x="52" y="383" class="labelS">Codex app-server</text>
+  <text x="52" y="397" class="sub">agent loop · thread/turn lifecycle · MCP client · approvals · streamed events</text>
+
+  <!-- bidirectional colleague <-> integration -->
+  <line x1="411" y1="414" x2="411" y2="442" class="edge" marker-end="url(#initiative-after-arr)"/>
+  <line x1="435" y1="442" x2="435" y2="414" class="edge" marker-end="url(#initiative-after-arr)"/>
+  <text x="449" y="433" class="port">events in · actions out</text>
+
+  <!-- Tier 3: service integration -->
+  <text x="24" y="460" class="tier">SERVICE INTEGRATION · EACH SERVICE ADDS TWO BINDINGS: INBOUND TRIGGER + OUTBOUND TOOL</text>
+  <rect x="24" y="470" width="792" height="74" rx="10" class="container"/>
+  <rect x="40" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="132" y="503" text-anchor="middle" class="labelS">Event Ingress</text>
+  <text x="132" y="518" text-anchor="middle" class="sub">webhook · verify · dedup · buffer</text>
+  <rect x="232" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="324" y="503" text-anchor="middle" class="labelS">Polling Scheduler</text>
+  <text x="324" y="518" text-anchor="middle" class="sub">cron · heartbeat (no-push)</text>
+  <rect x="424" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="516" y="503" text-anchor="middle" class="labelS">Subscription renewal</text>
+  <text x="516" y="518" text-anchor="middle" class="sub">renew push TTL · else events stop</text>
+  <rect x="616" y="484" width="184" height="48" rx="6" class="box"/>
+  <text x="708" y="503" text-anchor="middle" class="labelS">MCP Tool Servers</text>
+  <text x="708" y="518" text-anchor="middle" class="sub">vendor APIs · outbound actions</text>
+
+  <!-- explicit per-service integration paths -->
+  <line x1="132" y1="610" x2="132" y2="544" class="edgeB" marker-end="url(#initiative-after-arrB)"/>
+  <text x="142" y="560" class="flowIn">INBOUND A · native webhook / push</text>
+  <line x1="324" y1="544" x2="324" y2="610" class="edgeB" marker-end="url(#initiative-after-arrB)"/>
+  <text x="334" y="588" class="flowIn">INBOUND B · bounded polling when no push</text>
+  <line x1="708" y1="544" x2="708" y2="610" class="edge" marker-end="url(#initiative-after-arr)"/>
+  <text x="698" y="560" text-anchor="end" class="flowOut">OUTBOUND · MCP tool → vendor API</text>
+
+  <!-- Tier 4: external services -->
+  <text x="24" y="620" class="tier">EXTERNAL SERVICES · EXPAND BY INTEGRATING, WITHOUT CHANGING THE COLLEAGUE RUNTIME</text>
+  <rect x="40" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="85" y="654" text-anchor="middle" class="sub">Gmail</text>
+  <rect x="136" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="181" y="654" text-anchor="middle" class="sub">Outlook</text>
+  <rect x="232" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="277" y="654" text-anchor="middle" class="sub">Calendar</text>
+  <rect x="328" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="373" y="654" text-anchor="middle" class="sub">Slack</text>
+  <rect x="424" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="469" y="654" text-anchor="middle" class="sub">Teams</text>
+  <rect x="520" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="565" y="654" text-anchor="middle" class="sub">Notion</text>
+  <rect x="616" y="630" width="90" height="40" rx="6" class="box"/>
+  <text x="661" y="654" text-anchor="middle" class="sub">Database</text>
+  <rect x="712" y="630" width="88" height="40" rx="6" class="box"/>
+  <text x="756" y="654" text-anchor="middle" class="sub">APIs · …</text>
+
+  <!-- cross-cutting: access & permissions & audit -->
+  <text x="24" y="700" class="tier">ACCESS · PERMISSIONS · AUDIT · cross-cutting · bounds every layer above</text>
+  <rect x="24" y="710" width="792" height="60" rx="10" class="secband"/>
+  <rect x="38" y="722" width="150" height="14" rx="7" class="chipB"/>
+  <text x="46" y="732" class="sec">WE DESIGN · REVIEWED</text>
+  <rect x="200" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="273" y="737" text-anchor="middle" class="sub">credential custody</text>
+  <text x="273" y="751" text-anchor="middle" class="sub">least privilege</text>
+  <rect x="354" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="427" y="737" text-anchor="middle" class="sub">approval bounds</text>
+  <text x="427" y="751" text-anchor="middle" class="sub">on side effects</text>
+  <rect x="508" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="581" y="737" text-anchor="middle" class="sub">inbound content</text>
+  <text x="581" y="751" text-anchor="middle" class="sub">is untrusted</text>
+  <rect x="662" y="720" width="146" height="40" rx="6" class="box"/>
+  <text x="735" y="737" text-anchor="middle" class="sub">audit + provenance</text>
+  <text x="735" y="751" text-anchor="middle" class="sub">event → task → action</text>
+<g class="original-hit-areas"><a href="proactivity.html#architecture/before/system" data-original-node="client" aria-label="Interaction surface：點擊展開" tabindex="0"><title>Interaction surface：滑過說明，點擊展開</title><rect x="230" y="82" width="586" height="54" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="identity" aria-label="Identity and persona：點擊展開" tabindex="0"><title>Identity and persona：滑過說明，點擊展開</title><rect x="40" y="226" width="248" height="44" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="context" aria-label="AGENTS.md, skills and memory：點擊展開" tabindex="0"><title>AGENTS.md, skills and memory：滑過說明，點擊展開</title><rect x="296" y="226" width="504" height="44" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="controller" aria-label="Runtime Controller：點擊展開" tabindex="0"><title>Runtime Controller：滑過說明，點擊展開</title><rect x="40" y="278" width="760" height="38" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="admission" aria-label="Request Triage and Priority：點擊展開" tabindex="0"><title>Request Triage and Priority：滑過說明，點擊展開</title><rect x="40" y="322" width="760" height="38" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="discovery" aria-label="Codex app-server：點擊展開" tabindex="0"><title>Codex app-server：滑過說明，點擊展開</title><rect x="40" y="366" width="760" height="38" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="observe" aria-label="Event Ingress：點擊展開" tabindex="0"><title>Event Ingress：滑過說明，點擊展開</title><rect x="40" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="scheduler" aria-label="Polling Scheduler：點擊展開" tabindex="0"><title>Polling Scheduler：滑過說明，點擊展開</title><rect x="232" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="renewal" aria-label="Subscription renewal：點擊展開" tabindex="0"><title>Subscription renewal：滑過說明，點擊展開</title><rect x="424" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="tools" aria-label="MCP Tool Servers：點擊展開" tabindex="0"><title>MCP Tool Servers：滑過說明，點擊展開</title><rect x="616" y="484" width="184" height="48" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a><a href="proactivity.html#architecture/before/system" data-original-node="security" aria-label="Access, Permissions and Audit：點擊展開" tabindex="0"><title>Access, Permissions and Audit：滑過說明，點擊展開</title><rect x="24" y="710" width="792" height="60" rx="6" fill="transparent" stroke="transparent" stroke-width="2"/></a></g><g class="initiative-overlay"><a href="proactivity.html#architecture/after/state" data-arch-node="context" aria-label="職責與記憶：AGENTS.md、skills/、Memory"><title>職責與記憶：AGENTS.md、skills/、Memory</title><rect x="296" y="226" width="504" height="44" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/><rect x="781" y="217" width="19" height="18" rx="3" fill="#076fc9"/><text x="790.5" y="230" text-anchor="middle" font-size="11" fill="white">1</text></a><a href="proactivity.html#architecture/after/runtime" data-arch-node="discovery" aria-label="在既有 Agent turn 內依職責與證據提出工作"><title>在既有 Agent turn 內依職責與證據提出工作</title><rect x="40" y="366" width="760" height="38" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/><rect x="781" y="357" width="19" height="18" rx="3" fill="#076fc9"/><text x="790.5" y="370" text-anchor="middle" font-size="11" fill="white">2</text></a><a href="proactivity.html#architecture/after/application" data-arch-node="admission" aria-label="Controller 與 Triage：喚起、授權與派送"><title>Controller 與 Triage：喚起、授權與派送</title><rect x="40" y="278" width="760" height="82" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/><rect x="781" y="269" width="19" height="18" rx="3" fill="#076fc9"/><text x="790.5" y="282" text-anchor="middle" font-size="11" fill="white">3</text></a><a href="proactivity.html#architecture/after/ingress" data-arch-node="observe" aria-label="Event Ingress 與 Scheduler：觀察入口"><title>Event Ingress 與 Scheduler：觀察入口</title><rect x="40" y="484" width="376" height="48" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/><rect x="397" y="475" width="19" height="18" rx="3" fill="#076fc9"/><text x="406.5" y="488" text-anchor="middle" font-size="11" fill="white">4</text></a><a href="proactivity.html#architecture/after/runtime" data-arch-node="tools" aria-label="MCP 工具：讀來源、核對證據、執行獲准動作"><title>MCP 工具：讀來源、核對證據、執行獲准動作</title><rect x="616" y="484" width="184" height="48" rx="6" fill="transparent" stroke="#076fc9" stroke-width="2" stroke-dasharray="6 4"/><rect x="781" y="475" width="19" height="18" rx="3" fill="#076fc9"/><text x="790.5" y="488" text-anchor="middle" font-size="11" fill="white">5</text></a></g></svg>
+</div></div><aside class="arch-explainer"><p class="cream-kicker">原元件，同位置</p><h3 id="arch-detail-title">先看既有責任</h3><p id="arch-detail-copy">人與服務事件進入 Controller；AGENTS.md、skills 與記憶提供脈絡；Codex app-server 執行，MCP 連接來源與動作。</p><p class="arch-hint">滑過看說明 · 點擊展開</p><details id="arch-component-depth"><summary>展開元件責任與接線</summary><p id="arch-component-contract">選取圖中元件，查看它與自主選題的關係。</p></details><div class="arch-components" role="group" aria-label="展開自主性元件"><button type="button" data-component="observe" aria-pressed="false"><span>4</span>何時開始觀察</button><button type="button" data-component="context" aria-pressed="false"><span>1</span>關心什麼、已知什麼</button><button type="button" data-component="discovery" aria-pressed="false"><span>2</span>想到值得做的事</button><button type="button" data-component="admission" aria-pressed="false"><span>3</span>是否允許執行</button><button type="button" data-component="tools" aria-pressed="false"><span>5</span>如何查證與行動</button></div><a id="arch-detail-link" class="source" href="proactivity.html#architecture/before/system">展開元件與實作來源 ↗</a></aside></div><div class="arch-footnote"><span>實線：原有架構責任　虛線：自主性整合提案</span><a id="arch-original-link" href="../phases/0.5/reference-architecture.svg" target="_blank" rel="noopener">放大原圖 ↗</a></div></div><details class="detail-level"><summary>展開 Before／After：現有元件與待補能力</summary><div class="table-scroll" role="region" aria-label="現有架構 Before 與整合提案 After" tabindex="0"><table><thead><tr><th scope="col">Before：既有研究查到的能力</th><th scope="col">After：要補上的自主工作閉環</th></tr></thead><tbody><tr><th scope="row">Interaction Client → LocalColleagueService → StandaloneGateway → OpenClawGatewayRuntime</th><td>保留執行路徑，讓時間與事件入口帶著職責與觀察進入選題回合；選中工作再經 admission／dispatch</td></tr><tr><th scope="row">已有 M365 webhook、delta polling、event validation 與 receipt</th><td>加入職責與觀察脈絡；來源變化可推導新的工作提案，也可關聯既有任務</td></tr><tr><th scope="row">已有 task phase、receipt、artifact</th><td>補工作提案紀錄：職責、證據、建議動作、選擇／否決理由；需要追蹤時另存 follow-up records</td></tr><tr><th scope="row">外部 OpenClaw 提供 runtime；本地接線能力須逐項確認</th><td>確認固定部署版本的排程／goal RPC、wake 與 completion 契約，再接入 W0–W7 驗收</td></tr></tbody></table></div></details><details class="scope-detail"><summary>範圍與依據</summary><p>Before 為 prototype 固定 commit 的來源查核，已有 M365 webhook 與 delta polling。After 是整合提案；外部 OpenClaw 的排程與 wake 接口仍須確認。</p></details><h3>W0–W7：醒來後，各元件做什麼？</h3><p class="compact-note">原 repo 的設計映射到我們的既有元件；「待補」不是已部署能力。</p><div class="wake-stages"><details><summary><small>W0</small><b>喚醒</b><span>來源紀錄</span></summary><p><strong>Ingress／Scheduler</strong></p><p>保留 timer／event／human／inbox-open；區分人與機器。</p></details><details><summary><small>W1a</small><b>撈事件</b><span>零模型</span></summary><p><strong>Event Normalizer</strong></p><p>准入前只讀最小 metadata／差異，取得本期素材數。</p></details><details><summary><small>W1b</small><b>准入</b><span>零模型</span></summary><p><strong>Triage Policy</strong></p><p>enabled／paused；seed、間隔、idle、素材檢查，寫具名 skip 原因。</p></details><details><summary><small>W2</small><b>身分投影</b><span>待補</span></summary><p><strong>Persona／Skill Loader</strong></p><p>每輪讀 AGENTS.md、投影 role_card、驗 sha；讀不到就停。</p></details><details><summary><small>W3</small><b>對帳</b><span>缺口</span></summary><p><strong>Session Mapper ＋ State</strong></p><p>對帳任務、等待對象、常設指令與 cursor；避免重做。</p></details><details><summary><small>W4</small><b>檢索</b><span>有界讀取</span></summary><p><strong>MCP ＋ Context Loader</strong></p><p>先有事件錨點，再檢索材料；記載入量與截斷數。</p></details><details><summary><small>W5</small><b>執行</b><span>模型回合</span></summary><p><strong>App-server Client</strong></p><p>P1 固定產物；P2 達標續跑；P3 有錨點提案。模型費在這裡。</p></details><details><summary><small>W6</small><b>收件匣</b><span>不推播</span></summary><p><strong>Interaction Client</strong></p><p>相關性／來源多樣性／退回相似度獨立閘；只進私有收件匣。</p></details><details><summary><small>W7</small><b>寫回</b><span>部分待補</span></summary><p><strong>Audit ＋ State</strong></p><p>journal → kanban diff 提案 → audit → cursor 最後原子更新。</p></details></div><details class="detail-level"><summary>落地契約：讀什麼、誰寫、何時停止？</summary><div class="contract-columns"><div><h3>進 context</h3><p>role_card ＋ cursor 必讀；事件命中才讀 kanban／memory／知識庫。沿原設計：必讀約 ≤4,000 字，總量 ≤32,000 字；是字數，非 token。</p></div><div><h3>可寫範圍</h3><p>audit 每階段記；proposal／inbox 在 W6；journal 與 cursor 在 W7。kanban 只產 diff；對外寄送不接入此情境。</p></div><div><h3>硬邊界</h3><p>啟動 goal 之前檢查預算；token／時間／回合自行計數。拒絕、延後、取消與耗盡分開，不靠模型自述完成。</p></div></div></details><p class="compact-note">W2 身分投影、W3 對帳是原 repo 指出的缺口；原 repo 驗證結果不等於本平台驗證結果。</p><a class="source" href="https://github.com/shane01526/agent_initiate/blob/main/2026_09/wake-cycle-design.html">W0–W7 原始設計 ↗</a></section>
+<section class="story-section" id="phases" aria-labelledby="phases-title"><p class="cream-kicker">04 / LESS INSTRUCTION, MORE RESPONSIBILITY</p><h2 id="phases-title">三個 Phase，<br><span>人給的越來越少。</span></h2><div class="autonomy-phases"><article><small>PHASE 1</small><h3>固定節律</h3><p>人給：做什麼 ＋ 何時做</p><div class="phase-logic">固定時間 → 固定產物 → 稽核</div><b>驗證版實作已有</b></article><article><small>PHASE 2</small><h3>半主動 · 目標驅動</h3><p>人給：目標 ＋ 完成標準</p><div class="phase-logic">自己規劃 → 有界續跑 → 達標／停下</div><b>原專案仍是規劃</b></article><article><small>PHASE 3</small><h3>全主動 · 自主跟進</h3><p>人給：願景 ＋ 角色／權限</p><div class="phase-logic">自行找事 → 有據提案 → 人決定</div><b>原專案仍是規劃</b></article></div><p class="compact-note">這是主動性成熟度，不是部署時程，也不是架構 repo 的 Phase 0–4。Time／event 可出現在三個階段。</p><details class="detail-level" open><summary>誰做到哪裡？用什麼技術？</summary><p><strong>表中是可借用零件，不是整個 Phase 已驗收。</strong> 完整 P2 要程式完成證據與硬上限；完整 P3 要自主推斷、錨點、提案制與人審。</p><div class="table-scroll" role="region" tabindex="0" aria-label="三個主動性 Phase 與框架可用技術"><table><thead><tr><th scope="col">框架</th><th scope="col">P1 固定節律</th><th scope="col">P2 目標驅動</th><th scope="col">P3 自主跟進</th><th scope="col">依據</th></tr></thead><tbody><tr><th scope="row">OpenClaw</th><td>可接：heartbeat.every／cron／automations</td><td>需驗：採用 harness 的 goal 續跑；durable goal 不等於完整續跑器</td><td>嚴格對話推斷：退役功能不計。職責 prompt＋工具只能算組合提案能力</td><td><a href="reading/research/source-notes/openclaw.html">程式快照</a></td></tr><tr><th scope="row">Hermes</th><td>可接：cronjob／monitor／loop</td><td>可接：/goal；仍需宿主完成驗證與三軸硬上限</td><td>已查路徑未證對話自行長出可持久追蹤的待辦；重跑指令不算</td><td><a href="reading/research/source-notes/hermes.html">程式快照</a></td></tr><tr><th scope="row">Claude Code</th><td>可接：/loop、CronCreate；留意 session 生命週期</td><td>可接：/goal evaluator；模型評估不是程式完成證明</td><td>維護／選題指引不等於嚴格自主跟進介面；未據此判定完整 P3</td><td><a href="https://code.claude.com/docs/en/goal">官方文件</a></td></tr><tr><th scope="row">Codex</th><td>排程需選定宿主入口，本次 /goal 不作為 P1 排程證據</td><td>可接：/goal／thread/goal/set；啟動前先擋預算</td><td>既定目標 idle 續行不算自己推斷新跟進</td><td><a href="reading/research/source-notes/proactive-trigger-mechanisms.html">固定路徑</a></td></tr><tr><th scope="row">Grok Build · 原研究</th><td>原研究介面判準下需查核；不由內部計時器推定可建 cron</td><td>原研究列目標續行；部署仍須核對可調用介面</td><td>嚴格判準下未證；負面結論限鏡像與已搜路徑</td><td><a href="https://github.com/shane01526/agent_initiate/blob/main/2026_09/heartbeat-lifecycle.html">9 月原文</a></td></tr><tr><th scope="row">OpenBot · 補充</th><td>可接：create_routine＋持久 queue／lease</td><td>handoff／relay 可借用；不等於目標完成控制器</td><td>已查核心未證自主探索／對話跟進</td><td><a href="reading/research/source-notes/openbot.html">程式快照</a></td></tr><tr><th scope="row">Voyager · 補充</th><td>learn() 不是定時排程</td><td>rollout＋critic；仍是環境任務範圍</td><td>已證環境選題零件；未達企業 P3 的對話跟進、提案收件匣與人審契約</td><td><a href="reading/research/source-notes/voyager.html">程式快照</a></td></tr></tbody></table></div></details><details class="detail-level"><summary>我們逐 Phase 要補哪些元件？</summary><div class="table-scroll" role="region" tabindex="0" aria-label="元件與三個 Phase"><table><thead><tr><th>元件責任</th><th>P1</th><th>P2</th><th>P3</th></tr></thead><tbody><tr><td>觸發與准入</td><td>固定節律、occurrence、lock、確定性 skip</td><td>增加 goal 啟動／恢復的預算閘</td><td>同一 time／event 入口；增加事件錨點與提案准入</td></tr><tr><td>Context／對帳</td><td>固定 role_card 與輸出契約</td><td>加入指定 task、完成標準與續行點</td><td>加入願景、來源關聯、已提案／被否決紀錄</td></tr><tr><td>App-server</td><td>固定產物；純檢查不叫模型</td><td>goal 續跑＋宿主 validator／三軸計數</td><td>推導新工作；獨立相關性、來源與重複閘</td></tr><tr><td>State／UI</td><td>run／skip audit 與私有產物</td><td>blocked／exhausted／completed；保留部分成果</td><td>proposal／inbox；接受、退回、延後；不外寄</td></tr></tbody></table></div></details><details class="detail-level"><summary>「Phase 3 業界是零」怎麼讀？</summary><p>你提供的研究在受查五框架、指定快照與「可調用介面＋從對話自行推斷」判準下，未確認現役完整機制。這不是對全市場永久宣告；Voyager 的環境 curriculum 也不能直接換算為此處的 P3。</p><p>OpenClaw 曾有 inferred commitments，已退役；既定目標續跑、plan 子步驟、人排的 queue 都不算嚴格自主跟進。</p></details><a class="source" href="https://github.com/shane01526/agent_initiate/blob/main/2026_08/scenerios/scenario-legal.md">Phase 定義與達標標準原文 ↗</a></section>
+<section class="story-section" id="verification" aria-labelledby="verification-title"><span id="scenarios"></span><p class="cream-kicker">05 / CATHAY SCENARIOS & EVIDENCE</p><h2 id="verification-title">回到國泰，<br><span>怎麼用、怎麼證明？</span></h2><div class="cathay-workbench"><div class="mechanism-tabs" role="group" aria-label="選擇國泰角色情境"><button type="button" data-cathay="legal" aria-pressed="true">法務／法遵</button><button type="button" data-cathay="pm" aria-pressed="false">PM</button><button type="button" data-cathay="hr" aria-pressed="false">人資</button><button type="button" data-cathay="architect" aria-pressed="false">系統架構師</button></div><div id="cathay-result" aria-live="polite"><p>法務／法遵：定期到期清單 → 交辦補齊送審資料 → 自行發現值得檢視的契約並提案。</p></div><p class="compact-note">國泰情境假設，未接實際內部資料。唯讀來源、私有收件匣、人審；不對外寄送。</p></div>
+<h3>怎麼觀測「主動」？先保留這條證據鏈。</h3><div class="trace-chain"><span>wake_source</span><i>→</i><span>event_id／anchor</span><i>→</i><span>proposal／skip_reason</span><i>→</i><span>inbox／feedback</span><i>→</i><span>outcome／cursor</span></div>
+<div class="observation-demo"><div class="scenario-switch" role="group" aria-label="觀測示範分支"><button type="button" data-trace="proposal" aria-pressed="true">有據提案</button><button type="button" data-trace="quiet" aria-pressed="false">正常靜默</button><button type="button" data-trace="outage" aria-pressed="false">喚醒失效</button></div><output id="trace-result">選擇分支查看 trace。</output></div>
+<details class="detail-level"><summary>驗收矩陣：沒過，代表什麼？</summary><div class="table-scroll" role="region" tabindex="0" aria-label="主動性具體驗收與失效訊號"><table><thead><tr><th scope="col">驗什麼</th><th scope="col">怎麼驗</th><th scope="col">觀測／失效訊號</th></tr></thead><tbody><tr><th scope="row">P1 準時且不重複</th><td>重啟、同時到期、重送同 occurrence</td><td>同一 key 多份產物；或到期無 wake／skip 紀錄</td></tr><tr><th scope="row">P1 沒事不叫模型</th><td>無新公告／無材料，走確定性准入</td><td>NoMaterial 必須有 audit；model_calls = 0</td></tr><tr><th scope="row">P2 達標才完成</th><td>缺件不可補齊；極低預算；假完成訊息</td><td>程式 validator 不過不得 completed；exhausted／blocked 與 failed 分開</td></tr><tr><th scope="row">P3 自己想到且有根據</th><td>沒有逐件交辦；改角色、移除事件錨點、加入已完成紀錄</td><td>提案應隨脈絡改變；無錨點拒寫；同題不重複</td></tr><tr><th scope="row">P3 退回與延後不同</th><td>退回同類提案，再測 snooze 到期</td><td>退回規則生效；延後不得學成永久否決</td></tr><tr><th scope="row">W2／W3／W7 恢復</th><td>角色 sha 變更；等待兩週；cursor 更新前後中斷</td><td>舊權限 fail closed；等待不重提；cursor 不超前吞事件</td></tr><tr><th scope="row">靜默與故障分得開</th><td>正常 skip 對照 scheduler 停止／訂閱到期</td><td>前者有具名 skip；後者 overdue／source lag 告警</td></tr></tbody></table></div></details><details class="detail-level"><summary>指標的分母怎麼算？</summary><div class="table-scroll" role="region" tabindex="0" aria-label="主動性觀測指標定義"><table><thead><tr><th scope="col">指標</th><th scope="col">定義</th><th scope="col">避免誤讀</th></tr></thead><tbody><tr><th scope="row">喚醒覆蓋率</th><td>有結果的到期 occurrence／應到期 occurrence</td><td>分 timer、event、human、inbox-open；模型呼叫數不是主動次數</td></tr><tr><th scope="row">有用提案率</th><td>人工判定有用／已評閱提案</td><td>未讀另列；只看採納無法知道漏判</td></tr><tr><th scope="row">機會召回率</th><td>有提出的標註機會／全部標註機會</td><td>需離線標註集或定期人工抽查，不能從線上提案自算</td></tr><tr><th scope="row">無證據／重複提案率</th><td>不合格提案／所有生成提案</td><td>保留 W6 被擋的提案，才有分母</td></tr><tr><th scope="row">注意力與成本</th><td>標題已讀、內容開啟、接受／退回／延後；每次有效提案成本</td><td>不把開過等同有用；含生成後被擋成本</td></tr><tr><th scope="row">可靠性</th><td>來源延遲、W 階段耗時、恢復時間、預算耗盡、cursor lag</td><td>零模型不等於零資源成本；trace 是理由與證據，不存隱藏思考鏈</td></tr></tbody></table></div></details><div class="verification-path"><span>確定性測試</span><i>→</i><span>固定來源 replay</span><i>→</i><span>真實 adapter 整合</span><i>→</i><span>旁路提案＋人工評閱</span></div><p class="compact-note">90 項測試與 2 次真實整合是原 repo 的報告，本次未重跑，也不代表國泰業務效果已驗證。</p><a class="source" href="reading/research/source-notes/initiative-implementation-guide.html">實作、指標與來源索引 ↗</a></section><footer class="cream-footer"><span>數位同事研究 · 概念、實作提案與證據分開呈現</span><a href="reading/research/storyline.html">完整 Story line ↗</a><a href="library.html">研究書架 ↗</a></footer></main><script src="initiative-study-data.js?v=7d13f00f52"></script><script src="story-home.js?v=ad41d33c8a"></script></body></html>

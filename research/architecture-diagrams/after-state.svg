@@ -1,0 +1,67 @@
+<svg role="img" aria-labelledby="after-state-title after-state-desc" width="460pt" height="350pt"
+ viewBox="0.00 0.00 460.00 350.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title id="after-state-title">After · state architecture</title><desc id="after-state-desc">Logical software responsibilities. Solid nodes are existing or external; blue dashed nodes are proposed. Select a node in the research website for source code and integration details.</desc>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(21.6 328.2)">
+<polygon fill="#fdfcf9" stroke="none" points="-21.6,21.6 -21.6,-328.2 438.33,-328.2 438.33,21.6 -21.6,21.6"/>
+<!-- events -->
+<g id="node1" class="node">
+<title>events</title>
+<g id="a_node1"><a xlink:href="#node-events" xlink:title="ProactiveTaskPhase: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M274.05,-183.9C274.05,-183.9 125.12,-183.9 125.12,-183.9 119.12,-183.9 113.13,-177.9 113.13,-171.9 113.13,-171.9 113.13,-134.7 113.13,-134.7 113.13,-128.7 119.13,-122.7 125.13,-122.7 125.13,-122.7 274.05,-122.7 274.05,-122.7 280.05,-122.7 286.05,-128.7 286.05,-134.7 286.05,-134.7 286.05,-171.9 286.05,-171.9 286.05,-177.9 280.05,-183.9 274.05,-183.9"/>
+<text xml:space="preserve" text-anchor="middle" x="199.59" y="-155" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">ProactiveTaskPhase</text>
+<text xml:space="preserve" text-anchor="middle" x="199.59" y="-140" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Guarded task transitions</text>
+</a>
+</g>
+</g>
+<!-- artifacts -->
+<g id="node3" class="node">
+<title>artifacts</title>
+<g id="a_node3"><a xlink:href="#node-artifacts" xlink:title="Artifact store: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M278.17,-61.2C278.17,-61.2 121,-61.2 121,-61.2 115,-61.2 109,-55.2 109,-49.2 109,-49.2 109,-12 109,-12 109,-6 115,0 121,0 121,0 278.17,0 278.17,0 284.17,0 290.17,-6 290.17,-12 290.17,-12 290.17,-49.2 290.17,-49.2 290.17,-55.2 284.17,-61.2 278.17,-61.2"/>
+<text xml:space="preserve" text-anchor="middle" x="199.59" y="-32.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Artifact store</text>
+<text xml:space="preserve" text-anchor="middle" x="199.59" y="-17.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Draft / materialized output</text>
+</a>
+</g>
+</g>
+<!-- events&#45;&gt;artifacts -->
+<g id="edge2" class="edge">
+<title>events&#45;&gt;artifacts</title>
+<path fill="none" stroke="#7b918a" d="M199.59,-122.15C199.59,-107.32 199.59,-89.21 199.59,-73.09"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="203.09,-73.29 199.59,-63.29 196.09,-73.29 203.09,-73.29"/>
+<text xml:space="preserve" text-anchor="middle" x="247.59" y="-86.35" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">task association</text>
+</g>
+<!-- receipts -->
+<g id="node2" class="node">
+<title>receipts</title>
+<g id="a_node2"><a xlink:href="#node-receipts" xlink:title="M365InboundReceiptStore: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M175.17,-306.6C175.17,-306.6 12,-306.6 12,-306.6 6,-306.6 0,-300.6 0,-294.6 0,-294.6 0,-257.4 0,-257.4 0,-251.4 6,-245.4 12,-245.4 12,-245.4 175.17,-245.4 175.17,-245.4 181.17,-245.4 187.17,-251.4 187.17,-257.4 187.17,-257.4 187.17,-294.6 187.17,-294.6 187.17,-300.6 181.17,-306.6 175.17,-306.6"/>
+<text xml:space="preserve" text-anchor="middle" x="93.59" y="-277.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">M365InboundReceiptStore</text>
+<text xml:space="preserve" text-anchor="middle" x="93.59" y="-262.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Metadata&#45;only receipts</text>
+</a>
+</g>
+</g>
+<!-- receipts&#45;&gt;events -->
+<g id="edge1" class="edge">
+<title>receipts&#45;&gt;events</title>
+<path fill="none" stroke="#7b918a" d="M120.06,-244.85C133.85,-229.16 150.86,-209.79 165.6,-192.99"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="168.11,-195.44 172.08,-185.62 162.85,-190.82 168.11,-195.44"/>
+<text xml:space="preserve" text-anchor="middle" x="201.89" y="-209.05" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">restore projection</text>
+</g>
+<!-- followup -->
+<g id="node4" class="node">
+<title>followup</title>
+<g id="a_node4"><a xlink:href="#node-followup" xlink:title="Follow&#45;up records: open implementation details">
+<path fill="#e5f1fd" stroke="#076fc9" stroke-width="1.3" stroke-dasharray="5,2" d="M380.42,-306.6C380.42,-306.6 230.75,-306.6 230.75,-306.6 224.75,-306.6 218.75,-300.6 218.75,-294.6 218.75,-294.6 218.75,-257.4 218.75,-257.4 218.75,-251.4 224.75,-245.4 230.75,-245.4 230.75,-245.4 380.42,-245.4 380.42,-245.4 386.42,-245.4 392.42,-251.4 392.42,-257.4 392.42,-257.4 392.42,-294.6 392.42,-294.6 392.42,-300.6 386.42,-306.6 380.42,-306.6"/>
+<text xml:space="preserve" text-anchor="middle" x="305.59" y="-277.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Follow&#45;up records</text>
+<text xml:space="preserve" text-anchor="middle" x="305.59" y="-262.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Proposed business state</text>
+</a>
+</g>
+</g>
+<!-- followup&#45;&gt;events -->
+<g id="edge3" class="edge">
+<title>followup&#45;&gt;events</title>
+<path fill="none" stroke="#076fc9" stroke-dasharray="5,2" d="M288.41,-245C280.88,-232.93 271.5,-219.22 261.59,-207.9 256.91,-202.56 251.7,-197.27 246.35,-192.21"/>
+<polygon fill="#076fc9" stroke="#076fc9" points="248.73,-189.64 238.99,-185.49 244.02,-194.81 248.73,-189.64"/>
+<text xml:space="preserve" text-anchor="middle" x="343.98" y="-209.05" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">proposed task reference</text>
+</g>
+</g>
+</svg>

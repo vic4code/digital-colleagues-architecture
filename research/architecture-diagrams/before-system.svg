@@ -1,0 +1,84 @@
+<svg role="img" aria-labelledby="before-system-title before-system-desc" width="461pt" height="350pt"
+ viewBox="0.00 0.00 461.00 350.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title id="before-system-title">Before · system architecture</title><desc id="before-system-desc">Logical software responsibilities. Solid nodes are existing or external; blue dashed nodes are proposed. Select a node in the research website for source code and integration details.</desc>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(21.6 328.2)">
+<polygon fill="#fdfcf9" stroke="none" points="-21.6,21.6 -21.6,-328.2 439.83,-328.2 439.83,21.6 -21.6,21.6"/>
+<!-- client -->
+<g id="node1" class="node">
+<title>client</title>
+<g id="a_node1"><a xlink:href="#node-client" xlink:title="Interaction Client: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M166.81,-306.6C166.81,-306.6 21.61,-306.6 21.61,-306.6 15.61,-306.6 9.61,-300.6 9.61,-294.6 9.61,-294.6 9.61,-257.4 9.61,-257.4 9.61,-251.4 15.61,-245.4 21.61,-245.4 21.61,-245.4 166.81,-245.4 166.81,-245.4 172.81,-245.4 178.81,-251.4 178.81,-257.4 178.81,-257.4 178.81,-294.6 178.81,-294.6 178.81,-300.6 172.81,-306.6 166.81,-306.6"/>
+<text xml:space="preserve" text-anchor="middle" x="94.21" y="-277.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Interaction Client</text>
+<text xml:space="preserve" text-anchor="middle" x="94.21" y="-262.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">User request</text>
+</a>
+</g>
+</g>
+<!-- application -->
+<g id="node3" class="node">
+<title>application</title>
+<g id="a_node3"><a xlink:href="#node-application" xlink:title="LocalColleagueService: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M168.81,-183.9C168.81,-183.9 23.61,-183.9 23.61,-183.9 17.61,-183.9 11.61,-177.9 11.61,-171.9 11.61,-171.9 11.61,-134.7 11.61,-134.7 11.61,-128.7 17.61,-122.7 23.61,-122.7 23.61,-122.7 168.81,-122.7 168.81,-122.7 174.81,-122.7 180.81,-128.7 180.81,-134.7 180.81,-134.7 180.81,-171.9 180.81,-171.9 180.81,-177.9 174.81,-183.9 168.81,-183.9"/>
+<text xml:space="preserve" text-anchor="middle" x="96.21" y="-155" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">LocalColleagueService</text>
+<text xml:space="preserve" text-anchor="middle" x="96.21" y="-140" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Admission + dispatch</text>
+</a>
+</g>
+</g>
+<!-- client&#45;&gt;application -->
+<g id="edge1" class="edge">
+<title>client&#45;&gt;application</title>
+<path fill="none" stroke="#7b918a" d="M91.51,-244.94C90.79,-233.36 90.37,-220.02 90.96,-207.9 91.15,-203.95 91.43,-199.84 91.75,-195.74"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="95.23,-196.09 92.62,-185.82 88.26,-195.47 95.23,-196.09"/>
+<text xml:space="preserve" text-anchor="middle" x="104.08" y="-209.05" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">Turn</text>
+</g>
+<!-- ingress -->
+<g id="node2" class="node">
+<title>ingress</title>
+<g id="a_node2"><a xlink:href="#node-ingress" xlink:title="M365InboundRuntime: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M375.81,-306.6C375.81,-306.6 230.61,-306.6 230.61,-306.6 224.61,-306.6 218.61,-300.6 218.61,-294.6 218.61,-294.6 218.61,-257.4 218.61,-257.4 218.61,-251.4 224.61,-245.4 230.61,-245.4 230.61,-245.4 375.81,-245.4 375.81,-245.4 381.81,-245.4 387.81,-251.4 387.81,-257.4 387.81,-257.4 387.81,-294.6 387.81,-294.6 387.81,-300.6 381.81,-306.6 375.81,-306.6"/>
+<text xml:space="preserve" text-anchor="middle" x="303.21" y="-277.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">M365InboundRuntime</text>
+<text xml:space="preserve" text-anchor="middle" x="303.21" y="-262.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Verified provider events</text>
+</a>
+</g>
+</g>
+<!-- ingress&#45;&gt;application -->
+<g id="edge2" class="edge">
+<title>ingress&#45;&gt;application</title>
+<path fill="none" stroke="#7b918a" d="M226.71,-244.85C211.36,-237.83 195.62,-229.9 181.46,-221.4 167.03,-212.73 152.28,-201.94 139.2,-191.56"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="141.59,-188.99 131.61,-185.42 137.19,-194.43 141.59,-188.99"/>
+<text xml:space="preserve" text-anchor="middle" x="240.33" y="-209.05" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">dispatchAutomation</text>
+</g>
+<!-- state -->
+<g id="node5" class="node">
+<title>state</title>
+<g id="a_node5"><a xlink:href="#node-state" xlink:title="Task state + receipts: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M398.67,-183.9C398.67,-183.9 225.75,-183.9 225.75,-183.9 219.75,-183.9 213.75,-177.9 213.75,-171.9 213.75,-171.9 213.75,-134.7 213.75,-134.7 213.75,-128.7 219.75,-122.7 225.75,-122.7 225.75,-122.7 398.67,-122.7 398.67,-122.7 404.67,-122.7 410.67,-128.7 410.67,-134.7 410.67,-134.7 410.67,-171.9 410.67,-171.9 410.67,-177.9 404.67,-183.9 398.67,-183.9"/>
+<text xml:space="preserve" text-anchor="middle" x="312.21" y="-155" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Task state + receipts</text>
+<text xml:space="preserve" text-anchor="middle" x="312.21" y="-140" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Application&#45;owned metadata</text>
+</a>
+</g>
+</g>
+<!-- ingress&#45;&gt;state -->
+<g id="edge4" class="edge">
+<title>ingress&#45;&gt;state</title>
+<path fill="none" stroke="#7b918a" d="M305.46,-244.85C306.56,-230.02 307.91,-211.91 309.12,-195.79"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="312.59,-196.22 309.85,-185.99 305.61,-195.7 312.59,-196.22"/>
+<text xml:space="preserve" text-anchor="middle" x="363.1" y="-209.05" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">receipt / projection</text>
+</g>
+<!-- runtime -->
+<g id="node4" class="node">
+<title>runtime</title>
+<g id="a_node4"><a xlink:href="#node-runtime" xlink:title="OpenClaw: open implementation details">
+<path fill="#f2f2f8" stroke="#7b849c" stroke-width="2" d="M180.42,-61.2C180.42,-61.2 12,-61.2 12,-61.2 6,-61.2 0,-55.2 0,-49.2 0,-49.2 0,-12 0,-12 0,-6 6,0 12,0 12,0 180.42,0 180.42,0 186.42,0 192.42,-6 192.42,-12 192.42,-12 192.42,-49.2 192.42,-49.2 192.42,-55.2 186.42,-61.2 180.42,-61.2"/>
+<text xml:space="preserve" text-anchor="middle" x="96.21" y="-32.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">OpenClaw</text>
+<text xml:space="preserve" text-anchor="middle" x="96.21" y="-17.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">External Runtime Controller</text>
+</a>
+</g>
+</g>
+<!-- application&#45;&gt;runtime -->
+<g id="edge3" class="edge">
+<title>application&#45;&gt;runtime</title>
+<path fill="none" stroke="#7b918a" d="M96.21,-122.15C96.21,-107.32 96.21,-89.21 96.21,-73.09"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="99.71,-73.29 96.21,-63.29 92.71,-73.29 99.71,-73.29"/>
+<text xml:space="preserve" text-anchor="middle" x="138.21" y="-86.35" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">/v1/responses</text>
+</g>
+</g>
+</svg>

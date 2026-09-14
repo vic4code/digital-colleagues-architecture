@@ -1,5 +1,20 @@
 # Proactive agent research — source and evidence index
 
+- [主動性實作導讀](initiative-implementation-guide.md)：Time／Event、W0–W7、三個 Phase 與國泰觀測。
+
+## 先依研究問題閱讀
+
+| 主線／層次 | 核心文件 |
+|---|---|
+| 研究總入口 | [兩條主線與閱讀順序](../README.md) · [視覺化入口](../index.html) |
+| 主動工作 | [完整主文](../proactive-work.md) · [time／event 與進階機制](proactive-trigger-mechanisms.md) |
+| 同事互動感 | [接話、修正、群組與交接](../colleague-interaction.md) |
+| 共用狀態與責任 | [同事感／工作閉環](colleague-experience.md) · [承諾追蹤](commitment-followup-design.md) |
+| 歷史補正 | [OpenClaw inferred commitments](openclaw-inferred-commitments.md) |
+
+以下保留按 framework、機制和驗證建立的來源索引。舊路徑不搬動，避免原始碼、圖與報告引用失效。
+
+
 Start with the [integrated visual report](../show-me-proactive-lifecycle.html#research-summary) or the [complete README edition](../README.md).
 
 The report follows one story: an Outlook responsibility → four practical questions → native framework mechanisms → comparison → autonomous task choice → existing phases → original architecture integration → verification. Technical synthesis and design choices are expandable references within the comparison chapter. These are comparison questions, not exclusive framework categories or invented maturity phases.
@@ -72,3 +87,14 @@ Sources were inspected September 8–9, 2026. Code facts, documented product beh
 - 本次只補查 OpenClaw 與 Grok Bot 相關來源；其他 framework 與先前 validation 保持其原有日期和驗證範圍。
 
 [本次驗證紀錄](colleague-experience-validation.json)：新增來源連結、研究頁展開、桌機／手機溢出與 console 檢查；不是框架功能 E2E。
+
+## 2026-09-11：兩條研究主線與高層視覺化
+
+[本次驗證](research-reorganization-validation.json)：6 種主動情境組合、5 個合作情境、手機寬度、舊深連結、anchor／52 個程式區塊保留與 21 個來源 URL。這是研究呈現的檢查，不是上游產品 E2E。
+
+## 2026-09-11：簡報式視覺重設
+
+[設計判讀與重設紀錄](presentation-design-audit.md) · [八頁簡報驗證](presentation-design-validation.json)。入口改為一頁一個結論，來源按需展開；原研究、情境與固定來源仍保留。
+
+- [人如何想起，Agent 如何實踐](human-to-agent.md)：認知科學依據與工程對照，作為簡報的新起點。
+- [完整機制圖譜](../mechanisms.html)：可選取七框架與39個研究項目，展開流程、時序及來源。

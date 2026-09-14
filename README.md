@@ -44,7 +44,7 @@ own README explaining the goal, the architecture, and how it relates to the othe
 4. **See where we are:** [`phases/0/`](./phases/0/) — current running system (prototype)
 5. **See where we're going:** [`phases/1/`](./phases/1/) onwards (legal MVP → enterprise)
 6. **Understand the why:** [`decisions/`](./decisions/) — Architecture Decision Records
-7. **Cross-phase concerns:** [`flows/`](./flows/) (end-to-end workflows), [`research/`](./research/) (scratchpad)
+7. **Cross-phase concerns:** [`flows/`](./flows/) (end-to-end workflows), [`research/`](./research/) (proactive work and colleague interaction; [visual guide](./research/index.html))
 
 ## Conventions
 

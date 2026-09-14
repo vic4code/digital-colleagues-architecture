@@ -1,0 +1,141 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADR-020 — Separate webhook ingress from MCP tool execution｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../index.html">概念導覽</a><a href="../../proactivity.html">研究地圖</a><a href="../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../mechanisms.html">機制圖譜</a><a href="../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="../research/source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="../research/source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="../research/source-notes/design-philosophy.html">Design philosophy differences</a><a href="../research/proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="../research/source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="../research/source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="../research/source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="../research/colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="../research/source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="../research/source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="../research/source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../research/channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="../research/source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="../research/source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="../research/source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="../research/source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="../research/source-notes/openbot.html">OpenBot pinned source review</a><a href="../research/source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="../research/source-notes/voyager.html">Voyager implementation review</a><a href="../research/source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="../research/source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="../research/source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="../research/source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="../research/source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="../research/source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="../research/source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="../research/source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="../research/source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="../research/source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="../research/source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="../research/source-notes/README.html">Proactive agent research — source and evidence index</a><a href="../research/source-notes/design-audit.html">Taste skill audit</a><a href="../research/source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="../research/source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../research/README.html">數位同事研究：主動工作與同事互動感</a><a href="../research/proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../research/storyline.html">數位同事主動性：Story line</a><a href="../research/source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="../research/source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="../research/source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details open><summary>延伸專案文件</summary><a href="../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="ADR-020-event-driven-service-integration.html" aria-current="page">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../phases/0/README.html">Phase 0 — Prototype</a><a href="ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../overview/README.html">Overview</a><a href="ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../phases/1/README.html">Phase 1 — Legal MVP</a><a href="ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../library.html">延伸專案文件</a><span>研究正文</span></div><article><h1 id="adr-020-separate-webhook-ingress-from-mcp-tool-execution">ADR-020 — Separate webhook ingress from MCP tool execution</h1>
+<ul>
+<li><strong>Status:</strong> Accepted</li>
+<li><strong>Date:</strong> Phase 0.5 design</li>
+<li><strong>Deciders:</strong> architecture owner</li>
+<li><strong>Builds on:</strong> <a href="ADR-019-single-interaction-surface.html">ADR-019</a> (services are tools, not channels)</li>
+</ul>
+<h2 id="context">Context</h2>
+<p>The colleague was passive: it only checked a service when a human asked. We
+want services to <strong>wake</strong> it — a calendar invite, a new mail, a punch-clock
+deadline — so it decides whether to act or notify without being prompted each
+time. ADR-019 established services as bidirectional tools; this ADR defines the
+<strong>inbound</strong> direction.</p>
+<p>A tempting wrong turn is to draw one undifferentiated "SaaS ↔ app-server" line.
+Codex app-server and MCP solve different parts of that relationship. App-server
+is the client control API for thread/turn lifecycle and streamed agent events.
+MCP connects the Codex host to tools and context during that lifecycle. Neither
+is, by itself, a durable public ingress that converts an arbitrary SaaS webhook
+into a new Codex turn.</p>
+<h2 id="decision">Decision</h2>
+<p>Use two explicit paths that converge at the agent turn.</p>
+<h3 id="inbound-wake-up-path-webhook-app-server-client">Inbound wake-up path — webhook + app-server client</h3>
+<ol>
+<li><strong>Sources.</strong> Where a service offers native push, use it: Microsoft Graph
+   subscriptions (Outlook), Google Calendar <code>watch()</code>, Gmail watch. These carry
+   service-specific expiry and <strong>must be renewed</strong> — a scheduled renewal job is
+   part of the design, not an afterthought.</li>
+<li><strong>Ingress.</strong> A small always-on <strong>webhook receiver</strong> (public HTTPS) verifies
+   signature + source, and de-duplicates. For sources with <strong>no native push</strong>
+   (punch-clock, periodic work summaries), a <strong>scheduler (cron / heartbeat)</strong>
+   plays the same role — time-driven instead of event-driven.</li>
+<li><strong>Runtime triage gate — deterministic, not the LLM.</strong> The Runtime Controller
+   decides "does this need agent reasoning?" <strong>No →</strong> <em>deliver-only</em>: forward
+   the notice (e.g. to Telegram/Slack) with no LLM turn, saving tokens.
+   <strong>Yes →</strong> continue to the app-server bridge.</li>
+<li><strong>App-server bridge.</strong> The runtime is an app-server client. For accepted
+   events it calls <code>thread/start</code> or <code>thread/resume</code>, then <code>turn/start</code>; it keeps
+   reading notifications until <code>turn/completed</code>.</li>
+</ol>
+<h3 id="outbound-action-path-app-server-turn-mcp-tool">Outbound action path — app-server turn + MCP tool</h3>
+<p>During the turn, the Codex host uses its configured MCP client to invoke an MCP
+server/tool adapter. That adapter calls the SaaS API over HTTPS with scoped
+credentials. The agent can search, create, update, send, or reply through the
+same logical integration, subject to approvals. If no human notification is
+needed, it returns <strong><code>[SILENT]</code></strong>.</p>
+<p>This is "through app-server" in the lifecycle/control sense, but not a direct
+app-server-to-SaaS connector: the MCP server/tool adapter owns the SaaS API
+contract. The webhook receiver owns external wake-up ingress.</p>
+<p>Event-driven and time-driven <strong>coexist</strong>; both feed the one triage gate. All of
+it rides the ADR-019 access/permission/audit boundary: webhook content is
+untrusted input (sig + dedup + allow-lists), and every event → task → action
+shares one correlation id.</p>
+<h2 id="alternatives-considered-framework-capabilities-compared">Alternatives considered — framework capabilities compared</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>OpenClaw</th>
+<th>Hermes Agent</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generic inbound webhook</td>
+<td>✅ (config route, HMAC + IP allow-list)</td>
+<td>✅ + <strong>dynamic subscribe</strong> (no restart)</td>
+<td>⚠️ GitHub-only (Triggers)</td>
+</tr>
+<tr>
+<td>Gmail push</td>
+<td>✅ native (<code>gmail watch</code>)</td>
+<td>self-build route</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Calendar push</td>
+<td>⚠️ self-wire Google <code>watch()</code></td>
+<td>self-build route</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Token-saving passthrough</td>
+<td>—</td>
+<td>✅ <code>deliver_only</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Anti-fatigue</td>
+<td>—</td>
+<td>✅ <code>[SILENT]</code> convention</td>
+<td>—</td>
+</tr>
+<tr>
+<td>No-push fallback</td>
+<td>✅ heartbeat (~30 min)</td>
+<td>✅ cron + reasoning</td>
+<td>✅ Automations (polling)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Chosen borrowings:</strong> the receiver + native-push model (OpenClaw-style), and
+<strong><code>deliver_only</code> + <code>[SILENT]</code></strong> (Hermes-style) as the token/fatigue controls.
+We do not adopt any one framework wholesale; we reuse the patterns. Rejected:
+<strong>MCP alone as the wake-up path</strong> (it does not define the durable
+webhook-to-<code>turn/start</code> bridge), and building a bespoke event bus (the
+off-the-shelf receiver + native subscriptions already do it).</p>
+<h2 id="consequences">Consequences</h2>
+<p><strong>Easier:</strong> the colleague becomes proactive with almost no new infrastructure —
+a receiver on existing compute plus vendor push subscriptions; <code>deliver_only</code>
+keeps the common case free of LLM cost; <code>[SILENT]</code> keeps it from becoming spam.</p>
+<p><strong>Harder:</strong> subscription <strong>TTL renewal</strong> is now a reliability requirement
+(a missed renewal silently stops events); the webhook receiver needs a public
+HTTPS endpoint (dev: a tunnel; prod: existing always-on host); the triage rules
+are worth real design effort — they are where token spend and notification
+fatigue are actually won or lost.</p>
+<p><strong>Follow-up implied:</strong> the diagram shows this pipeline; the implementation repo
+picks the concrete receiver, wires each service's push + renewal, and writes the
+triage rules. Names in the comparison table stay here (ADR), not on diagrams
+(brand neutrality, ADR-018).</p>
+<h2 id="sources-checked">Sources checked</h2>
+<ul>
+<li><a href="https://learn.chatgpt.com/docs/app-server.md">Codex app-server</a>: clients
+  initialize a connection, start/resume threads, start turns, and consume
+  streamed notifications.</li>
+<li><a href="https://learn.chatgpt.com/docs/extend/mcp.md">Codex MCP</a>: Codex connects to
+  STDIO or Streamable HTTP MCP servers for tools and context.</li>
+</ul><details class="article-references"><summary>本文參考來源 · 2</summary><p>以下保留本文實際引用的來源；引用不等於實測，適用範圍以正文說明為準。</p><ol><li><a href="https://learn.chatgpt.com/docs/app-server.md">Codex app-server</a></li><li><a href="https://learn.chatgpt.com/docs/extend/mcp.md">Codex MCP</a></li></ol></details></article><footer class="article-footer"><a href="../../library.html">← 回研究目錄</a><a href="ADR-018-adopt-openclaw-codex.html">下一篇：ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#context">Context</a></li>
+<li><a href="#decision">Decision</a><ul>
+<li><a href="#inbound-wake-up-path-webhook-app-server-client">Inbound wake-up path — webhook + app-server client</a></li>
+<li><a href="#outbound-action-path-app-server-turn-mcp-tool">Outbound action path — app-server turn + MCP tool</a></li>
+</ul>
+</li>
+<li><a href="#alternatives-considered-framework-capabilities-compared">Alternatives considered — framework capabilities compared</a></li>
+<li><a href="#consequences">Consequences</a></li>
+<li><a href="#sources-checked">Sources checked</a></li>
+</ul>
+</div>
+</aside></div><script src="../../research-library.js?v=9e6a3877b9"></script></body></html>

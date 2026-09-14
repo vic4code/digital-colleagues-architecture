@@ -1,0 +1,7 @@
+Shared Workspace — unDraw
+Illustrator: Katerina Limpitsouni
+Source: https://cdn.undraw.co/illustration/shared-workspace_6y9d.svg
+License: https://undraw.co/license
+Retrieved: 2026-09-11
+Changes: recolored accent/neutral fills; responsive viewBox; accessible title and description. Original aspect ratio and anatomy preserved.
+Used as illustration in this research site, not as product evidence.

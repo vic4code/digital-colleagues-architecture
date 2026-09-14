@@ -1,0 +1,34 @@
+{
+  "reviewed": "2026-09-11",
+  "skill": {
+    "name": "ui-ux-pro-max",
+    "repository": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+    "revision": "7f69fed6a2717900085f1bc3b263721f8ba025e2",
+    "queries": [
+      "editorial research knowledge presentation --design-system",
+      "navigation hierarchy progressive disclosure --domain ux"
+    ],
+    "applied": "Swiss editorial layout, information hierarchy, keyboard focus, readable article layout, progressive disclosure. Existing project neutral/orange palette retained; portfolio conversion advice not applied."
+  },
+  "scope": "Frontend presentation and complete static reading experience; not a new framework source audit or live product test",
+  "changes": [
+    "Removed cartoon figure; replaced with work context, cue, recalled commitment and decision diagram",
+    "34 research notes and 25 linked project documents rendered in full",
+    "Rewired local Markdown destinations in frontend pages and source drawers",
+    "Added full-text search, grouped navigation, article TOC, tables and code presentation"
+  ],
+  "validation": {
+    "viewports": [
+      1440,
+      1280,
+      375
+    ],
+    "new_human_slide_footer_collision": "none on desktop",
+    "horizontal_overflow": "none for revised slide, library and sampled commitments reader",
+    "search": "matching full text, open intended article, no results, return to category passed",
+    "source_drawer": "local links lead to frontend pages; Escape passed",
+    "local_reading_links": "60 pages checked; zero missing targets, raw Markdown destinations or internal reading anchor errors",
+    "javascript_errors": "none in tested flows",
+    "screenshots": "/tmp/ui-pro-*.png"
+  }
+}

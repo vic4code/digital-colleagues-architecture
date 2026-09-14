@@ -1,0 +1,109 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Official concepts and implementation evidence｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../../index.html">概念導覽</a><a href="../../../proactivity.html">研究地圖</a><a href="../../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../../mechanisms.html">機制圖譜</a><a href="../../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="design-philosophy.html">Design philosophy differences</a><a href="../proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="../colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details open><summary>框架研究</summary><a href="openclaw.html">OpenClaw source review — 2026-09-08</a><a href="openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="hermes.html">Hermes source review — 2026-09-08</a><a href="openbot.html">OpenBot pinned source review</a><a href="grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="voyager.html">Voyager implementation review</a><a href="official-claims.html" aria-current="page">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="README.html">Proactive agent research — source and evidence index</a><a href="design-audit.html">Taste skill audit</a><a href="taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../README.html">數位同事研究：主動工作與同事互動感</a><a href="../proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../storyline.html">數位同事主動性：Story line</a><a href="initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="initiative-taste-review.html">Initiative homepage: taste review</a><a href="diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details><summary>延伸專案文件</summary><a href="../../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../../phases/0/README.html">Phase 0 — Prototype</a><a href="../../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../../overview/README.html">Overview</a><a href="../../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../../library.html#group-2">框架研究</a><span>研究正文</span></div><article><h1 id="official-concepts-and-implementation-evidence">Official concepts and implementation evidence</h1>
+<p>Added 2026-09-09. Project documentation is retained alongside source inspection. A feature definition is not a runtime test; a research result is not a reproduced experiment. Same-commit documentation is preferred over mixing online docs from another version.</p>
+<h2 id="openclaw-heartbeat-direct-answer">OpenClaw Heartbeat: direct answer</h2>
+<p>At the inspected commit, docs/gateway/heartbeat.md explicitly defines heartbeat as a system-owned automation. resolveHeartbeatMonitorPlan in src/cron/heartbeat-monitor.ts:71 projects heartbeat configuration to an every schedule, payload.kind heartbeat, and main-session target. The Automations scheduler uses setTimeout; no separate heartbeat fallback timer is described. Manual/event wakes remain a separate available entry when recurring cadence is disabled.</p>
+<p>The earlier timer-first diagram omitted this feature/configuration layer. The current diagram starts at Heartbeat configuration and the system-owned monitor.</p>
+<h2 id="claim-to-code-ledger">Claim-to-code ledger</h2>
+<h3 id="openclawopenclaw-heartbeat">openclaw/openclaw — Heartbeat</h3>
+<p>Project claim: The docs define Heartbeat as a system-owned automation for periodic agent turns. Its cadence is owned by the Automations scheduler; there is no separate fallback timer.</p>
+<p>Documentation: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/gateway/heartbeat.md#L10</p>
+<p>Code evidence: resolveHeartbeatMonitorPlan projects config into an every schedule with a heartbeat payload and main-session target. timer-scheduler.ts supplies the actual setTimeout.</p>
+<p>Source: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/heartbeat-monitor.ts#L71</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="openclawopenclaw-automations-cron">openclaw/openclaw — Automations / cron</h3>
+<p>Project claim: The project describes a built-in scheduler that persists work and delivers results. The automations CLI is primary; cron remains an alias.</p>
+<p>Documentation: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/automation/cron-jobs.md#L12</p>
+<p>Code evidence: armTimer / onTimer schedule and select work. The heartbeat branch is one payload route, not every automation.</p>
+<p>Source: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-scheduler.ts#L55</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="openclawopenclaw-skill-workshop">openclaw/openclaw — Skill Workshop</h3>
+<p>Project claim: Docs distinguish governed generated-skill proposals from automatic background learning that may directly maintain Workshop files.</p>
+<p>Documentation: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/tools/skill-workshop.md#L12</p>
+<p>Code evidence: The review path uses configured off/auto/propose behavior, eligibility and tool restrictions. Do not assume every background change requires a proposal.</p>
+<p>Source: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/skills/workshop/experience-review.ts#L122</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="openclawopenclaw-dreaming">openclaw/openclaw — Dreaming</h3>
+<p>Project claim: The project documents background memory consolidation and synthesis.</p>
+<p>Documentation: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/concepts/dreaming.md#L1</p>
+<p>Code evidence: The inspected promotion/diary paths maintain memory artifacts. They do not establish a new external-goal generator.</p>
+<p>Source: https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts#L583</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="nousresearchhermes-agent-persistent-goals-goal">NousResearch/hermes-agent — Persistent Goals /goal</h3>
+<p>Project claim: The docs call this a Ralph-loop adaptation: keep a standing objective across turns and inject continuation after judging the latest response. They credit Codex as inspiration and describe Hermes as an independent implementation.</p>
+<p>Documentation: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/website/docs/user-guide/features/goals.md#L7</p>
+<p>Code evidence: A real post-turn hook evaluates GoalManager and queues a synthetic event. Waiting, gates, budgets and error paths qualify the broad “after every turn” description.</p>
+<p>Source: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L262</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="nousresearchhermes-agent-recurring-loops-loop-proactive">NousResearch/hermes-agent — Recurring Loops /loop, /proactive</h3>
+<p>Project claim: Docs distinguish timer-driven recurring prompts from judge-driven goals. /proactive is an alias; fixed and self-paced cadences are documented.</p>
+<p>Documentation: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/website/docs/user-guide/features/loops.md#L7</p>
+<p>Code evidence: complete_tick checks stop markers and limits; normalized reply digests affect pacing. The digest is lexical, not a semantic progress evaluator.</p>
+<p>Source: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py#L538</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="nousresearchhermes-agent-session-heartbeats-heartbeat">NousResearch/hermes-agent — Session Heartbeats /heartbeat</h3>
+<p>Project claim: One recurring instruction re-enters the current session when idle. Docs credit Prime-Agent as inspiration.</p>
+<p>Documentation: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/website/docs/user-guide/features/heartbeat.md#L7</p>
+<p>Code evidence: The watcher checks session/adapter and running/queued state before injecting a synthetic turn.</p>
+<p>Source: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/gateway/run_goals.py#L116</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="nousresearchhermes-agent-scheduled-tasks-cron">NousResearch/hermes-agent — Scheduled Tasks / cron</h3>
+<p>Project claim: Docs advertise durable unattended jobs, fresh sessions and a script-only no-agent mode.</p>
+<p>Documentation: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/website/docs/user-guide/features/cron.md#L7</p>
+<p>Code evidence: Expanded audit: tick / due-job claim → run_one_job → run_job → fresh AIAgent; no_agent branches before agent construction. Remote provider fire shares run_one_job. Static source trace, not live end-to-end verification.</p>
+<p>Source: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/scheduler.py#L2301</p>
+<p>Status: Source path traced; runtime not exercised / 已追蹤程式路徑，未執行完整 runtime</p>
+<h3 id="nousresearchhermes-agent-self-improving-learning-loop">NousResearch/hermes-agent — Self-improving / learning loop</h3>
+<p>Project claim: The project positions Hermes as a self-improving agent with memory/skill learning. Its uniqueness claim is a marketing assertion, not a finding of this study.</p>
+<p>Documentation: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/README.md#L20</p>
+<p>Code evidence: Constrained review and guarded skill updates support artifact-level learning. This does not demonstrate model-weight training or prove exclusivity.</p>
+<p>Source: https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/background_review.py#L937</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="copilotkitopenbot-routines">CopilotKit/OpenBot — Routines</h3>
+<p>Project claim: Standing instructions run on a schedule as the requesting user, with current permissions. The docs name limits and a repeated-failure disable rule.</p>
+<p>Documentation: https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/docs/routines.md#L1</p>
+<p>Code evidence: The runner reloads context/access and records outcomes. The due sweep and queue implement scheduled ownership.</p>
+<p>Source: https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/runner.ts#L72</p>
+<p>Status: Supported in inspected code / 已讀程式支持</p>
+<h3 id="copilotkitopenbot-missed-window-handling">CopilotKit/OpenBot — Missed-window handling</h3>
+<p>Project claim: Docs say missed windows are not replayed as old outputs, but describe advancing stale occurrences one by one.</p>
+<p>Documentation: https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/docs/routines.md#L51</p>
+<p>Code evidence: The inspected code instead advances an out-of-grace schedule from now. Preserve the intended skip policy; prefer code for the exact recovery algorithm.</p>
+<p>Source: https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts#L135</p>
+<p>Status: Documentation/code discrepancy / 文件與程式細節有差異</p>
+<h3 id="b-nnettgrok-bot-018-reconstructed-reconstruction-provenance">b-nnett/grok-bot-0.18-reconstructed — Reconstruction provenance</h3>
+<p>Project claim: The supplied repository describes reconstructed Grok Bot 0.18 source and additional extensions. It is not a vendor-authored specification for xAI services.</p>
+<p>Documentation: https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/PROVENANCE.md#L1</p>
+<p>Code evidence: Completion/event follow-up is visible in this reconstruction. Original-binary parity and a vendor claim about this behavior are unverified.</p>
+<p>Source: https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L99</p>
+<p>Status: Reconstructor claim only / 僅重建者說明</p>
+<h2 id="voyager-authors-research">Voyager authors’ research</h2>
+<p>The project page and paper define automatic curriculum, skill library and iterative prompting. The authors describe the curriculum as an in-context form of novelty search. Source inspection supports the component mapping; reported Minecraft results are author experiments, not this review’s measurements.</p>
+<p>https://voyager.minedojo.org/</p>
+<p>https://arxiv.org/abs/2305.16291</p>
+<h2 id="source-tier">Source tier</h2>
+<p>OpenClaw/Hermes/OpenBot: maintainer-authored documentation, not treated as peer-reviewed research. Voyager: authors’ project and paper. Grok Bot 0.18 repository: unofficial reconstruction, not an authenticated vendor specification.</p>
+<h2 id="grok-bot-official-product-checked-2026-09-11">Grok Bot official product, checked 2026-09-11</h2>
+<p><a href="https://x.ai/news/introducing-grok-bot">Official product page</a> describes following up dropped threads/stalled handoffs, retaining work context, learning routines from demonstrations and coordinating Bots. Status: documented product claims, not live behavior measured by this study. This is separate from the unofficial 0.18 reconstruction; its code is not authenticated by similar product language. See <a href="colleague-experience.html">evidence and design synthesis</a>.</p><details class="article-references"><summary>本文參考來源 · 1</summary><p>以下保留本文實際引用的來源；引用不等於實測，適用範圍以正文說明為準。</p><ol><li><a href="https://x.ai/news/introducing-grok-bot">Official product page</a></li></ol></details></article><footer class="article-footer"><a href="../../../library.html">← 回研究目錄</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#openclaw-heartbeat-direct-answer">OpenClaw Heartbeat: direct answer</a></li>
+<li><a href="#claim-to-code-ledger">Claim-to-code ledger</a><ul>
+<li><a href="#openclawopenclaw-heartbeat">openclaw/openclaw — Heartbeat</a></li>
+<li><a href="#openclawopenclaw-automations-cron">openclaw/openclaw — Automations / cron</a></li>
+<li><a href="#openclawopenclaw-skill-workshop">openclaw/openclaw — Skill Workshop</a></li>
+<li><a href="#openclawopenclaw-dreaming">openclaw/openclaw — Dreaming</a></li>
+<li><a href="#nousresearchhermes-agent-persistent-goals-goal">NousResearch/hermes-agent — Persistent Goals /goal</a></li>
+<li><a href="#nousresearchhermes-agent-recurring-loops-loop-proactive">NousResearch/hermes-agent — Recurring Loops /loop, /proactive</a></li>
+<li><a href="#nousresearchhermes-agent-session-heartbeats-heartbeat">NousResearch/hermes-agent — Session Heartbeats /heartbeat</a></li>
+<li><a href="#nousresearchhermes-agent-scheduled-tasks-cron">NousResearch/hermes-agent — Scheduled Tasks / cron</a></li>
+<li><a href="#nousresearchhermes-agent-self-improving-learning-loop">NousResearch/hermes-agent — Self-improving / learning loop</a></li>
+<li><a href="#copilotkitopenbot-routines">CopilotKit/OpenBot — Routines</a></li>
+<li><a href="#copilotkitopenbot-missed-window-handling">CopilotKit/OpenBot — Missed-window handling</a></li>
+<li><a href="#b-nnettgrok-bot-018-reconstructed-reconstruction-provenance">b-nnett/grok-bot-0.18-reconstructed — Reconstruction provenance</a></li>
+</ul>
+</li>
+<li><a href="#voyager-authors-research">Voyager authors’ research</a></li>
+<li><a href="#source-tier">Source tier</a></li>
+<li><a href="#grok-bot-official-product-checked-2026-09-11">Grok Bot official product, checked 2026-09-11</a></li>
+</ul>
+</div>
+</aside></div><script src="../../../research-library.js?v=9e6a3877b9"></script></body></html>

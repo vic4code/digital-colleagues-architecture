@@ -1,0 +1,8 @@
+Sharing Ideas — unDraw
+Illustrator: Katerina Limpitsouni
+Source: https://cdn.undraw.co/illustration/sharing-ideas_toje.svg
+Website: https://undraw.co/
+License: https://undraw.co/license
+Retrieved: 2026-09-11
+Project changes: recolored accent and neutral fills, removed fixed pixel dimensions, added accessible title.
+Used as an illustration within this research website; not an original project-drawn character or evidence of framework behavior.

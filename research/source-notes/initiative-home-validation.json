@@ -1,0 +1,32 @@
+{
+  "updated": "2026-09-14",
+  "widths": [
+    320,
+    768,
+    1024,
+    1440
+  ],
+  "overflow": false,
+  "mechanisms": [
+    "polling",
+    "heartbeat",
+    "cron",
+    "event",
+    "loop"
+  ],
+  "cathay_roles": [
+    "legal",
+    "pm",
+    "hr",
+    "architect"
+  ],
+  "trace_branches": [
+    "proposal",
+    "quiet",
+    "outage"
+  ],
+  "phase_definition": "agent_initiate P1 fixed cadence / P2 goal / P3 inferred followup",
+  "architecture": "original coordinates; hover, click, Before/After and keyboard passed",
+  "page_errors": [],
+  "scope": "browser fixtures and source inspection; no backend or Cathay deployment validation"
+}

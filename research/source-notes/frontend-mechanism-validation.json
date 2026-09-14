@@ -1,0 +1,19 @@
+{
+  "reviewed": "2026-09-11",
+  "scope": "Human-to-agent narrative and mechanism explorer; UI checks, not framework runtime certification",
+  "checks": {
+    "deck_slides": 10,
+    "frameworks": 7,
+    "mechanism_entries": 39,
+    "flow_diagrams": 28,
+    "sequence_diagrams": 28,
+    "all_39_hash_selections": "passed",
+    "human_cue_switch_and_source_dialog": "passed",
+    "step_highlight": "passed",
+    "flow_and_sequence_image_load": "passed for Heartbeat; all 56 local diagram paths exist",
+    "empty_search": "passed",
+    "horizontal_overflow": "none at 1440 and 390 for new slides, proactive/frameworks slides, and explorer",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "date": "2026-09-11",
+  "scope": "Taste-led executive slide redesign; 8-slide linear narrative over the retained research.",
+  "design": {
+    "skill": "design-taste-frontend",
+    "variance": 6,
+    "motion": 3,
+    "density": 2,
+    "palette": "neutral paper and burnt orange",
+    "format": "native HTML presentation; no OpenSlides package claim",
+    "reading_order": [
+      "two questions",
+      "trigger",
+      "situational decision",
+      "framework value",
+      "interaction",
+      "collaboration example",
+      "shared context",
+      "bounded implementation"
+    ]
+  },
+  "checks": {
+    "desktop_viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1024,
+        768
+      ]
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "all_8_slides_checked_at_each_viewport": true,
+    "desktop_vertical_or_horizontal_overflow": false,
+    "footer_collisions": false,
+    "mobile_horizontal_overflow": false,
+    "proactive_scenario_combinations": 6,
+    "interaction_scenarios": 5,
+    "keyboard": [
+      "Home",
+      "End",
+      "ArrowRight",
+      "boundary disabled controls"
+    ],
+    "sources_dialog": [
+      "contextual links",
+      "Escape closes",
+      "focus returns to opener"
+    ],
+    "fullscreen": "entry and exit passed in Chromium",
+    "reduced_motion": "animation-name: none",
+    "print": "all 8 slides visible",
+    "human_agent_visual_attribution": "passed",
+    "retained_reading_pages": "both load and fit desktop width",
+    "local_links": "passed",
+    "duplicate_ids": "none",
+    "javascript_syntax": "passed",
+    "diff_whitespace": "passed"
+  },
+  "visual_review": "All eight desktop slide screenshots, 1280px scenario, mobile cover, and sources drawer inspected. Captures used animations disabled to avoid intermediate fade frames.",
+  "notes": [
+    "Initial navigation assertion checked URL before hashchange finished; changed the check to await the visible slide, then keyboard checks passed.",
+    "Static illustrated scenarios, no real message sends.",
+    "Historical validation documents retain their original scope."
+  ],
+  "sha256": {
+    "research/index.html": "266e175dc95c6393f437a5105b755dfeb04a96d6eb1267545fdb902fd999f620",
+    "research/research-deck.css": "54590521c2d8797e8856f629679886e9f3e4e08c3d0af073b43980dace9ee1b8",
+    "research/research-deck.js": "0db6f92d8c73f2e1560229c91772d8f070689628b05067ebe55231bca3fb8494",
+    "research/research-guide.css": "16e05897a71db162a8bc0e74b9c2ffc34c504fe12dc0cfb5c40b891fa685ee70",
+    "research/proactive-overview.css": "cf0abac85d65749c36dce67b0682a29217db3749b6fabf8f071ff3400be2a729"
+  }
+}

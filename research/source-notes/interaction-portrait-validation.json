@@ -1,0 +1,21 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "aspectRatio": 3.1005168912682297,
+      "scenarios": 5
+    },
+    {
+      "width": 1024,
+      "aspectRatio": 3.1004212528876205,
+      "scenarios": 5
+    },
+    {
+      "width": 390,
+      "aspectRatio": 3.1004170676932947,
+      "scenarios": 5
+    }
+  ],
+  "consoleErrors": [],
+  "reducedMotion": "passed"
+}

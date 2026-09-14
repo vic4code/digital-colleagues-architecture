@@ -1,0 +1,8 @@
+{
+  "files": 10,
+  "tool": "diagram-design lint-skin.py",
+  "nonStyleFindings": [],
+  "defaultStyleFindings": "Expected palette/font mismatch: project deliberately uses user-selected Cream + system sans, documented in diagram-project-style.md. Default palette is not the acceptance profile.",
+  "scope": "Skin/a11y lint only; Graphviz geometry also visually inspected.",
+  "accessibility": "No remaining aria/title/desc findings across 10 SVGs"
+}

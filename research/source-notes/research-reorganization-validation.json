@@ -1,0 +1,152 @@
+{
+  "date": "2026-09-11",
+  "scope": "Research reorganized into proactive work and colleague interaction, with executive-first visuals and expandable implementation evidence.",
+  "static": {
+    "missing_local_targets": [],
+    "duplicate_new_page_ids": [],
+    "all_previous_report_anchor_ids_preserved": true,
+    "previous_code_blocks": 52,
+    "current_code_blocks": 52,
+    "js_syntax": "passed for new scripts and checked inline report scripts",
+    "svg_xml": "passed"
+  },
+  "browser": {
+    "tool": "Playwright CLI",
+    "proactive_combinations": 6,
+    "interaction_scenarios": [
+      "accept",
+      "change",
+      "group",
+      "handoff",
+      "everyday"
+    ],
+    "technical_details_initially_collapsed": true,
+    "legacy_deep_links": [
+      "flow-gr-2",
+      "embedding",
+      "frameworks"
+    ],
+    "framework_navigation_highlight": "passed",
+    "mobile_width_and_scroll_width": [
+      390,
+      390
+    ],
+    "mobile_pages": [
+      "index.html",
+      "show-me-proactive-lifecycle.html",
+      "show-me-colleague-interaction.html"
+    ],
+    "console_errors": 0,
+    "console_warnings": 0,
+    "visual_review": [
+      "proactive desktop screenshot",
+      "interaction desktop screenshot"
+    ]
+  },
+  "external_source_urls": [
+    {
+      "url": "https://arxiv.org/abs/2304.03442",
+      "status": 200
+    },
+    {
+      "url": "https://arxiv.org/abs/2502.07709",
+      "status": 200
+    },
+    {
+      "url": "https://code.claude.com/docs/en/goal",
+      "status": 200
+    },
+    {
+      "url": "https://code.claude.com/docs/en/scheduled-tasks",
+      "status": 200
+    },
+    {
+      "url": "https://docs.openclaw.ai/concepts/queue",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/routines/sweep.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/work/queue.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/voyager.py",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/hermes_cli/loops.py",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/background-wakes.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/runner/system-prompt.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/joonspk-research/generative_agents/blob/fe05a71d3e4ed7d10bf68aa4eda6dd995ec070f4/reverie/backend_server/persona/cognitive_modules/reflect.py",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/openai/codex/blob/634ebc1865c6ac840ed3ba118f040d527bf4b55d/codex-rs/ext/goal/src/runtime.rs",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/dreaming.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-outcomes.ts",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/openclaw/openclaw/blob/d36ca99e50d161d117e747ed18482ae715c53b8b/docs/channels/group-messages.md",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/openclaw/openclaw/blob/d36ca99e50d161d117e747ed18482ae715c53b8b/docs/concepts/typing-indicators.md",
+      "status": 200
+    },
+    {
+      "url": "https://x.ai/news/introducing-grok-bot",
+      "status": 200
+    }
+  ],
+  "research_method": "Re-read 12 pinned source modules across existing framework audits, additional Generative Agents reflection source, and current official documents. No live upstream runtime or human-message E2E.",
+  "sha256": {
+    "research/index.html": "df0ff1b2b409c15531ce636d637c1f3ac3026960645b79020fd19ca586f82bb6",
+    "research/README.md": "806bd21fef6e16f5d4605f2aa7b97753b05b474f38460776ed06ac7fdc75408a",
+    "research/proactive-work.md": "d2f145339d8ba8ae1b006365b6d188b31dbf63c2234904e4e122381b0d5518d0",
+    "research/colleague-interaction.md": "75cd652ba24481c1e80cf352735e721e30a6b4c00908d67a02d24388eaee7e80",
+    "research/show-me-proactive-lifecycle.html": "bcf902f5bf382c0a6992eab5f0be4cee46dbad16b9d9d1138251563f3f1fb413",
+    "research/show-me-colleague-interaction.html": "a830429573adc7447030fede42917be4f4380e0ec532be81e3a8897ce658b7b8",
+    "research/proactive-overview.css": "95280d1fc8c1c259d187db1e3247de00f853b9188eacd5bb8a4028659be3704d",
+    "research/proactive-overview.js": "9c3a3b23633e577ca8569f395a25e67ad4127e3c6154c44109ccad152239d57d",
+    "research/colleague-interaction.js": "4149207d3498b82c13cafd79c1e9139bdcb7232a1caa42bd29d3ab308e2c2704",
+    "research/research-guide.css": "ce2ed7b01cff3b022adcb98ac0a16504a85fecc1b064d0cca9007c05525d6cc7",
+    "research/proactive-high-level.svg": "30cb5176723bf532489504eb6cd7b943c1f14ef12ca05f1faae605632658eae8",
+    "research/source-notes/proactive-trigger-mechanisms.md": "0f1d20aa4a0cbacb07468f42bff3dcd4f08214c619d20f1bf61f26c7062a35d5"
+  },
+  "limits": [
+    "Visuals are local scenarios, not recorded official product behavior.",
+    "Not a full regression of every historical mechanism animation.",
+    "Historical validation files retain their original dates and scope."
+  ]
+}

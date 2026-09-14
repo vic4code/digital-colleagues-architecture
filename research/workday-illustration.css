@@ -1,0 +1,25 @@
+/* Keep the complete illustration in normal flow. No detached limb animation. */
+.scene-shell{display:flex;flex-direction:column;gap:24px;padding:32px;background:#eef3ef;overflow:visible;isolation:auto;height:auto;min-height:0;align-self:stretch}
+.scene-topline{position:static;inset:auto;font-size:11px;gap:20px;color:#64786d;min-height:24px;flex-shrink:0}
+.scene-clock{color:#49695b;font-variant-numeric:tabular-nums}
+.scene-shell .thought-card{position:static;inset:auto;min-width:0;width:auto;padding:20px 23px;align-self:flex-start;max-width:100%;background:#fdfefb;border:1px solid #d8e3d9;box-shadow:none;border-radius:15px 15px 15px 3px;opacity:1!important;transform:none!important;flex-shrink:0}
+.thought-card .card-eyebrow{color:#73887b;font-size:9px;letter-spacing:.04em;line-height:1.7}
+.thought-card strong{font-size:18px;line-height:1.65;margin-top:7px;font-weight:600}
+.card-dots{margin-top:14px;gap:5px}.card-dots span{background:#94b7a0}
+.scene-shell .illustration{position:static;inset:auto;display:block;width:100%;margin:auto 0 12px;padding:12px 0;flex-shrink:0;line-height:0}
+.scene-shell .illustration>svg{display:block;width:100%;height:auto;max-height:none;aspect-ratio:800/258.032;overflow:visible}
+.scene-shell .illustration svg *{animation:none!important}
+.work-feedback{display:grid;gap:12px;min-height:76px;align-content:end;flex-shrink:0}
+.scene-shell .message-card,.scene-shell .result-card{position:static;inset:auto;min-width:0;max-width:100%;width:100%;padding:15px 18px;box-shadow:none;border:1px solid #d8e3d9;border-radius:12px;background:#fdfefb;transform:none!important;opacity:1;display:none;align-items:center;gap:12px}
+.scene-shell[data-scene="3"] .message-card,.scene-shell[data-scene="4"] .message-card{display:flex}
+.scene-shell[data-scene="4"] .result-card,.scene-shell[data-scene="5"] .result-card,.scene-shell[data-outcome="deliver"][data-scene="3"] .result-card{display:flex}
+.scene-shell[data-outcome="wait"] .message-card,.scene-shell[data-outcome="wait"] .result-card,.scene-shell[data-outcome="deliver"] .message-card{display:none}
+.scene-shell .message-card p{font-size:12px;color:#5e7567}.scene-shell .message-card strong{font-size:12px}.scene-shell .result-card strong{font-size:13px}.scene-shell .result-card span{font-size:11px}.scene-shell .file-icon{flex-shrink:0}.scene-shell .result-check{margin-left:auto}
+.scene-shell .person-tag{position:static;inset:auto;padding:20px 0 0;margin:0;border:0;border-top:1px solid #ccdcd0;border-radius:0;box-shadow:none;background:none;display:flex;align-items:center;gap:10px;white-space:normal;font-size:12px;flex-shrink:0}
+.person-tag strong{font-size:15px}.person-tag .tag-dot{background:#428267;flex-shrink:0}.person-tag #person-status{margin-left:auto;color:#637c6d;font-size:12px;text-align:right}
+.workday-art-credit{font-size:9px;color:#7a8e80;line-height:1.7;margin-top:-15px}.workday-art-credit a{text-decoration:underline;text-underline-offset:3px}
+.changed .work-feedback>div{animation:work-feedback-in .25s ease-out}
+@keyframes work-feedback-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:1150px){.scene-shell{padding:26px;gap:21px}.thought-card strong{font-size:16px}.scene-shell .thought-card{padding:17px 20px}}
+@media(max-width:800px){.scene-shell{height:auto;min-height:430px;gap:20px;padding:24px}.scene-shell .illustration{margin:6px 0;padding:12px 0}.work-feedback{min-height:0}.scene-shell .person-tag{padding-top:17px}.scene-shell .thought-card{max-width:100%;padding:17px 20px}}
+@media(prefers-reduced-motion:reduce){.changed .work-feedback>div{animation:none}}

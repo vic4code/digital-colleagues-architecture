@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="410" viewBox="0 0 1120 410" role="img" aria-labelledby="title desc"><style id="research-diagram-font">text,tspan{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif!important;font-kerning:normal}</style>
+  <title id="title">主動怎麼做：觸發、判斷、行動與接續</title>
+  <desc id="desc">時間或事件提供工作機會，agent 讀取最新資訊、職責與記憶，判斷後執行、提問或保持安靜，保存結果供下一輪使用。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#78716c"/></marker></defs>
+  <rect width="1120" height="410" fill="white"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" fill="#292524">
+    <text x="40" y="40" font-size="23" font-weight="600">主動，就是讓它自己回來看，然後決定怎麼做。</text>
+    <text x="40" y="70" font-size="14" fill="#57534e">系統提供工作機會；模型在職責與授權內判斷下一步。</text>
+    <rect x="40" y="110" width="290" height="170" rx="8" fill="#fafaf9" stroke="#d6d3d1"/>
+    <rect x="415" y="110" width="290" height="170" rx="8" fill="#fff7ed" stroke="#fdba74"/>
+    <rect x="790" y="110" width="290" height="170" rx="8" fill="#fafaf9" stroke="#d6d3d1"/>
+    <text x="60" y="143" font-size="13" font-weight="500">01　何時開始</text>
+    <text x="60" y="180" font-size="21" font-weight="600">時間到了，或有事件</text>
+    <text x="60" y="217" font-size="14">每天十點／收到訊息／背景完成</text>
+    <text x="60" y="249" font-size="13" fill="#57534e">Scheduler 或事件處理程式啟動回合</text>
+    <text x="435" y="143" font-size="13" font-weight="500" fill="#c2410c">02　看了之後怎麼想</text>
+    <text x="435" y="180" font-size="21" font-weight="600">查最新狀況，判斷下一步</text>
+    <text x="435" y="217" font-size="14">最新資訊 ＋ 職責 ＋ 先前記錄</text>
+    <text x="435" y="249" font-size="13" fill="#57534e">模型決定值得做什麼、是否需要找人</text>
+    <text x="810" y="143" font-size="13" font-weight="500">03　採取行動</text>
+    <text x="810" y="180" font-size="21" font-weight="600">做事、提問，或安靜等待</text>
+    <text x="810" y="217" font-size="14">使用工具／準備成果／聯絡對的人</text>
+    <text x="810" y="249" font-size="13" fill="#57534e">保存結果與等待狀態，不重複做</text>
+    <path d="M330 192H408" stroke="#78716c" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+    <text x="343" y="176" font-size="11" fill="#57534e">開始一輪</text>
+    <path d="M705 192H783" stroke="#78716c" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+    <text x="718" y="176" font-size="11" fill="#57534e">決定動作</text>
+    <path d="M935 280V332H185V287" stroke="#78716c" stroke-width="1.2" stroke-dasharray="5 4" fill="none" marker-end="url(#arrow)"/>
+    <rect x="359" y="316" width="402" height="30" fill="white"/>
+    <text x="380" y="336" font-size="14">記住結果 → 下次觸發再看；可繼續的工作就接著做</text>
+    <text x="40" y="384" font-size="13" fill="#57534e">關鍵差別：時間可以固定；每次看到的狀況、選擇的動作不必寫死。</text>
+  </g>
+</svg>

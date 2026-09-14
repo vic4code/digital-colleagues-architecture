@@ -1,0 +1,84 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Remembered-commitment follow-up: OpenClaw integration design｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../../index.html">概念導覽</a><a href="../../../proactivity.html">研究地圖</a><a href="../../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../../mechanisms.html">機制圖譜</a><a href="../../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="design-philosophy.html">Design philosophy differences</a><a href="../proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details open><summary>同事互動與責任</summary><a href="../colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="commitment-followup-design.html" aria-current="page">Remembered-commitment follow-up: OpenClaw integration design</a><a href="commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="openclaw.html">OpenClaw source review — 2026-09-08</a><a href="openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="hermes.html">Hermes source review — 2026-09-08</a><a href="openbot.html">OpenBot pinned source review</a><a href="grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="voyager.html">Voyager implementation review</a><a href="official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="README.html">Proactive agent research — source and evidence index</a><a href="design-audit.html">Taste skill audit</a><a href="taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../README.html">數位同事研究：主動工作與同事互動感</a><a href="../proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../storyline.html">數位同事主動性：Story line</a><a href="initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="initiative-taste-review.html">Initiative homepage: taste review</a><a href="diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details><summary>延伸專案文件</summary><a href="../../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../../phases/0/README.html">Phase 0 — Prototype</a><a href="../../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../../overview/README.html">Overview</a><a href="../../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../../library.html#group-1">同事互動與責任</a><span>研究正文</span></div><article><h1 id="remembered-commitment-follow-up-openclaw-integration-design">Remembered-commitment follow-up: OpenClaw integration design</h1>
+<p>This is a proposed application workflow assembled from inspected framework primitives. No live outreach or end-to-end follow-up test was executed. It is not a claim that OpenClaw includes a built-in commitment tracker.</p>
+<p>Example: Alex promised yesterday to upload a sales file this morning. The colleague reads the promise, searches later replies and the designated source, finds no completion evidence, and asks for status or the file link. Lack of evidence is not proof of noncompletion.</p>
+<h2 id="recall-the-promise-找回原本的承諾">Recall the promise / 找回原本的承諾</h2>
+<p>Search available memory. Use memory_get for memory-file excerpts; read original conversations or messages with the permitted session-history or source-message tool.
+先搜尋可用記憶；memory_get 讀記憶檔片段，對話或郵件原文則用獲准的歷史／來源工具讀取。</p>
+<p>Native recall interface; the follow-up responsibility supplies the search purpose.
+已有記憶介面；由追蹤職責提供本次搜尋目的。</p>
+<p><a href="https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/memory-tool-contract.ts#L110-L130">Source</a></p>
+<h2 id="check-current-evidence-查最新進度">Check current evidence / 查最新進度</h2>
+<p>Read later replies, the task record or the promised artifact using connected tools.
+查後續回覆、任務狀態或約定成果；找不到完成證據，不等於對方沒做。</p>
+<p>Proposed skill logic and source integration.
+需補 Skill 邏輯與資料來源接合。</p>
+<h2 id="decide-whether-to-ask-判斷值不值得追問">Decide whether to ask / 判斷值不值得追問</h2>
+<p>Let the model weigh the promise, due date, available evidence and previous follow-ups.
+由模型綜合承諾、期限、目前證據與先前追問，決定是否值得問。</p>
+<p>Proposed prompt/skill; not a fixed rule per person or promise.
+需補 prompt／skill；不用替每個人、每件事寫死規則。</p>
+<h2 id="resolve-the-person-確認是對的人">Resolve the person / 確認是對的人</h2>
+<p>Resolve a known channel identity. The inspected directory branch returns an error and candidates for ambiguous names.
+解析已知的 channel 身分；已查核的名錄路徑遇到同名歧義會回傳錯誤與候選人。</p>
+<p>Native target resolution; project-owner-to-contact mapping remains our data.
+已有收件者解析；專案負責人到聯絡身分的對照仍要有資料。</p>
+<p><a href="https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/outbound/target-resolver.ts#L459-L500">Source</a></p>
+<h2 id="prepare-or-send-the-question-準備或送出追問">Prepare or send the question / 準備或送出追問</h2>
+<p>Generate a grounded question; use authorized channel messaging, or keep a private draft under the current phase policy.
+寫出有根據的問題；依已授權的 channel 傳訊，或按目前 phase 規則留為私人草稿。</p>
+<p>Native message execution; delivery policy and email connectors are separate.
+已有 message 執行；送達政策與 Email connector 分開處理。</p>
+<p><a href="https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/message-tool-execution.ts#L597-L635">Source</a></p>
+<h2 id="remember-the-outcome-記住問過了收到什麼結果">Remember the outcome / 記住問過了、收到什麼結果</h2>
+<p>Persist the commitment, source IDs, last contact and reply/completion evidence; reconcile later events.
+保存承諾、來源 ID、上次聯絡與回覆／完成證據，後續收到新資料再更新。</p>
+<p>Proposed business records in Colleague State, not an existing built-in commitment tracker.
+需在 Colleague State 補業務紀錄，不宣稱框架已有完整承諾追蹤器。</p>
+<h2 id="proposed-business-state-建議業務狀態">Proposed business state / 建議業務狀態</h2>
+<p>Store records in Colleague State; this is a design sketch, not an implemented schema. Keep unknown due dates and uncertain identity explicit instead of guessing.</p>
+<pre><code class="language-json">{
+  &quot;commitment_id&quot;: &quot;stable application ID&quot;,
+  &quot;source_message_ids&quot;: [
+    &quot;original promise&quot;
+  ],
+  &quot;owner_identity&quot;: &quot;resolved channel/account/person ID or unresolved&quot;,
+  &quot;promised_outcome&quot;: &quot;upload the sales file&quot;,
+  &quot;due_at&quot;: &quot;resolved date/time with timezone or null&quot;,
+  &quot;evidence_checked_at&quot;: &quot;last successful source check&quot;,
+  &quot;completion_evidence_ids&quot;: [],
+  &quot;status&quot;: &quot;open | unknown | awaiting_reply | completed | cancelled&quot;,
+  &quot;last_outreach_id&quot;: null,
+  &quot;delivery_status&quot;: &quot;draft | pending | sent | failed&quot;,
+  &quot;next_contact_not_before&quot;: null
+}
+</code></pre>
+<h2 id="proposed-acceptance-checks">Proposed acceptance checks</h2>
+<ul>
+<li>A later reply says it is done → retrieve that evidence and suppress the follow-up. / 後續已有完成回覆 → 找到證據，不再追問。</li>
+<li>Two contacts named Alex → do not choose arbitrarily; resolve the identity before contact. / 兩位同名 Alex → 不猜收件者，確認身分後才聯絡。</li>
+<li>Already asked and still waiting → retain the pending state; apply the configured contact cadence. / 已問過、還在等 → 保留等待狀態，依設定的聯絡頻率處理。</li>
+<li>The mailbox or task API fails → record unknown status, not “Alex has not done it.” / 信箱或任務 API 讀取失敗 → 記錄狀態未知，不能說 Alex 沒做。</li>
+<li>Delivery fails → retry the same pending message with stable identity; do not generate another independent reminder. / 送達失敗 → 以同一筆待送訊息重試，不另生一份催辦。</li>
+<li>Current phase allows drafts only → prepare the question privately without sending it. / 目前 phase 只允許草稿 → 私下準備追問，不直接寄出。</li>
+</ul>
+<h2 id="ownership">Ownership</h2>
+<p>Use existing Skills, Colleague State, Request Triage &amp; Priority, Runtime Controller, Tools and interaction surface. Memory retrieval provides context; persisted business state governs follow-up identity, evidence and recovery. No separate always-thinking service is required to implement this scenario.</p>
+<h2 id="existing-reminder-mechanism">Existing reminder mechanism</h2>
+<p>OpenClaw also implements Standing Intent: persistent keyword reminders matched on eligible user-trigger turns. Heartbeat/cron hooks sweep maintenance. This is not an automatic extractor/tracker for every promise. <a href="commitment-memory.html">Callable memory and intent audit</a> records exact source paths and separates session indexing from session-search eligibility.</p>
+<h2 id="2026-09-11-synthesis">2026-09-11 synthesis</h2>
+<p><a href="colleague-experience.html">同事感研究</a> 將本 schema 接成候選、責任、證據、執行、通知與閉環，補來源類型、授權參照、完成條件、revision 與 timeout 恢復。OpenClaw 曾有 inferred commitments，但目前已移除；<a href="openclaw-inferred-commitments.html">歷史與清理查核</a>。本設計仍是我們需補的業務狀態，不是重新開啟 upstream 舊功能。</p><details class="article-references"><summary>本文參考來源 · 3</summary><p>以下保留本文實際引用的來源；引用不等於實測，適用範圍以正文說明為準。</p><ol><li><a href="https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/extensions/memory-core/src/memory-tool-contract.ts#L110-L130">Source</a></li><li><a href="https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/infra/outbound/target-resolver.ts#L459-L500">Source</a></li><li><a href="https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/agents/tools/message-tool-execution.ts#L597-L635">Source</a></li></ol></details></article><footer class="article-footer"><a href="../../../library.html">← 回研究目錄</a><a href="commitment-memory.html">下一篇：OpenClaw commitment recall: positive callable path and limits →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#recall-the-promise-找回原本的承諾">Recall the promise / 找回原本的承諾</a></li>
+<li><a href="#check-current-evidence-查最新進度">Check current evidence / 查最新進度</a></li>
+<li><a href="#decide-whether-to-ask-判斷值不值得追問">Decide whether to ask / 判斷值不值得追問</a></li>
+<li><a href="#resolve-the-person-確認是對的人">Resolve the person / 確認是對的人</a></li>
+<li><a href="#prepare-or-send-the-question-準備或送出追問">Prepare or send the question / 準備或送出追問</a></li>
+<li><a href="#remember-the-outcome-記住問過了收到什麼結果">Remember the outcome / 記住問過了、收到什麼結果</a></li>
+<li><a href="#proposed-business-state-建議業務狀態">Proposed business state / 建議業務狀態</a></li>
+<li><a href="#proposed-acceptance-checks">Proposed acceptance checks</a></li>
+<li><a href="#ownership">Ownership</a></li>
+<li><a href="#existing-reminder-mechanism">Existing reminder mechanism</a></li>
+<li><a href="#2026-09-11-synthesis">2026-09-11 synthesis</a></li>
+</ul>
+</div>
+</aside></div><script src="../../../research-library.js?v=9e6a3877b9"></script></body></html>

@@ -1,0 +1,231 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>同事感怎麼做：持續負責一件事，直到有結果｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../../index.html">概念導覽</a><a href="../../../proactivity.html">研究地圖</a><a href="../../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../../mechanisms.html">機制圖譜</a><a href="../../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="design-philosophy.html">Design philosophy differences</a><a href="../proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details open><summary>同事互動與責任</summary><a href="../colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="colleague-experience.html" aria-current="page">同事感怎麼做：持續負責一件事，直到有結果</a><a href="commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="../channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="openclaw.html">OpenClaw source review — 2026-09-08</a><a href="openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="hermes.html">Hermes source review — 2026-09-08</a><a href="openbot.html">OpenBot pinned source review</a><a href="grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="voyager.html">Voyager implementation review</a><a href="official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="README.html">Proactive agent research — source and evidence index</a><a href="design-audit.html">Taste skill audit</a><a href="taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="../README.html">數位同事研究：主動工作與同事互動感</a><a href="../proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="../storyline.html">數位同事主動性：Story line</a><a href="initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="initiative-taste-review.html">Initiative homepage: taste review</a><a href="diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details><summary>延伸專案文件</summary><a href="../../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../../phases/0/README.html">Phase 0 — Prototype</a><a href="../../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../../overview/README.html">Overview</a><a href="../../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../../library.html#group-1">同事互動與責任</a><span>研究正文</span></div><article><h1 id="同事感怎麼做持續負責一件事直到有結果">同事感怎麼做：持續負責一件事，直到有結果</h1>
+<p>定位：兩條主線共用的工作責任與狀態研究。純粹的接話、修正、群組參與與交接，已另立 <a href="../colleague-interaction.html">同事互動感</a>；<a href="../proactive-work.html">主動工作</a> 另述觸發與執行。</p>
+<p>更新：2026-09-11。這份文件整合 OpenClaw 歷史與現況、Grok Bot 官方產品描述和 0.18 非官方重建碼。架構、資料欄位與驗收是本專案提案，尚未實作。</p>
+<h2 id="我們要的體驗">我們要的體驗</h2>
+<p>「Alex 說今天會補檔案。」隔天數位同事能接得上：知道是哪份檔案、查到現在的狀態、在授權範圍處理；真需要我決定時才找我，而且問過一次後不會忘記自己還在等。</p>
+<p>同事感的可操作定義是：<strong>你不必反覆交代背景，也不必代替它記得下一步；工作有進度、有證據、有交代。</strong> 親切語氣可以改善體驗，但不替代持續責任。</p>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>使用者感受</th>
+<th>要有的設計</th>
+<th>失敗時會像什麼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>你記得我們在做什麼</td>
+<td>可追溯的工作／承諾、來源、關係人與近期脈絡</td>
+<td>每次從頭問起</td>
+</tr>
+<tr>
+<td>你接手後會繼續</td>
+<td>持久狀態、事件／排程／completion 喚醒、恢復等待工作</td>
+<td>聊完就消失</td>
+</tr>
+<tr>
+<td>你知道下一步</td>
+<td>職責、最新證據、依賴與可用工具；模型做有限範圍判斷</td>
+<td>只反覆提醒</td>
+</tr>
+<tr>
+<td>你知道何時找我</td>
+<td>工作與通知分開、去重、安靜時段、必要升級</td>
+<td>每次檢查都發訊息</td>
+</tr>
+<tr>
+<td>你做完有交代</td>
+<td>執行結果與送達紀錄、完成證據、明確的下一位 owner</td>
+<td>只有「收到」</td>
+</tr>
+<tr>
+<td>你越來越懂配合</td>
+<td>保存被確認的偏好、修正與工作 routine</td>
+<td>每次糾正同一件事</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="grok-bot-有沒有相關設計有但證據分兩層">Grok Bot 有沒有相關設計？有，但證據分兩層</h2>
+<p><strong>官方產品描述：</strong> Grok Bot 被定位為工作 teammate；官方提到接回先前對話、跟進停滯交接、依使用方式保留脈絡，以及從示範與修正形成 routine。官方也描述 Bot 間交接、群組協作與需要判斷才找人。這支持產品方向，沒有公開證明其內部承諾抽取演算法、成功率或與重建版本的一致性。<a href="https://x.ai/news/introducing-grok-bot">官方 Grok Bot</a></p>
+<p><strong>可閱讀的機制：</strong> 本研究固定檢視 <code>b-nnett/grok-bot-0.18-reconstructed@a9f633e09d49a85829b8236331b9e21f7e612634</code>。它是非官方重建且帶擴充；以下是該 repo 行為，不冒充官方 backend。</p>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>機制</th>
+<th>程式／prompt 證據</th>
+<th>對同事感的意義</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>從需求辨識持續工作</td>
+<td><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/automations/automation.ts#L19">automation.ts L19–35</a>：prompt 鼓勵辨識隱含 recurring needs；明確就建立 routine，不確定則提出</td>
+<td>不要求使用者先學 cron；用意圖安排下一次工作</td>
+</tr>
+<tr>
+<td>背景做事與發話分離</td>
+<td><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/runner/system-prompt.ts#L82">system-prompt.ts L82–100</a>：hidden wake 先工作；SendMessage 才是對外訊息</td>
+<td>每次醒來不必打招呼，但人在等的結果必須回報</td>
+</tr>
+<tr>
+<td>完成事件接回原工作</td>
+<td><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L99">completion-revivals.ts L99</a>：接入背景／subagent 結果，再排入 continuation</td>
+<td>不必靠使用者說「繼續」才取回成果</td>
+</tr>
+<tr>
+<td>有根據地往前想</td>
+<td><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/runner/system-prompt.ts#L236">system-prompt.ts L236–248</a>：initiative 依觀察訊號與交辦範圍推導下一步</td>
+<td>有限責任內的主動性，不是任意擴大任務</td>
+</tr>
+<tr>
+<td>可執行的後續回合</td>
+<td><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/automation-run-path.ts#L178">automation-run-path.ts L178</a>：routine context 排入背景 runner，允許 silence</td>
+<td>不只寫一段「要主動」的 prompt，還有喚醒與執行路徑</td>
+</tr>
+</tbody>
+</table></div>
+<p>prompt 中的「應該」不是 deterministic guarantee。尚未證明原產品有通用的「每次對話抽取承諾 → 查證完成 → 自動找到人 → 主動寄信」完整鏈。<code>SendMessage</code> 是對目前使用者的交談介面，<code>SendToAgent</code> 是 Bot 協作；兩者都不能直接當作寄信給 Alex 的證據。詳見 <a href="initiative-grok.html">initiative 查核</a> 與 <a href="grok-reconstructed.html">重建來源限制</a>。</p>
+<h2 id="openclaw-與-grok-bot-的差異">OpenClaw 與 Grok Bot 的差異</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>路徑</th>
+<th>未來要做的事如何產生</th>
+<th>到時做什麼</th>
+<th>限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenClaw 舊 inferred commitments</td>
+<td>隱藏 extraction 推斷短期 check-in</td>
+<td>無工具 heartbeat 決定問候或 dismiss</td>
+<td>已移除；不等於工作交付追蹤</td>
+</tr>
+<tr>
+<td>OpenClaw 現行基礎</td>
+<td>職責／automation 指令，加上執行時模型判斷</td>
+<td>喚醒、讀來源、tools、task／flow</td>
+<td>業務承諾辨識與 reconcile 需自行接合</td>
+</tr>
+<tr>
+<td>Grok Bot 重建</td>
+<td>模型辨識持續需求，建立 routine；事件與 completion 接續</td>
+<td>背景執行工作，再決定是否 SendMessage</td>
+<td>重建證據，非完整官方實作保證</td>
+</tr>
+<tr>
+<td>本專案提案</td>
+<td>職責內顯式工作＋有來源的推斷候選</td>
+<td>查證 → 推進／等待／提問 → 留下證據與狀態</td>
+<td>候選不是授權；無來源的猜測不可直接變成對外行動</td>
+</tr>
+</tbody>
+</table></div>
+<p>OpenClaw 的歷史資料保留說法已過時；目前 migration 會清掉識別出的舊 commitment table。不要照舊文重新設定 <code>commitments.enabled</code>。詳見 <a href="openclaw-inferred-commitments.html">版本與原始碼查核</a>。</p>
+<h2 id="建議的完整工作循環">建議的完整工作循環</h2>
+<ol>
+<li><strong>接住脈絡。</strong> 收到對話、信件或事件，取出與現有職責相關的工作候選。辨識 explicit request、agent 自己承諾、他人承諾、弱推斷機會；保留來源 ID 與不確定性。</li>
+<li><strong>承接責任。</strong> 明確交辦或既有職責可以成為工作；弱推斷先保留 candidate 或一次簡短提案。confidence 只代表理解把握，不是操作授權。界定 owner、期待成果與完成條件。</li>
+<li><strong>安排再看。</strong> 已知時間就排程，等待外部改變就訂閱事件，背景工作就等待 completion。低頻 heartbeat 可兜底檢查；不需要一直思考的常駐 LLM。</li>
+<li><strong>讀最新證據。</strong> 喚醒後先合併新訊息與交付物，確認是否已完成、取消、改期或換人。來源故障保留 unknown；缺乏完成證據不代表對方沒做。</li>
+<li><strong>選擇下一步。</strong> 可自行完成就執行；缺依賴就等待；缺判斷才提問；有必要且已授權才向關係人跟進。多工作排序沿用 <a href="prioritization.html">prioritization</a>。</li>
+<li><strong>決定是否通知。</strong> 使用者正在等的成果、阻塞決策、實質風險變化應回報；無新增資訊的例行檢查安靜結束。重複提醒依上次送達與等待狀態抑制。</li>
+<li><strong>結案或延續。</strong> 寫入完成證據、執行結果與送達狀態；仍未完成則留下下一個 trigger。修正偏好與 routine，不讓同一錯誤每次重來。</li>
+</ol>
+<p>抽取可先放在正常回合的結構化狀態更新，不必一開始複製 OpenClaw 的獨立隱藏 pass。若後續評估發現漏接，再加入異步 extractor；兩種方式都走同一個驗證／去重入口，避免生成兩份工作。這是本專案選擇，沒有宣稱是 Grok Bot 的未公開設計。</p>
+<h2 id="狀態要分三種保存">狀態要分三種保存</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>資料</th>
+<th>回答的問題</th>
+<th>建議內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memory</td>
+<td>我們之前知道什麼？</td>
+<td>偏好、關係、事實、來源、修正；不是完成狀態權威</td>
+</tr>
+<tr>
+<td>Work / commitment</td>
+<td>現在由誰負責、還缺什麼？</td>
+<td>stable ID、來源、owner、outcome、due_at／timezone、evidence、status、next_check_at、依賴、scope</td>
+</tr>
+<tr>
+<td>Execution / delivery</td>
+<td>這次做了與送了什麼？</td>
+<td>run ID、工具結果、outbox ID、delivery receipt、retry、last_outreach、awaiting_reply</td>
+</tr>
+</tbody>
+</table></div>
+<p>沿用 <a href="commitment-followup-design.html">commitment-followup-design</a> 的 schema，補 <code>origin_kind</code>、<code>authority_ref</code>、<code>confidence</code>、<code>success_criteria</code> 與 <code>revision</code>。狀態建議：<code>candidate → open → waiting / in_progress → completed / cancelled</code>，<code>unknown</code> 表示觀測不足；<code>awaiting_reply</code> 不等於已完成。不得只靠聊天紀錄裡一句「我會記得」管理工作。</p>
+<p>同時到來的 mail event 與 timer 必須 claim 同一工作 revision，送信採 stable action ID／outbox 並查送達結果。若外部 connector 無 idempotency，timeout 後先查送件紀錄或轉待確認，不能保證 exactly-once 也不能盲目重寄。這補在既有 Runtime Controller、Colleague State 與 Tools，不另建一個不受控的思考服務。</p>
+<h2 id="alex-情境可觀察的差異">Alex 情境：可觀察的差異</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>時點／新證據</th>
+<th>工作狀態與動作</th>
+<th>對人的訊息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>昨天：Alex 說今天會給檔案</td>
+<td>建候選，解析人與檔案；既有責任包含追蹤才接成工作</td>
+<td>必要時確認缺失的成果／期限；不捏造時間</td>
+</tr>
+<tr>
+<td>今日期限前已收到附件</td>
+<td>關聯同一工作並驗證交付物，符合條件則完成</td>
+<td>使用者在等就附連結回報；不再催 Alex</td>
+</tr>
+<tr>
+<td>到期仍無證據，工具正常</td>
+<td>檢查原 thread、交付處，依權限準備或送一次具體追問</td>
+<td>「想確認銷售檔案進度，今天彙整會用到」；不直接斷言未交</td>
+</tr>
+<tr>
+<td>已問過但沒有回覆</td>
+<td>保存 awaiting_reply 與下次可聯絡時間</td>
+<td>下一個 heartbeat 不再重複同一句</td>
+</tr>
+<tr>
+<td>來源工具故障</td>
+<td>unknown，保留待重查；時效風險必要時升級</td>
+<td>「目前無法確認」，不能說 Alex 沒做</td>
+</tr>
+<tr>
+<td>Alex 回覆改到明天</td>
+<td>更新 due／revision，撤掉過時提醒</td>
+<td>只在影響決策或既有回報責任時告知</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="採用順序與驗收">採用順序與驗收</h2>
+<p>沿用原 P0–P4 建置優先序，不變更 ADR 或 phase 權限：P0 補工作、證據與送達狀態；P1 先做一個限定職責的定時 follow-up；P2 接 mail／task 事件以改善時效；P3 接 completion 續跑；P4 才擴大隱含需求候選與可修正的 routines。若 P1 的工作本就需要背景執行，提早做最低限度 completion 回接；P0–P4 不應成為阻擋完整單一情境的僵硬瀑布。</p>
+<p>驗收要量工作閉環，不能只量模型主動說了幾句：</p>
+<ul>
+<li>承諾漏接率與錯建率：由人工標註的對話集比較；弱暗示不可強制建工作。</li>
+<li>過時跟進率：已有完成／改期證據時，仍催問的比例。</li>
+<li>接續成功率：completion 到來後，有沒有接回同一工作並交付結果。</li>
+<li>重複外送數：並行喚醒、重啟、timeout 後是否重送同一 action。</li>
+<li>打擾品質：有新增證據／需要決策的通知比例，加上使用者有用／無用回饋；不可只以低發送量算成功。</li>
+<li>閉環率與延遲：接受的工作是否按責任交付或明確升級；使用者等待的成果不能被 silence 吃掉。</li>
+<li>糾正保留：改收件人、偏好、截止時間後，下一輪是否使用新 revision。</li>
+</ul>
+<p>第一個完整切片以 Alex 情境為準：完成、改期、重複喚醒、來源故障、同名收件人、外送 timeout、使用者正在等、僅能草稿八種情況都要涵蓋。門檻由試跑 baseline 和業務風險訂定；本次沒有虛構成功率，也未執行真人郵件 E2E。</p><details class="article-references"><summary>本文參考來源 · 6</summary><p>以下保留本文實際引用的來源；引用不等於實測，適用範圍以正文說明為準。</p><ol><li><a href="https://x.ai/news/introducing-grok-bot">官方 Grok Bot</a></li><li><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/automations/automation.ts#L19">automation.ts L19–35</a></li><li><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/runner/system-prompt.ts#L82">system-prompt.ts L82–100</a></li><li><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/completion-revivals.ts#L99">completion-revivals.ts L99</a></li><li><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/runner/system-prompt.ts#L236">system-prompt.ts L236–248</a></li><li><a href="https://github.com/b-nnett/grok-bot-0.18-reconstructed/blob/a9f633e09d49a85829b8236331b9e21f7e612634/source/host/extensions/transcript/automation-run-path.ts#L178">automation-run-path.ts L178</a></li></ol></details></article><footer class="article-footer"><a href="../../../library.html">← 回研究目錄</a><a href="commitment-followup-design.html">下一篇：Remembered-commitment follow-up: OpenClaw integration design →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#我們要的體驗">我們要的體驗</a></li>
+<li><a href="#grok-bot-有沒有相關設計有但證據分兩層">Grok Bot 有沒有相關設計？有，但證據分兩層</a></li>
+<li><a href="#openclaw-與-grok-bot-的差異">OpenClaw 與 Grok Bot 的差異</a></li>
+<li><a href="#建議的完整工作循環">建議的完整工作循環</a></li>
+<li><a href="#狀態要分三種保存">狀態要分三種保存</a></li>
+<li><a href="#alex-情境可觀察的差異">Alex 情境：可觀察的差異</a></li>
+<li><a href="#採用順序與驗收">採用順序與驗收</a></li>
+</ul>
+</div>
+</aside></div><script src="../../../research-library.js?v=9e6a3877b9"></script></body></html>

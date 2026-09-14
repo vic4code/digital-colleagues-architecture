@@ -1,0 +1,67 @@
+<svg role="img" aria-labelledby="before-application-title before-application-desc" width="271pt" height="473pt"
+ viewBox="0.00 0.00 271.00 473.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title id="before-application-title">Before · application architecture</title><desc id="before-application-desc">Logical software responsibilities. Solid nodes are existing or external; blue dashed nodes are proposed. Select a node in the research website for source code and integration details.</desc>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(21.6 450.9)">
+<polygon fill="#fdfcf9" stroke="none" points="-21.6,21.6 -21.6,-450.9 249.43,-450.9 249.43,21.6 -21.6,21.6"/>
+<!-- dispatch -->
+<g id="node1" class="node">
+<title>dispatch</title>
+<g id="a_node1"><a xlink:href="#node-dispatch" xlink:title="dispatch / dispatchAutomation: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M194.67,-306.6C194.67,-306.6 12,-306.6 12,-306.6 6,-306.6 0,-300.6 0,-294.6 0,-294.6 0,-257.4 0,-257.4 0,-251.4 6,-245.4 12,-245.4 12,-245.4 194.67,-245.4 194.67,-245.4 200.67,-245.4 206.67,-251.4 206.67,-257.4 206.67,-257.4 206.67,-294.6 206.67,-294.6 206.67,-300.6 200.67,-306.6 194.67,-306.6"/>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-277.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">dispatch / dispatchAutomation</text>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-262.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">LocalColleagueService</text>
+</a>
+</g>
+</g>
+<!-- gateway -->
+<g id="node3" class="node">
+<title>gateway</title>
+<g id="a_node3"><a xlink:href="#node-gateway" xlink:title="StandaloneGateway: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M175.94,-183.9C175.94,-183.9 30.73,-183.9 30.73,-183.9 24.73,-183.9 18.73,-177.9 18.73,-171.9 18.73,-171.9 18.73,-134.7 18.73,-134.7 18.73,-128.7 24.73,-122.7 30.73,-122.7 30.73,-122.7 175.94,-122.7 175.94,-122.7 181.94,-122.7 187.94,-128.7 187.94,-134.7 187.94,-134.7 187.94,-171.9 187.94,-171.9 187.94,-177.9 181.94,-183.9 175.94,-183.9"/>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-155" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">StandaloneGateway</text>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-140" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Per&#45;thread queue</text>
+</a>
+</g>
+</g>
+<!-- dispatch&#45;&gt;gateway -->
+<g id="edge2" class="edge">
+<title>dispatch&#45;&gt;gateway</title>
+<path fill="none" stroke="#7b918a" d="M103.33,-244.85C103.33,-230.02 103.33,-211.91 103.33,-195.79"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="106.84,-195.99 103.34,-185.99 99.84,-195.99 106.84,-195.99"/>
+<text xml:space="preserve" text-anchor="middle" x="144.58" y="-209.05" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">dispatch(turn)</text>
+</g>
+<!-- admission -->
+<g id="node2" class="node">
+<title>admission</title>
+<g id="a_node2"><a xlink:href="#node-admission" xlink:title="assertAutomationAdmission: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M188.67,-429.3C188.67,-429.3 18,-429.3 18,-429.3 12,-429.3 6,-423.3 6,-417.3 6,-417.3 6,-380.1 6,-380.1 6,-374.1 12,-368.1 18,-368.1 18,-368.1 188.67,-368.1 188.67,-368.1 194.67,-368.1 200.67,-374.1 200.67,-380.1 200.67,-380.1 200.67,-417.3 200.67,-417.3 200.67,-423.3 194.67,-429.3 188.67,-429.3"/>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-400.4" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">assertAutomationAdmission</text>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-385.4" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Fresh readiness check</text>
+</a>
+</g>
+</g>
+<!-- admission&#45;&gt;dispatch -->
+<g id="edge1" class="edge">
+<title>admission&#45;&gt;dispatch</title>
+<path fill="none" stroke="#7b918a" d="M103.33,-367.55C103.33,-352.72 103.33,-334.61 103.33,-318.49"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="106.84,-318.69 103.34,-308.69 99.84,-318.69 106.84,-318.69"/>
+<text xml:space="preserve" text-anchor="middle" x="165.58" y="-331.75" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">admission boundary²</text>
+</g>
+<!-- adapter -->
+<g id="node4" class="node">
+<title>adapter</title>
+<g id="a_node4"><a xlink:href="#node-adapter" xlink:title="OpenClawGatewayRuntime: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M188.67,-61.2C188.67,-61.2 18,-61.2 18,-61.2 12,-61.2 6,-55.2 6,-49.2 6,-49.2 6,-12 6,-12 6,-6 12,0 18,0 18,0 188.67,0 188.67,0 194.67,0 200.67,-6 200.67,-12 200.67,-12 200.67,-49.2 200.67,-49.2 200.67,-55.2 194.67,-61.2 188.67,-61.2"/>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-32.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">OpenClawGatewayRuntime</text>
+<text xml:space="preserve" text-anchor="middle" x="103.33" y="-17.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">POST /v1/responses</text>
+</a>
+</g>
+</g>
+<!-- gateway&#45;&gt;adapter -->
+<g id="edge3" class="edge">
+<title>gateway&#45;&gt;adapter</title>
+<path fill="none" stroke="#7b918a" d="M103.33,-122.15C103.33,-107.32 103.33,-89.21 103.33,-73.09"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="106.84,-73.29 103.34,-63.29 99.84,-73.29 106.84,-73.29"/>
+<text xml:space="preserve" text-anchor="middle" x="137.83" y="-86.35" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">respond(...)</text>
+</g>
+</g>
+</svg>

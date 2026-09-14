@@ -1,0 +1,64 @@
+<svg role="img" aria-labelledby="before-runtime-title before-runtime-desc" width="427pt" height="321pt"
+ viewBox="0.00 0.00 427.00 321.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title id="before-runtime-title">Before · runtime architecture</title><desc id="before-runtime-desc">Logical software responsibilities. Solid nodes are existing or external; blue dashed nodes are proposed. Select a node in the research website for source code and integration details.</desc>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(21.6 299.2)">
+<polygon fill="#fdfcf9" stroke="none" points="-21.6,21.6 -21.6,-299.2 405.54,-299.2 405.54,21.6 -21.6,21.6"/>
+<!-- adapter -->
+<g id="node1" class="node">
+<title>adapter</title>
+<g id="a_node1"><a xlink:href="#node-adapter" xlink:title="OpenClawGatewayRuntime: open implementation details">
+<path fill="#eef4f1" stroke="#becbc7" stroke-width="1.3" d="M273.94,-277.6C273.94,-277.6 103.27,-277.6 103.27,-277.6 97.27,-277.6 91.27,-271.6 91.27,-265.6 91.27,-265.6 91.27,-228.4 91.27,-228.4 91.27,-222.4 97.27,-216.4 103.27,-216.4 103.27,-216.4 273.94,-216.4 273.94,-216.4 279.94,-216.4 285.94,-222.4 285.94,-228.4 285.94,-228.4 285.94,-265.6 285.94,-265.6 285.94,-271.6 279.94,-277.6 273.94,-277.6"/>
+<text xml:space="preserve" text-anchor="middle" x="188.6" y="-248.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">OpenClawGatewayRuntime</text>
+<text xml:space="preserve" text-anchor="middle" x="188.6" y="-233.7" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Application adapter</text>
+</a>
+</g>
+</g>
+<!-- controller -->
+<g id="node2" class="node">
+<title>controller</title>
+<g id="a_node2"><a xlink:href="#node-controller" xlink:title="OpenClaw /v1/responses: open implementation details">
+<path fill="#f2f2f8" stroke="#7b849c" stroke-width="2" d="M265.31,-169.4C265.31,-169.4 111.89,-169.4 111.89,-169.4 105.89,-169.4 99.89,-163.4 99.89,-157.4 99.89,-157.4 99.89,-120.2 99.89,-120.2 99.89,-114.2 105.89,-108.2 111.89,-108.2 111.89,-108.2 265.31,-108.2 265.31,-108.2 271.31,-108.2 277.31,-114.2 277.31,-120.2 277.31,-120.2 277.31,-157.4 277.31,-157.4 277.31,-163.4 271.31,-169.4 265.31,-169.4"/>
+<text xml:space="preserve" text-anchor="middle" x="188.6" y="-140.5" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">OpenClaw /v1/responses</text>
+<text xml:space="preserve" text-anchor="middle" x="188.6" y="-125.5" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">External controller</text>
+</a>
+</g>
+</g>
+<!-- adapter&#45;&gt;controller -->
+<g id="edge1" class="edge">
+<title>adapter&#45;&gt;controller</title>
+<path fill="none" stroke="#7b918a" d="M188.6,-215.85C188.6,-205.29 188.6,-193.23 188.6,-181.88"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="192.1,-181.91 188.6,-171.91 185.1,-181.91 192.1,-181.91"/>
+</g>
+<!-- harness -->
+<g id="node3" class="node">
+<title>harness</title>
+<g id="a_node3"><a xlink:href="#node-harness" xlink:title="Codex App Server: open implementation details">
+<path fill="#f2f2f8" stroke="#7b849c" stroke-width="2" d="M157.2,-61.2C157.2,-61.2 12,-61.2 12,-61.2 6,-61.2 0,-55.2 0,-49.2 0,-49.2 0,-12 0,-12 0,-6 6,0 12,0 12,0 157.2,0 157.2,0 163.2,0 169.2,-6 169.2,-12 169.2,-12 169.2,-49.2 169.2,-49.2 169.2,-55.2 163.2,-61.2 157.2,-61.2"/>
+<text xml:space="preserve" text-anchor="middle" x="84.6" y="-32.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Codex App Server</text>
+<text xml:space="preserve" text-anchor="middle" x="84.6" y="-17.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Configured harness</text>
+</a>
+</g>
+</g>
+<!-- controller&#45;&gt;harness -->
+<g id="edge2" class="edge">
+<title>controller&#45;&gt;harness</title>
+<path fill="none" stroke="#7b918a" d="M158.8,-107.37C147.37,-95.7 134.19,-82.24 122.14,-69.93"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="124.96,-67.81 115.47,-63.12 119.96,-72.71 124.96,-67.81"/>
+</g>
+<!-- tools -->
+<g id="node4" class="node">
+<title>tools</title>
+<g id="a_node4"><a xlink:href="#node-tools" xlink:title="Tool execution: open implementation details">
+<path fill="#f2f2f8" stroke="#7b849c" stroke-width="2" d="M371.94,-61.2C371.94,-61.2 213.27,-61.2 213.27,-61.2 207.27,-61.2 201.27,-55.2 201.27,-49.2 201.27,-49.2 201.27,-12 201.27,-12 201.27,-6 207.27,0 213.27,0 213.27,0 371.94,0 371.94,0 377.94,0 383.94,-6 383.94,-12 383.94,-12 383.94,-49.2 383.94,-49.2 383.94,-55.2 377.94,-61.2 371.94,-61.2"/>
+<text xml:space="preserve" text-anchor="middle" x="292.6" y="-32.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Tool execution</text>
+<text xml:space="preserve" text-anchor="middle" x="292.6" y="-17.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#202823">Runtime&#45;owned execution</text>
+</a>
+</g>
+</g>
+<!-- controller&#45;&gt;tools -->
+<g id="edge3" class="edge">
+<title>controller&#45;&gt;tools</title>
+<path fill="none" stroke="#7b918a" d="M218.4,-107.37C229.83,-95.7 243.01,-82.24 255.06,-69.93"/>
+<polygon fill="#7b918a" stroke="#7b918a" points="257.24,-72.71 261.73,-63.12 252.24,-67.81 257.24,-72.71"/>
+</g>
+</g>
+</svg>

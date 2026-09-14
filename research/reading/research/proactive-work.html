@@ -1,0 +1,318 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>主動工作：從觸發、判斷到行動｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../index.html">概念導覽</a><a href="../../proactivity.html">研究地圖</a><a href="../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../mechanisms.html">機制圖譜</a><a href="../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details open><summary>從人到 Agent</summary><a href="source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="source-notes/design-philosophy.html">Design philosophy differences</a><a href="proactive-work.html" aria-current="page">主動工作：從觸發、判斷到行動</a><a href="source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="source-notes/openbot.html">OpenBot pinned source review</a><a href="source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="source-notes/voyager.html">Voyager implementation review</a><a href="source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details><summary>架構與研究紀錄</summary><a href="source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="source-notes/README.html">Proactive agent research — source and evidence index</a><a href="source-notes/design-audit.html">Taste skill audit</a><a href="source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="README.html">數位同事研究：主動工作與同事互動感</a><a href="proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="storyline.html">數位同事主動性：Story line</a><a href="source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details><summary>延伸專案文件</summary><a href="../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../phases/0/README.html">Phase 0 — Prototype</a><a href="../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../overview/README.html">Overview</a><a href="../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../library.html#group-0">從人到 Agent</a><span>研究正文</span></div><article><h1 id="主動工作從觸發判斷到行動">主動工作：從觸發、判斷到行動</h1>
+<p><a href="../../show-me-proactive-lifecycle.html">HTML 互動版</a> · <a href="source-notes/README.html">來源與驗證索引</a></p>
+<p>兩版使用相同情境與比較主線：README 適合順讀、搜尋與 review；HTML 可以切換 framework，展開原本的故事動畫、流程圖與程式片段。更新：2026-09-11（同事感、OpenClaw commitments 退役與 Grok Bot 補查；其餘框架維持原固定版本）。</p>
+<h2 id="先看高層概念">先看高層概念</h2>
+<p><strong>時間到了／有事件 → 查看狀況與記憶 → 在職責內判斷 → 做事、提問或等待 → 保存結果、接續。</strong></p>
+<p>排程可以固定，具體動作不必寫死。time／event 足夠描述本專案的喚醒來源；已在執行的 loop 可以直接下一步。framework 的進階能力主要在省成本、判斷、記憶與可靠接續，不是新增一種無來源的念頭。</p>
+<p><img alt="主動工作的高層流程" src="../../proactive-high-level.svg" /></p>
+<ul>
+<li>給決策者：<a href="../../show-me-proactive-lifecycle.html#proactive-overview">互動概念與三種結果</a>。</li>
+<li>給設計者：<a href="source-notes/proactive-trigger-mechanisms.html">觸發與進階機制詳細查核</a>。</li>
+<li>另一條主線：<a href="colleague-interaction.html">同事互動感</a>，研究接話、修正、群組發言與交接。</li>
+<li>歷史補正：<a href="source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments 已退役</a>；<a href="source-notes/colleague-experience.html">工作閉環共用設計</a>。</li>
+</ul>
+<p>以下展開原本的七框架比較；保留各來源版本與證據限制。</p>
+<h2 id="1-從一天的工作開始">1. 從一天的工作開始</h2>
+<blockquote>
+<p>「上班時間幫我留意 Outlook。客戶來信有需要我處理的事情，再提醒我。」</p>
+</blockquote>
+<p>下一次查看時，同事讀到客戶要求今天回覆的信，查相關資料，準備附原信連結的私人提醒。沒有需要注意的事，就不打擾。</p>
+<p>接著情境變複雜：昨天 Alex 答應今天提供檔案，現在還找不到完成證據；查資料的背景工作還沒結束；目前工作告一段落後，是否有下一件值得做的事？這些問題共同構成原本的 proactive 故事。</p>
+<p>這是比較情境，假設已接好 Outlook／來源工具與權限；不表示每個 framework 都原生支援這個完整流程。Minecraft 與程式庫維護則保留各自的原生情境，不硬套成郵件功能。</p>
+<h2 id="2-用同一組問題看實作">2. 用同一組問題看實作</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>問題</th>
+<th>要找的機制</th>
+<th>不宜混在一起的概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>何時開始？</td>
+<td>Timer、event、completion、init 後的 loop</td>
+<td>喚醒時機與工作價值</td>
+</tr>
+<tr>
+<td>看見什麼？</td>
+<td>Context、來源 tools、monitor baseline、成敗紀錄</td>
+<td>已取得的觀察與模型猜測</td>
+</tr>
+<tr>
+<td>為什麼先做它？</td>
+<td>硬規則、prompt 順序、LLM 取捨、queue priority</td>
+<td>執行通道順序與業務目標排序</td>
+</tr>
+<tr>
+<td>如何執行？</td>
+<td>Tools、程式、Bot 派工與結果回送</td>
+<td>派送成功與成果正確</td>
+</tr>
+<tr>
+<td>下一輪呢？</td>
+<td>排程、結果事件、goal judge、curriculum feedback</td>
+<td>續跑既定工作與產生新目標</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>「不用人催就會查看與判斷」可以從時間 trigger 做起。</strong> 但 timer 本身不決定看什麼、是否有必要行動或先做哪件事。下面比較的是每個 framework 如何把這些部分接起來；五個問題不是強制共用的 runtime pipeline。</p>
+<h2 id="3-七個-framework-的故事與實作">3. 七個 framework 的故事與實作</h2>
+<h3 id="openclaw">OpenClaw</h3>
+<p>2026-09-11 補查：舊 inferred commitments 已移除；現行 Automations／Heartbeat／memory 不等於內建承諾追蹤器。<a href="source-notes/openclaw-inferred-commitments.html">版本查核</a></p>
+<blockquote>
+<p>上班時間留意客戶來信，需要今天回覆時提醒我。</p>
+</blockquote>
+<p><strong>流程：</strong> Heartbeat / Automations 或事件喚醒 → 讀職責與來源 → LLM 判斷是否需處理 → Tools 查資料／準備提醒 → 保存狀態，等待下次</p>
+<ul>
+<li><strong>觀察：</strong> 模型在回合中透過已接好的工具取得來源；Heartbeat 本身不是 Outlook 訂閱。</li>
+<li><strong>Prioritization：</strong> 依設定職責與 context 判斷要不要處理／通知。Heartbeat 路徑本身未證明具備跨責任候選池或業務分數排序。</li>
+<li><strong>接續：</strong> 排程或事件提供下一次回合；沒事時依靜默規則不通知。多種入口可接到自動化執行。</li>
+<li><strong>證據範圍：</strong> 預設 Heartbeat 不從舊聊天推導任務。若要追承諾，需設定職責、來源與動作授權。</li>
+</ul>
+<p><a href="source-notes/openclaw.html">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-claw-0">HTML 情境流程</a></p>
+<h3 id="hermes">Hermes</h3>
+<blockquote>
+<p>持續看這份資料；有變化才分析。分析目標未完成時接著做。</p>
+</blockquote>
+<p><strong>流程：</strong> Cron monitor 讀 script / URL → 比對上次結果 → 首次或有變化才喚醒模型 → 按指令分析 → 交付；另由 /goal 判斷目標續跑</p>
+<ul>
+<li><strong>觀察：</strong> Monitor 可先取得來源內容、保存 baseline 並比對，避免每次都呼叫模型。/loop 與 /goal 是不同機制。</li>
+<li><strong>Prioritization：</strong> Monitor 決定是否需要跑；goal judge 決定既定目標是否繼續。這些不等同多目標 ranking。Self-paced loop 依正規化文字 hash 調間隔，也不是學習式注意力。</li>
+<li><strong>接續：</strong> Cron 到期再查；/goal 可 continue、wait 或 stop，受 gates 與限制約束。</li>
+<li><strong>證據範圍：</strong> Self-paced 的文字比對可能忽略數值差異；judge 也不必然直接驗證成果。不能把少跑或續跑當成業務排序。</li>
+</ul>
+<p><a href="source-notes/hermes.html">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-hermes-8">HTML 情境流程</a></p>
+<h3 id="openbot">OpenBot</h3>
+<blockquote>
+<p>每天整理進度；需要專家 Bot 時派工，拿到結果後回到原對話。</p>
+</blockquote>
+<p><strong>流程：</strong> Routine 到期 → 持久 queue → claim / lease → Bot 執行 → 必要時 message_bot 派工 → 成果 relay 回原對話</p>
+<ul>
+<li><strong>觀察：</strong> Routine 保存 instruction 與執行脈絡；資料由 Bot 的工具取得。收到派工時帶入 task、constraints、expected result。</li>
+<li><strong>Prioritization：</strong> 到期與租約條件控制工作是否可被領取；模型選獲准的協作 Bot。這是 eligibility 與派工，不足以證明依業務價值排名。</li>
+<li><strong>接續：</strong> 排程產生下一次 occurrence；派工成果經 relay 送回。Lease heartbeat 用於維持工作所有權。</li>
+<li><strong>證據範圍：</strong> Heartbeat 不是好奇心。Queue 接受工作不代表模型完成，更不代表成果正確。</li>
+</ul>
+<p><a href="source-notes/openbot.html">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-ob-0">HTML 情境流程</a></p>
+<h3 id="grok-bot-official-product-reconstruction">Grok Bot · official product + reconstruction</h3>
+<p>官方產品頁明確描述接回舊對話、跟進交接、從示範學 routine；以下實作流程仍來自非官方重建，並未驗證與官方二進位一致。<a href="https://x.ai/news/introducing-grok-bot">官方產品頁</a></p>
+<blockquote>
+<p>背景工作完成，或新的 automation 事件到了，就接回原本等待的工作。</p>
+</blockquote>
+<p><strong>流程：</strong> 消費 automation fire / 收到背景 completion → 組合事件與結果 → 加入執行佇列 → 模型接續 → 回報有用成果或保持安靜</p>
+<ul>
+<li><strong>觀察與持續需求：</strong> 事件與背景結果成為新回合 context；initiative prompt 依觀察提出下一步。routine prompt 鼓勵辨識隱含持續需求，明確時建立後續工作；這是模型政策，不是保證每次都辨識正確。</li>
+<li><strong>工作與回報：</strong> 背景 wake 可先安靜工作，有價值才 SendMessage；使用者已在等的成果則必須交付。</li>
+<li><strong>Prioritization：</strong> RunScheduler 明確讓 queued user tasks 優先於 agent/background tasks。這是執行通道優先序；回合內值得做什麼仍靠 prompt 與模型，未證明全域業務效用排名。</li>
+<li><strong>接續：</strong> Completion revival 接回等待對話；goal continuation 有 handler，但既有查核未建立每回合自動產生下一次 action 的完整鏈。</li>
+<li><strong>證據範圍：</strong> 來源是非官方重建；不能直接當成原產品或雲端控制器的完整行為證明。</li>
+</ul>
+<p><a href="source-notes/grok-reconstructed.html">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-gr-2">HTML 情境流程</a></p>
+<h3 id="codex">Codex</h3>
+<blockquote>
+<p>這個目標還沒完成，不用等我再次說「繼續」。</p>
+</blockquote>
+<p><strong>流程：</strong> 明確設定 /goal → 執行一回合 → thread 閒置時讀取有效目標 → 符合條件則啟動下一回合 → 完成或符合停止條件</p>
+<ul>
+<li><strong>觀察：</strong> 續跑讀既有 goal 與對話脈絡；外部狀態仍要靠已設定工具查取。App 排程是另外一層入口。</li>
+<li><strong>Prioritization：</strong> 已查核 goal 路徑是在同一目標內選下一步，不是跨目標候選排序器。</li>
+<li><strong>接續：</strong> 有效 goal 的 idle continuation 讓工作接續。具體停止與預算條件依已查核版本／執行設定。</li>
+<li><strong>證據範圍：</strong> /goal 不會單獨建立「讀郵件、發現承諾、選人追問」整套流程。</li>
+</ul>
+<p><a href="../../source-notes/official-coding-agents.json">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-cx-1">HTML 情境流程</a></p>
+<h3 id="claude-code">Claude Code</h3>
+<blockquote>
+<p>目前程式庫還有什麼值得處理？在既有工作範圍內持續維護。</p>
+</blockquote>
+<p><strong>流程：</strong> 啟動 bare /loop → 讀目前工作與 repository → 按維護指引選任務 → 執行 → 選下次間隔，再次喚醒</p>
+<ul>
+<li><strong>觀察：</strong> 利用目前工作、PR 與 repository 脈絡；Monitor、channels、本機排程與 cloud routines 各有不同路徑。</li>
+<li><strong>Prioritization：</strong> 官方 bare /loop 指引依序關注未完成工作、目前 PR，再找 bug／簡化。這是明訂在指引中的順序，由模型具體判斷，不是已證明的數值效用排序器。</li>
+<li><strong>接續：</strong> 模型可決定動態查看間隔，排程再喚起下一回合；各模式存活範圍不同。2026-09-11 官方 <code>/goal</code> 文件另描述每輪後由小模型評估完成條件，未完成再接續；詳見 <a href="source-notes/proactive-trigger-mechanisms.html">本次補查</a>。</li>
+<li><strong>證據範圍：</strong> 維護範圍不等於任意新計畫，也不等於原生 Outlook 工作流程。</li>
+</ul>
+<p><a href="../../source-notes/autonomous-task-selection.json">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-cc-0">HTML 情境流程</a></p>
+<h3 id="voyager">Voyager</h3>
+<blockquote>
+<p>在 Minecraft 裡，根據目前環境與能力，下一件值得探索的事是什麼？</p>
+</blockquote>
+<p><strong>流程：</strong> Init / learn loop → 讀遊戲狀態與成敗 → 起始／背包硬規則或 LLM 選 Task → 執行與 critic 回饋 → 成功技能存庫 → 再選任務</p>
+<ul>
+<li><strong>觀察：</strong> 把環境、背包、裝備與完成／失敗任務提供給 curriculum；不是讓 LLM 無來源地猜世界。</li>
+<li><strong>Prioritization：</strong> 硬規則先行；一般路徑以新穎、難度可行、資源需求指引 LLM，直接輸出一個 Task。沒有明訂權重、候選排名或學習中的 priority predictor。</li>
+<li><strong>接續：</strong> 執行結果更新歷史，成功程式可進 skill library；outer loop 再提下一個目標。</li>
+<li><strong>證據範圍：</strong> 本質上就是 context + LLM + feedback loop。能力累積不等於更新模型權重，也未證明主觀慾望。</li>
+</ul>
+<p><a href="source-notes/voyager.html">來源查核</a> · <a href="../../show-me-proactive-lifecycle.html#flow-v-0">HTML 情境流程</a></p>
+<h2 id="4-放在一起看差異在哪裡">4. 放在一起看，差異在哪裡？</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>Framework／路徑</th>
+<th>主要 proactive 機制</th>
+<th>如何選擇／排序</th>
+<th>結果如何影響下一輪</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenClaw Heartbeat / Automations</td>
+<td>排程與事件喚醒設定職責</td>
+<td>職責 prompt + LLM 判斷</td>
+<td>狀態、context 與下次喚醒</td>
+</tr>
+<tr>
+<td>Hermes monitor / goal</td>
+<td>變化前置比對、judge 續跑</td>
+<td>是否需要跑／是否繼續；非同一個 ranking 問題</td>
+<td>Baseline、goal 狀態；self-paced 另用 hash 調間隔</td>
+</tr>
+<tr>
+<td>OpenBot routines / handoff</td>
+<td>持久 queue、租約、Bot 派工／relay</td>
+<td>到期與 claim eligibility、模型選協作者</td>
+<td>下次 occurrence 或派工成果回送</td>
+</tr>
+<tr>
+<td>Grok reconstruction</td>
+<td>Automation fire 與 completion revival</td>
+<td>User queue 優先於 agent/background；回合內由模型取捨</td>
+<td>背景成果成為下一回合 context</td>
+</tr>
+<tr>
+<td>Codex /goal</td>
+<td>Active goal 的 idle continuation</td>
+<td>既定目標內的下一步</td>
+<td>保存目標狀態，符合條件再接續</td>
+</tr>
+<tr>
+<td>Claude Code bare /loop</td>
+<td>維護職責 + 動態排程</td>
+<td>指引順序：未完成工作 → PR → bug／簡化</td>
+<td>工作脈絡與下一次查看間隔</td>
+</tr>
+<tr>
+<td>Voyager curriculum</td>
+<td>持續探索迴圈</td>
+<td>硬規則 + LLM 隱式取捨</td>
+<td>成敗紀錄、成功技能、下一個 Task</td>
+</tr>
+</tbody>
+</table></div>
+<p>依據是上述各列的來源查核。這裡的「未證明」限於已查路徑，不能推論整個 framework 或所有插件都沒有優先排序。</p>
+<h2 id="5-再往前一步沒逐項交辦能自己找工作嗎">5. 再往前一步：沒逐項交辦，能自己找工作嗎？</h2>
+<p>回到 Alex 的承諾：找回昨天的來源 → 查今天有沒有新回覆／檔案 → 判斷缺少完成證據是否值得追蹤 → 決定準備提醒或聯絡誰 → 保存結果，避免重複。</p>
+<p>OpenClaw 的脈絡回合、工具與可選對象的傳訊介面能作為接合基礎，但需提供追蹤職責、正確來源與聯絡授權。Grok 重建版有 initiative 指引；OpenBot 能在工作內選 Bot 派工。這些都有模型判斷空間，卻不代表原樣安裝就會自動管理所有承諾。缺少完成證據，也不等於對方沒做。</p>
+<p>Claude Code 在程式庫維護範圍選工作，Voyager 在 Minecraft 探索範圍產生任務。兩者都值得比較，仍須保留各自的範圍與目標。</p>
+<p><a href="../../show-me-proactive-lifecycle.html#self-directed-work">完整追承諾故事與接合步驟</a> · <a href="source-notes/initiative-outreach.html">主動聯絡來源查核</a></p>
+<h3 id="voyager-與更明確的學習式排序">Voyager 與更明確的學習式排序</h3>
+<p>Voyager 一般路徑就是更新 context，請 LLM 選下一個 Task；新穎性與難度是 prompt 條件，沒有明訂數值權重。其所查路徑沒有候選排名或學習中的 priority predictor。</p>
+<p>研究上有更明確的訊號：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1705.05363">ICM</a>：行動結果的預測誤差形成探索獎勵；不等同工作 priority score。</li>
+<li><a href="https://arxiv.org/abs/1810.06284">CURIOUS</a>：以 absolute learning progress 分配注意力，能力退步也能引發重新練習。</li>
+<li><a href="https://arxiv.org/abs/2502.07709v3">MAGELLAN</a>：online RL 中學習預測能力與 learning progress，據此選目標。</li>
+</ul>
+<p>它們沒有證明主觀慾望；值得學習的任務也未必是業務上最重要的事。<a href="source-notes/prioritization.html">機制、示例與限制</a></p>
+<h2 id="6-回到我們的架構與採用順序">6. 回到我們的架構與採用順序</h2>
+<p>以下是接合提案，尚未實作；保留既有 phase，不另立階段。</p>
+<p>同事感循環：接住脈絡 → 承接責任 → 安排再看 → 查最新證據 → 推進／等待／提問 → 判斷是否通知 → 結案或接續。分開保存 Memory、Work／commitment、Execution／delivery；信心不是授權，通知成功也不是工作完成。<a href="source-notes/colleague-experience.html#狀態要分三種保存">完整狀態與驗收設計</a></p>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>元件</th>
+<th>負責什麼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scheduler / Event Ingress</td>
+<td>決定何時提供執行機會</td>
+</tr>
+<tr>
+<td>Runtime Controller</td>
+<td>控制執行、接續、等待與停止</td>
+</tr>
+<tr>
+<td>Skills / Tools</td>
+<td>定義責任、讀來源與執行動作</td>
+</tr>
+<tr>
+<td>Request Triage &amp; Priority</td>
+<td>若有多項候選，依政策比較先後</td>
+</tr>
+<tr>
+<td>Colleague State</td>
+<td>保存工作、依賴、選擇理由與結果</td>
+</tr>
+</tbody>
+</table></div>
+<p>採用順序沿用原研究：<strong>P0</strong> 工作 ID、狀態、去重與送達可靠性 → <strong>P1</strong> 限定職責的排程查看 → <strong>P2</strong> 時效有需要再接事件 → <strong>P3</strong> 長任務需要時補續跑 → <strong>P4</strong> 在職責內試行新工作提案。P0–P4 是建置優先序，不是既有 phase 的新定義。</p>
+<p>工作排序提案：先排除已完成、重複、缺授權與缺依賴項目；對可執行候選比較責任等級、期限與等待時間，記錄選中／延後原因。探索另設預算。重新排序不自動代表可中斷正在執行的動作。</p>
+<p><a href="../../show-me-proactive-lifecycle.html#embedding">原架構與接合圖</a> · <a href="../../show-me-proactive-lifecycle.html#project-phases">既有 phase 對照</a> · <a href="../../show-me-proactive-lifecycle.html#adoption-conclusion">採用取捨</a></p>
+<h2 id="7-用同一套情境驗收">7. 用同一套情境驗收</h2>
+<div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
+<thead>
+<tr>
+<th>情境</th>
+<th>應看到的結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客戶信需要今天回覆</td>
+<td>讀原信與相關資料，產生一次有來源的提醒</td>
+</tr>
+<tr>
+<td>沒有新資料或已完成</td>
+<td>安靜停止，不重複追問</td>
+</tr>
+<tr>
+<td>背景工作尚未完成</td>
+<td>等結果，收到後正確接續</td>
+</tr>
+<tr>
+<td>兩件都可做，期限改變</td>
+<td>按政策重新評估，說明選中與延後原因</td>
+</tr>
+<tr>
+<td>高重要工作缺上游資料</td>
+<td>標示等待，不占住 executor</td>
+</tr>
+<tr>
+<td>程式庫維護／探索有新成果</td>
+<td>說清楚更新的是 context、技能、統計還是模型參數</td>
+</tr>
+</tbody>
+</table></div>
+<p>量測漏件、重複提醒、準時率、人工接受率與成本。來源查核、局部程式探測與完整情境 E2E 是不同證據；不能用前兩者聲稱上述情境已部署通過。</p>
+<p><a href="../../show-me-proactive-lifecycle.html#verification">完整驗證計畫</a> · <a href="source-notes/README.html">來源索引</a></p>
+<h2 id="證據範圍與其他研究">證據範圍與其他研究</h2>
+<p>框架內容整理自既有 pinned source／官方文件查核，沒有在本次重新測試所有 framework。Grok 來源為非官方重建；論文於 2026-09-10 核對，實驗未重跑。工作排序與接合是提案，不是已接受的 ADR 或已部署功能。</p>
+<p>其他研究：Memory 架構、多租戶隔離、模型選擇、stateful／stateless colleague，以及 <a href="channel-selection.html">channel-selection 歷史研究</a>（已由 ADR-019 的 single-interface model 取代）。研究成熟後再整理成 ADR。</p><details class="article-references"><summary>本文參考來源 · 4</summary><p>以下保留本文實際引用的來源；引用不等於實測，適用範圍以正文說明為準。</p><ol><li><a href="https://x.ai/news/introducing-grok-bot">官方產品頁</a></li><li><a href="https://arxiv.org/abs/1705.05363">ICM</a></li><li><a href="https://arxiv.org/abs/1810.06284">CURIOUS</a></li><li><a href="https://arxiv.org/abs/2502.07709v3">MAGELLAN</a></li></ol></details></article><footer class="article-footer"><a href="../../library.html">← 回研究目錄</a><a href="source-notes/proactive-trigger-mechanisms.html">下一篇：主動的觸發與進階機制：time、event 之外到底還有什麼？ →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<ul>
+<li><a href="#先看高層概念">先看高層概念</a></li>
+<li><a href="#1-從一天的工作開始">1. 從一天的工作開始</a></li>
+<li><a href="#2-用同一組問題看實作">2. 用同一組問題看實作</a></li>
+<li><a href="#3-七個-framework-的故事與實作">3. 七個 framework 的故事與實作</a><ul>
+<li><a href="#openclaw">OpenClaw</a></li>
+<li><a href="#hermes">Hermes</a></li>
+<li><a href="#openbot">OpenBot</a></li>
+<li><a href="#grok-bot-official-product-reconstruction">Grok Bot · official product + reconstruction</a></li>
+<li><a href="#codex">Codex</a></li>
+<li><a href="#claude-code">Claude Code</a></li>
+<li><a href="#voyager">Voyager</a></li>
+</ul>
+</li>
+<li><a href="#4-放在一起看差異在哪裡">4. 放在一起看，差異在哪裡？</a></li>
+<li><a href="#5-再往前一步沒逐項交辦能自己找工作嗎">5. 再往前一步：沒逐項交辦，能自己找工作嗎？</a><ul>
+<li><a href="#voyager-與更明確的學習式排序">Voyager 與更明確的學習式排序</a></li>
+</ul>
+</li>
+<li><a href="#6-回到我們的架構與採用順序">6. 回到我們的架構與採用順序</a></li>
+<li><a href="#7-用同一套情境驗收">7. 用同一套情境驗收</a></li>
+<li><a href="#證據範圍與其他研究">證據範圍與其他研究</a></li>
+</ul>
+</div>
+</aside></div><script src="../../research-library.js?v=9e6a3877b9"></script></body></html>

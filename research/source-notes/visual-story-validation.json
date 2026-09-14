@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-11",
+  "skill": "ui-ux-pro-max",
+  "queries": [
+    "process flow interaction diagram --domain chart",
+    "animation playback controls reduced motion --domain ux"
+  ],
+  "design": "Conceptual SVG flow with explicit playback, selectable nodes, branching and state. Not quantitative Sankey or observed execution data.",
+  "checks": {
+    "three_modes_three_outcomes": "passed 9 combinations",
+    "five_step_playback": "passed in deck iframe",
+    "keyboard_node_activation": "passed",
+    "reduced_motion": "single step instead of autoplay",
+    "desktop_embed": "playback controls visible at 1280x720",
+    "mobile_horizontal_overflow": "none at 375px",
+    "javascript_syntax": "passed",
+    "diff_whitespace": "passed"
+  },
+  "scope": "Presentation interaction checks, not framework runtime verification"
+}

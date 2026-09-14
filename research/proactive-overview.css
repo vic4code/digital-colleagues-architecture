@@ -1,0 +1,52 @@
+/* High-level explanation first; the existing source study expands below it. */
+#proactive-overview, #trigger-mechanisms { max-width: 1200px; }
+.scenario-request { font-size: 22px; font-weight: 550; max-width: 900px; }
+.proactive-demo { margin: 24px 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.demo-controls { display: flex; flex-wrap: wrap; gap: 20px 40px; padding: 20px 24px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.demo-controls span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.demo-controls [role=group] { display: flex; flex-wrap: wrap; gap: 8px; }
+.proactive-stages { display: grid; grid-template-columns: minmax(0,1fr) 28px minmax(0,1.25fr) 28px minmax(0,1fr); padding: 28px 24px 12px; gap: 12px; }
+.proactive-stages article { padding: 18px; border-radius: 6px; background: var(--surface); min-width: 0; }
+.proactive-stages .thinking-stage { background: var(--tint); border: 1px solid #fdba74; }
+.proactive-stages h3 { font-size: 20px; margin: 14px 0; }
+.proactive-stages p { font-size: 15px; }
+.proactive-stages .stage-number { margin: 0; font-size: 12px; font-weight: 600; color: var(--muted); }
+.proactive-stages .stage-owner { font-size: 12px; color: var(--muted); margin-top: 24px; }
+.stage-arrow { align-self: center; text-align: center; color: var(--muted); font-size: 24px; }
+.demo-memory { margin: 12px 24px; padding: 14px 18px; border-top: 1px dashed #a8a29e; font-size: 15px; }
+.demo-boundary { color: var(--muted); font-size: 12px; margin: 16px 24px; }
+.overview-takeaway { font-size: 19px; max-width: 980px; }
+.concept-detail { margin: 14px 0; border: 1px solid var(--line); border-radius: 6px; }
+.concept-detail > summary { padding: 16px 20px; font-size: 17px; font-weight: 550; cursor: pointer; }
+.concept-detail > p { margin: 14px 20px; max-width: 1000px; }
+.concept-detail > p:last-child { margin-bottom: 22px; }
+.implementation-detail { border-top: 2px solid var(--line); margin: 36px 0; }
+.implementation-detail > summary { padding: 24px 0; font-size: 22px; font-weight: 600; cursor: pointer; }
+.implementation-detail-body { min-width: 0; }
+.implementation-detail-body > section { padding: 42px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 760px) {
+  header h1 { font-size: 32px; }
+  .scenario-request { font-size: 18px; }
+  .demo-controls { padding: 16px; gap: 16px; }
+  .demo-controls button { font-size: 13px; padding: 8px 10px; }
+  .proactive-stages { grid-template-columns: minmax(0,1fr); padding: 16px; gap: 6px; }
+  .stage-arrow { transform: rotate(90deg); line-height: 1; }
+  .proactive-stages .stage-owner { margin-top: 12px; }
+  .demo-memory, .demo-boundary { margin-left: 16px; margin-right: 16px; }
+  .concept-detail > summary { font-size: 16px; padding: 14px; }
+  .concept-detail > p { margin-left: 14px; margin-right: 14px; }
+  .implementation-detail > summary { font-size: 19px; }
+}
+@media print {
+  .demo-controls, .demo-boundary { display: none; }
+  .proactive-stages { break-inside: avoid; }
+}
+
+/* Reading mode: diagrams and whitespace instead of nested UI cards. */
+:root{--ink:#272522;--muted:#716d66;--line:#d9d5ce;--surface:#faf9f6;--accent:#b7441c;--tint:#f2e9df}
+body{background:var(--surface);font-family:"Helvetica Neue","PingFang TC","Noto Sans TC",Arial,sans-serif}
+header h1{font-weight:550;letter-spacing:-2px}.scenario-request{font-size:24px;line-height:1.65;font-weight:500}
+.proactive-demo{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0}
+.demo-controls{background:none;padding:24px 0;gap:24px 48px}.demo-controls button{border:0;border-bottom:1px solid transparent;background:none;border-radius:0;padding:10px 0;margin-right:12px;color:var(--muted)}.demo-controls button[aria-pressed=true]{color:var(--accent);background:none;border-color:var(--accent)}
+.proactive-stages{padding:34px 0 20px;gap:24px}.proactive-stages article{padding:10px 0;border:0;border-radius:0;background:none}.proactive-stages .thinking-stage{background:none;border:0;border-left:2px solid var(--accent);padding-left:22px}.proactive-stages h3{font-size:24px;line-height:1.5;font-weight:500}.proactive-stages .stage-number{font-size:11px;font-weight:400}.demo-memory{margin:10px 0;padding:20px 0;border-top:1px solid var(--line)}.demo-boundary{margin:0 0 20px;font-size:11px}.overview-takeaway{font-size:21px;line-height:1.8;margin:28px 0}.concept-detail{border:0;border-top:1px solid var(--line);border-radius:0;margin:0}.concept-detail>summary{padding:24px 0;font-weight:500}.concept-detail>p{margin:12px 0;font-size:15px;line-height:1.9;max-width:70ch}.concept-detail>p:last-child{margin-bottom:28px}.implementation-detail{margin:40px 0;border-top:1px solid var(--line)}.implementation-detail>summary{font-size:22px;font-weight:500;padding:28px 0}
+@media(max-width:760px){.scenario-request{font-size:19px}.demo-controls{padding:18px 0}.demo-controls button{font-size:12px;margin-right:8px}.proactive-stages{padding:24px 0;gap:12px}.proactive-stages h3{font-size:22px}.overview-takeaway{font-size:18px}}

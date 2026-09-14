@@ -1,0 +1,33 @@
+{
+  "reviewed": "2026-09-11",
+  "design_sources": [
+    {
+      "name": "ppt-master",
+      "revision": "6c372a292f1d1fd008a183e1ea4c08d706c76684",
+      "role": "Presentation/interaction design reference only; not evidence for cognitive or framework claims"
+    },
+    {
+      "name": "typeui",
+      "revision": "2a977f1f6616ae8a5ea84a478ca35601c67f4322",
+      "role": "Presentation/interaction design reference only; not evidence for cognitive or framework claims"
+    }
+  ],
+  "applied": {
+    "ppt-master": "Shared composition principles; different topology for human context overlap, agent branch flow, and team ownership lanes. No native PPTX generation/export claimed.",
+    "typeui": "Existing project tokens retained; progressive disclosure, one primary playback action, mobile single-step graphic, complete map on demand."
+  },
+  "research_evidence": {
+    "visual_stages": 15,
+    "classification": "Research, official docs, fixed code, unofficial reconstruction and project proposals distinguished",
+    "source_receipts": "Each stage includes claim, source links and limitation",
+    "reading_sources": "Actual external links cited in articles collected; collection is not a new source-verification claim"
+  },
+  "checks": [
+    "All 15 stage receipts render claim/source/limit",
+    "375px mobile step/map toggle and no horizontal overflow",
+    "Full article source list expands",
+    "60 reading/library pages: no missing local targets or raw Markdown exits",
+    "JavaScript syntax and diff whitespace passed"
+  ],
+  "scope": "Presentation checks only; no upstream framework runtime or human study replication"
+}
