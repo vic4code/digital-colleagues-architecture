@@ -92,16 +92,27 @@
     document.querySelectorAll('[data-mechanism]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.mechanism===key)));
   }
   document.querySelectorAll('[data-mechanism]').forEach(b=>b.addEventListener('click',()=>renderMechanism(b.dataset.mechanism)));
+  const discoveries = {
+    legal: ['新公告發布', '角色：契約與法遵支援', '待續約契約可能受影響', '「值得先核對相關契約。」'],
+    pm: ['上游交付日期延後', '角色：跨團隊交付協調', '下游里程碑可能受影響', '「值得先檢查下游依賴。」'],
+    hr: ['到職流程規範更新', '角色：到離職流程支援', '現有交接清單可能過時', '「值得先核對適用清單。」'],
+    architect: ['程式加入新的外部依賴', '角色：維護架構一致性', '可能與既有 ADR 衝突', '「值得先查證設計偏差。」'],
+  };
   function renderCathay(key) {
-    const c = study.cathay[key];
-    $('cathay-result').innerHTML = `<div class="cathay-heading"><h3>${c.title}</h3><span>${c.source}</span></div><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${phase}</small><b>${title}</b><p>${behavior}</p><details><summary>怎麼驗？</summary><p>${test}</p></details></article>`).join('')}</div><p class="scenario-boundary">${c.boundary}</p>`;
-    document.querySelectorAll('[data-cathay]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cathay===key)));
+    const c = study.cathay[key], d = discoveries[key];
+    $('cathay-result').innerHTML = `<div class="cathay-heading"><h3>${c.title}</h3><span>${c.source}</span></div><div class="discovery-story"><div class="discovery-input"><small>看到的線索</small><b>${d[0]}</b><span>${d[1]}</span></div><span class="discovery-link" aria-hidden="true">↗</span><div class="discovery-thought"><small>連到正在負責的事</small><span>${d[2]}</span><blockquote>${d[3]}</blockquote></div><div class="discovery-delivery"><small>交給人決定</small><b>附來源的檢視提案</b><span>接受 ／ 退回 ／ 延後</span></div></div><p class="scenario-boundary">${c.boundary}</p><details class="detail-level"><summary>同一情境，三個 Phase 各做什麼、怎麼驗？</summary><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${phase}</small><b>${title}</b><p>${behavior}</p><details><summary>怎麼驗？</summary><p>${test}</p></details></article>`).join('')}</div></details>`;
+      document.querySelectorAll('[data-cathay]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cathay===key)));
   }
   document.querySelectorAll('[data-cathay]').forEach(b=>b.addEventListener('click',()=>renderCathay(b.dataset.cathay)));
+  const traceStories = {
+    proposal: ['有看、有依據，提案等人決定', ['收到新的來源資料', '找到角色相關的影響', '通過檢查，送進私有收件匣'], '有提案，不等於已證明有用；還要看人的評閱。'],
+    quiet: ['有看，這次沒有值得處理的變化', ['定期檢查確實執行', '比對後沒有新素材', '記下跳過原因，這輪不叫模型'], '安靜是可解釋的結果；處理紀錄能證明它看過。'],
+    outage: ['應該醒來，卻沒有留下任何紀錄', ['預定檢查時間已到', '找不到執行或跳過紀錄', '監測發現逾期，檢查排程與訂閱'], '缺少紀錄是故障訊號，不能當成「看過但沒事」。'],
+  };
   function renderTrace(key) {
-    const t = study.traces[key];
-    $('trace-result').innerHTML = `<div class="trace-rows">${t.rows.map(([stage,result])=>`<div><b>${stage}</b><code>${result}</code></div>`).join('')}</div><p>${t.conclusion}</p><small>預編觀測示例，非 production log。</small>`;
-    document.querySelectorAll('[data-trace]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.trace===key)));
+    const t = study.traces[key], [title,steps,meaning] = traceStories[key];
+    $('trace-result').innerHTML = `<div class="trace-story"><h4>${title}</h4><ol>${steps.map(x=>`<li>${x}</li>`).join('')}</ol><p>${meaning}</p></div><details class="detail-level"><summary>查看工程紀錄與欄位</summary><div class="trace-rows">${t.rows.map(([stage,result])=>`<div><b>${stage}</b><code>${result}</code></div>`).join('')}</div><p>${t.conclusion}</p></details><small>預編觀測示例，非 production log。</small>`;
+      document.querySelectorAll('[data-trace]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.trace===key)));
   }
   document.querySelectorAll('[data-trace]').forEach(b=>b.addEventListener('click',()=>renderTrace(b.dataset.trace)));
   renderMechanism('polling'); renderCathay('legal'); renderTrace('proposal');

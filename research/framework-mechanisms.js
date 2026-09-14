@@ -50,7 +50,8 @@ window.FRAMEWORK_MECHANISMS = {
         "日記與技能更新不等於新外部任務；本次未驗證由它們自動建 root goal。",
         "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/tools/skill-workshop.md#L12"
       ]
-    ]
+    ],
+    "origin": "人設定巡檢與目標；Agent 可調整檢查節律。"
   },
   "hermes": {
     "name": "Hermes",
@@ -103,7 +104,8 @@ window.FRAMEWORK_MECHANISMS = {
         "學的是外部記憶／技能產物，不是更新模型權重；也不證明學到的內容正確。",
         "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/turn_finalizer.py#L591"
       ]
-    ]
+    ],
+    "origin": "人給指令、目標或看板任務；系統判斷時機與可執行項。"
   },
   "claude": {
     "name": "Claude Code",
@@ -138,7 +140,8 @@ window.FRAMEWORK_MECHANISMS = {
         "需要 stop_hook_active 等防遞迴設計；Auto mode 只處理授權，不自行啟動下一輪。",
         "https://code.claude.com/docs/en/hooks#stop"
       ]
-    ]
+    ],
+    "origin": "人給 prompt 或完成條件；hook／evaluator 判斷是否續行。"
   },
   "codex": {
     "name": "Codex",
@@ -164,7 +167,8 @@ window.FRAMEWORK_MECHANISMS = {
         "這是整合邊界，不算 Codex 原生 heartbeat 或排程器；本表不以缺少此證據斷言產品沒有其他 automation。",
         "reading/research/source-notes/proactive-trigger-mechanisms.html"
       ]
-    ]
+    ],
+    "origin": "人給目標；runtime 在未完成時接續下一輪。"
   },
   "grok": {
     "name": "Grok Build",
@@ -181,7 +185,8 @@ window.FRAMEWORK_MECHANISMS = {
         "Grok Bot 非官方重建的 completion revival、automation consumer 不可挪作 Grok Build 證據。",
         "https://github.com/shane01526/agent_initiate/blob/main/2026_09/heartbeat-lifecycle.html"
       ]
-    ]
+    ],
+    "origin": "原研究記載目標續行；公開建立介面仍待驗證。"
   },
   "voyager": {
     "name": "Voyager",
@@ -216,7 +221,8 @@ window.FRAMEWORK_MECHANISMS = {
         "累積可重用程式，不是睡眠時自行思考；失敗不等於學到可靠技能。",
         "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/skill.py#L57"
       ]
-    ]
+    ],
+    "origin": "Agent 依環境與進度產生新題，範圍是被授予的探索任務。"
   },
   "openbot": {
     "name": "OpenBot",
@@ -242,6 +248,7 @@ window.FRAMEWORK_MECHANISMS = {
         "交辦與完成事件，不是 recipient 自行產生 root task。",
         "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff-runner.ts#L391"
       ]
-    ]
+    ],
+    "origin": "人設定 routine，或其他 Agent 委派；queue 負責可靠交付。"
   }
 };

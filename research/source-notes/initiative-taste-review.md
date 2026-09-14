@@ -26,3 +26,13 @@ Contextual pre-flight: light theme matches the research site; shared cream/blue 
 - 有限播放可暫停；切換頁籤或離開畫面停止；reduced-motion 停用轉場。
 - 移除架構數字徽章，元件選擇依原圖空間順序排列，hover 與點擊保留。
 - Chrome 已驗證 file URL、320/768/1440 寬度、契機切換、三個時刻、播放暫停、架構展開，零 page errors。
+
+
+## Agent team review · 2026-09-14
+
+- 三個獨立 reviewer 分別檢查可讀性、insight 與證據界線、1440／390px 視覺。
+- 採納：章節結論提前；每家框架明列工作來源；刪重複分類列；Phase 矩陣預設收合；角色場景改為線索、聯想、提案；trace 用白話，原始欄位展開。
+- 架構圖保留座標，新增責任快速入口與橫滑／放大提示；區分 Codex 原圖與 OpenClaw prototype 證據。
+- 主摘要提高到 15–17px；保留 Cream 色彩與既有插畫，不增加裝飾。
+- 修正 320px 觀測分支按鈕溢出。原圖與比較表各自橫向捲動，不能造成整頁溢位。
+- 最後視覺 review 未發現阻擋問題；第二章因研究結論增加而稍長，保留為本輪取捨。
