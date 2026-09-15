@@ -94,6 +94,7 @@
     $('arch-mode-note').textContent = mode === 'before' ? 'Existing design · Phase 0.5' : 'After · '+(activeIntegration?.name || 'Implementation');
     document.querySelector('.original-workbench').classList.toggle('is-before',mode==='before');
     document.querySelector('.arch-view-controls').hidden=mode==='before';
+    document.querySelector('.architecture-reading-tools>span').textContent=mode==='before'?'Before · 原有元件與責任':'Blue = Add / Change · Gray = Reuse';
     $('arch-original-link').href = mode === 'before' ? '../phases/0.5/reference-architecture.svg' : (activeIntegration?.diagramUrl || 'architecture-diagrams/initiative-on-original.svg');
     document.querySelector('.architecture-reading-tools a').href=$('arch-original-link').href;
     if (mode === 'before') {
@@ -147,17 +148,18 @@
   const study = window.INITIATIVE_STUDY;
   const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const cases={
-    legal:{title:'法務／法遵：一則公告，牽動哪份契約？',role:'協助檢視待續約契約',trigger:'Event · 公告 N-17 新增附件要求',evidence:[['公告 N-17','適用 A 類委外；需核對附件 X。'],['契約 C-042','分類為 A 類；附件清單沒有 X。']],proposal:'建議檢視 C-042 是否需補附件 X。',why:'公告適用範圍與契約分類相符，現有附件清單有缺口。',deliver:'產出 N-17 條文 × C-042 附件對照，交法遵人員確認適用性。',test:'未交辦 C-042；仍應指出此契約，並附公告段落與附件清單。',negative:'把契約改成不適用的 B 類 → 不應再提 C-042。',repeat:'C-042 × N-17 已評閱 → 不再產生同一提案。'},
+    legal:{title:'法務／法遵：一則公告，牽動哪份契約？',role:'協助檢視待續約契約',trigger:'Event · 公告 N-17 新增附件要求',evidence:[['公告 N-17','適用 A 類委外；需核對附件 X。'],['契約 C-042','分類為 A 類；附件清單沒有 X。']],proposal:'建議檢視 C-042 是否需補附件 X。',why:'公告適用範圍與契約分類相符，現有附件清單有缺口。',deliver:'產出 N-17 條文 × C-042 附件對照，交法遵人員確認適用性。',test:'未交辦 C-042；仍應指出此契約，並附公告段落與附件清單。',negative:'把契約改成不適用的 B 類 → 不應再提 C-042。',repeat:'同一來源版本的 C-042 × N-17 已結案 → 不再產生同一提案。'},
     pm:{title:'PM：上游延後，想到哪個下游會受影響？',role:'追蹤跨團隊交付依賴',trigger:'Event · API-17 的交付日由 9/18 延至 9/23',evidence:[['API-17','新的交付日期：9/23。'],['UAT-08','原訂 9/21 開始；依賴 API-17。']],proposal:'建議檢視 UAT-08 的啟動日期。',why:'上游交付晚於下游開始日，且看板有明確依賴關係。',deliver:'產出受影響里程碑、依賴鏈與日期衝突對照，交 PM 決定調整。',test:'只提供日期變動，未交辦 UAT-08；應自行找出這項下游衝突。',negative:'移除 UAT-08 對 API-17 的依賴 → 不應再提此風險。',repeat:'同一日期變更已處理 → 不再提出相同延期建議。'},
     hr:{title:'HR：流程更新，哪份到職清單漏了一項？',role:'維護授權範圍內的到職流程',trigger:'Event · Onboarding SOP 由 v4 更新為 v5',evidence:[['SOP v5','新增設備領用確認步驟。'],['模板 T-03','仍引用 v4；没有設備領用欄位。']],proposal:'建議更新到職模板 T-03。',why:'模板版本落後，且缺少新流程要求的檢查項。',deliver:'產出 T-03 的欄位差異草稿，交流程負責人審閱。',test:'未指定 T-03；應從模板引用關係找出缺項，不使用員工個資。',negative:'T-03 已升至 v5 且欄位齊全 → 不應再提更新。',repeat:'同一模板變更已接受 → 不重複建立草稿提案。'},
-    architect:{title:'Architect：新依賴出現，會不會違反既定設計？',role:'維護 ADR 與實作的一致性',trigger:'Event · PR #128 新增服務間資料庫連線',evidence:[['PR #128 diff','Service A 加入直連 Service B DB 的設定。'],['ADR-012（示例）','跨服務資料須走 API；不開放直接 DB 讀取。']],proposal:'建議檢視 PR #128 的資料存取方式。',why:'新增連線與 ADR 的存取約束可能衝突，需要作者確認。',deliver:'產出 diff 行號 × ADR 段落對照與 review 草稿，交架構師判斷。',test:'未交辦 PR #128 的架構檢查；仍應找到對應 ADR，且引用可解析。',negative:'ADR 明確允許這種連線 → 不應再報相同偏差。',repeat:'同一 diff 已被 review → 不再重提同一議題。'}
+    architect:{title:'Architect：新依賴出現，會不會違反既定設計？',role:'維護 ADR 與實作的一致性',trigger:'Event · PR #128 新增服務間資料庫連線',evidence:[['PR #128 diff','Service A 加入直連 Service B DB 的設定。'],['ADR-012（示例）','跨服務資料須走 API；不開放直接 DB 讀取。']],proposal:'建議檢視 PR #128 的資料存取方式。',why:'新增連線與 ADR 的存取約束可能衝突，需要作者確認。',deliver:'產出 diff 行號 × ADR 段落對照與 review 草稿，交架構師判斷。',test:'未交辦 PR #128 的架構檢查；仍應找到對應 ADR，且引用可解析。',negative:'ADR 明確允許這種連線 → 不應再報相同偏差。',repeat:'同一 diff 與 ADR 版本的議題已結案 → 不再重提同一議題。'}
   };
   const alternateEvidence={legal:[['公告 N-17','只適用 A 類委外。'],['契約 C-042','分類改為 B 類；不在本公告範圍。']],pm:[['API-17','交付日仍為 9/23。'],['UAT-08','已解除 API-17 依賴，可獨立開始。']],hr:[['SOP v5','要求設備領用確認步驟。'],['模板 T-03','已更新 v5；設備領用欄位齊全。']],architect:[['PR #128 diff','新增同一筆跨服務 DB 連線。'],['ADR-012（示例）','已明確允許該服務的此類連線。']]};
+  const caseReasons={legal:['C-042 屬 B 類，不在 N-17 公告適用範圍。','同一來源版本的 C-042 × N-17 已結案，本次沒有新差異。'],pm:['UAT-08 已解除對 API-17 的依賴，沒有這項日期衝突。','同一日期变更已有處理紀錄，本次沒有新的影響。'],hr:['T-03 已更新為 v5，設備領用欄位齊全。','同一模板變更已有接受紀錄，不再建立相同提案。'],architect:['ADR 已明確允許這種連線，此 diff 不構成所述偏差。','同一 diff 與 ADR 版本的議題已結案，本次沒有新差異。']};
   let cathayKey='legal';
   function renderCathay(key,mode='new') {
     cathayKey=key;
     const c=study.cathay[key],d=cases[key],h=escapeHTML;
-    const result=mode==='new' ? ['PROPOSAL · 提出新工作',d.proposal,d.why] : mode==='irrelevant' ? ['SKIP · 條件不成立','不產生這件工作的提案',d.negative] : ['SKIP · 已處理','保留處理紀錄，不重提',d.repeat];
+    const result=mode==='new' ? ['PROPOSAL · 提出新工作',d.proposal,d.why] : mode==='irrelevant' ? ['SKIP · 條件不成立','不產生這件工作的提案',caseReasons[key][0]] : ['SKIP · 已處理','保留處理紀錄，不重提',caseReasons[key][1]];
     const checks=[
       {mode:'new',label:'01 · 應該想到',setup:'有相關的新資料；沒有逐件交辦。',expected:d.proposal,fail:'漏提、選錯對象，或提案沒有可查證的來源。'},
       {mode:'irrelevant',label:'02 · 不該亂提',setup:alternateEvidence[key][1][1],expected:'不產生這件工作的提案；留下不適用的原因。',fail:'條件已不成立，仍然提出原本的工作。'},
@@ -169,7 +171,9 @@
       <section class="acceptance-sheet" aria-label="情境驗收對照"><h4>03 / ACCEPTANCE · 怎樣才算通過？</h4><p>三種條件都要通過。點選一列，上方同步顯示該測試的資料與預期結果。</p><div class="acceptance-rows">${checks.map(check=>`<button type="button" class="acceptance-row" data-case-mode="${check.mode}" aria-pressed="${mode===check.mode}"><span class="acceptance-setup"><small>${h(check.label)}</small><b>${h(check.setup)}</b></span><span><small>PASS · 應有結果</small>${h(check.expected)}</span><span class="acceptance-fail"><small>FAIL · 這樣就不通過</small>${h(check.fail)}</span></button>`).join('')}</div><p class="compact-note">這是驗收規格與預編示範，尚未執行模型測試。提案是否有用，仍由業務人員評閱。</p></section>
       <details class="detail-level"><summary>Phase 1 → 3 · 各階段交付內容與驗收</summary><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${h(phase)}</small><b>${h(title)}</b><p>${h(behavior)}</p><details><summary>Validation</summary><p>${h(test)}</p></details></article>`).join('')}</div><p>${h(c.boundary)}</p></details>`;
     document.querySelectorAll('[data-cathay]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cathay===key)));
-    $('cathay-result').querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>{const mode=b.dataset.caseMode;renderCathay(cathayKey,mode);$('cathay-result').querySelector('[data-case-mode="'+mode+'"]').focus({preventScroll:true});}));
+    $('cathay-result').querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>{const mode=b.dataset.caseMode;renderCathay(cathayKey,mode);$('cathay-result').querySelector('[data-case-mode="'+mode+'"]').focus({preventScroll:true});
+      const result=$('cathay-result').querySelector('.case-evidence-flow');
+      if(result.getBoundingClientRect().top<0)result.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}));
   }
   document.querySelectorAll('[data-cathay]').forEach(b=>b.addEventListener('click',()=>renderCathay(b.dataset.cathay)));
   const traceStories = {

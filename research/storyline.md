@@ -68,3 +68,7 @@ Chapter 3 presents mechanism purpose → action sequence → original component 
 ## Focused reading pass · 2026-09-15
 
 Reduce simultaneous choices and duplicate explanations. Architecture opens on the original core components in Focus mode, with Before/After deltas and full-map access. Scenario acceptance presents Input → Expected output → Pass/Fail sheet on one reading path; engineering observability and cost are secondary detail.
+
+## Presentation edition · 2026-09-15
+
+The 14-slide, 16:9 edition in slides/index.html is designed for a roughly 15-minute sharing session. All key content is visible without interaction; the original architecture is split into Before, change-gated monitor After, and task discovery After. A separate PDF and per-slide speaker notes provide presentation backup and source context. Website team review also reduced closed phase-row height, clarified Before/After legends, and made selected validation output visible after a mobile interaction.
