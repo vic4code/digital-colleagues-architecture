@@ -62,7 +62,7 @@ window.FRAMEWORK_MECHANISMS = {
         "Agent turn"
       ],
       "sequence": "sequence-diagrams/framework-openclaw.svg",
-      "note": "Busy / policy rejection → Skip；event wake 可接同一 admission。next_check 為另一路 paced job 能力。"
+      "note": "Wake admission 先檢查 enabled、active hours 與 busy 狀態；被擋則 Skip，通過才開 Agent turn。"
     }
   },
   "hermes": {
@@ -176,7 +176,7 @@ window.FRAMEWORK_MECHANISMS = {
         "Re-evaluate"
       ],
       "sequence": "sequence-diagrams/framework-claude.svg",
-      "note": "Met / impossible / actionable error → Stop。Stop hook 是另一個可自訂的完成檢查入口。"
+      "note": "Met / impossible / actionable error → Stop；條件未達成則啟動下一輪。"
     }
   },
   "codex": {
@@ -330,7 +330,7 @@ window.FRAMEWORK_MECHANISMS = {
         "Result / next due"
       ],
       "sequence": "sequence-diagrams/framework-openbot.svg",
-      "note": "Lease heartbeat 續租執行權，不會啟動新的 Agent turn；handoff / relay 另處理 Event。"
+      "note": "Lease heartbeat 只維持此工作的執行權；Worker 完成後更新工作結果。"
     }
   }
 };

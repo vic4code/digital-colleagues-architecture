@@ -12,7 +12,7 @@ Proactivity still means generating a worthwhile, unassigned task. Time / Event s
 
 ## 02 · Framework × Trigger
 
-One visible matrix: Framework | Observed mechanism | What starts the next run? | Classification. Observed evidence precedes classification; the cross-framework Time / Event finding appears after the matrix, not in its premise. Click a framework for its representative Flow / Sequence; expand Mechanisms & source for the full inventory and evidence limits.
+One visible matrix: Framework | Observed mechanism | What starts the next run? | Classification. Observed evidence precedes classification; the cross-framework Time / Event finding appears after the matrix, not in its premise. Click a framework for its representative Flow / Sequence; the homepage shows only that path and its source. Explore all mechanisms opens the selected framework in the mechanism atlas, which retains the inventory, interfaces and evidence limits.
 
 - OpenClaw: managed heartbeat job → Scheduler → Wake admission → Agent turn. Event hooks and watchers enter compatible dispatch paths; next_check is a bounded pacing proposal.
 - Hermes: Cron monitor → source hash → unchanged Skip / changed Agent. Baseline saved before execution is observation state, not successful processing.
@@ -57,3 +57,8 @@ Observability separates Proposal, Skip and Failure. Metrics cover useful proposa
 ## Presentation change record
 
 2026-09-15 supersedes earlier attention/recall substeps, four-layer main taxonomy, default framework inventory and wake-story vignette. The research evidence remains; the homepage now uses one trigger classification and explicit mechanism/component/phase mappings.
+
+
+## Reading scope clarification
+
+The homepage Flow is a representative implementation path, not a ranking of the framework’s mechanisms or a complete execution graph. Flow and Sequence depict that same path. Framework-wide inventory is maintained in the mechanism atlas; Grok Build is not linked to the unrelated Grok Bot reconstruction.
