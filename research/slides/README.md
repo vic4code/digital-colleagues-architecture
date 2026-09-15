@@ -10,3 +10,14 @@
 操作：左右方向鍵／Page Up、Page Down 換頁；Space 下一頁；Home、End 跳到主線首末頁；A 切換附錄；F 進出全螢幕。網址的 `#7` 可直接開啟第 7 頁。
 
 每頁關鍵內容均直接顯示；PDF 不依賴 hover、動畫或展開。架構四頁沿用相同版位：Before → Time entry → Event entry（替代入口）→ 共用 Task discovery。換頁只切換新增責任，支援減少動態效果的系統設定。Before／After 是設計對照，國泰契約案例是示意資料，並非已驗證的業務成效。
+
+## 視覺定稿
+
+採用 design-taste-frontend 的 redesign audit 與 ui-ux-pro-max 的 Swiss editorial grid 建議；保留既有奶油白、藍色與原架構元件座標。套用範圍是投影簡報，不採用資料庫建議中的電子報表單或行銷 CTA。
+
+- 封面採明確圖文分欄；生活頁使用生成的日曆／牛奶場景素材。
+- 深藍集中在 Agent 工作、提案與結果；來源、框線與表頭降為次要層級。
+- Phase 以 Human／Agent／Output 責任橫帶呈現，保留三階段對照。
+- 原架構四頁固定位置與轉場；照片是生活示意，並非產品或實證照片。
+
+`editorial.css` 管理簡報視覺；`slides.css` 保留畫布、導航與既有基本結構。所有素材離線可用。
