@@ -43,12 +43,27 @@
     const delta=architectureMode==='after' && activeIntegration?.steps.find(step=>step.node===key);
     if (architectureMode==='after' && activeIntegration && !delta) return;
     $('arch-detail-title').textContent = delta ? delta.component : title;
-    $('arch-detail-copy').textContent = delta ? 'ADD · '+delta.change : copy;
-    $('arch-step-label').textContent = delta ? 'STEP '+(activeIntegration.steps.indexOf(delta)+1)+' / '+activeIntegration.steps.length+' · ADD IMPLEMENTATION' : 'EXISTING DESIGN';
+    $('arch-detail-copy').textContent = delta ? delta.explanation : copy;
+    $('arch-step-label').textContent = delta ? 'STEP '+(activeIntegration.steps.indexOf(delta)+1)+' / '+activeIntegration.steps.length+' · COMPONENT CHANGE' : 'EXISTING DESIGN';
     $('arch-contract-cards').replaceChildren();
-    if(delta) for(const [label,value] of [['STATE / CONTRACT',delta.state],['OUTPUT → NEXT',delta.output]]) {
-      const row=document.createElement('div'),labelEl=document.createElement('small'),valueEl=document.createElement('p');
-      labelEl.textContent=label;valueEl.textContent=value;row.append(labelEl,valueEl);$('arch-contract-cards').append(row);
+    if(delta) {
+      const action=document.createElement('strong');action.className='arch-action';action.textContent=delta.action;
+      $('arch-contract-cards').append(action);
+      const details=document.createElement('details');details.className='arch-code-details';
+      const summary=document.createElement('summary');summary.textContent='Code / State · 展開實作細節';details.append(summary);
+      for(const [label,value] of [['CODE · 新增實作',delta.change],['STATE · 要記住什麼',delta.state],['OUTPUT · 交給下一步',delta.output]]) {
+        const row=document.createElement('div'),labelEl=document.createElement('small'),valueEl=document.createElement('p');
+        labelEl.textContent=label;valueEl.textContent=value;row.append(labelEl,valueEl);details.append(row);
+      }
+      $('arch-contract-cards').append(details);
+      const nav=document.createElement('div');nav.className='arch-step-nav';
+      const index=activeIntegration.steps.indexOf(delta);
+      for(const [offset,label] of [[-1,'← 上一步'],[1,'下一步 →']]) {
+       const button=document.createElement('button');button.type='button';button.textContent=label;
+       button.disabled=!activeIntegration.steps[index+offset];
+       button.addEventListener('click',()=>selectComponent(activeIntegration.steps[index+offset].node));nav.append(button);
+      }
+      $('arch-contract-cards').append(nav);
     }
     $('arch-component-depth').hidden=!!delta;
     $('arch-component-contract').textContent=contract;
@@ -87,6 +102,7 @@
     if(activeIntegration && !activeIntegration.steps.some(s=>s.node===key))return;
     setArchitecture('after');
     describeComponent(key, true);
+    document.querySelectorAll('.integration-route [data-integration-node]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.integrationNode===key)));
     document.querySelectorAll('[data-component]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.component === key)));
     document.querySelectorAll('[data-arch-node]').forEach(a => a.classList.toggle('active-component', a.dataset.archNode === key));
   }
@@ -117,17 +133,21 @@
 
   const study = window.INITIATIVE_STUDY;
   const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const discoveries = {
-    legal: ['新公告發布', '角色：契約與法遵支援', '待續約契約可能受影響', '「值得先核對相關契約。」'],
-    pm: ['上游交付日期延後', '角色：跨團隊交付協調', '下游里程碑可能受影響', '「值得先檢查下游依賴。」'],
-    hr: ['到職流程規範更新', '角色：到離職流程支援', '現有交接清單可能過時', '「值得先核對適用清單。」'],
-    architect: ['程式加入新的外部依賴', '角色：維護架構一致性', '可能與既有 ADR 衝突', '「值得先查證設計偏差。」'],
+  const cases={
+    legal:{title:'法務／法遵：一則公告，牽動哪份契約？',role:'協助檢視待續約契約',trigger:'Event · 公告 N-17 新增附件要求',evidence:[['公告 N-17','適用 A 類委外；需核對附件 X。'],['契約 C-042','分類為 A 類；附件清單沒有 X。']],proposal:'建議檢視 C-042 是否需補附件 X。',why:'公告適用範圍與契約分類相符，現有附件清單有缺口。',deliver:'產出 N-17 條文 × C-042 附件對照，交法遵人員確認適用性。',test:'未交辦 C-042；仍應指出此契約，並附公告段落與附件清單。',negative:'把契約改成不適用的 B 類 → 不應再提 C-042。',repeat:'C-042 × N-17 已評閱 → 不再產生同一提案。'},
+    pm:{title:'PM：上游延後，想到哪個下游會受影響？',role:'追蹤跨團隊交付依賴',trigger:'Event · API-17 的交付日由 9/18 延至 9/23',evidence:[['API-17','新的交付日期：9/23。'],['UAT-08','原訂 9/21 開始；依賴 API-17。']],proposal:'建議檢視 UAT-08 的啟動日期。',why:'上游交付晚於下游開始日，且看板有明確依賴關係。',deliver:'產出受影響里程碑、依賴鏈與日期衝突對照，交 PM 決定調整。',test:'只提供日期變動，未交辦 UAT-08；應自行找出這項下游衝突。',negative:'移除 UAT-08 對 API-17 的依賴 → 不應再提此風險。',repeat:'同一日期變更已處理 → 不再提出相同延期建議。'},
+    hr:{title:'HR：流程更新，哪份到職清單漏了一項？',role:'維護授權範圍內的到職流程',trigger:'Event · Onboarding SOP 由 v4 更新為 v5',evidence:[['SOP v5','新增設備領用確認步驟。'],['模板 T-03','仍引用 v4；没有設備領用欄位。']],proposal:'建議更新到職模板 T-03。',why:'模板版本落後，且缺少新流程要求的檢查項。',deliver:'產出 T-03 的欄位差異草稿，交流程負責人審閱。',test:'未指定 T-03；應從模板引用關係找出缺項，不使用員工個資。',negative:'T-03 已升至 v5 且欄位齊全 → 不應再提更新。',repeat:'同一模板變更已接受 → 不重複建立草稿提案。'},
+    architect:{title:'Architect：新依賴出現，會不會違反既定設計？',role:'維護 ADR 與實作的一致性',trigger:'Event · PR #128 新增服務間資料庫連線',evidence:[['PR #128 diff','Service A 加入直連 Service B DB 的設定。'],['ADR-012（示例）','跨服務資料須走 API；不開放直接 DB 讀取。']],proposal:'建議檢視 PR #128 的資料存取方式。',why:'新增連線與 ADR 的存取約束可能衝突，需要作者確認。',deliver:'產出 diff 行號 × ADR 段落對照與 review 草稿，交架構師判斷。',test:'未交辦 PR #128 的架構檢查；仍應找到對應 ADR，且引用可解析。',negative:'ADR 明確允許這種連線 → 不應再報相同偏差。',repeat:'同一 diff 已被 review → 不再重提同一議題。'}
   };
-  const caseChecks = {legal: '移除公告或契約關聯 → 不得產生該契約提案', pm: '日期未變或依賴已解除 → 不得重提同一交付風險', hr: '規範不適用或超出資料權限 → 不得產生個案提案', architect: 'Diff 不存在或 ADR 已允許 → 不得提同一漂移'};
-  function renderCathay(key) {
-    const c = study.cathay[key], d = discoveries[key];
-    $('cathay-result').innerHTML = `<div class="cathay-heading"><h3>${c.title}</h3><span>${c.source}</span></div><div class="discovery-story"><div class="discovery-input"><small>Event</small><b>${d[0]}</b><span>${d[1]}</span></div><span class="discovery-link" aria-hidden="true">↗</span><div class="discovery-thought"><small>Context → Proposal</small><span>${d[2]}</span><blockquote>${d[3]}</blockquote></div><div class="discovery-delivery"><small>Human review</small><b>附來源的檢視提案</b><span>Accept / Reject / Snooze</span></div></div><div class="case-validation"><b>Negative control</b><span>${caseChecks[key]}</span></div><p class="scenario-boundary">${c.boundary}</p><details class="detail-level"><summary>Use case × Phase · Output / Validation</summary><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${phase}</small><b>${title}</b><p>${behavior}</p><details><summary>Validation</summary><p>${test}</p></details></article>`).join('')}</div></details>`;
-      document.querySelectorAll('[data-cathay]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cathay===key)));
+  const alternateEvidence={legal:[['公告 N-17','只適用 A 類委外。'],['契約 C-042','分類改為 B 類；不在本公告範圍。']],pm:[['API-17','交付日仍為 9/23。'],['UAT-08','已解除 API-17 依賴，可獨立開始。']],hr:[['SOP v5','要求設備領用確認步驟。'],['模板 T-03','已更新 v5；設備領用欄位齊全。']],architect:[['PR #128 diff','新增同一筆跨服務 DB 連線。'],['ADR-012（示例）','已明確允許該服務的此類連線。']]};
+  let cathayKey='legal';
+  function renderCathay(key,mode='new') {
+    cathayKey=key;
+    const c=study.cathay[key],d=cases[key],h=escapeHTML;
+    const result=mode==='new' ? ['PROPOSAL · 提出新工作',d.proposal,d.why] : mode==='irrelevant' ? ['SKIP · 條件不成立','不產生這件工作的提案',d.negative] : ['SKIP · 已處理','保留處理紀錄，不重提',d.repeat];
+    $('cathay-result').innerHTML=`<div class="cathay-heading"><h3>${h(d.title)}</h3><small>示意資料 · 非國泰實際個案</small></div><p class="case-duty"><b>Role</b> ${h(d.role)}<span>人只給職責，未逐件交辦下面的工作。</span></p><div class="case-evidence-flow"><div class="case-inputs"><small>${h(d.trigger)}</small><div class="case-documents">${(mode==='irrelevant'?alternateEvidence[key]:d.evidence).map(([name,fact])=>`<article><b>${h(name)}</b><p>${h(fact)}</p></article>`).join('')}</div>${mode==='handled'?`<p class="case-history"><b>Proposal history</b> ${h(d.repeat)}</p>`:''}</div><span class="case-join" aria-hidden="true">→</span><article class="case-proposal"><small>${h(result[0])}</small><h4>${h(result[1])}</h4><p>${h(result[2])}</p></article></div><div class="case-deliverable"><b>Deliverable · 人會收到什麼？</b><p>${h(mode==='new'?d.deliver:'本輪沒有新提案；稽核留下來源、比對結果與 Skip 原因。')}</p><span>Human review · Accept / Reject / Snooze</span></div><div class="case-test"><div><b>Validation · 改一下資料，看判斷是否跟著改。</b><span>預編案例切換，非即時模型測試。</span></div><div class="scenario-switch" role="group" aria-label="切換驗證條件"><button type="button" data-case-mode="new" aria-pressed="${mode==='new'}">新證據</button><button type="button" data-case-mode="irrelevant" aria-pressed="${mode==='irrelevant'}">條件不成立</button><button type="button" data-case-mode="handled" aria-pressed="${mode==='handled'}">已經處理</button></div><p><b>Pass criterion</b> ${h(mode==='new'?d.test:mode==='irrelevant'?d.negative:d.repeat)}</p></div><details class="detail-level"><summary>Phase 1 → 3 · 同一職能的責任怎麼增加？</summary><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${h(phase)}</small><b>${h(title)}</b><p>${h(behavior)}</p><details><summary>Validation</summary><p>${h(test)}</p></details></article>`).join('')}</div><p>${h(c.boundary)}</p></details>`;
+    document.querySelectorAll('[data-cathay]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cathay===key)));
+    $('cathay-result').querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>renderCathay(cathayKey,b.dataset.caseMode)));
   }
   document.querySelectorAll('[data-cathay]').forEach(b=>b.addEventListener('click',()=>renderCathay(b.dataset.cathay)));
   const traceStories = {

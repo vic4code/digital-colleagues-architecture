@@ -32,9 +32,30 @@
    {node:'tools',component:'MCP Tool Servers',change:'查證 candidate 的來源與關聯，回傳可解析證據。',state:'resolved_refs / source_versions',output:'Verified evidence / Unsupported'},
    {node:'admission',component:'Triage → Interaction surface',change:'新增 validateProposal()；檢查相關性、重複與授權，通過才進私有 Inbox。',state:'proposal_id / dedup_key / Accept / Reject / Snooze',output:'Human review → Feedback history'}]}
  };
+ // Reading layer: actions first; exact proposed contracts remain expandable.
+ const reading={
+  heartbeat:{label:'定期巡檢',headline:'時間到了，啟動一次巡檢。',rule:'Schedule 決定何時跑；Workspace 決定這輪檢查什麼。',actions:[['設定巡檢範圍','把要看的來源、檢查頻率與產物格式寫成設定。'],['到期排入工作','保存下次執行時間，服務重啟也能接回排程。'],['判斷能否執行','停用、暫停、忙碌或預算不足，就留下原因並跳過。'],['啟動巡檢並記錄','Controller 帶入巡檢設定，交給 Codex 執行並保存結果。']]},
+  monitor:{label:'有變化才執行',headline:'先查資料有沒有變，再決定要不要叫 Agent。',rule:'No change → Skip；有新資料 → Agent turn。',actions:[['定期查來源','Scheduler 到期後先查資料，不直接呼叫模型。'],['取回最新版本','MCP 讀取來源，回傳版本與可追溯的資料連結。'],['比較是否有變','Triage 比對已處理版本；沒有新資料就記錄 Skip。'],['有變才交給 Agent','Controller 把新資料交給 Codex；產物保存成功後，才標記已處理。']]},
+  event:{label:'事件到了就處理',headline:'收到事件，先確認來源，再交給 Agent。',rule:'新資料 → 開始觀察；任務完成通知 → 接回既有工作。',actions:[['驗證並接收事件','Ingress 驗證來源、排除重複通知，保存事件。'],['找到對應工作','Controller 判斷要開新工作，還是接回正在等待的任務。'],['檢查權限與預算','Triage 決定立即執行、排隊或跳過；同一事件只派送一次。'],['帶入事件並執行','Codex 使用事件內容執行，結果交回 Controller 保存。']]},
+  goal:{label:'做到驗收通過',headline:'每輪做完都驗收；沒達標才繼續。',rule:'有證據才 Complete；否則 Continue、Blocked 或 Exhausted。',actions:[['接回目標與進度','Controller 取回目標、驗收標準，以及上輪完成的部分。'],['驗收這一輪成果','Triage 檢查完成證據與剩餘預算，決定繼續或停止。'],['處理未完成部分','Codex 收到未通過的項目，只繼續剩下的工作。'],['保存續行進度','將成果與等待條件寫回，下次從這裡接續。']]},
+  pacing:{label:'調整下次檢查',headline:'Agent 建議何時再看，宿主決定是否採用。',rule:'只能調整檢查間隔；仍受最短／最長間隔限制。',actions:[['建議再檢查時機','Codex 根據本輪結果，提出下次檢查的間隔。'],['檢查間隔是否合理','Triage 驗證建議屬於本輪工作，並套用時間上下限。'],['更新下次排程','Scheduler 保存核准的到期時間，之後再啟動一輪。']]},
+  proposal:{label:'自己提出新工作',headline:'依職責與新證據，想到未被交辦的工作。',rule:'Time / Event 開啟觀察；Agent 產生候選工作，人決定是否採用。',actions:[['讀職責與現況','Workspace 提供角色、授權來源，以及過去提案與退回紀錄。'],['產生新工作候選','Codex 推導值得處理的事，附上理由；無適合工作也可 Skip。'],['查證提案依據','MCP 確認來源存在且支持提案，避免把猜測當成事實。'],['檢查後交人決定','Triage 檢查相關性、重複與授權，再送 Inbox 接受、退回或延後。']]}
+ };
+ Object.entries(plans).forEach(([key,plan])=>{Object.assign(plan,reading[key]);plan.steps.forEach((step,i)=>{[step.action,step.explanation]=plan.actions[i];});});
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function render(key){const plan=plans[key];target.innerHTML=`<div class="integration-heading"><div><small>PROPOSED IMPLEMENTATION · ${esc(plan.phase)}</small><h3>${esc(plan.name)}</h3><p>${esc(plan.summary)}</p></div><a class="source" href="${esc(plan.href)}">Reference · ${esc(plan.reference)} ↗</a></div><ol class="integration-route">${plan.steps.map(s=>`<li><button type="button" data-integration-node="${s.node}">${esc(s.component)}</button></li>`).join('')}</ol><details class="integration-contracts"><summary>Full contract · 展開各元件 Code / State / Output</summary><div class="table-scroll integration-delta" role="region" tabindex="0" aria-label="Selected mechanism implementation changes"><table><thead><tr><th>Change location</th><th>Add code / control flow</th><th>Add state / contract</th><th>Next output</th></tr></thead><tbody>${plan.steps.map((s,i)=>`<tr><th scope="row"><button type="button" data-integration-node="${s.node}"><small>STEP ${i+1} · 在原圖定位 ↘</small>${esc(s.component)}</button></th><td>${esc(s.change)}</td><td><code>${esc(s.state)}</code></td><td>${esc(s.output)}</td></tr>`).join('')}</tbody></table></div><p class="compact-note">上列 function / schema 名稱是本架構的提案契約；需在宿主實作，不是宣稱框架已提供同名 API。</p></details>`;document.querySelectorAll('[data-integration]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.integration===key)));document.dispatchEvent(new CustomEvent('integrationselect',{detail:plan}));target.querySelectorAll('[data-integration-node]').forEach(b=>b.addEventListener('click',()=>{document.dispatchEvent(new CustomEvent('integrationnode',{detail:b.dataset.integrationNode}));document.querySelector('.original-workbench').scrollIntoView({block:'start'});}));}
- document.querySelectorAll('[data-integration]').forEach(b=>b.addEventListener('click',()=>render(b.dataset.integration)));
+ function render(key){
+  const plan=plans[key];
+  target.innerHTML=`<div class="integration-heading"><div><small>${esc(plan.name)} · ${esc(plan.phase)}</small><h3>${esc(plan.headline)}</h3><p>${esc(plan.rule)}</p></div></div>
+   <ol class="integration-route" aria-label="執行順序；點選步驟查看元件修改">${plan.steps.map(s=>`<li><button type="button" data-integration-node="${s.node}" aria-pressed="false"><b>${esc(s.action)}</b><small>${esc(s.component)}</small></button></li>`).join('')}</ol>
+   <details class="integration-contracts"><summary>Implementation table · 展開完整 Code / State / Output</summary><div class="table-scroll integration-delta" role="region" tabindex="0" aria-label="Selected mechanism implementation changes"><table><thead><tr><th>Component · 修改位置</th><th>Code · 新增實作</th><th>State · 要記住什麼</th><th>Output · 交給下一步</th></tr></thead><tbody>${plan.steps.map((s,i)=>`<tr><th scope="row"><button type="button" data-integration-node="${s.node}"><small>STEP ${i+1}</small>${esc(s.component)}</button></th><td>${esc(s.change)}</td><td><code>${esc(s.state)}</code></td><td>${esc(s.output)}</td></tr>`).join('')}</tbody></table></div><p class="compact-note">Function / schema 名稱為本架構的提案契約，需在宿主實作。</p><a class="source" href="${esc(plan.href)}">Reference · ${esc(plan.reference)} ↗</a></details>`;
+  document.querySelectorAll('[data-integration]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.integration===key)));
+  document.dispatchEvent(new CustomEvent('integrationselect',{detail:plan}));
+  target.querySelectorAll('[data-integration-node]').forEach(b=>b.addEventListener('click',()=>{
+   document.dispatchEvent(new CustomEvent('integrationnode',{detail:b.dataset.integrationNode}));
+   document.querySelector('.arch-layout').scrollIntoView({block:'start'});
+  }));
+ }
+ document.querySelectorAll('[data-integration]').forEach(b=>{const p=plans[b.dataset.integration];b.innerHTML=`<span>${esc(p.name==='Evidence-grounded task proposal'?'Task discovery':p.name)}</span><strong>${esc(p.label)}</strong>`;b.addEventListener('click',()=>render(b.dataset.integration));});
  const captions={
   'Scheduled heartbeat':[['Workspace','ADD heartbeat_spec'],['Polling Scheduler','ADD persistent next_due'],['Request Triage','ADD admitWake() → Admit / Skip'],['Runtime Controller','ADD Wake envelope → Agent turn → save result']],
   'Change-gated monitor':[['Polling Scheduler','ADD pollSource()'],['MCP Tool Servers','ADD readChanges(cursor)'],['Request Triage','ADD compareSnapshot() → Changed / Skip'],['Runtime Controller','ADD Changed → turn; persist output → advance cursor']],
@@ -55,7 +76,7 @@
    const g=document.createElementNS(ns,'g');g.setAttribute('class','implementation-label');g.setAttribute('pointer-events','none');
    const rect=document.createElementNS(ns,'rect');for(const [k,v] of Object.entries({x:x+2,y:y+2,width:w-4,height:h-4,rx:4,fill:'#e5f1fd'}))rect.setAttribute(k,v);g.append(rect);
    const label=captions[plan.name]?.[i]||[step.component,step.output];
-   [[(i+1)+'  '+label[0],y+15,11,'700'],[label[1],y+29,w<220?9:10,'500']].forEach(([value,ty,size,weight])=>{
+   [[(i+1)+'  '+label[0],y+15,11,'700'],[step.action,y+30,12,'600']].forEach(([value,ty,size,weight])=>{
     const t=document.createElementNS(ns,'text');t.setAttribute('x',x+9);t.setAttribute('y',ty);t.setAttribute('font-size',size);t.setAttribute('font-weight',weight);t.setAttribute('fill','#075ba1');t.textContent=value;g.append(t);
    });a.append(g);a.setAttribute('aria-label','Step '+(i+1)+' '+step.component+': '+step.change);
   });
