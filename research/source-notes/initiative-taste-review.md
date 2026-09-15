@@ -36,3 +36,7 @@ Contextual pre-flight: light theme matches the research site; shared cream/blue 
 - 主摘要提高到 15–17px；保留 Cream 色彩與既有插畫，不增加裝飾。
 - 修正 320px 觀測分支按鈕溢出。原圖與比較表各自橫向捲動，不能造成整頁溢位。
 - 最後視覺 review 未發現阻擋問題；第二章因研究結論增加而稍長，保留為本輪取捨。
+
+## Taxonomy and implementation revision · 2026-09-15
+
+User correction: simplify the overview to Time / Event, then show implementation relationships. Removed attention/recall step controls, repeated four-layer overview, and wake story. Framework matrix precedes Flow / Sequence; technical inventory expands. After maps mechanisms to exact reference Components, with separate Before/After descriptions and individual Scheduler/Ingress, Controller/Triage highlights. Phase goals and both matrices use English-first terms. Cathay cases add negative controls. Grok Build has no verified execution Sequence and is labeled accordingly.

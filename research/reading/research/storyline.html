@@ -1,83 +1,77 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>數位同事主動性：Story line｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../index.html">概念導覽</a><a href="../../proactivity.html">研究地圖</a><a href="../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../mechanisms.html">機制圖譜</a><a href="../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="source-notes/design-philosophy.html">Design philosophy differences</a><a href="proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="source-notes/openbot.html">OpenBot pinned source review</a><a href="source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="source-notes/voyager.html">Voyager implementation review</a><a href="source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details open><summary>架構與研究紀錄</summary><a href="source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="source-notes/README.html">Proactive agent research — source and evidence index</a><a href="source-notes/design-audit.html">Taste skill audit</a><a href="source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="README.html">數位同事研究：主動工作與同事互動感</a><a href="proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="storyline.html" aria-current="page">數位同事主動性：Story line</a><a href="source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="source-notes/framework-chapter-review.html">第二章：以框架機制為單位重整 · 2026-09-14</a><a href="source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details><summary>延伸專案文件</summary><a href="../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../phases/0/README.html">Phase 0 — Prototype</a><a href="../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../overview/README.html">Overview</a><a href="../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../library.html#group-4">架構與研究紀錄</a><span>研究正文</span></div><article><h1 id="數位同事主動性story-line">數位同事主動性：Story line</h1>
-<p>更新：2026-09-14。首頁採五段、top-down 展開。統一 Cream 風格，主畫面用圖與短句，技術與證據在下一層。</p>
-<p><strong>Time／Event 喚起 → 框架怎麼實作 → 我們的 W0–W7 → 三個主動性 Phase → 國泰情境與驗證。</strong></p>
-<h2 id="01主動性的入口time-event">01｜主動性的入口：Time ＋ Event</h2>
-<p>同畫面對照人與 Agent：線索 → 連到職責／記憶 → 想到值得做的事。</p>
-<p>主張：time／event 解釋何時有觀察與思考機會；職責 × 證據 × 推論解釋想到什麼。自主性不能只靠排程，也不能把 goal 續跑當自行發現新工作。</p>
-<p>小問題：狀態門檻、程序完成與串流資料抵達都是 Event。while 是控制流，polling 是偵測方式，均不另列第三種觸發來源；環境與記憶是選題輸入。</p>
-<h2 id="02框架實作名字不同責任不同">02｜框架實作：名字不同，責任不同</h2>
-<p>可切換流程圖：Polling／Heartbeat／Cron job／Event trigger／Loop–Voyager。</p>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Initiative research — Story line｜數位同事研究</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../../research-library.css?v=4566c6ca34"><link rel="stylesheet" href="../../cream-site.css?v=8e0e49cbac"><link rel="stylesheet" href="../../cream-library.css?v=1875bcf9d3"></head><body class="reader"><a class="skip" href="#article">跳到正文</a><header class="cream-header"><a class="cream-brand" href="../../index.html"><span class="cream-mark" aria-hidden="true">c<span>·</span></span><span>數位同事<small>THE COLLEAGUE STUDY</small></span></a><nav aria-label="主要導覽"><a href="../../index.html">概念導覽</a><a href="../../proactivity.html">研究地圖</a><a href="../../show-me-colleague-interaction.html">互動實驗室</a><a href="../../mechanisms.html">機制圖譜</a><a href="../../library.html" aria-current="page">研究書架</a></nav></header><div class="reading-layout"><aside class="reading-nav" aria-label="研究章節"><p class="eyebrow">RESEARCH CHAPTERS</p><details><summary>從人到 Agent</summary><a href="source-notes/proactivity-architecture-guide.html">Proactivity · 從認知到 Before / After 架構</a><a href="source-notes/human-to-agent.html">從人的主動行為到 Agent 實作</a><a href="source-notes/design-philosophy.html">Design philosophy differences</a><a href="proactive-work.html">主動工作：從觸發、判斷到行動</a><a href="source-notes/proactive-trigger-mechanisms.html">主動的觸發與進階機制：time、event 之外到底還有什麼？</a><a href="source-notes/framework-terminology.html">Framework terminology · 框架原生術語與中文說明</a><a href="source-notes/loop-graph-implementation.html">Loop and graph implementation audit — 2026-09-09</a></details><details><summary>同事互動與責任</summary><a href="colleague-interaction.html">同事互動感：不只會回話，還要讓合作接得下去</a><a href="source-notes/colleague-experience.html">同事感怎麼做：持續負責一件事，直到有結果</a><a href="source-notes/commitment-followup-design.html">Remembered-commitment follow-up: OpenClaw integration design</a><a href="source-notes/commitment-memory.html">OpenClaw commitment recall: positive callable path and limits</a><a href="channel-selection.html">Channel Selection for a Codex-Based Digital Colleague</a><a href="source-notes/initiative-outreach.html">Initiative, remembered commitments and contacting people</a></details><details><summary>框架研究</summary><a href="source-notes/openclaw.html">OpenClaw source review — 2026-09-08</a><a href="source-notes/openclaw-inferred-commitments.html">OpenClaw inferred commitments：曾有實作，現已完整退役</a><a href="source-notes/hermes.html">Hermes source review — 2026-09-08</a><a href="source-notes/openbot.html">OpenBot pinned source review</a><a href="source-notes/grok-reconstructed.html">Grok Bot 0.18: reconstructed implementation review</a><a href="source-notes/voyager.html">Voyager implementation review</a><a href="source-notes/official-claims.html">Official concepts and implementation evidence</a></details><details><summary>觀察、主動與優先排序</summary><a href="source-notes/environment-observation.html">Environment observation: acquisition and model dispatch</a><a href="source-notes/observation-openclaw.html">OpenClaw observation acquisition — pinned source audit</a><a href="source-notes/observation-hermes.html">Hermes — Cron monitor mode: observe cheaply before waking the agent</a><a href="source-notes/initiative-openclaw.html">OpenClaw: deciding to contact a person</a><a href="source-notes/initiative-hermes.html">Hermes: initiative and recipient selection</a><a href="source-notes/initiative-grok.html">Grok Bot reconstruction: initiative and outbound action</a><a href="source-notes/prioritization.html">Prioritization / 下一件事為什麼先做？</a><a href="source-notes/mechanism-inventory.html">Mechanism inventory audit — 2026-09-09</a></details><details open><summary>架構與研究紀錄</summary><a href="source-notes/phase-0.5-mapping.html">Framework evidence to existing phases and architecture</a><a href="source-notes/colleague-prototype.html">Supporting research: colleague notes and validation prototype</a><a href="source-notes/README.html">Proactive agent research — source and evidence index</a><a href="source-notes/design-audit.html">Taste skill audit</a><a href="source-notes/taste-redesign-audit.html">Research report presentation audit — 2026-09-09</a><a href="source-notes/presentation-design-audit.html">研究站重設：敘事與視覺</a><a href="README.html">數位同事研究：主動工作與同事互動感</a><a href="proactive-research-summary.html">主動研究：相容閱讀入口</a><a href="storyline.html" aria-current="page">Initiative research — Story line</a><a href="source-notes/initiative-implementation-guide.html">主動性：入口、實作、三個 Phase 與觀測</a><a href="source-notes/initiative-taste-review.html">Initiative homepage: taste review</a><a href="source-notes/framework-chapter-review.html">第二章：以框架機制為單位重整 · 2026-09-14</a><a href="source-notes/diagram-project-style.html">Diagram style · 專案圖表設定</a></details><details><summary>延伸專案文件</summary><a href="../phases/0.5/README.html">Phase 0.5 — One face-to-face interface, many tools</a><a href="../decisions/ADR-019-single-interaction-surface.html">ADR-019 — One interaction surface; surrounding services are bidirectional tools</a><a href="../decisions/ADR-003-linear-as-control-plane.html">ADR-003 — Linear as control plane for task dispatch, not as system of record</a><a href="../decisions/ADR-009-source-connectors-distinct-from-channels.html">ADR-009 — Source connectors are a distinct abstraction from channel adapters</a><a href="../decisions/ADR-010-email-per-colleague-identity.html">ADR-010 — Email dispatch addresses the colleague, not a shared inbox</a><a href="../decisions/ADR-020-event-driven-service-integration.html">ADR-020 — Separate webhook ingress from MCP tool execution</a><a href="../decisions/ADR-018-adopt-openclaw-codex.html">ADR-018 — Adopt OpenClaw + Codex; retire the hand-built channel adapter</a><a href="../decisions/ADR-008-vdi-presentation-only-channel.html">ADR-008 — VDI is a presentation-only channel, never an execution target</a><a href="../decisions/ADR-017-initiator-test.html">ADR-017 — The initiator test: channels are justified by who initiates, not by reach</a><a href="../phases/0/README.html">Phase 0 — Prototype</a><a href="../decisions/ADR-004-worker-pool-externalized-state.html">ADR-004 — Worker pool with externalized state, not per-agent containers</a><a href="../decisions/ADR-006-audit-log-retention.html">ADR-006 — Audit log storage and retention for legal compliance</a><a href="../overview/README.html">Overview</a><a href="../decisions/ADR-007-symphony-inspired-orchestration.html">ADR-007 — Symphony-inspired orchestration model for Phase 1+</a><a href="../phases/2/README.html">Phase 2 — Generalized Platform</a><a href="../phases/3/README.html">Phase 3 — Enterprise Reach &amp; Resilience</a><a href="../decisions/ADR-001-file-based-state-in-phase0.html">ADR-001 — File-based state in Phase 0</a><a href="../overview/worldview.html">Worldview — what a digital colleague fundamentally is</a><a href="../decisions/ADR-005-human-in-the-loop-gates.html">ADR-005 — Human-in-the-loop gates for contract output</a><a href="../decisions/ADR-015-codex-harness-own-surface.html">ADR-015 — Build on the official codex harness; own surface = channel adapter only</a><a href="../decisions/ADR-002-fargate-not-eks.html">ADR-002 — Fargate for Phase 1, not EKS / Kubernetes</a><a href="../phases/1/README.html">Phase 1 — Legal MVP</a><a href="../decisions/ADR-014-worker-pool-placement.html">ADR-014 — Worker pool placement: federated, pull-based pools by location</a><a href="../overview/logical-architecture.html">Logical architecture — the capability model</a><a href="../decisions/ADR-013-capability-oriented-logical-architecture.html">ADR-013 — Capability-oriented logical architecture; clouds are bindings</a><a href="../decisions/ADR-011-alb-not-api-gateway.html">ADR-011 — ALB + orchestrator as the gateway, not AWS API Gateway</a><a href="../decisions/ADR-012-streaming-return-path.html">ADR-012 — Worker → orchestrator streaming return path</a></details></aside><main id="article" tabindex="-1"><div class="article-kicker"><a href="../../library.html#group-4">架構與研究紀錄</a><span>研究正文</span></div><article><h1 id="initiative-research-story-line">Initiative research — Story line</h1>
+<p>Updated: 2026-09-15. Single narrative: <strong>Time / Event → Framework mechanisms → Component integration → Phase goals → Cathay validation</strong>. English technical terms first; Chinese explains meaning. Tables establish relationships before expandable source details.</p>
+<h2 id="01-time-event">01 · Time / Event</h2>
+<p>Human and Agent use the same report/meeting example. Only two controls: Time (scheduled check) and Event (report update). Remove attention/recall/thought substeps.</p>
+<p><strong>Conclusion:</strong> the reviewed implementation paths do not require a third Trigger category. State change, Process completion and Stream data are Event. Polling detects changes; while is control flow. This classification does not claim every internal condition uses an event object or bus.</p>
+<p>Proactivity still means generating a worthwhile, unassigned task. Time / Event supply an execution opportunity; they do not prove task discovery.</p>
+<h2 id="02-framework-trigger">02 · Framework × Trigger</h2>
+<p>One visible matrix: Framework | Time | Event | Key implementation. Click a framework for its representative Flow / Sequence; expand Mechanisms &amp; source for the full inventory and evidence limits.</p>
 <ul>
-<li>Polling：間隔到期 → 讀來源 → hash／版本差異 → 必要才推論。</li>
-<li>Heartbeat：設定節律 → monitor job → wake admission → 巡檢回合。</li>
-<li>Cron：規則＋時區 → next due → occurrence queue → claim／執行。</li>
-<li>Event：通知 → 驗證／去重 → 關聯 → wake／turn。</li>
-<li>Voyager：learn loop → curriculum 選題 → rollout → 更新進度 → 下一輪。</li>
+<li>OpenClaw: managed heartbeat job → Scheduler → Wake admission → Agent turn. Event hooks and watchers enter compatible dispatch paths; next_check is a bounded pacing proposal.</li>
+<li>Hermes: Cron monitor → source hash → unchanged Skip / changed Agent. Baseline saved before execution is observation state, not successful processing.</li>
+<li>Claude Code: goal evaluator after turn → Continue / Stop; /loop and Channels provide other Time / Event entries.</li>
+<li>Codex: active goal + session idle → state lock → start_turn_if_idle. This continues an assigned goal.</li>
+<li>Grok Build: public creation/dispatch interface unverified; show evidence gap, do not invent execution Sequence.</li>
+<li>Voyager: learn while → curriculum → rollout/critic → progress/skills → next task. Completion is a useful Event abstraction; code directly continues without a timer or event bus.</li>
+<li>OpenBot: due routine → occurrence queue → claim/lease → worker. Lease heartbeat is ownership maintenance, not an Agent wake.</li>
 </ul>
-<p>展開後列可調用介面、內部路徑、原始碼。討論：polling 可藏在 event adapter 後面；heartbeat 不是 lease；cron 不必是 OS crontab；wait_ticks 不是選題 cron。</p>
-<p>框架表以 config／tool／CLI／RPC 入口判定。Grok Build 與非官方 Grok Bot 重建分列；快照、現在文件與組合提案分開。</p>
-<h2 id="03我們的原架構接上-w0w7">03｜我們的原架構，接上 W0–W7</h2>
-<p>Before／After 使用 <a href="../../../phases/0.5/reference-architecture.svg">Phase 0.5 原圖</a>，元件不移位；hover 說明，點擊固定並展開責任／接線／來源。</p>
-<p>W0 喚醒 → W1a 撈事件 → W1b 零模型准入 → W2 role_card → W3 對帳 → W4 有界檢索 → W5 執行 → W6 私有提案 → W7 寫回。</p>
-<p>W2 身分投影與 W3 對帳標示原 repo 缺口；W7 cursor 最後更新。沒有假設另造一個常駐的想法產生服務。</p>
-<h2 id="04三個-phase人給的越來越少">04｜三個 Phase：人給的越來越少</h2>
+<p>Sequence diagrams are source-path summaries, not runtime traces. Fixed revisions and official-document dates remain visible; full inventory retains interface/source links.</p>
+<h2 id="03-mechanism-component">03 · Mechanism → Component</h2>
+<p>Reuse the original architecture coordinates. Before describes Existing design; After describes Proposed integration with separate hover/click text.</p>
+<ul>
+<li>Polling Scheduler: Schedule / next_due / occurrence / Monitor hash / Adaptive pacing.</li>
+<li>Event Ingress: Validation / Dedup / Event envelope / source cursor / completion routing.</li>
+<li>Runtime Controller: Durable dispatch / active goal / Checkpoint / Resume.</li>
+<li>Triage: Admission / Budget / Completion validator / Proposal gate.</li>
+<li>Workspace and State contracts: Role card / Permissions / Waiting / Completed / Proposal history.</li>
+<li>Codex app-server: Fixed output → Goal execution → Task proposal, by Phase.</li>
+<li>MCP and Interaction: Evidence verification / approved action / Proposal inbox / Accept / Reject / Snooze.</li>
+</ul>
+<p>State schemas and loaders are proposed responsibilities, not extra existing services. Codex reference design and separately researched OpenClaw prototype must not be conflated. Remove the wake-story vignette; engineering wake-cycle remains available through its original source link.</p>
+<h2 id="04-phase-goals">04 · Phase goals</h2>
 <div class="table-scroll" role="region" aria-label="研究比較表" tabindex="0"><table>
 <thead>
 <tr>
 <th>Phase</th>
-<th>人給什麼</th>
-<th>Agent 自己決定什麼</th>
-<th>原專案狀態</th>
+<th>Human input</th>
+<th>Agent output</th>
+<th>Exit criteria</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1 固定節律</td>
-<td>做什麼＋何時做</td>
-<td>固定產物，不自行續跑／找事</td>
-<td>有驗證版</td>
+<td>P1 Scheduled</td>
+<td>Task + Schedule</td>
+<td>Fixed output / Skip</td>
+<td>On time, no duplicates, explain skips</td>
 </tr>
 <tr>
-<td>2 半主動／目標驅動</td>
-<td>目標＋完成標準</td>
-<td>步驟、有界接續，達標／阻塞／耗盡停止</td>
-<td>規劃</td>
+<td>P2 Goal-driven</td>
+<td>Goal + Acceptance criteria</td>
+<td>Validated result</td>
+<td>Complete only with evidence; otherwise Continue / Blocked / Exhausted</td>
 </tr>
 <tr>
-<td>3 全主動／自主跟進</td>
-<td>願景＋角色／權限／知識庫</td>
-<td>自行推斷值得跟進的事，形成有據提案</td>
-<td>規劃</td>
+<td>P3 Self-initiated</td>
+<td>Vision + Role + Permissions</td>
+<td>New proposal</td>
+<td>No itemized assignment; grounded and relevant; Human review</td>
 </tr>
 </tbody>
 </table></div>
-<p>以使用者提供的 Notion 導讀及 repo <code>scenario-legal.md</code> §§6–8 為準。這是技術成熟度，<strong>不是部署 Phase 0–4</strong>；time／event 可用於三個階段。</p>
-<p>主圖之後一張框架 × Phase 表。每格列介面、可借用技術、還缺什麼；「有零件」不代表整階段達標。嚴格 P3 的五家歸零限於原研究判準與快照，不宣稱全市場沒有探索能力。</p>
-<h2 id="05國泰場景怎麼用怎麼證明">05｜國泰場景：怎麼用、怎麼證明</h2>
-<p>四個角色可切換：法務／法遵、PM、人資、架構師。每個角色同屏對照 P1 固定產物、P2 指定目標、P3 自行找事，點開驗收。</p>
-<p>觀測圖：wake_source → anchor → proposal／skip_reason → inbox／feedback → outcome／cursor。</p>
-<p>三個可切換分支：有據提案、正常靜默、喚醒失效。前兩者有可追查紀錄；第三者要由獨立觀測器發現到期卻沒有紀錄。</p>
-<p>驗收從「沒過代表什麼」出發：去重、並發、角色 sha、等待對帳、硬預算、validator、錨點、退回／延後、cursor 恢復。量測提案品質與覆蓋率，而不是把模型呼叫數當主動性。</p>
-<p>來源、實作路徑與指標定義：<a href="source-notes/initiative-implementation-guide.html">實作導讀</a>。</p>
-<h2 id="2026-09-14從人的想到開場">2026-09-14：從人的「想到」開場</h2>
-<p>首頁先呈現同事看到新報表、想起下午會議、自己想到先核對簡報的插畫情境；右側同步對照 Agent。可切換「看到新報表／快到開會時間」與三個思考時刻。Time／Event 的抽象在人的情境之後展開。架構圖維持原元件位置，移除數字徽章，側欄按原圖由上而下排列；執行生命週期另見 W0–W7。</p>
-<h2 id="第二章修訂框架-機制-實作">第二章修訂：框架 → 機制 → 實作</h2>
-<p>先選 OpenClaw、Hermes、Claude Code、Codex、Grok Build；另附 Voyager 的選題研究與 OpenBot 可靠派工。每家呈現主要機制及判定界線，點開看介面、原碼路徑與證據。Polling 等術語降為補充，避免先拿例子當成完整分類。見 <a href="source-notes/framework-chapter-review.html">本輪查核</a>。</p>
-<h2 id="喚醒流程的閱讀順序">喚醒流程的閱讀順序</h2>
-<p>先用報表 v3 與下午會議呈現：收到線索 → 程式判斷是否要跑 → 載入角色與工作進度 → 查證並提出建議 → 收件匣與寫回。沒有新資料，在模型前結束並留下原因。W0–W7 為工程階段代號，移至展開對照；自主選題屬 Phase 3 提案，不能把流程骨架視為已實作。</p>
-<h2 id="agent-team-review可讀性與-insight-2026-09-14">Agent team review：可讀性與 insight · 2026-09-14</h2>
-<p>三路獨立 review（敘事、研究判準、桌機與手機視覺）後，第二章先說研究發現，再逐家標示工作來源與實作；第三章先指出角色、進度與提案接線，再讀原圖；第四章以人的交辦語句對照三階段，技術矩陣收合；第五章先呈現角色如何由線索提出檢視建議，再區分提案、正確靜默與故障。工程 trace 與欄位不再預設露出。</p>
-<p>核心判斷：節律調整不等於選題；目標續跑不等於發現新工作；評估主動性要同時看有用、漏掉與重複。</p></article><footer class="article-footer"><a href="../../library.html">← 回研究目錄</a><a href="source-notes/initiative-implementation-guide.html">下一篇：主動性：入口、實作、三個 Phase 與觀測 →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
+<p>Two compact matrices stay visible: Framework × Phase (reusable building blocks, not full Phase certification) and Capability × Phase (Trigger &amp; Admission; Context &amp; State; Agent Runtime; Validation &amp; Review). The Trigger taxonomy does not change across phases.</p>
+<h2 id="05-cathay-use-cases-validation">05 · Cathay use cases / Validation</h2>
+<p>Each role shows Event → Context → Proposal → Human review, plus a concrete Negative control. P1/P2/P3 outputs and checks expand below it.</p>
+<p>Observability separates Proposal, Skip and Failure. Metrics cover useful proposals, missed opportunities and duplicates; detailed denominators and raw Trace expand. These are hypothetical cases and pre-authored fixtures, not validated Cathay deployment results.</p>
+<h2 id="presentation-change-record">Presentation change record</h2>
+<p>2026-09-15 supersedes earlier attention/recall substeps, four-layer main taxonomy, default framework inventory and wake-story vignette. The research evidence remains; the homepage now uses one trigger classification and explicit mechanism/component/phase mappings.</p></article><footer class="article-footer"><a href="../../library.html">← 回研究目錄</a><a href="source-notes/initiative-implementation-guide.html">下一篇：主動性：入口、實作、三個 Phase 與觀測 →</a></footer></main><aside class="page-toc" aria-label="本篇目錄"><p class="eyebrow">本篇內容</p><div class="toc">
 <ul>
-<li><a href="#01主動性的入口time-event">01｜主動性的入口：Time ＋ Event</a></li>
-<li><a href="#02框架實作名字不同責任不同">02｜框架實作：名字不同，責任不同</a></li>
-<li><a href="#03我們的原架構接上-w0w7">03｜我們的原架構，接上 W0–W7</a></li>
-<li><a href="#04三個-phase人給的越來越少">04｜三個 Phase：人給的越來越少</a></li>
-<li><a href="#05國泰場景怎麼用怎麼證明">05｜國泰場景：怎麼用、怎麼證明</a></li>
-<li><a href="#2026-09-14從人的想到開場">2026-09-14：從人的「想到」開場</a></li>
-<li><a href="#第二章修訂框架-機制-實作">第二章修訂：框架 → 機制 → 實作</a></li>
-<li><a href="#喚醒流程的閱讀順序">喚醒流程的閱讀順序</a></li>
-<li><a href="#agent-team-review可讀性與-insight-2026-09-14">Agent team review：可讀性與 insight · 2026-09-14</a></li>
+<li><a href="#01-time-event">01 · Time / Event</a></li>
+<li><a href="#02-framework-trigger">02 · Framework × Trigger</a></li>
+<li><a href="#03-mechanism-component">03 · Mechanism → Component</a></li>
+<li><a href="#04-phase-goals">04 · Phase goals</a></li>
+<li><a href="#05-cathay-use-cases-validation">05 · Cathay use cases / Validation</a></li>
+<li><a href="#presentation-change-record">Presentation change record</a></li>
 </ul>
 </div>
 </aside></div><script src="../../research-library.js?v=9e6a3877b9"></script></body></html>

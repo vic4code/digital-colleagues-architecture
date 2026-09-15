@@ -15,7 +15,7 @@ window.FRAMEWORK_MECHANISMS = {
         "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-execution.ts#L161"
       ],
       [
-        "條件、串流、程序結束",
+        "Condition / Stream / On-exit",
         "wake",
         "條件滿足，才執行工作",
         "Automations schedule：on-exit／stream；condition watcher",
@@ -51,7 +51,19 @@ window.FRAMEWORK_MECHANISMS = {
         "https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/docs/tools/skill-workshop.md#L12"
       ]
     ],
-    "origin": "人設定巡檢與目標；Agent 可調整檢查節律。"
+    "origin": "人設定巡檢與目標；Agent 可調整檢查節律。",
+    "flow": {
+      "title": "Scheduled heartbeat",
+      "steps": [
+        "Heartbeat config",
+        "Managed job",
+        "Scheduler due",
+        "Wake admission",
+        "Agent turn"
+      ],
+      "sequence": "sequence-diagrams/framework-openclaw.svg",
+      "note": "Busy / policy rejection → Skip；event wake 可接同一 admission。next_check 為另一路 paced job 能力。"
+    }
   },
   "hermes": {
     "name": "Hermes",
@@ -105,7 +117,19 @@ window.FRAMEWORK_MECHANISMS = {
         "https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/agent/turn_finalizer.py#L591"
       ]
     ],
-    "origin": "人給指令、目標或看板任務；系統判斷時機與可執行項。"
+    "origin": "人給指令、目標或看板任務；系統判斷時機與可執行項。",
+    "flow": {
+      "title": "Cron monitor",
+      "steps": [
+        "Cron tick",
+        "Read source",
+        "Compare hash",
+        "Changed → Agent",
+        "Delivery policy"
+      ],
+      "sequence": "sequence-diagrams/framework-hermes.svg",
+      "note": "Hash baseline 先於 Agent 存入；代表看過，不代表已處理或投遞。"
+    }
   },
   "claude": {
     "name": "Claude Code",
@@ -141,7 +165,19 @@ window.FRAMEWORK_MECHANISMS = {
         "https://code.claude.com/docs/en/hooks#stop"
       ]
     ],
-    "origin": "人給 prompt 或完成條件；hook／evaluator 判斷是否續行。"
+    "origin": "人給 prompt 或完成條件；hook／evaluator 判斷是否續行。",
+    "flow": {
+      "title": "Goal continuation",
+      "steps": [
+        "Turn ends",
+        "Goal evaluator",
+        "Condition unmet",
+        "Next turn",
+        "Re-evaluate"
+      ],
+      "sequence": "sequence-diagrams/framework-claude.svg",
+      "note": "Met / impossible / actionable error → Stop。Stop hook 是另一個可自訂的完成檢查入口。"
+    }
   },
   "codex": {
     "name": "Codex",
@@ -168,7 +204,19 @@ window.FRAMEWORK_MECHANISMS = {
         "reading/research/source-notes/proactive-trigger-mechanisms.html"
       ]
     ],
-    "origin": "人給目標；runtime 在未完成時接續下一輪。"
+    "origin": "人給目標；runtime 在未完成時接續下一輪。",
+    "flow": {
+      "title": "Active goal + idle",
+      "steps": [
+        "Session idle",
+        "Read active_goal",
+        "Lock + recheck",
+        "Start turn",
+        "Persist status"
+      ],
+      "sequence": "sequence-diagrams/framework-codex.svg",
+      "note": "這是既定 Goal 的 continuation，不是 Agent 自行建立新工作。"
+    }
   },
   "grok": {
     "name": "Grok Build",
@@ -177,7 +225,7 @@ window.FRAMEWORK_MECHANISMS = {
     "verdict": "原研究有續行與內部 timer 記載；本輪未取得可重驗的公開建立介面，無法和前四家等強度比較。",
     "items": [
       [
-        "目標續行／內部排程線索",
+        "Continuation / Timer evidence",
         "continue",
         "已交辦工作接續；公開入口待核對",
         "未驗證可調用的建立介面",
@@ -186,7 +234,17 @@ window.FRAMEWORK_MECHANISMS = {
         "https://github.com/shane01526/agent_initiate/blob/main/2026_09/heartbeat-lifecycle.html"
       ]
     ],
-    "origin": "原研究記載目標續行；公開建立介面仍待驗證。"
+    "origin": "原研究記載目標續行；公開建立介面仍待驗證。",
+    "flow": {
+      "title": "Evidence boundary",
+      "steps": [
+        "Relative timer clue",
+        "Continuation clue",
+        "Public API unverified"
+      ],
+      "sequence": null,
+      "note": "Grok Build 證據不足：這是查核邊界圖，不是已證實 execution sequence。"
+    }
   },
   "voyager": {
     "name": "Voyager",
@@ -222,7 +280,19 @@ window.FRAMEWORK_MECHANISMS = {
         "https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/skill.py#L57"
       ]
     ],
-    "origin": "Agent 依環境與進度產生新題，範圍是被授予的探索任務。"
+    "origin": "Agent 依環境與進度產生新題，範圍是被授予的探索任務。",
+    "flow": {
+      "title": "Automatic curriculum",
+      "steps": [
+        "learn()",
+        "Curriculum",
+        "Rollout + critic",
+        "Update progress",
+        "Next task"
+      ],
+      "sequence": "sequence-diagrams/framework-voyager.svg",
+      "note": "rollout 回傳後由 while 直接接續；沒有固定選題 timer，也不需要 event bus。"
+    }
   },
   "openbot": {
     "name": "OpenBot",
@@ -249,6 +319,18 @@ window.FRAMEWORK_MECHANISMS = {
         "https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/agents/handoff-runner.ts#L391"
       ]
     ],
-    "origin": "人設定 routine，或其他 Agent 委派；queue 負責可靠交付。"
+    "origin": "人設定 routine，或其他 Agent 委派；queue 負責可靠交付。",
+    "flow": {
+      "title": "Durable routine",
+      "steps": [
+        "Routine due",
+        "Occurrence queue",
+        "Claim / lease",
+        "Worker turn",
+        "Result / next due"
+      ],
+      "sequence": "sequence-diagrams/framework-openbot.svg",
+      "note": "Lease heartbeat 續租執行權，不會啟動新的 Agent turn；handoff / relay 另處理 Event。"
+    }
   }
 };
