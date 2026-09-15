@@ -72,3 +72,7 @@ Reduce simultaneous choices and duplicate explanations. Architecture opens on th
 ## Presentation edition · 2026-09-15
 
 The 16:9 presentation in slides/index.html contains 14 main slides and two appendices for a roughly 15-minute sharing session. A daily-life milk-shopping example introduces Time and Event. A fictional work case, notice N-17 and contract C-042, then connects implementation and acceptance. Four architecture slides keep component positions fixed: Before → Time entry → Event entry (alternative) → shared Task discovery. Historical commitments and the full architecture are appendices. Key content remains visible in the PDF; speaker notes provide transitions and source context.
+
+## Evidence and engineering decisions · Presentation revision
+
+Slide 3 derives Time-based / Event-based from observed execution paths. Slide 4 compares six representative implementation patterns, callable entry points and execution semantics. Architecture slides connect the Hermes monitor baseline tradeoff to atomic observation/pending-work persistence, then specify Controller → Codex → Triage handoffs. Validation uses counterfactual fixtures, transaction-boundary fault injection and a controlled fixed-policy/discovery/model-history-ablation experiment. Pre-gate candidate repetition is measured separately from Inbox duplication; results remain proposed, not observed.

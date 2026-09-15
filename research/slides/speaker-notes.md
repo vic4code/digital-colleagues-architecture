@@ -24,25 +24,31 @@ Architecture continuity：第 6 頁是 Before；第 7、8 頁是 Time／Event **
 
 來源：生活示意類比，不是人類認知模型的實驗結論。
 
-## 03 · Framework evidence — 先追下一輪怎麼開始
+## 03 · Implementation → Finding — 歸納 Time-based／Event-based
 
-這張表先看原碼和可用介面，再做分類。OpenClaw、Hermes、Claude Code 有排程與事件路徑。Codex 這次追的是 active goal 在 session idle 時續行。Voyager 則在 rollout 回傳後，由 while 直接選下一題；可以把完成條件抽象為內部 Event，但不是說它有 event bus。Grok Build 的公開建立介面還有空缺，因此不代填。結論只涵蓋本次確認的路徑。
+先指左邊的實作證據，再指右邊結論。OpenClaw、Hermes、Claude 與 OpenBot 的排程或巡檢，在時間條件成立後啟動；Hooks、Channels 在通知抵達後執行；Codex active-goal 路徑依 thread idle 接續，Voyager 在 rollout 回傳後選下一題。因此，本次已確認路徑可歸納為 Time-based／Event-based，沒有找到必須另立的第三類啟動原因。
 
-講圖：只帶三種代表：排程／通知、idle continuation、rollout completion；不逐列朗讀。
+這是工程分類：timer 本身也能視作事件，但本研究把定時觀察與非時間事件分開，便於比較延遲、成本與恢復。Internal event 不表示框架真的使用 event bus；Voyager 是持續執行的 while loop。這也不宣稱人類認知只有兩種機制。Grok Build 的公開可重驗入口不足，沒有拿它補滿結論。
 
-轉場：名字很多，但這些機制其實各自負責不同部分。
+講圖：排程到期 → Time；通知／完成／閒置 → Event。最後讀研究結論，不逐項唸名詞。
 
-來源：[OpenClaw](../source-notes/openclaw.md)、[Hermes](../source-notes/hermes.md)、[Trigger audit](../source-notes/proactive-trigger-mechanisms.md)、[Voyager curriculum](https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L240)。
+轉場：Time／Event 是啟動原因；同一類入口，各框架用了哪些不同的實作 Pattern？
 
-## 04 · Mechanism relationships — 各自負責什麼
+來源：[Trigger audit 與固定原碼](../source-notes/proactive-trigger-mechanisms.md)、[OpenClaw audit](../source-notes/openclaw.md)、[Hermes audit](../source-notes/hermes.md)、[Voyager curriculum](https://github.com/MineDojo/Voyager/blob/55e45a880755d0c8c66ca7fb5fe7962ac8974f89/voyager/agents/curriculum.py#L240)。
 
-Cron 決定排程，Heartbeat 是一種巡檢回合，Polling 是讀來源、發現變化的方法；它們可以組合在同一條路徑。Time 到期後，可以先讀來源、比較，再決定是否叫模型。Event 路徑先驗來源、去重，再過 admission。狀態門檻、程序完成和串流資料，也可以構成事件條件。Goal loop 則是既定目標的續行控制，和觸發入口是不同問題。
+## 04 · Framework mechanisms — 六種實作 Pattern
 
-講圖：沿 Time 一排走，再沿 Event 一排走，最後落在兩排共用的 Agent turn。
+這頁比較已查核框架中的代表做法，不是市場使用率排名，也不是六種互斥的 Trigger。第一列 Scheduled job，Claude CronCreate、OpenBot create_routine、OpenClaw Cron 與 Hermes cronjob_manage 把時間與工作交給排程。持久性、session 作用域與 missed-run 政策不能視為一樣。第二列 Heartbeat，OpenClaw 與 Claude bare /loop 都可承載週期巡檢；重點是到期讀 context，再判斷是否需要動作。
 
-轉場：Trigger 讓一輪開始，但誰決定這輪值得做什麼？
+第三列是 Hermes Change-gated monitor：先讀 script／URL，算 hash，unchanged 就不進模型。它是在排程上加變化過濾，不是更聰明的 heartbeat；timestamp 或順序變化仍可能造成假變化。第四列 OpenClaw Hooks／Claude Channels 把外部通知送進 session；要區分可信宿主指令與不可信來源內容。
 
-來源：[OpenClaw scheduler](https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-scheduler.ts#L55)、[Hermes monitor](https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py)、[Claude scheduling](https://code.claude.com/docs/en/scheduled-tasks)。
+第五列 Goal continuation 是 Codex、Claude、Hermes 各自的既定目標續行，實際停止與評估機制不相同。Codex 查核路徑是 on_thread_idle → continue_if_idle，不宣稱三家共用此函式或同一完成評估器。第六列 Voyager 的 Curriculum 在 rollout 結束後讀環境、選下一題，確實有選題政策，但不是現成企業提案管理器。
+
+講圖：先用 Scheduled job／Heartbeat／Monitor 說明可組合；再帶 Event 注入；最後對比 Goal 續行與 Curriculum 選題。每列右邊是代表執行語意，不是該框架所有路徑的完整 sequence diagram。
+
+轉場：既然可以用排程叫醒一般 Agent turn，真正的差異就是醒來後的任務政策：照單做，還是依職責找新工作？
+
+來源：[OpenClaw scheduler](https://github.com/openclaw/openclaw/blob/91ea838947d30a65f1299b05fa42071917f2a293/src/cron/service/timer-scheduler.ts#L55)、[Hermes cronjob tool](https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/tools/cronjob_tools.py#L525)、[Hermes monitor](../source-notes/observation-hermes.md)、[Claude scheduling](https://code.claude.com/docs/en/scheduled-tasks)、[Claude Channels](https://code.claude.com/docs/en/channels)、[OpenBot routine interface](https://github.com/CopilotKit/OpenBot/blob/7b94a0b802732e6491634160cf9ed3fcfb813424/server/src/plugins/builtin-routines.ts#L74)、[Goal／Voyager 固定路徑](../source-notes/proactive-trigger-mechanisms.md)。
 
 ## 05 · Key insight — 定期觀察，也能想到新工作
 
@@ -60,19 +66,23 @@ Cron 決定排程，Heartbeat 是一種巡檢回合，Polling 是讀來源、發
 
 講圖：先定位 workspace、runtime、integration 三層。翻頁時不要重新介紹原圖；讓觀眾追藍色修改。
 
-轉場：先接 Time：定期讀公告，有變化才交給 Agent。
+轉場：先接 Time：定期讀公告，再分開管理來源變化與未完成工作。
 
 來源：[Phase 0.5 reference architecture](../../phases/0.5/reference-architecture.svg)。
 
-## 07 · Time entry — Change-gated monitor
+## 07 · Time entry — Change detection 與 Recovery 分開
 
-第一條路從 Scheduler 到期開始。MCP 讀公告來源，Triage 比較版本；沒變化就留下 Skip，有變化才由 Controller 派送。這裡 observed_hash 和 processed_cursor 要分開：看過某個版本，不代表那批資料已成功處理。產物可靠保存後，才推進處理進度。這是我們要補的宿主契約；零模型回合也仍有輪詢、網路和儲存成本。
+我們借鏡 Hermes 的 change gate，但要看清楚狀態語意。固定原碼在呼叫模型之前保存 monitor hash。這能抑制相同內容重複觸發，但 downstream 失敗時，下輪 unchanged 不會單靠這個 gate 重建未完成工作。這不是斷言整個 Hermes 一定丟件，而是此路徑的具體取捨。
 
-講圖：順著 1 Scheduler、2 MCP、3 Triage、4 Controller，停在 hash 與 cursor 的區別。
+因此我們的宿主提案將 observed_hash 與 pending_work 分開：讀到新版本時，把 observation snapshot、版本與 pending work 在同一交易中可靠保存，再交模型。不能只存 hash，否則在 hash 與 pending 之間中斷仍有缺口。Controller 有新資料或可重試的 Pending work 才派送；沒有新版本，也能恢復未完成工作。產物可靠保存後才推進 processed cursor；來源讀取失敗要留下 Error，不可視為 unchanged。
 
-轉場：如果來源能直接通知，就換 Event 入口，後面的執行元件仍沿用。
+圖中藍色部分是我們要補的契約，沒有宣稱現成 framework 直接提供同名欄位。原始 hash 比較也不是語意價值判斷，時間戳與排序噪音要在來源 normalization 處理。持久化與網路仍有成本，零模型回合不等於零系統成本。
 
-來源：[Integration proposal](../proactive-integration.js)、[Hermes monitor source](https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py)。參考機制不代表直接照抄其 baseline 語意。
+講圖：先順著 Scheduler → MCP → Triage → Controller，再解釋「看過 ≠ 已完成」。
+
+轉場：若來源能直接通知，改走 Event 入口；可靠保存與恢復的責任仍存在。
+
+來源：[Hermes baseline 寫入時點與限制](../source-notes/observation-hermes.md)、[固定 monitor.py](https://github.com/NousResearch/hermes-agent/blob/fef0e16fe19b79ded929209f87c7434270b03825/cron/monitor.py#L125)、[本案宿主整合提案](../proactive-integration.js)。同交易保存與 recovery 契約為本簡報建議增量，尚未實作。
 
 ## 08 · Event entry — Alternative entry，不是下一道工序
 
@@ -86,17 +96,19 @@ Cron 決定排程，Heartbeat 是一種巡檢回合，Polling 是讀來源、發
 
 介面來源：[OpenClaw hooks](https://docs.openclaw.ai/automation/webhook)、[Component integration proposal](../proactive-integration.js)。此頁是本架構的 proposed integration。
 
-## 09 · Task discovery — 兩種入口共用的後續能力
+## 09 · Task discovery — 用交接契約定義元件工作
 
-不論從 Time 或 Event 進來，選題都需要這段。Workspace 帶進職責、新證據與提案歷史；Codex 產生候選工作；MCP 取得查證材料；Triage 與宿主檢查引用、相關性、重複和授權，才送人審。Candidate 不等於已核准任務。Accept、Reject、Snooze 要分開記，避免把延後學成永久否決。圖上的資料契約是整合提案，仍需在宿主實作。
+Controller 從 Workspace 組裝本輪 role／權限、來源 snapshot／版本與已提案／已完成歷史，送給 Codex。Codex 回 candidate（target、proposed_work、evidence_refs）或 no_op（reason）。MCP 取得查證材料，Triage 所屬宿主驗證引用是否能解析、來源版本是否相符、對象是否在授權範圍，以及同版本議題是否已存在，才保存 Inbox 提案。
 
-講圖：沿四個藍色元件走；強調這是兩種入口共用的 discovery，不是新的觸發器。
+Schema 正確不等於證據正確：JSON 格式保證不了來源存在，更保證不了主張受來源支持。語意相關性需查證與人工評閱；宿主先把可確定的來源、版本、權限與重複檢查做硬。業務欄位是本案 proposed contract，不是聲稱框架原生 schema。
 
-轉場：同一組元件能承擔不同程度的決定權，接著用三個 Phase 定義。
+候選去重鍵建議由 role＋target＋issue_type＋evidence_version 決定，與事件去重鍵分開。不同事件可能指向同一議題。資料層需唯一約束與 idempotent upsert，才讓重試不產生第二份提案；鍵的議題粒度需以 fixtures 驗證，不能只 hash 模型自由文句。Accept／Reject／Snooze 與後續 execution completion 分開保存，核准後才啟動對應動作。這些持久化契約是待實作設計。
 
-來源：[Proposed component contracts](../proactive-integration.js)、[Codex app-server turn/start and outputSchema](https://developers.openai.com/codex/app-server/)。
+講圖：Controller → Codex 看輸入；Codex → Triage 看候選；Triage → Inbox 看硬檢查。保持原圖位置，讓觀眾追元件交接。
 
-角色選題與企業化缺口：[Task discovery recipes](../source-notes/phase-task-discovery.md)。
+轉場：同樣一套入口與 runtime，工作決定權可以分三個 Phase。
+
+來源：[共用 Discovery contract](../source-notes/phase-task-discovery.md)、[Codex app-server](https://developers.openai.com/codex/app-server/)、[本架構整合提案](../proactive-integration.js)。
 
 ## 10 · Phase goals — 誰決定工作
 
@@ -128,25 +140,35 @@ OpenClaw 可以自訂 heartbeat prompt，Hermes 排程 prompt 或 discovery skil
 
 來源：[Authored scenario fixtures](../story-home.js)、[Original legal scenario](https://github.com/shane01526/agent_initiate/blob/main/2026_08/scenerios/scenario-legal.md)。
 
-## 13 · Acceptance — 三種條件加恢復測試
+## 13 · Acceptance — Counterfactual 與故障注入
 
-第一種，有相關新證據、沒有逐件交辦，應找到 C-042 並附來源。第二種，把契約改成不適用的 B 類，就不應再提。第三種，同版本議題已結案，沒有新差異，也不應重提。再故意重送事件、中途重啟、讓來源失敗，檢查是否重派、丟工作或假裝沒變化。這些是驗收規格，還不是已執行的業務測試；有用性仍要讓業務人員評閱。
+固定同一公告、角色與模型設定，每次只改一項。A 類且附件清單沒有 X，應提出查證建議並附來源；分類改 B，應不再提此工作；移除附件清單，合理行為是查證或記錄不足，不能把未知直接當缺件；加入同版本已結案紀錄，應不重建相同提案。
 
-講圖：帶三列 PASS／FAIL 後，再指三個故障注入。避免只用生成提案數當成果。
+這些對照測的是目標選對、依據成立、判斷會隨證據與歷史改變，不只計算有沒有產生文字。固定 snapshot 不保證模型 deterministic；每組重跑多次，記錄模型／prompt／資料版本及所有 no-op、Error、失敗回合。
 
-轉場：下一個 gate，就是把這些條件放進一條真的能跑的 prototype。
+恢復驗收直接對應前面的契約。在 Hash 與 Pending 同交易提交後中斷：Pending 必須仍可恢復；交易內中斷應整筆回滾，下一輪重新觀察。在提案保存後、Cursor 更新前中斷：重播命中唯一鍵／upsert，不新增第二份；之後能完成 Cursor。額外測來源失敗與事件重送。這是本案 proposed evaluation，還沒有測量結果。
 
-來源：[Acceptance fixtures and expected outputs](../story-home.js)、[Validation and metrics](../source-notes/initiative-implementation-guide.md)。這些是驗收規格與預編示範，未執行本次業務模型測試。
+講圖：四列分別是正常、適用性反例、證據消融、歷史對帳；頁底兩個中斷點對應 slide 7 與 9。
 
-## 14 · Next gate — 一個角色，一條完整路徑
+轉場：單一案例通過後，再比較它是否真的比固定排程多找到有用工作。
 
-建議收斂在一個角色、一條來源和私有提案入口。先接穩 Scheduler／Ingress、比對、去重與預算，再補角色投影、對帳及提案歷史，最後用固定資料 replay、人工評閱和故障注入驗證。看有用、漏判、重提三件事：漏判需要人工標註機會，不能只靠線上產物算。原研究 P1 有驗證版與測試報告；這次沒重跑，P2、P3 仍待實作。
+來源：[驗收與指標基礎](../source-notes/initiative-implementation-guide.md)、[Discovery contract](../source-notes/phase-task-discovery.md)、[Hermes baseline 分析](../source-notes/observation-hermes.md)。控制變因與寫入點故障注入為新增實驗設計，未執行。
 
-講圖：沿 Build、Context、Validate，最後指三個指標分母。主線到這裡結束。
+## 14 · Experiment design — Baseline、Discovery、History ablation
 
-轉場：主線先到這裡；若要追問歷史機制或原圖位置，後面有兩頁附錄。
+下一個 Gate 是一個角色、一條授權來源，唯讀產生私有提案。用事先標註、未放入 prompt 的候選工作集，固定資料 snapshot、模型、工具、Time trigger 與預算上限。A 與 B 使用相同可見證據與歷史，只改任務政策：A 照固定檢查清單，B 按職責發現候選，使用者不逐件指定契約 ID；候選 ID 仍存在授權來源中。A 的清單在盲測前固定，不用測試答案補清單，也不刻意弱化 baseline。C 與 B 相同，只移除模型 context 的 proposal／completion history；宿主 Triage 的持久歷史與硬去重保持，重播同一事件。
 
-來源：[Implementation status and gaps](../source-notes/initiative-implementation-guide.md)、[Phase recipes and limits](../source-notes/phase-task-discovery.md)。原研究 90 項測試與兩次真實整合是歷史報告，未在本次重跑，也不代表國泰業務效果已驗證。
+A／B 比較 discovery policy 相對固定排程是否增加有用機會，不是用此設計證明所有差異都來自單一提示詞。B／C 專門量化模型可見歷史對候選重提的影響，比較宿主去重前的候選重複率及被宿主擋下的數量。不能只看 Inbox 重複率，因為宿主可能已攔掉全部重複；也不能據此推斷整個對帳系統或 trigger 的優劣。兩種 trigger 的成本／延遲是另一組工程比較，本實驗刻意固定 Time。
+
+評閱者盲評產物、不看分組；事先定義候選匹配規則、來源支持、適用性及「有用」判準。Precision 在這裡指有用提案占已評閱提案；Recall 的分母是人工標註的機會集合，不能從 Agent 自己產物估。Duplicate rate 在本實驗以宿主去重前的重複候選占模型候選；另報被攔截數與最終 Inbox 重複率，以區分模型選題和宿主護欄。目標是評閱全部提案；若抽樣要報評閱覆蓋率與方法，不能只挑好案例。零產出時 Precision／Duplicate rate 分母為零記 N/A，不能寫 100%；Recall 可呈現漏判。另報每回合成本、no-op／Error 數與所有失敗回合，避免分母偏誤。
+
+重跑配對案例並報跨次變異，不編造及格百分比或實測成效。原研究 P1 的 90 項測試與兩次整合只是歷史報告，這次未重跑，不代表這套國泰情境已驗證。實作順序仍是入口與持久化 → Role／History → 盲評與故障注入。
+
+講圖：先說共用控制條件，再比較 A／B，最後 B／C；只讀三個指標的分子／分母。
+
+轉場：主線到這裡；歷史 inferred commitments 與完整原圖留在兩頁附錄。
+
+來源：[指標與實作狀態](../source-notes/initiative-implementation-guide.md)、[選題定義與角色契約](../source-notes/phase-task-discovery.md)。分組、盲評與消融設計為本簡報提案，尚未執行。
 
 ## 15 · Appendix A — Historical inferred commitments
 
