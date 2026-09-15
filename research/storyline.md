@@ -4,7 +4,7 @@ Updated: 2026-09-15. Single narrative: **Time / Event → Framework mechanisms �
 
 ## 01 · Time / Event
 
-Human and Agent use the same report/meeting example. Only two contrasting examples: Time (13:30 scheduled lookup) and Event (13:07 report arrival). Clock/document objects, timeline, human thought, Agent input and outcome all change together. Remove attention/recall/thought substeps.
+Human and Agent use the same report/meeting example. Only two contrasting examples: Time (13:30 scheduled lookup) and Event (report arrival). Time uses a clock and timeline; Event uses a report and Webhook delivery diagram with no timestamps or schedule. Human thought, Agent input and outcome change together. Remove attention/recall/thought substeps.
 
 Chapter 1 poses the question whether these examples cover framework implementations. Chapter 2 derives its conclusion from observed mechanisms and activation conditions: the reviewed implementation paths do not require a third Trigger category. State change, Process completion and Stream data are Event. Polling detects changes; while is control flow. This classification does not claim every internal condition uses an event object or bus.
 

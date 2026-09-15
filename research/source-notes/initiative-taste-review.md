@@ -45,3 +45,8 @@ User correction: simplify the overview to Time / Event, then show implementation
 ### Trigger contrast and inductive ordering
 
 Time shows a 13:30 clock, scheduled lookup and possibly unchanged input; Event shows a13:07 report v2→v3 arrival before the next scheduled check. All scene content changes, not only labels. Chapter 2 now starts with observed mechanisms and activation conditions; Time/Event is the scoped finding after the table. Chapter 1 asks the question rather than preempting that finding.
+
+
+### Event visual correction
+
+Event removes all times, schedule references and timeline markers. It shows Report v3 → Webhook → Agent turn. Time alone retains clocks and scheduled ticks. Event thought text also removes the afternoon reference, keeping the contrast focused on clock versus incoming data.
