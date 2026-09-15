@@ -40,3 +40,8 @@ Contextual pre-flight: light theme matches the research site; shared cream/blue 
 ## Taxonomy and implementation revision · 2026-09-15
 
 User correction: simplify the overview to Time / Event, then show implementation relationships. Removed attention/recall step controls, repeated four-layer overview, and wake story. Framework matrix precedes Flow / Sequence; technical inventory expands. After maps mechanisms to exact reference Components, with separate Before/After descriptions and individual Scheduler/Ingress, Controller/Triage highlights. Phase goals and both matrices use English-first terms. Cathay cases add negative controls. Grok Build has no verified execution Sequence and is labeled accordingly.
+
+
+### Trigger contrast and inductive ordering
+
+Time shows a 13:30 clock, scheduled lookup and possibly unchanged input; Event shows a13:07 report v2→v3 arrival before the next scheduled check. All scene content changes, not only labels. Chapter 2 now starts with observed mechanisms and activation conditions; Time/Event is the scoped finding after the table. Chapter 1 asks the question rather than preempting that finding.

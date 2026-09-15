@@ -4,15 +4,15 @@ Updated: 2026-09-15. Single narrative: **Time / Event → Framework mechanisms �
 
 ## 01 · Time / Event
 
-Human and Agent use the same report/meeting example. Only two controls: Time (scheduled check) and Event (report update). Remove attention/recall/thought substeps.
+Human and Agent use the same report/meeting example. Only two contrasting examples: Time (13:30 scheduled lookup) and Event (13:07 report arrival). Clock/document objects, timeline, human thought, Agent input and outcome all change together. Remove attention/recall/thought substeps.
 
-**Conclusion:** the reviewed implementation paths do not require a third Trigger category. State change, Process completion and Stream data are Event. Polling detects changes; while is control flow. This classification does not claim every internal condition uses an event object or bus.
+Chapter 1 poses the question whether these examples cover framework implementations. Chapter 2 derives its conclusion from observed mechanisms and activation conditions: the reviewed implementation paths do not require a third Trigger category. State change, Process completion and Stream data are Event. Polling detects changes; while is control flow. This classification does not claim every internal condition uses an event object or bus.
 
 Proactivity still means generating a worthwhile, unassigned task. Time / Event supply an execution opportunity; they do not prove task discovery.
 
 ## 02 · Framework × Trigger
 
-One visible matrix: Framework | Time | Event | Key implementation. Click a framework for its representative Flow / Sequence; expand Mechanisms & source for the full inventory and evidence limits.
+One visible matrix: Framework | Observed mechanism | What starts the next run? | Classification. Observed evidence precedes classification; the cross-framework Time / Event finding appears after the matrix, not in its premise. Click a framework for its representative Flow / Sequence; expand Mechanisms & source for the full inventory and evidence limits.
 
 - OpenClaw: managed heartbeat job → Scheduler → Wake admission → Agent turn. Event hooks and watchers enter compatible dispatch paths; next_check is a bounded pacing proposal.
 - Hermes: Cron monitor → source hash → unchanged Skip / changed Agent. Baseline saved before execution is observation state, not successful processing.
