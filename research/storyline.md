@@ -24,19 +24,13 @@ One visible matrix: Framework | Observed mechanism | What starts the next run? |
 
 Sequence diagrams are source-path summaries, not runtime traces. Fixed revisions and official-document dates remain visible; full inventory retains interface/source links.
 
-## 03 · Mechanism → Component
+## 03 · Mechanism → Implementation
 
-Reuse the original architecture coordinates. Before describes Existing design; After describes Proposed integration with separate hover/click text.
+Select Scheduled heartbeat, Change-gated monitor, Event-triggered run, Goal continuation, Adaptive pacing or Task proposal. Each selected mechanism exposes a concrete implementation plan: Change location | Add code/control flow | Add state/contract | Next output. Reference links identify the upstream mechanism being adapted.
 
-- Polling Scheduler: Schedule / next_due / occurrence / Monitor hash / Adaptive pacing.
-- Event Ingress: Validation / Dedup / Event envelope / source cursor / completion routing.
-- Runtime Controller: Durable dispatch / active goal / Checkpoint / Resume.
-- Triage: Admission / Budget / Completion validator / Proposal gate.
-- Workspace and State contracts: Role card / Permissions / Waiting / Completed / Proposal history.
-- Codex app-server: Fixed output → Goal execution → Task proposal, by Phase.
-- MCP and Interaction: Evidence verification / approved action / Proposal inbox / Accept / Reject / Snooze.
+The original architecture keeps its coordinates. After replaces generic labels inside the original Components with numbered Code / Contract additions. The selected step exposes ADD implementation, State / Contract and Output beside the diagram. The mechanism selector and execution route live inside the same workbench; the full table expands on demand. Before is a separate existing-design view. Default After shows Change-gated monitor. No generic Component responsibility table competes with the implementation plan.
 
-State schemas and loaders are proposed responsibilities, not extra existing services. Codex reference design and separately researched OpenClaw prototype must not be conflated. Remove the wake-story vignette; engineering wake-cycle remains available through its original source link.
+Function names such as admitWake(), compareSnapshot() and validateCompletion() are proposed host contracts, not upstream API claims. Persistent observation state and successful processing state stay distinct. P3 uses an ordinary discovery turn with Role, current evidence and proposal history. A scheduled trigger can start that turn; no dedicated curiosity API or third Trigger is required. Voyager provides a native curriculum reference, not a turnkey enterprise transplant.
 
 ## 04 · Phase goals
 
@@ -46,7 +40,7 @@ State schemas and loaders are proposed responsibilities, not extra existing serv
 | P2 Goal-driven | Goal + Acceptance criteria | Validated result | Complete only with evidence; otherwise Continue / Blocked / Exhausted |
 | P3 Self-initiated | Vision + Role + Permissions | New proposal | No itemized assignment; grounded and relevant; Human review |
 
-Two compact matrices stay visible: Framework × Phase (reusable building blocks, not full Phase certification) and Capability × Phase (Trigger & Admission; Context & State; Agent Runtime; Validation & Review). The Trigger taxonomy does not change across phases.
+Two compact matrices stay visible: Framework × Phase (reusable building blocks, not full Phase certification) and Capability × Phase (Trigger & Admission; Context & State; Agent Runtime; Validation & Review). The Trigger taxonomy does not change across phases. Phase goals visualize who authors the work. P3 cells describe configurable discovery paths and required host additions, rather than treating lack of a dedicated inferred-follow-up feature as inability. Historical OpenClaw commitments extracted future conversation check-ins; removal did not absorb that extractor into heartbeat, and reviewed removal evidence does not state the product decision rationale. Custom heartbeat discovery is a separate composition path.
 
 ## 05 · Cathay use cases / Validation
 
@@ -62,3 +56,7 @@ Observability separates Proposal, Skip and Failure. Metrics cover useful proposa
 ## Reading scope clarification
 
 The homepage Flow is a representative implementation path, not a ranking of the framework’s mechanisms or a complete execution graph. Flow and Sequence depict that same path. Framework-wide inventory is maintained in the mechanism atlas; Grok Build is not linked to the unrelated Grok Bot reconstruction.
+
+## P3 judgment correction · 2026-09-15
+
+Previous homepage cells used “inferred commitments retired” or “native root-task discovery unverified” to stand in for P3 capability. That conflated a narrow persistent conversation-follow-up feature with broader role-based task discovery. Revised judgment: documented configurable agent turns can compose task discovery; native Voyager curriculum already selects tasks from environment context. Composition feasibility is not an end-to-end enterprise acceptance result. Retain historical research under its original, narrower criterion.

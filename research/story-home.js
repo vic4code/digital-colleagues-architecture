@@ -35,14 +35,25 @@
   };
   let architectureMode = 'before';
   let pinnedComponent = null;
+  let activeIntegration = null;
   function describeComponent(key, expand = false) {
     const component = architectureComponents[architectureMode][key];
     if (!component) return;
     const [title,copy,level,contract] = component;
-    $('arch-detail-title').textContent = title;
-    $('arch-detail-copy').textContent = copy;
-    $('arch-component-contract').textContent = contract;
-    $('arch-detail-link').href = 'proactivity.html#architecture/' + architectureMode + '/' + level;
+    const delta=architectureMode==='after' && activeIntegration?.steps.find(step=>step.node===key);
+    if (architectureMode==='after' && activeIntegration && !delta) return;
+    $('arch-detail-title').textContent = delta ? delta.component : title;
+    $('arch-detail-copy').textContent = delta ? 'ADD · '+delta.change : copy;
+    $('arch-step-label').textContent = delta ? 'STEP '+(activeIntegration.steps.indexOf(delta)+1)+' / '+activeIntegration.steps.length+' · ADD IMPLEMENTATION' : 'EXISTING DESIGN';
+    $('arch-contract-cards').replaceChildren();
+    if(delta) for(const [label,value] of [['STATE / CONTRACT',delta.state],['OUTPUT → NEXT',delta.output]]) {
+      const row=document.createElement('div'),labelEl=document.createElement('small'),valueEl=document.createElement('p');
+      labelEl.textContent=label;valueEl.textContent=value;row.append(labelEl,valueEl);$('arch-contract-cards').append(row);
+    }
+    $('arch-component-depth').hidden=!!delta;
+    $('arch-component-contract').textContent=contract;
+    $('arch-detail-link').href=delta ? activeIntegration.href : 'proactivity.html#architecture/'+architectureMode+'/'+level;
+    $('arch-detail-link').textContent=delta ? 'Mechanism reference · '+activeIntegration.reference+' ↗' : '展開元件與實作來源 ↗';
     if (expand) {
       pinnedComponent = key;
       $('arch-component-depth').open = true;
@@ -53,12 +64,18 @@
     architectureMode = mode;
     $('arch-before').hidden = mode !== 'before'; $('arch-after').hidden = mode !== 'after';
     document.querySelectorAll('[data-arch-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.archMode === mode)));
-    $('arch-mode-note').textContent = mode === 'before' ? 'Existing design · Phase 0.5' : 'Proposed integration · Mechanisms → Components';
-    $('arch-original-link').href = mode === 'before' ? '../phases/0.5/reference-architecture.svg' : 'architecture-diagrams/initiative-on-original.svg';
+    $('arch-mode-note').textContent = mode === 'before' ? 'Existing design · Phase 0.5' : 'After · '+(activeIntegration?.name || 'Implementation');
+    document.querySelector('.original-workbench').classList.toggle('is-before',mode==='before');
+    $('arch-original-link').href = mode === 'before' ? '../phases/0.5/reference-architecture.svg' : (activeIntegration?.diagramUrl || 'architecture-diagrams/initiative-on-original.svg');
+    document.querySelector('.architecture-reading-tools a').href=$('arch-original-link').href;
     if (mode === 'before') {
       pinnedComponent = null;
-      document.querySelectorAll('.pinned-component,.active-component').forEach(a => a.classList.remove('pinned-component','active-component'));
+      $('arch-contract-cards').replaceChildren();
+      $('arch-component-depth').hidden=false;
+      document.querySelectorAll('.pinned-component,.active-component,.route-component').forEach(a => a.classList.remove('pinned-component','active-component','route-component'));
       $('arch-component-depth').open = false;
+      $('arch-step-label').textContent='EXISTING DESIGN';
+      $('arch-detail-link').textContent='展開元件與實作來源 ↗';
       $('arch-detail-title').textContent = 'Before · Existing design';
       $('arch-detail-copy').textContent = 'Controller 接收輸入；workspace 提供脈絡；Codex app-server 執行；MCP 連接來源與動作。';
       $('arch-component-contract').textContent = '選取元件查看既有設計責任；After 顯示新增介面、狀態與控制契約。';
@@ -67,15 +84,25 @@
     }
   }
   function selectComponent(key) {
+    if(activeIntegration && !activeIntegration.steps.some(s=>s.node===key))return;
     setArchitecture('after');
     describeComponent(key, true);
     document.querySelectorAll('[data-component]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.component === key)));
     document.querySelectorAll('[data-arch-node]').forEach(a => a.classList.toggle('active-component', a.dataset.archNode === key));
   }
-  document.querySelectorAll('[data-arch-mode]').forEach(b => b.addEventListener('click', () => b.dataset.archMode === 'after' ? selectComponent('discovery') : setArchitecture('before')));
+  function showIntegration(plan) {
+    activeIntegration=plan;
+    document.dispatchEvent(new CustomEvent('integrationpaint',{detail:plan}));
+    selectComponent(plan.steps[0].node);
+    document.querySelectorAll('[data-arch-node]').forEach(a=>a.classList.toggle('route-component',plan.steps.some(step=>step.node===a.dataset.archNode)));
+    $('arch-mode-note').textContent='After · '+plan.name+' · '+plan.phase;
+  }
+  document.addEventListener('integrationselect',e=>showIntegration(e.detail));
+  document.addEventListener('integrationnode',e=>selectComponent(e.detail));
+  document.querySelectorAll('[data-arch-mode]').forEach(b => b.addEventListener('click', () => b.dataset.archMode === 'after' ? (activeIntegration ? showIntegration(activeIntegration) : selectComponent('discovery')) : setArchitecture('before')));
   document.querySelectorAll('[data-component]').forEach(b => b.addEventListener('click', () => selectComponent(b.dataset.component)));
   document.querySelectorAll('[data-arch-node]').forEach(a => {
-    a.addEventListener('pointerenter', () => describeComponent(a.dataset.archNode));
+    a.addEventListener('pointerenter', () => {if(!pinnedComponent)describeComponent(a.dataset.archNode);});
     a.addEventListener('focus', () => describeComponent(a.dataset.archNode));
     a.addEventListener('click', e => { e.preventDefault(); selectComponent(a.dataset.archNode); });
   });
