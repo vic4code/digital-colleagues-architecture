@@ -45,6 +45,7 @@
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function render(key){
   const plan=plans[key];
+  document.getElementById('integration-choice').value=key;
   target.innerHTML=`<div class="integration-heading"><div><small>${esc(plan.name)} · ${esc(plan.phase)}</small><h3>${esc(plan.headline)}</h3><p>${esc(plan.rule)}</p></div></div>
    <ol class="integration-route" aria-label="執行順序；點選步驟查看元件修改">${plan.steps.map(s=>`<li><button type="button" data-integration-node="${s.node}" aria-pressed="false"><b>${esc(s.action)}</b><small>${esc(s.component)}</small></button></li>`).join('')}</ol>
    <details class="integration-contracts"><summary>Implementation table · 展開完整 Code / State / Output</summary><div class="table-scroll integration-delta" role="region" tabindex="0" aria-label="Selected mechanism implementation changes"><table><thead><tr><th>Component · 修改位置</th><th>Code · 新增實作</th><th>State · 要記住什麼</th><th>Output · 交給下一步</th></tr></thead><tbody>${plan.steps.map((s,i)=>`<tr><th scope="row"><button type="button" data-integration-node="${s.node}"><small>STEP ${i+1}</small>${esc(s.component)}</button></th><td>${esc(s.change)}</td><td><code>${esc(s.state)}</code></td><td>${esc(s.output)}</td></tr>`).join('')}</tbody></table></div><p class="compact-note">Function / schema 名稱為本架構的提案契約，需在宿主實作。</p><a class="source" href="${esc(plan.href)}">Reference · ${esc(plan.reference)} ↗</a></details>`;
@@ -55,7 +56,7 @@
    document.querySelector('.arch-layout').scrollIntoView({block:'start'});
   }));
  }
- document.querySelectorAll('[data-integration]').forEach(b=>{const p=plans[b.dataset.integration];b.innerHTML=`<span>${esc(p.name==='Evidence-grounded task proposal'?'Task discovery':p.name)}</span><strong>${esc(p.label)}</strong>`;b.addEventListener('click',()=>render(b.dataset.integration));});
+ document.getElementById('integration-choice').addEventListener('change',e=>render(e.target.value));
  const captions={
   'Scheduled heartbeat':[['Workspace','ADD heartbeat_spec'],['Polling Scheduler','ADD persistent next_due'],['Request Triage','ADD admitWake() → Admit / Skip'],['Runtime Controller','ADD Wake envelope → Agent turn → save result']],
   'Change-gated monitor':[['Polling Scheduler','ADD pollSource()'],['MCP Tool Servers','ADD readChanges(cursor)'],['Request Triage','ADD compareSnapshot() → Changed / Skip'],['Runtime Controller','ADD Changed → turn; persist output → advance cursor']],
@@ -83,6 +84,7 @@
   if(plan.diagramUrl)URL.revokeObjectURL(plan.diagramUrl);
   const exportSvg=document.querySelector('#arch-after svg').cloneNode(true);
   exportSvg.classList.add('original-architecture');
+  exportSvg.setAttribute('viewBox',document.querySelector('#arch-after svg').dataset.fullViewbox || exportSvg.getAttribute('viewBox'));
   plan.diagramUrl=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(exportSvg)],{type:'image/svg+xml'}));
  });
  render('monitor');

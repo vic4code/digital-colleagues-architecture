@@ -28,7 +28,7 @@ Sequence diagrams are source-path summaries, not runtime traces. Fixed revisions
 
 Select Scheduled heartbeat, Change-gated monitor, Event-triggered run, Goal continuation, Adaptive pacing or Task proposal. Each selected mechanism exposes a concrete implementation plan: Change location | Add code/control flow | Add state/contract | Next output. Reference links identify the upstream mechanism being adapted.
 
-The original architecture keeps its coordinates. After replaces generic labels inside the original Components with numbered Code / Contract additions. The selected step explains its action in plain language; exact Code, State and Output expand beside the diagram. Action-first route buttons and Previous/Next controls keep the selected component in sync. The mechanism selector and execution route live inside the same workbench; the full table expands on demand. Before is a separate existing-design view. Default After shows Change-gated monitor. No generic Component responsibility table competes with the implementation plan.
+The original architecture keeps its coordinates. After replaces generic labels inside the original Components with numbered Code / Contract additions. The selected step explains its action in plain language; exact Code, State and Output expand beside the diagram. Action-first route buttons and Previous/Next controls keep the selected component in sync. One compact mechanism selector and an action sequence lead into a focused crop of the original architecture. Full map restores the entire original without moving components. The sidebar compares the existing responsibility with the added behavior; exact contracts expand on demand. Before is a separate existing-design view. Default After shows Change-gated monitor. No generic Component responsibility table competes with the implementation plan.
 
 Function names such as admitWake(), compareSnapshot() and validateCompletion() are proposed host contracts, not upstream API claims. Persistent observation state and successful processing state stay distinct. P3 uses an ordinary discovery turn with Role, current evidence and proposal history. A scheduled trigger can start that turn; no dedicated curiosity API or third Trigger is required. Voyager provides a native curriculum reference, not a turnkey enterprise transplant.
 
@@ -44,9 +44,9 @@ Two compact matrices stay visible: Framework × Phase (reusable building blocks,
 
 ## 05 · Cathay use cases / Validation
 
-Each role uses concrete fictional artifacts (notice/contract, dependency dates, SOP/template, or diff/ADR), a grounded task proposal and an explicit deliverable. New evidence, irrelevant evidence and already-handled controls change both source facts/history and expected Proposal/Skip outcome. These are pre-authored demonstrations, not live model evaluations. P1/P2/P3 outputs and checks expand below it.
+Each role uses concrete fictional artifacts (notice/contract, dependency dates, SOP/template, or diff/ADR), a grounded task proposal and an explicit deliverable. A visible three-row acceptance sheet compares relevant evidence, irrelevant evidence and already-handled state. Each row names its setup, expected output and failure. Selecting a row updates the source facts/history and expected Proposal/Skip outcome above. These are pre-authored demonstrations, not live model evaluations. P1/P2/P3 outputs and checks expand below it.
 
-Observability separates Proposal, Skip and Failure. Metrics cover useful proposals, missed opportunities and duplicates; detailed denominators and raw Trace expand. These are hypothetical cases and pre-authored fixtures, not validated Cathay deployment results.
+Observability separates Proposal, Skip and Failure. Metrics cover useful proposals, missed opportunities and duplicates; engineering reliability, metrics, detailed denominators and raw Trace are grouped in one collapsed engineering validation section, after the concrete business acceptance sheet. These are hypothetical cases and pre-authored fixtures, not validated Cathay deployment results.
 
 ## Presentation change record
 
@@ -64,3 +64,7 @@ Previous homepage cells used “inferred commitments retired” or “native roo
 ## Readability pass · 2026-09-15
 
 Chapter 3 presents mechanism purpose → action sequence → original component location → expandable code/state. Chapter 4 adds a historical OpenClaw conversation → extraction/storage → due heartbeat → check-in/dismiss diagram, with tool restrictions and retirement evidence kept separate. Chapter 5 provides concrete source fixtures, proposal deliverables, positive and negative acceptance criteria, illustrative metric denominators, and visible failure/recovery checks.
+
+## Focused reading pass · 2026-09-15
+
+Reduce simultaneous choices and duplicate explanations. Architecture opens on the original core components in Focus mode, with Before/After deltas and full-map access. Scenario acceptance presents Input → Expected output → Pass/Fail sheet on one reading path; engineering observability and cost are secondary detail.

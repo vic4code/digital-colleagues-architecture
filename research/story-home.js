@@ -33,6 +33,16 @@
       security: ['State / Audit · Reconciliation', 'P1 run／skip；P2 goal／checkpoint；P3 proposal／feedback，以 correlation ID 串接。', 'application', 'Proposed integration · Durable state：Audit 是原圖責任；State schema 是待補契約。保存 occurrence → event／snapshot → run → proposal／skip → outcome；成果可靠寫入後才提交處理 cursor。權限檢查與預算計數由宿主執行。'],
     },
   };
+  const existingResponsibilities={context:'Workspace 保存角色、規則與記憶。',scheduler:'Scheduler 提供 cron / heartbeat 時間入口。',admission:'Triage 負責分類、排序與核准判斷。',controller:'Controller 管理 session，派送 Agent 工作。',tools:'MCP 連接來源資料與工具。',observe:'Ingress 接收、驗證並緩衝來源事件。',discovery:'Codex app-server 執行 Agent turn。'};
+  const afterSvg=document.querySelector('#arch-after svg');
+  afterSvg.dataset.fullViewbox=afterSvg.getAttribute('viewBox');
+  function setDiagramView(view){
+    afterSvg.setAttribute('viewBox',view==='focus'?'25 204 790 342':afterSvg.dataset.fullViewbox);
+    afterSvg.classList.toggle('focused-architecture',view==='focus');
+    document.querySelectorAll('[data-arch-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.archView===view)));
+  }
+  document.querySelectorAll('[data-arch-view]').forEach(b=>b.addEventListener('click',()=>setDiagramView(b.dataset.archView)));
+  setDiagramView('focus');
   let architectureMode = 'before';
   let pinnedComponent = null;
   let activeIntegration = null;
@@ -43,12 +53,14 @@
     const delta=architectureMode==='after' && activeIntegration?.steps.find(step=>step.node===key);
     if (architectureMode==='after' && activeIntegration && !delta) return;
     $('arch-detail-title').textContent = delta ? delta.component : title;
-    $('arch-detail-copy').textContent = delta ? delta.explanation : copy;
+    $('arch-detail-copy').textContent = delta ? '' : copy;
     $('arch-step-label').textContent = delta ? 'STEP '+(activeIntegration.steps.indexOf(delta)+1)+' / '+activeIntegration.steps.length+' · COMPONENT CHANGE' : 'EXISTING DESIGN';
     $('arch-contract-cards').replaceChildren();
     if(delta) {
-      const action=document.createElement('strong');action.className='arch-action';action.textContent=delta.action;
-      $('arch-contract-cards').append(action);
+      for(const [label,value,kind] of [['BEFORE · 原本已有',existingResponsibilities[key],'before'],['AFTER · 這次新增',delta.explanation,'after']]) {
+        const row=document.createElement('div');row.className='arch-change-'+kind;
+        const small=document.createElement('small'),p=document.createElement('p');small.textContent=label;p.textContent=value;row.append(small,p);$('arch-contract-cards').append(row);
+      }
       const details=document.createElement('details');details.className='arch-code-details';
       const summary=document.createElement('summary');summary.textContent='Code / State · 展開實作細節';details.append(summary);
       for(const [label,value] of [['CODE · 新增實作',delta.change],['STATE · 要記住什麼',delta.state],['OUTPUT · 交給下一步',delta.output]]) {
@@ -81,6 +93,7 @@
     document.querySelectorAll('[data-arch-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.archMode === mode)));
     $('arch-mode-note').textContent = mode === 'before' ? 'Existing design · Phase 0.5' : 'After · '+(activeIntegration?.name || 'Implementation');
     document.querySelector('.original-workbench').classList.toggle('is-before',mode==='before');
+    document.querySelector('.arch-view-controls').hidden=mode==='before';
     $('arch-original-link').href = mode === 'before' ? '../phases/0.5/reference-architecture.svg' : (activeIntegration?.diagramUrl || 'architecture-diagrams/initiative-on-original.svg');
     document.querySelector('.architecture-reading-tools a').href=$('arch-original-link').href;
     if (mode === 'before') {
@@ -145,9 +158,18 @@
     cathayKey=key;
     const c=study.cathay[key],d=cases[key],h=escapeHTML;
     const result=mode==='new' ? ['PROPOSAL · 提出新工作',d.proposal,d.why] : mode==='irrelevant' ? ['SKIP · 條件不成立','不產生這件工作的提案',d.negative] : ['SKIP · 已處理','保留處理紀錄，不重提',d.repeat];
-    $('cathay-result').innerHTML=`<div class="cathay-heading"><h3>${h(d.title)}</h3><small>示意資料 · 非國泰實際個案</small></div><p class="case-duty"><b>Role</b> ${h(d.role)}<span>人只給職責，未逐件交辦下面的工作。</span></p><div class="case-evidence-flow"><div class="case-inputs"><small>${h(d.trigger)}</small><div class="case-documents">${(mode==='irrelevant'?alternateEvidence[key]:d.evidence).map(([name,fact])=>`<article><b>${h(name)}</b><p>${h(fact)}</p></article>`).join('')}</div>${mode==='handled'?`<p class="case-history"><b>Proposal history</b> ${h(d.repeat)}</p>`:''}</div><span class="case-join" aria-hidden="true">→</span><article class="case-proposal"><small>${h(result[0])}</small><h4>${h(result[1])}</h4><p>${h(result[2])}</p></article></div><div class="case-deliverable"><b>Deliverable · 人會收到什麼？</b><p>${h(mode==='new'?d.deliver:'本輪沒有新提案；稽核留下來源、比對結果與 Skip 原因。')}</p><span>Human review · Accept / Reject / Snooze</span></div><div class="case-test"><div><b>Validation · 改一下資料，看判斷是否跟著改。</b><span>預編案例切換，非即時模型測試。</span></div><div class="scenario-switch" role="group" aria-label="切換驗證條件"><button type="button" data-case-mode="new" aria-pressed="${mode==='new'}">新證據</button><button type="button" data-case-mode="irrelevant" aria-pressed="${mode==='irrelevant'}">條件不成立</button><button type="button" data-case-mode="handled" aria-pressed="${mode==='handled'}">已經處理</button></div><p><b>Pass criterion</b> ${h(mode==='new'?d.test:mode==='irrelevant'?d.negative:d.repeat)}</p></div><details class="detail-level"><summary>Phase 1 → 3 · 同一職能的責任怎麼增加？</summary><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${h(phase)}</small><b>${h(title)}</b><p>${h(behavior)}</p><details><summary>Validation</summary><p>${h(test)}</p></details></article>`).join('')}</div><p>${h(c.boundary)}</p></details>`;
+    const checks=[
+      {mode:'new',label:'01 · 應該想到',setup:'有相關的新資料；沒有逐件交辦。',expected:d.proposal,fail:'漏提、選錯對象，或提案沒有可查證的來源。'},
+      {mode:'irrelevant',label:'02 · 不該亂提',setup:alternateEvidence[key][1][1],expected:'不產生這件工作的提案；留下不適用的原因。',fail:'條件已不成立，仍然提出原本的工作。'},
+      {mode:'handled',label:'03 · 不該重提',setup:d.repeat.split(' → ')[0]+'。',expected:'不再提同一件事；保留既有處理紀錄。',fail:'已經處理，卻又建立相同提案。'}
+    ];
+    $('cathay-result').innerHTML=`<div class="cathay-heading"><h3>${h(d.title)}</h3><small>示意資料 · 非實際業務紀錄</small></div>
+      <p class="case-duty"><b>Role · 交給 Agent 的職責</b> ${h(d.role)}<span>下面這件工作，沒有人逐件交辦。</span></p>
+      <div class="case-evidence-flow"><div class="case-inputs"><small>01 / INPUT · Agent 看到什麼？</small><p class="case-trigger">${h(d.trigger)}</p><div class="case-documents">${(mode==='irrelevant'?alternateEvidence[key]:d.evidence).map(([name,fact])=>`<article><b>${h(name)}</b><p>${h(fact)}</p></article>`).join('')}</div>${mode==='handled'?`<p class="case-history"><b>Proposal history</b> ${h(d.repeat)}</p>`:''}</div><span class="case-join" aria-hidden="true">→</span><article class="case-proposal"><small>02 / EXPECTED OUTPUT · 預期結果</small><h4>${h(result[1])}</h4><p>${h(result[2])}</p><div class="case-delivery-inline"><b>${mode==='new'?'Deliverable · 人會收到':'Audit · 系統應留下'}</b><p>${h(mode==='new'?d.deliver:'本輪未新增提案；記下來源、比對結果與 Skip 原因。')}</p></div></article></div>
+      <section class="acceptance-sheet" aria-label="情境驗收對照"><h4>03 / ACCEPTANCE · 怎樣才算通過？</h4><p>三種條件都要通過。點選一列，上方同步顯示該測試的資料與預期結果。</p><div class="acceptance-rows">${checks.map(check=>`<button type="button" class="acceptance-row" data-case-mode="${check.mode}" aria-pressed="${mode===check.mode}"><span class="acceptance-setup"><small>${h(check.label)}</small><b>${h(check.setup)}</b></span><span><small>PASS · 應有結果</small>${h(check.expected)}</span><span class="acceptance-fail"><small>FAIL · 這樣就不通過</small>${h(check.fail)}</span></button>`).join('')}</div><p class="compact-note">這是驗收規格與預編示範，尚未執行模型測試。提案是否有用，仍由業務人員評閱。</p></section>
+      <details class="detail-level"><summary>Phase 1 → 3 · 各階段交付內容與驗收</summary><div class="cathay-phases">${c.phases.map(([phase,title,behavior,test])=>`<article><small>${h(phase)}</small><b>${h(title)}</b><p>${h(behavior)}</p><details><summary>Validation</summary><p>${h(test)}</p></details></article>`).join('')}</div><p>${h(c.boundary)}</p></details>`;
     document.querySelectorAll('[data-cathay]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cathay===key)));
-    $('cathay-result').querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>renderCathay(cathayKey,b.dataset.caseMode)));
+    $('cathay-result').querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>{const mode=b.dataset.caseMode;renderCathay(cathayKey,mode);$('cathay-result').querySelector('[data-case-mode="'+mode+'"]').focus({preventScroll:true});}));
   }
   document.querySelectorAll('[data-cathay]').forEach(b=>b.addEventListener('click',()=>renderCathay(b.dataset.cathay)));
   const traceStories = {
