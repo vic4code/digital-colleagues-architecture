@@ -69,9 +69,9 @@ Chapter 3 presents mechanism purpose → action sequence → original component 
 
 Reduce simultaneous choices and duplicate explanations. Architecture opens on the original core components in Focus mode, with Before/After deltas and full-map access. Scenario acceptance presents Input → Expected output → Pass/Fail sheet on one reading path; engineering observability and cost are secondary detail.
 
-## Presentation edition · 2026-09-15
+## Presentation edition · 2026-09-16
 
-The 16:9 presentation in slides/index.html contains 14 main slides and two appendices for a roughly 15-minute sharing session. A daily-life milk-shopping example introduces Time and Event. A fictional work case, notice N-17 and contract C-042, then connects implementation and acceptance. Four architecture slides keep component positions fixed: Before → Time entry → Event entry (alternative) → shared Task discovery. Historical commitments and the full architecture are appendices. Key content remains visible in the PDF; speaker notes provide transitions and source context.
+The presentation contains 18 main slides and three appendices for a 15–18-minute sharing session. A daily-life milk-shopping example introduces Time and Event; actual framework paths establish the classification. Four architecture slides preserve component positions: Before → Time entry → Event entry (alternative) → shared Task discovery. Persistence follows as a separate engineering decision. Phase goals compare execution, planning and task ownership visually. A fictional N-17 / C-042 case connects to counterfactual acceptance, fault recovery, controlled experiments and metrics on separate slides. Full interfaces, historical commitments and the full map are appendices. The fixed 1920×1080 stage supports overview navigation and page-specific speaker notes; all key information remains visible in the PDF.
 
 ## Evidence and engineering decisions · Presentation revision
 

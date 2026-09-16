@@ -1,23 +1,24 @@
 # 數位同事主動性 · 分享簡報
 
-14 頁主線＋2 頁附錄、16:9，按約 15 分鐘分享編排。內容查核截至 2026-09-15。
+18 頁主線＋3 頁附錄，約 15–18 分鐘。固定 1920 × 1080 畫布；內容查核截至 2026-09-15。
 
-- [開啟簡報](index.html)：可直接以瀏覽器開啟，所有圖片與樣式在本機，不需網路。
-- [PDF](digital-colleague-initiative.pdf)：同一份 16 頁定稿，供分享或播放備援。
-- [講者備註](speaker-notes.html)：逐頁講稿、講圖提示與來源。
-- [研究正文](../index.html)：完整互動圖、框架機制與驗收細節。
+- [開啟簡報](index.html)：可離線播放。
+- [PDF](digital-colleague-initiative.pdf)：21 頁，分享與播放備援。
+- [講者備註](speaker-notes.html)：逐頁講稿、轉場與來源。
+- [研究正文](../index.html)：完整互動圖與調研細節。
 
-操作：左右方向鍵／Page Up、Page Down 換頁；Space 下一頁；Home、End 跳到主線首末頁；A 切換附錄；F 進出全螢幕。網址的 `#7` 可直接開啟第 7 頁。
+操作：方向鍵／Page Up、Page Down 換頁；Space 下一頁；Home、End 跳到主線首末頁；A 切換附錄；F 全螢幕；O 投影片總覽；N 開啟當頁講稿。網址的 `#7` 可直接開啟第 7 頁。
 
-每頁關鍵內容均直接顯示；PDF 不依賴 hover、動畫或展開。架構四頁沿用相同版位：Before → Time entry → Event entry（替代入口）→ 共用 Task discovery。換頁只切換新增責任，支援減少動態效果的系統設定。Before／After 是設計對照，國泰契約案例是示意資料，並非已驗證的業務成效。
+## 講解順序
 
-## 視覺定稿
+生活例子 → 框架實作歸納 → 主流機制 → Task discovery → 原架構四頁連續對照 → Persistence → Phase goals → P3 組合方式 → 國泰示意案例 → 反事實驗收 → 故障恢復 → 對照實驗 → 指標 → 下一步。
 
-採用 design-taste-frontend 的 redesign audit 與 ui-ux-pro-max 的 Swiss editorial grid 建議；保留既有奶油白、藍色與原架構元件座標。套用範圍是投影簡報，不採用資料庫建議中的電子報表單或行銷 CTA。
+架構四頁保持原圖座標：Before → Time entry → Event entry（替代入口）→ 共用 Task discovery。轉場保留位置，支援 reduced motion。每頁關鍵內容直接顯示，PDF 不依賴 hover 或動畫。附錄收錄完整機制表、歷史 commitments 與全架構。
 
-- 封面採明確圖文分欄；生活頁使用生成的日曆／牛奶場景素材。
-- 深藍集中在 Agent 工作、提案與結果；來源、框線與表頭降為次要層級。
-- Phase 以 Human／Agent／Output 責任橫帶呈現，保留三階段對照。
-- 原架構四頁固定位置與轉場；照片是生活示意，並非產品或實證照片。
+案例 N-17／C-042 是虛構資料；架構新增能力與驗收實驗是設計提案，並非已驗證的國泰部署成效。
 
-`editorial.css` 管理簡報視覺；`slides.css` 保留畫布、導航與既有基本結構。所有素材離線可用。
+## 編輯與視覺來源
+
+`deck.json` 是內容與講稿來源。執行 `python3 research/slides/build_deck.py` 產生簡報 HTML 與兩種講稿。`presentation.css` 管理視覺，`viewport-base.css` 管理固定畫布，`slides.js` 管理播放。變更後需以 Chrome 重新檢查各頁並輸出 PDF 與 `assets/previews/` 縮圖。
+
+採用 Presentations skill 的單頁論點與圖像層級、[Frontend Slides](https://github.com/zarazhangrui/frontend-slides) 的固定畫布原則，以及 [Taste Skill](https://github.com/leonxlnx/taste-skill/tree/ccbc15639c97057cbfcf32ecebc38ef716e4bb37/skills/taste-skill) 的排版與 redesign review。保留研究頁奶油白／藍色識別；深色集中於封面、核心主張、結尾。生活照片為生成示意。Frontend Slides 授權見 `LICENSE.frontend-slides`。
