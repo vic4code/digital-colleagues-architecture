@@ -17,7 +17,7 @@ One visible matrix: Framework | Observed mechanism | What starts the next run? |
 - OpenClaw: managed heartbeat job → Scheduler → Wake admission → Agent turn. Event hooks and watchers enter compatible dispatch paths; next_check is a bounded pacing proposal.
 - Hermes: Cron monitor → source hash → unchanged Skip / changed Agent. Baseline saved before execution is observation state, not successful processing.
 - Claude Code: goal evaluator after turn → Continue / Stop; /loop and Channels provide other Time / Event entries.
-- Codex: active goal + session idle → state lock → start_turn_if_idle. This continues an assigned goal.
+- Codex: App Automations / Scheduled tasks provides Time scheduling; native thread/goal/set persists a goal and session idle → state lock → start_turn_if_idle continues that assigned goal (internal Event). These are distinct product/API surfaces.
 - Grok Build: public creation/dispatch interface unverified; show evidence gap, do not invent execution Sequence.
 - Voyager: learn while → curriculum → rollout/critic → progress/skills → next task. Completion is a useful Event abstraction; code directly continues without a timer or event bus.
 - OpenBot: due routine → occurrence queue → claim/lease → worker. Lease heartbeat is ownership maintenance, not an Agent wake.
@@ -73,8 +73,11 @@ Reduce simultaneous choices and duplicate explanations. Architecture opens on th
 
 13 main slides and two appendices, designed for a 15–18-minute sharing session. The cover names the subject: digital colleague proactivity. Two numbered daily-life examples introduce time and events. A framework-first table labels implementation paths before the two-trigger synthesis. The three phases come before architecture: assigned execution, goal-driven planning, self-initiated task discovery.
 
-Four architecture slides preserve original component positions and include the Tools / external services layer: Existing → Time entry → Event entry → shared Task discovery. They explicitly distinguish existing entry points from proposed orchestration and task policies. Standalone recovery and P3-recipe pages are removed; details remain in notes.
+Four architecture slides preserve original component positions and include the Tools / external services layer: Existing → Time entry → Event entry → shared Task policy (Phase 1–3 and native Codex goal). They explicitly distinguish existing entry points from proposed orchestration and task policies. Standalone recovery and P3-recipe pages are removed; details remain in notes.
 
 The Cathay example is now a governance colleague reviewing CAB submissions. The supplied temporary image path was unavailable, so the five-step flow is explicitly illustrative pending alignment with the actual CAB process. Workflow comes first: intake, completeness checks, risk review, evidence follow-up/re-review, and human CAB decision. The next slide identifies scheduled checks, automatic review on new submissions, due follow-up, and discovery of unassigned cross-case risks.
 
 Acceptance measures actual proactive behavior: due-check coverage plus correct quiet outcomes, timely event-initiated review, eligible follow-up and false reminders, fault recovery and duplicate outputs. P3 separately checks unassigned task discovery against independent labeled opportunities. All example figures are hypothetical, and latency denominators include misses/errors/timeouts. The three-phase recap restores original scope and maturity (P1 prototype, P2/P3 planned); the historical five-framework zero conclusion remains narrowly qualified by time, public interface and conversation-inference criteria.
+
+
+September 16 follow-up: slides 7 and 8 now isolate Time and Event wiring, with no Phase crosswalk. Slide 9 maps all phases onto the same architecture: Scheduler stores fixed work; AGENTS.md stores role policy; native thread/goal/set stores the execution objective; Controller owns case-to-thread mapping and external waiting state. CAB observation and metric pages share A–D identifiers and identical flow locations; recovery is a cross-cutting check, not a replacement for D task discovery. All metric values remain illustrative.

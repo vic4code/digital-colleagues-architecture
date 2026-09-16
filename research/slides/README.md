@@ -11,9 +11,9 @@
 
 ## 講解順序
 
-生活例子 → 六框架機制表（Time／Event 標籤）→ Trigger 歸納 → 三個 Phase → 原架構四頁連續對照 → CAB 治理審閱流程 → 主動性觀測點 → 觸發與恢復驗收 → 三點結論。
+生活例子 → 六框架機制表（Time／Event 標籤）→ Trigger 歸納 → 三個 Phase → 原架構四頁連續對照 → CAB 治理審閱流程 → 主動性觀測點 → A–D 對應驗收與共同恢復檢查 → 三點結論。
 
-架構四頁保持原圖座標：Before → Time entry → Event entry（替代入口）→ 共用 Task discovery。轉場保留位置，支援 reduced motion。每頁關鍵內容直接顯示，PDF 不依賴 hover 或動畫。架構保留 Tools／外部服務層。附錄收錄介面查核表與完整架構；歷史 commitments 只保留表下註記。
+架構四頁保持原圖座標：Before → Time entry → Event entry（替代入口）→ 共用 Task policy（P1–P3 與 Native goal）。轉場保留位置，支援 reduced motion。每頁關鍵內容直接顯示，PDF 不依賴 hover 或動畫。架構保留 Tools／外部服務層。附錄收錄介面查核表與完整架構；歷史 commitments 只保留表下註記。
 
 CAB-042／CAB-043 是虛構案例；提供的 CAB 原圖暫存路徑失效，目前流程為待確認示意。架構新增能力與驗收實驗是設計提案，並非已驗證的國泰部署成效。
 
